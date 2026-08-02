@@ -30,32 +30,33 @@ test("server-renders the OneBonsai Gulf experience", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>OneBonsai Gulf — AI Strategy &amp; DeepTech<\/title>/i);
-  assert.match(html, /Your business already works\. We make it/);
-  assert.match(html, /AI, integrated into the business you already have\./);
-  assert.match(html, /Infrastructure intelligence, at scale\./);
-  assert.match(html, /\/media\/hero-frames\/frame-08\.jpg/);
+  assert.match(html, /YOUR BUSINESS/);
+  assert.match(html, /WE MAKE IT INTELLIGENT/);
+  assert.match(html, /AI SHOULD SIMPLIFY THE BUSINESS YOU ALREADY HAVE/);
+  assert.match(html, /INFRASTRUCTURE INTELLIGENCE, AT SCALE\./);
+  assert.match(html, /\/media\/onebonsai-brand-film-hq\.mp4/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
-test("keeps the crisp frame sequence and UAE imagery in source", async () => {
+test("keeps one native HQ film and the UAE imagery in source", async () => {
   const [page, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /length: 8/);
-  assert.match(page, /className="film-frame"/);
+  assert.match(page, /className="brand-film"/);
+  assert.match(page, /autoPlay/);
+  assert.match(page, /onebonsai-brand-film-hq\.mp4/);
+  assert.match(page, /onebonsai-brand-film-poster\.jpg/);
   assert.match(page, /uae-ai-boardroom-v1\.jpg/);
   assert.match(page, /uae-port-ai-v1\.jpg/);
   assert.match(page, /uae-ai-workshop-v1\.jpg/);
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
-  assert.doesNotMatch(page, /cultivated-intelligence-scroll\.mp4/);
-  assert.match(css, /\.hero-glass-plane/);
-  assert.match(css, /\.hero-orbit/);
-  assert.match(css, /\.human-proof-grid/);
+  assert.doesNotMatch(page, /heroFrames|cultivated-intelligence-scroll\.mp4/);
+  assert.match(css, /\.hero-veil/);
+  assert.match(css, /\.sculpture/);
+  assert.match(css, /\.pathway-grid/);
 
-  for (let index = 1; index <= 8; index += 1) {
-    const frame = String(index).padStart(2, "0");
-    await access(new URL(`../public/media/hero-frames/frame-${frame}.jpg`, import.meta.url));
-  }
+  await access(new URL("../public/media/onebonsai-brand-film-hq.mp4", import.meta.url));
+  await access(new URL("../public/media/onebonsai-brand-film-poster.jpg", import.meta.url));
 });

@@ -2,12 +2,12 @@
 
 The interactive website for OneBonsai Gulf, an independent AI consultancy based in Abu Dhabi.
 
-The experience is built around a scroll-controlled, source-resolution 3D frame sequence that shows an existing business architecture becoming mapped, connected, AI-integrated, activated, and ready to scale. All narrative text remains live HTML for sharp rendering and accessibility.
+The experience pairs a light editorial system with one native 4K brand film. All narrative text remains live HTML for sharp rendering and accessibility.
 
 ## Highlights
 
-- Eight-frame 5504×3072 cinematic hero sequence
-- Scroll-controlled crossfades with CSS 3D glass, orbital, and core elements
+- Native 3840×2160 cinematic brand film with an accessible play/pause control
+- Light editorial grid with sculptural CSS elements and vertical edge branding
 - UAE-focused enterprise AI integration story
 - Natural editorial imagery of OneBonsai Gulf consultants working with local teams
 - Responsive desktop and mobile layouts
@@ -36,6 +36,6 @@ This builds the vinext application and validates the rendered brand experience a
 
 - `app/page.tsx` — content, sections, and scroll timeline
 - `app/globals.css` — responsive layout, interaction, and 3D styling
-- `public/media/hero-frames/` — high-resolution hero sequence
+- `public/media/onebonsai-brand-film-hq.mp4` — retina-sharp 2560×1440 web film derived from the 4K master
 - `public/media/` — UAE editorial and capability imagery
 - `.openai/hosting.json` — Sites deployment configuration
