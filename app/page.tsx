@@ -220,42 +220,47 @@ const reasons = [
   "Global Perspective with Regional Expertise",
 ];
 
+const heroFrames = Array.from(
+  { length: 8 },
+  (_, index) => `/media/hero-frames/frame-${String(index + 1).padStart(2, "0")}.jpg`,
+);
+
 const filmChapters = [
   {
-    at: 0.16,
-    label: "Potential",
+    at: 0.18,
+    label: "Your systems",
     accent: ".",
-    copy: "Every transformation starts with a valuable possibility.",
+    copy: "Keep the platforms, data, and workflows your business already trusts.",
   },
   {
-    at: 0.32,
-    label: "Understand",
+    at: 0.34,
+    label: "Mapped",
     accent: ".",
-    copy: "Find the right problem before choosing the technology.",
+    copy: "We find the friction, the opportunity, and the path to measurable value.",
   },
   {
-    at: 0.49,
-    label: "Adopt",
+    at: 0.5,
+    label: "Connected",
     accent: ".",
-    copy: "Align leadership, governance, people, and process.",
+    copy: "Your people, tools, and knowledge become one connected operating layer.",
   },
   {
     at: 0.66,
-    label: "Build",
+    label: "AI integrated",
     accent: ".",
-    copy: "Engineer intelligent systems around the way you work.",
+    copy: "The right intelligence is engineered into the way your company already works.",
   },
   {
     at: 0.82,
-    label: "Scale",
+    label: "Activated",
     accent: ".",
-    copy: "Turn proven capability into lasting commercial advantage.",
+    copy: "Manual work gets lighter. Decisions get faster. Capability compounds.",
   },
   {
     at: 0.955,
-    label: "Intelligence,",
-    accent: "cultivated.",
-    copy: "AI is not something you add. It is something you cultivate.",
+    label: "Built to",
+    accent: "scale.",
+    copy: "One secure intelligence layer, ready to grow across the enterprise.",
     final: true,
   },
 ] as const;
@@ -266,13 +271,11 @@ function clamp(value: number, min = 0, max = 1) {
 
 function ScrollFilm() {
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const video = videoRef.current;
-    if (!section || !video) return;
+    if (!section) return;
 
     let raf = 0;
     let lastProgress = -1;
@@ -286,10 +289,6 @@ function ScrollFilm() {
       if (Math.abs(next - lastProgress) > 0.001) {
         lastProgress = next;
         setProgress(next);
-        if (Number.isFinite(video.duration) && video.duration > 0) {
-          const target = clamp(next, 0.001, 0.998) * video.duration;
-          if (Math.abs(video.currentTime - target) > 0.035) video.currentTime = target;
-        }
       }
     };
 
@@ -297,41 +296,49 @@ function ScrollFilm() {
       if (!raf) raf = requestAnimationFrame(update);
     };
 
-    video.pause();
-    video.addEventListener("loadedmetadata", requestUpdate);
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);
     requestUpdate();
 
     return () => {
       cancelAnimationFrame(raf);
-      video.removeEventListener("loadedmetadata", requestUpdate);
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
   }, []);
 
   const heroOpacity = clamp(1 - progress * 9);
+  const framePosition = progress * (heroFrames.length - 1);
+  const baseFrame = Math.min(heroFrames.length - 1, Math.floor(framePosition));
+  const frameMix = framePosition - baseFrame;
 
   return (
     <section ref={sectionRef} className="film" aria-label="OneBonsai Gulf introduction">
       <div className="film-sticky">
-        <video
-          ref={videoRef}
-          className="film-video"
-          muted
-          playsInline
-          preload="auto"
-          poster="/media/cultivated-intelligence-poster.jpg"
-          aria-hidden="true"
-        >
-          <source
-            media="(max-width: 760px)"
-            src="/media/cultivated-intelligence-mobile.mp4"
-            type="video/mp4"
-          />
-          <source src="/media/cultivated-intelligence-scroll.mp4" type="video/mp4" />
-        </video>
+        <div className="film-frames" aria-hidden="true">
+          {heroFrames.map((frame, index) => {
+            const visible = index === baseFrame ? 1 : index === baseFrame + 1 ? frameMix : 0;
+            return (
+              <img
+                className="film-frame"
+                key={frame}
+                src={frame}
+                alt=""
+                fetchPriority={index === 0 ? "high" : "auto"}
+                style={{
+                  opacity: visible,
+                  transform: `scale(${1.012 + progress * 0.014}) translate3d(${progress * -0.35}%, 0, 0)`,
+                }}
+              />
+            );
+          })}
+        </div>
+        <div className="hero-objects" aria-hidden="true">
+          <span className="hero-orbit hero-orbit-one" style={{ transform: `rotateX(67deg) rotateZ(${progress * 210 - 18}deg)` }} />
+          <span className="hero-orbit hero-orbit-two" style={{ transform: `rotateY(58deg) rotateZ(${progress * -160 + 30}deg)` }} />
+          <span className="hero-glass-plane" style={{ transform: `rotateY(${progress * 48 - 24}deg) rotateX(${progress * 18 - 9}deg) translateZ(${progress * 90}px)` }} />
+          <span className="hero-core" style={{ opacity: clamp((progress - 0.45) * 3), transform: `scale(${0.75 + progress * 0.35}) rotate(${progress * 135}deg)` }}>✦</span>
+        </div>
         <div className="film-grade" />
         <div className="film-grain" />
 
@@ -367,11 +374,11 @@ function ScrollFilm() {
         >
           <p className="eyebrow"><span /> Independent AI consultancy · Abu Dhabi</p>
           <h1>
-            Building the next generation of <em>intelligent businesses.</em>
+            Your business already works. We make it <em>intelligent.</em>
           </h1>
           <div className="hero-bottom">
             <p>
-              We help organizations understand, adopt, build, and scale Artificial Intelligence.
+              If your company was not built with AI, we integrate intelligence into the systems you already trust.
             </p>
             <div className="hero-actions">
               <a className="button button-lime" href="#contact">Book a consultation <span>↗</span></a>
@@ -395,10 +402,7 @@ function ScrollFilm() {
               {chapter.final && (
                 <img className="chapter-logo" src="/brand/onebonsai-gulf-white.png" alt="OneBonsai Gulf" />
               )}
-              <div
-                className="film-chapter-inner"
-                style={{ clipPath: `inset(0 ${(1 - intensity) * 100}% 0 0)` }}
-              >
+              <div className="film-chapter-inner">
                 <p className="chapter-count">{chapter.final ? "BRAND REVEAL" : `0${index + 1} / 05`}</p>
                 <h2>{chapter.label}<span>{chapter.accent}</span></h2>
                 <p>{chapter.copy}</p>
@@ -453,10 +457,10 @@ export default function Home() {
           </div>
           <div className="about-copy">
             <p className="lead">
-              Artificial Intelligence is reshaping every industry—but knowing where to start remains one of the biggest challenges facing organizations today.
+              You do not need to replace the business you have built to become an AI-powered company.
             </p>
             <p>
-              OneBonsai Gulf bridges the gap between emerging technologies and real business value. We combine executive strategy, AI expertise, software engineering, and business consulting to help organizations embrace transformation with confidence.
+              OneBonsai Gulf connects your current data, software, workflows, and teams to the right AI capabilities. We start with the business reality, then integrate intelligence where it can create measurable value.
             </p>
             <p>
               We do not simply deliver software. We build long-term partnerships that enable organizations to innovate, grow, and stay ahead of change—from Abu Dhabi to the GCC, Europe, and international markets.
@@ -469,10 +473,51 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="integration" className="section integration-section">
+        <div className="section-index light">
+          <p className="eyebrow"><span /> AI integration</p>
+          <span>OBG / 02</span>
+        </div>
+        <div className="integration-intro">
+          <div>
+            <p className="integration-kicker">Already running.<br /><span>Ready for intelligence.</span></p>
+            <h2>AI, integrated into the business you already have.</h2>
+          </div>
+          <div className="integration-copy">
+            <p>Your organization already has systems, knowledge, processes, and people. We connect them to useful AI—securely, practically, and without forcing you to start again.</p>
+            <ul>
+              <li><span>01</span>Connect ERP, CRM, documents, data, and knowledge</li>
+              <li><span>02</span>Automate high-friction operational work</li>
+              <li><span>03</span>Equip teams to use AI safely and confidently</li>
+              <li><span>04</span>Scale what proves real commercial value</li>
+            </ul>
+          </div>
+        </div>
+
+        <figure className="integration-feature">
+          <img src="/media/uae-ai-boardroom-v1.jpg" alt="OneBonsai Gulf consultants helping Emirati leaders plan AI integration in Abu Dhabi" />
+          <figcaption>
+            <span>UAE / ENTERPRISE TRANSFORMATION</span>
+            <p>Strategy becomes useful when people can see how it changes the work.</p>
+          </figcaption>
+        </figure>
+
+        <div className="human-proof-grid">
+          <figure>
+            <img src="/media/uae-port-ai-v1.jpg" alt="OneBonsai Gulf consultant working with Emirati logistics leaders at a UAE port" />
+            <figcaption><span>LOGISTICS / OPERATIONS</span><p>Intelligence connected to live operational systems.</p></figcaption>
+          </figure>
+          <figure>
+            <img src="/media/uae-ai-workshop-v1.jpg" alt="OneBonsai Gulf consultant leading an AI integration workshop with Emirati professionals" />
+            <figcaption><span>PEOPLE / ADOPTION</span><p>AI capability that grows with the people using it.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section id="services" className="section services-section">
         <div className="section-index light">
           <p className="eyebrow"><span /> Our services</p>
-          <span>OBG / 02</span>
+          <span>OBG / 03</span>
         </div>
         <div className="section-heading-row">
           <h2 className="display-title light-title">From first question<br />to full-scale impact.</h2>
@@ -505,7 +550,7 @@ export default function Home() {
 
       <section className="work-showcase" aria-label="Selected technology capabilities">
         <article className="showcase-panel showcase-wide">
-          <img src="/media/bridge-inspection.avif" alt="Computer vision drone inspecting a bridge" />
+          <img src="/media/infrastructure-intelligence-v2.jpg" alt="UAE engineers using AI and a drone to inspect bridge infrastructure" />
           <div className="showcase-overlay">
             <p>Computer Vision</p>
             <h3>Infrastructure intelligence, at scale.</h3>
@@ -533,7 +578,7 @@ export default function Home() {
       <section id="academy" className="section academy-section glow-surface">
         <div className="section-index">
           <p className="eyebrow dark"><span /> AI Academy</p>
-          <span>OBG / 03</span>
+          <span>OBG / 04</span>
         </div>
         <div className="academy-intro">
           <div>
@@ -583,7 +628,7 @@ export default function Home() {
       <section id="products" className="section products-section">
         <div className="section-index light">
           <p className="eyebrow"><span /> Our products</p>
-          <span>OBG / 04</span>
+          <span>OBG / 05</span>
         </div>
         <div className="section-heading-row">
           <h2 className="display-title light-title">Innovation,<br /><em>built in-house.</em></h2>
@@ -621,7 +666,7 @@ export default function Home() {
       <section id="approach" className="section approach-section">
         <div className="section-index">
           <p className="eyebrow dark"><span /> Our approach</p>
-          <span>OBG / 05</span>
+          <span>OBG / 06</span>
         </div>
         <h2 className="display-title">A proven framework<br />for innovation.</h2>
         <div className="approach-grid">

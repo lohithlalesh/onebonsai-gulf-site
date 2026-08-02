@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s — OneBonsai Gulf",
   },
   description:
-    "An independent AI consultancy and DeepTech company in Abu Dhabi, helping organizations understand, adopt, build, and scale Artificial Intelligence.",
+    "OneBonsai Gulf integrates AI into the systems, workflows, and teams that UAE organizations already trust.",
   applicationName: "OneBonsai Gulf",
   keywords: [
     "AI consultancy Abu Dhabi",
@@ -28,22 +28,22 @@ export const metadata: Metadata = {
     locale: "en_AE",
     url: "/",
     siteName: "OneBonsai Gulf",
-    title: "Building the next generation of intelligent businesses.",
+    title: "Your business already works. We make it intelligent.",
     description:
-      "Independent AI strategy, transformation, engineering, and innovation from Abu Dhabi.",
+      "Practical AI integration, transformation, and engineering from Abu Dhabi.",
     images: [
       {
         url: "/og.png",
         width: 1536,
         height: 1024,
-        alt: "OneBonsai Gulf — Building the next generation of intelligent businesses.",
+        alt: "OneBonsai Gulf — Your business already works. We make it intelligent.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Building the next generation of intelligent businesses.",
-    description: "AI strategy, transformation, and DeepTech from Abu Dhabi.",
+    title: "Your business already works. We make it intelligent.",
+    description: "Practical AI integration, transformation, and engineering from Abu Dhabi.",
     images: ["/og.png"],
   },
 };
