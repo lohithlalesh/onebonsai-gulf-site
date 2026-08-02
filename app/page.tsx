@@ -221,10 +221,43 @@ const reasons = [
 ];
 
 const filmChapters = [
-  [0.24, "Understand", "Find the valuable problem before choosing the technology."],
-  [0.45, "Adopt", "Align leadership, governance, people, and process."],
-  [0.66, "Build", "Engineer intelligent systems around the way you work."],
-  [0.86, "Scale", "Turn proven capability into lasting commercial advantage."],
+  {
+    at: 0.16,
+    label: "Potential",
+    accent: ".",
+    copy: "Every transformation starts with a valuable possibility.",
+  },
+  {
+    at: 0.32,
+    label: "Understand",
+    accent: ".",
+    copy: "Find the right problem before choosing the technology.",
+  },
+  {
+    at: 0.49,
+    label: "Adopt",
+    accent: ".",
+    copy: "Align leadership, governance, people, and process.",
+  },
+  {
+    at: 0.66,
+    label: "Build",
+    accent: ".",
+    copy: "Engineer intelligent systems around the way you work.",
+  },
+  {
+    at: 0.82,
+    label: "Scale",
+    accent: ".",
+    copy: "Turn proven capability into lasting commercial advantage.",
+  },
+  {
+    at: 0.955,
+    label: "Intelligence,",
+    accent: "cultivated.",
+    copy: "AI is not something you add. It is something you cultivate.",
+    final: true,
+  },
 ] as const;
 
 function clamp(value: number, min = 0, max = 1) {
@@ -278,7 +311,7 @@ function ScrollFilm() {
     };
   }, []);
 
-  const heroOpacity = clamp(1 - progress * 6.5);
+  const heroOpacity = clamp(1 - progress * 9);
 
   return (
     <section ref={sectionRef} className="film" aria-label="OneBonsai Gulf introduction">
@@ -289,10 +322,15 @@ function ScrollFilm() {
           muted
           playsInline
           preload="auto"
-          poster="/media/intelligence-film-poster.jpg"
+          poster="/media/cultivated-intelligence-poster.jpg"
           aria-hidden="true"
         >
-          <source src="/media/intelligence-film.mp4" type="video/mp4" />
+          <source
+            media="(max-width: 760px)"
+            src="/media/cultivated-intelligence-mobile.mp4"
+            type="video/mp4"
+          />
+          <source src="/media/cultivated-intelligence-scroll.mp4" type="video/mp4" />
         </video>
         <div className="film-grade" />
         <div className="film-grain" />
@@ -342,21 +380,29 @@ function ScrollFilm() {
           </div>
         </div>
 
-        {filmChapters.map(([position, title, copy]) => {
-          const intensity = clamp(1 - Math.abs(progress - position) / 0.115);
+        {filmChapters.map((chapter, index) => {
+          const intensity = clamp(1 - Math.abs(progress - chapter.at) / (chapter.final ? 0.075 : 0.092));
           return (
             <div
-              className="film-chapter"
-              key={title}
+              className={`film-chapter${chapter.final ? " film-chapter-final" : ""}`}
+              key={chapter.label}
               style={{
                 opacity: intensity,
-                transform: `translate3d(0, ${(1 - intensity) * 38}px, 0)`,
+                transform: `translate3d(${(1 - intensity) * -26}px, 0, 0)`,
                 pointerEvents: intensity > 0.4 ? "auto" : "none",
               }}
             >
-              <p className="chapter-count">0{filmChapters.findIndex((item) => item[1] === title) + 1} / 04</p>
-              <h2>{title}<span>.</span></h2>
-              <p>{copy}</p>
+              {chapter.final && (
+                <img className="chapter-logo" src="/brand/onebonsai-gulf-white.png" alt="OneBonsai Gulf" />
+              )}
+              <div
+                className="film-chapter-inner"
+                style={{ clipPath: `inset(0 ${(1 - intensity) * 100}% 0 0)` }}
+              >
+                <p className="chapter-count">{chapter.final ? "BRAND REVEAL" : `0${index + 1} / 05`}</p>
+                <h2>{chapter.label}<span>{chapter.accent}</span></h2>
+                <p>{chapter.copy}</p>
+              </div>
             </div>
           );
         })}
