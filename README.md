@@ -2,11 +2,12 @@
 
 The interactive website for OneBonsai Gulf, an independent AI consultancy based in Abu Dhabi.
 
-The experience pairs a light editorial system with one native 4K brand film. All narrative text remains live HTML for sharp rendering and accessibility.
+The experience pairs a light editorial system with a scroll-controlled, high-resolution brand film and a code-rendered 3D intelligence flow. All narrative text remains live HTML for sharp rendering and accessibility.
 
 ## Highlights
 
-- Native 3840×2160 cinematic brand film with an accessible play/pause control
+- Retina-sharp 2560×1440 cinematic film scrubbed directly by scroll position
+- Four-stage 3D infographic flow: Connect, Understand, Activate, and Scale
 - Light editorial grid with sculptural CSS elements and vertical edge branding
 - UAE-focused enterprise AI integration story
 - Natural editorial imagery of OneBonsai Gulf consultants working with local teams

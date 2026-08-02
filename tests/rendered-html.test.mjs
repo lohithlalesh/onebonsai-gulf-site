@@ -38,14 +38,16 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
-test("keeps one native HQ film and the UAE imagery in source", async () => {
+test("keeps one scroll-controlled HQ film and the UAE imagery in source", async () => {
   const [page, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /className="brand-film"/);
-  assert.match(page, /autoPlay/);
+  assert.match(page, /className="intelligence-flow"/);
+  assert.match(page, /--flow-progress/);
+  assert.match(page, /film\.currentTime = targetTime/);
+  assert.match(page, /SCROLL TO CULTIVATE/);
   assert.match(page, /onebonsai-brand-film-hq\.mp4/);
   assert.match(page, /onebonsai-brand-film-poster\.jpg/);
   assert.match(page, /uae-ai-boardroom-v1\.jpg/);
@@ -54,6 +56,9 @@ test("keeps one native HQ film and the UAE imagery in source", async () => {
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
   assert.doesNotMatch(page, /heroFrames|cultivated-intelligence-scroll\.mp4/);
   assert.match(css, /\.hero-veil/);
+  assert.match(css, /\.flow-sticky/);
+  assert.match(css, /\.flow-core/);
+  assert.match(css, /\.flow-spine/);
   assert.match(css, /\.sculpture/);
   assert.match(css, /\.pathway-grid/);
 

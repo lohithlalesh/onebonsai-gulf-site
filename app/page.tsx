@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 
 const pathways = [
   {
@@ -53,49 +53,175 @@ const products = [
   ["MedHub", "AI healthcare navigation", "CARE / ACCESS / AI"],
 ];
 
-function Film() {
-  const filmRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(true);
+const flowStages = [
+  {
+    number: "01",
+    eyebrow: "Connect",
+    title: "Your systems enter the flow.",
+    copy: "ERP, CRM, documents, operations, and human knowledge connect without replacing the tools your teams already trust.",
+  },
+  {
+    number: "02",
+    eyebrow: "Understand",
+    title: "Signals become context.",
+    copy: "One governed intelligence layer reads relationships across data, decisions, and day-to-day work.",
+  },
+  {
+    number: "03",
+    eyebrow: "Activate",
+    title: "Context becomes action.",
+    copy: "Purpose-built agents, predictions, and automations move the right intelligence into the right workflow.",
+  },
+  {
+    number: "04",
+    eyebrow: "Scale",
+    title: "Value flows through the business.",
+    copy: "People stay in control while proven outcomes expand securely across teams, operations, and infrastructure.",
+  },
+];
 
-  const toggleFilm = () => {
+function IntelligenceFlow() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const filmRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
     const film = filmRef.current;
-    if (!film) return;
-    if (film.paused) {
-      void film.play();
-      setPlaying(true);
-    } else {
-      film.pause();
-      setPlaying(false);
-    }
-  };
+    if (!section || !film) return;
+
+    let animationFrame = 0;
+
+    const syncFlow = () => {
+      const bounds = section.getBoundingClientRect();
+      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const progress = Math.min(1, Math.max(0, -bounds.top / travel));
+      const phase = Math.min(flowStages.length - 1, Math.floor(progress * flowStages.length));
+
+      section.style.setProperty("--flow-progress", progress.toFixed(4));
+      section.style.setProperty("--flow-fill", `${(progress * 100).toFixed(2)}%`);
+      section.style.setProperty("--flow-y", `${(6 + progress * 88).toFixed(2)}%`);
+      section.style.setProperty("--flow-turn", `${(progress * 180).toFixed(2)}deg`);
+      section.style.setProperty("--flow-ribbon-scale", (0.58 + progress * 0.42).toFixed(4));
+      section.style.setProperty("--flow-ribbon-opacity", (0.28 + progress * 0.42).toFixed(4));
+      section.dataset.phase = String(phase);
+
+      if (film.readyState >= 1 && Number.isFinite(film.duration) && film.duration > 0) {
+        const targetTime = progress * Math.max(film.duration - 0.08, 0);
+        if (Math.abs(film.currentTime - targetTime) > 0.025) film.currentTime = targetTime;
+      }
+    };
+
+    const queueSync = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(syncFlow);
+    };
+
+    film.pause();
+    film.addEventListener("loadedmetadata", queueSync);
+    window.addEventListener("scroll", queueSync, { passive: true });
+    window.addEventListener("resize", queueSync);
+    queueSync();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      film.removeEventListener("loadedmetadata", queueSync);
+      window.removeEventListener("scroll", queueSync);
+      window.removeEventListener("resize", queueSync);
+    };
+  }, []);
 
   return (
-    <figure className="brand-film">
-      <video
-        ref={filmRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/media/onebonsai-brand-film-poster.jpg"
-        aria-label="OneBonsai Gulf cultivated intelligence brand film"
-      >
-        <source src="/media/onebonsai-brand-film-hq.mp4" type="video/mp4" />
-      </video>
-      <div className="film-shade" />
-      <figcaption>
-        <span>ONEBONSAI GULF / BRAND FILM</span>
-        <span>00:15 / HQ</span>
-      </figcaption>
-      <button className="film-control" type="button" onClick={toggleFilm} aria-label={playing ? "Pause film" : "Play film"}>
-        <span>{playing ? "Ⅱ" : "▶"}</span>
-      </button>
-      <div className="film-copy">
-        <p>Independent AI consultancy · Abu Dhabi</p>
-        <h2>Intelligence,<br /><em>cultivated.</em></h2>
+    <section
+      ref={sectionRef}
+      className="intelligence-flow"
+      data-phase="0"
+      style={{
+        "--flow-progress": "0",
+        "--flow-fill": "0%",
+        "--flow-y": "6%",
+        "--flow-turn": "0deg",
+        "--flow-ribbon-scale": "0.58",
+        "--flow-ribbon-opacity": "0.28",
+      } as CSSProperties}
+      aria-label="How OneBonsai Gulf cultivates intelligence"
+    >
+      <div className="flow-sticky">
+        <video
+          ref={filmRef}
+          className="flow-film"
+          muted
+          playsInline
+          preload="auto"
+          poster="/media/onebonsai-brand-film-poster.jpg"
+          aria-label="Scroll-controlled OneBonsai Gulf intelligence film"
+        >
+          <source src="/media/onebonsai-brand-film-hq.mp4" type="video/mp4" />
+        </video>
+        <div className="flow-shade" />
+
+        <div className="flow-header" aria-hidden="true">
+          <span>ONEBONSAI GULF / INTELLIGENCE FLOW</span>
+          <span>SCROLL TO CULTIVATE ↓</span>
+        </div>
+
+        <div className="flow-narrative">
+          <p className="flow-kicker">Independent AI consultancy · Abu Dhabi</p>
+          <h2>Intelligence,<br /><em>cultivated.</em></h2>
+          <div className="flow-stage-copy" aria-live="polite">
+            {flowStages.map((stage, index) => (
+              <article key={stage.number} data-stage={index}>
+                <span>{stage.number} / {stage.eyebrow}</span>
+                <h3>{stage.title}</h3>
+                <p>{stage.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="flow-visual" aria-hidden="true">
+          <div className="flow-plane flow-plane-top" />
+          <div className="flow-plane flow-plane-bottom" />
+          <div className="flow-spine"><i /></div>
+          <div className="flow-pulse"><span /></div>
+
+          <div className="flow-node flow-node-source">
+            <b>INPUT</b><span>ERP · CRM · DOCS · OPS</span><i>01</i>
+          </div>
+          <div className="flow-node flow-node-context">
+            <b>CONTEXT</b><span>GOVERNED INTELLIGENCE</span><i>02</i>
+          </div>
+          <div className="flow-core"><span>AI</span><i /><i /><i /></div>
+          <div className="flow-node flow-node-action">
+            <b>ACTION</b><span>AGENTS · PREDICTION · AUTOMATION</span><i>03</i>
+          </div>
+          <div className="flow-node flow-node-value">
+            <b>VALUE</b><span>PEOPLE · OPERATIONS · SCALE</span><i>04</i>
+          </div>
+
+          <div className="flow-ribbons">
+            {Array.from({ length: 7 }, (_, index) => (
+              <i
+                key={index}
+                style={{
+                  "--ribbon-left": `${12 + index * 10}%`,
+                  "--ribbon-depth": `${index * -16}px`,
+                  "--ribbon-angle": `${(index - 3) * 4}deg`,
+                } as CSSProperties}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flow-progress" aria-hidden="true">
+          {flowStages.map((stage, index) => <span key={stage.number} data-index={index}>{stage.number}</span>)}
+          <i />
+        </div>
+
+        <div className="flow-footer" aria-hidden="true">
+          <span>00:00</span><b /><span>00:15 / HQ</span>
+        </div>
       </div>
-    </figure>
+    </section>
   );
 }
 
@@ -129,7 +255,7 @@ export default function Home() {
           </div>
         </div>
 
-        <Film />
+        <IntelligenceFlow />
 
         <div className="pathway-grid" aria-label="How OneBonsai Gulf creates value">
           {pathways.map((pathway) => (
