@@ -37,6 +37,12 @@ npm test
 
 This builds the vinext application and validates the rendered brand experience and required visual assets.
 
+## GitHub Pages
+
+Every push to `main` runs the Pages workflow in `.github/workflows/deploy-pages.yml`. The workflow creates a static export with the repository base path, uploads the generated site, and publishes it at:
+
+https://lohithlalesh.github.io/onebonsai-gulf-site/
+
 ## Structure
 
 - `app/page.tsx`: page content and sections

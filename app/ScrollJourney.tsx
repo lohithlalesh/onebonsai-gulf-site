@@ -15,6 +15,9 @@ type Act = {
   signal: string;
 };
 
+const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const publicAsset = (path: string) => `${assetBase}${path}`;
+
 const acts: Act[] = [
   {
     eyebrow: "AI, BUILT INTO THE BUSINESS",
@@ -53,19 +56,19 @@ const capabilityCards = [
     number: "01",
     title: "Connect systems",
     copy: "Bring software, data, and institutional knowledge into one useful flow.",
-    image: "/media/icon-systems.png",
+    image: publicAsset("/media/icon-systems.png"),
   },
   {
     number: "02",
     title: "Govern intelligence",
     copy: "Create secure context for agents, predictions, and automation.",
-    image: "/media/icon-intelligence.png",
+    image: publicAsset("/media/icon-intelligence.png"),
   },
   {
     number: "03",
     title: "Scale value",
     copy: "Expand proven outcomes without losing human control or operational trust.",
-    image: "/media/icon-scale.png",
+    image: publicAsset("/media/icon-scale.png"),
   },
 ];
 
@@ -247,14 +250,14 @@ export default function ScrollJourney() {
                 muted
                 playsInline
                 preload="auto"
-                poster="/media/onebonsai-hero-poster-v2.jpg"
+                poster={publicAsset("/media/onebonsai-hero-poster-v2.jpg")}
                 disableRemotePlayback
               >
-                <source src="/media/onebonsai-hero-motion-4k.mp4" type="video/mp4" />
+                <source src={publicAsset("/media/onebonsai-hero-motion-4k.mp4")} type="video/mp4" />
               </video>
             )}
             {isSmallScreen !== false && (
-              <img src="/media/onebonsai-hero-poster-v2.jpg" alt="" />
+              <img src={publicAsset("/media/onebonsai-hero-poster-v2.jpg")} alt="" />
             )}
           </div>
 

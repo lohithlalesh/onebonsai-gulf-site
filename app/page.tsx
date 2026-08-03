@@ -2,6 +2,9 @@
 
 import ScrollJourney from "./ScrollJourney";
 
+const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const publicAsset = (path: string) => `${assetBase}${path}`;
+
 const pathways = [
   {
     number: "01",
@@ -58,7 +61,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="OneBonsai Gulf home">
-          <img src="/brand/onebonsai-gulf-black.png" alt="OneBonsai Gulf" />
+          <img src={publicAsset("/brand/onebonsai-gulf-black.png")} alt="OneBonsai Gulf" />
         </a>
         <nav aria-label="Primary navigation">
           <a href="#about">About</a>
@@ -102,7 +105,7 @@ export default function Home() {
 
       <section id="work" className="system-section section-pad">
         <div className="system-image">
-          <img src="/media/uae-ai-boardroom-v1.jpg" alt="OneBonsai Gulf consultants working with Emirati business leaders in Abu Dhabi" />
+          <img src={publicAsset("/media/uae-ai-boardroom-v1.jpg")} alt="OneBonsai Gulf consultants working with Emirati business leaders in Abu Dhabi" />
           <span>UAE / ENTERPRISE TRANSFORMATION</span>
         </div>
         <div className="system-signals" aria-label="AI integration outcomes">
@@ -149,17 +152,17 @@ export default function Home() {
           <p>We work beside leadership, technology teams, and operational experts to turn new capability into confident everyday practice.</p>
         </div>
         <figure>
-          <img src="/media/uae-port-ai-v1.jpg" alt="OneBonsai Gulf consultant with Emirati logistics leaders" />
+          <img src={publicAsset("/media/uae-port-ai-v1.jpg")} alt="OneBonsai Gulf consultant with Emirati logistics leaders" />
           <figcaption>LOGISTICS / OPERATIONS</figcaption>
         </figure>
         <figure>
-          <img src="/media/uae-ai-workshop-v1.jpg" alt="OneBonsai Gulf consultant leading an AI workshop in the UAE" />
+          <img src={publicAsset("/media/uae-ai-workshop-v1.jpg")} alt="OneBonsai Gulf consultant leading an AI workshop in the UAE" />
           <figcaption>PEOPLE / ADOPTION</figcaption>
         </figure>
       </section>
 
       <section className="infrastructure-section">
-        <img src="/media/infrastructure-intelligence-v2.jpg" alt="UAE engineers using AI and a drone to inspect bridge infrastructure" />
+        <img src={publicAsset("/media/infrastructure-intelligence-v2.jpg")} alt="UAE engineers using AI and a drone to inspect bridge infrastructure" />
         <div className="infrastructure-copy">
           <p>Computer vision / UAE infrastructure</p>
           <h2>INFRASTRUCTURE INTELLIGENCE, AT SCALE.</h2>
@@ -203,7 +206,7 @@ export default function Home() {
         <h2>READY TO MAKE<br />AI <em>VALUABLE?</em></h2>
         <a href="mailto:info@onebonsai.com?subject=AI%20Strategy%20Consultation">Book your AI strategy consultation <span>↗</span></a>
         <footer>
-          <img src="/brand/onebonsai-gulf-white.png" alt="OneBonsai Gulf" />
+          <img src={publicAsset("/brand/onebonsai-gulf-white.png")} alt="OneBonsai Gulf" />
           <p>info@onebonsai.com<br />www.onebonsai.com</p>
           <p>© {new Date().getFullYear()} OneBonsai Gulf LLC</p>
         </footer>
