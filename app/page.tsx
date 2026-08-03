@@ -61,7 +61,7 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="OneBonsai Gulf home">
-          <img src={publicAsset("/brand/onebonsai-gulf-black.png")} alt="OneBonsai Gulf" />
+          <img src={publicAsset("/brand/onebonsai-gulf-white.png")} alt="OneBonsai Gulf" />
         </a>
         <nav aria-label="Primary navigation">
           <a href="#about">About</a>
