@@ -269,9 +269,7 @@ export default function ScrollJourney() {
                   <p className="journey-eyebrow">{entry.eyebrow}</p>
                   <Heading><BouncyTitle>{entry.title}</BouncyTitle></Heading>
                   <p className="journey-body">{entry.copy}</p>
-                  <a className="journey-cta" href="#contact">
-                    Plan your AI integration <span aria-hidden="true">↗</span>
-                  </a>
+                  <a className="journey-cta" href="#contact">Plan your AI integration</a>
                 </article>
               );
             })}

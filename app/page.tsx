@@ -56,6 +56,16 @@ const products = [
   ["MedHub", "AI healthcare navigation", "CARE / ACCESS / AI"],
 ];
 
+const customers = [
+  ["Ajman", "/customers/ajman.webp"],
+  ["ITC Pros", "/customers/itc-pros.png"],
+  ["Masdar City", "/customers/masdar-city.svg"],
+  ["NEXT", "/customers/next.png"],
+  ["OneBonsai", "/customers/onebonsai.png"],
+  ["Northstone", "/customers/northstone.png"],
+  ["Stare", "/customers/stare.png"],
+];
+
 export default function Home() {
   return (
     <main>
@@ -103,11 +113,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="work" className="system-section section-pad">
-        <div className="system-image">
-          <img src={publicAsset("/media/uae-ai-boardroom-v1.jpg")} alt="OneBonsai Gulf consultants working with Emirati business leaders in Abu Dhabi" />
-          <span>UAE / ENTERPRISE TRANSFORMATION</span>
+      <section className="customer-marquee" aria-labelledby="customer-marquee-title">
+        <div className="customer-marquee-heading">
+          <p id="customer-marquee-title">Trusted by organizations building what comes next</p>
+          <span>UAE / GLOBAL</span>
         </div>
+        <div className="customer-marquee-viewport">
+          <div className="customer-marquee-track">
+            {[0, 1].map((groupIndex) => (
+              <div
+                className="customer-marquee-group"
+                key={groupIndex}
+                aria-hidden={groupIndex === 1 ? "true" : undefined}
+              >
+                {customers.map(([name, image]) => (
+                  <div className="customer-logo" key={`${groupIndex}-${name}`}>
+                    <img src={publicAsset(image)} alt={groupIndex === 0 ? name : ""} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="work" className="system-section section-pad">
         <div className="system-signals" aria-label="AI integration outcomes">
           <article><p>Systems connected</p><strong>01</strong><div><span style={{ width: "88%" }} /></div></article>
           <article><p>Workflows automated</p><strong>02</strong><div><span style={{ width: "74%" }} /></div></article>
@@ -118,7 +148,7 @@ export default function Home() {
           <p className="micro-label">One intelligent operating layer</p>
           <h2>YOUR EVERY SYSTEM CAN WORK AS ONE BUSINESS.</h2>
           <p>From ERP and CRM to documents, operations, and institutional knowledge, we create the connections that make intelligence useful.</p>
-          <a className="pill-button dark" href="#contact">Plan your AI integration <span>↗</span></a>
+          <a className="pill-button dark" href="#contact">Plan your AI integration</a>
         </div>
       </section>
 
