@@ -11,8 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase,
     title: {
-      default: "OneBonsai Gulf — AI Strategy & DeepTech",
-      template: "%s — OneBonsai Gulf",
+      default: "OneBonsai Gulf | AI Strategy & DeepTech",
+      template: "%s | OneBonsai Gulf",
     },
     description:
       "OneBonsai Gulf integrates AI into the systems, workflows, and teams that UAE organizations already trust.",
@@ -43,7 +43,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/og.png",
           width: 1536,
           height: 1024,
-          alt: "OneBonsai Gulf — Your business already works. We make it intelligent.",
+          alt: "OneBonsai Gulf: Your business already works. We make it intelligent.",
         },
       ],
     },

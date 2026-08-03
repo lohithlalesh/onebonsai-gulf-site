@@ -2,12 +2,16 @@
 
 The interactive website for OneBonsai Gulf, an independent AI consultancy based in Abu Dhabi.
 
-The experience pairs a light editorial system with a scroll-controlled, high-resolution brand film and a code-rendered 3D intelligence flow. All narrative text remains live HTML for sharp rendering and accessibility.
+The experience pairs a light editorial system with a five-act scroll studio. A native 4K brand sculpture evolves inside a contained 16:9 stage while the narrative, infographic, and capability cards remain sharp live HTML.
 
 ## Highlights
 
-- Retina-sharp 2560×1440 cinematic film scrubbed directly by scroll position
-- Four-stage 3D infographic flow: Connect, Understand, Activate, and Scale
+- Five-act, 500vh journey: Introduce, Connect, Cultivate, Flow, and Scale
+- Locked-camera 3840×2160 H.264 film with a short GOP for responsive scroll seeking
+- Contained 16:9 stage that never magnifies the source to fill the viewport
+- Bouncy word choreography, interactive signal object, downward intelligence flow, and live capability cards
+- Custom 2K 3D icon system for connection, governance, and scale
+- Poster-backed mobile card stack with no mounted video below 700px
 - Light editorial grid with sculptural CSS elements and vertical edge branding
 - UAE-focused enterprise AI integration story
 - Natural editorial imagery of OneBonsai Gulf consultants working with local teams
@@ -35,8 +39,12 @@ This builds the vinext application and validates the rendered brand experience a
 
 ## Structure
 
-- `app/page.tsx` — content, sections, and scroll timeline
-- `app/globals.css` — responsive layout, interaction, and 3D styling
-- `public/media/onebonsai-brand-film-hq.mp4` — retina-sharp 2560×1440 web film derived from the 4K master
-- `public/media/` — UAE editorial and capability imagery
-- `.openai/hosting.json` — Sites deployment configuration
+- `app/page.tsx`: page content and sections
+- `app/ScrollJourney.tsx`: cinematic hero, scroll interpolation, and mobile fallback
+- `app/globals.css`: responsive layout, interaction, and 3D styling
+- `public/media/onebonsai-hero-motion-4k.mp4`: 3840×2160 seek-optimized H.264 scroll film
+- `public/media/onebonsai-hero-poster-v2.jpg`: 5504×3072 first-paint and mobile poster
+- `public/media/icon-*.png`: custom 2K 3D capability icons
+- `outputs/higgsfield/v2/`: full-quality generated masters and source frames
+- `public/media/`: UAE editorial and capability imagery
+- `.openai/hosting.json`: Sites deployment configuration
