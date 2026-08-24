@@ -2,6 +2,7 @@ import Image from "next/image";
 import AboutSection from "./AboutSection";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
+import IntegrationMap from "./IntegrationMap";
 import ScrollJourney from "./ScrollJourney";
 import TeamSection from "./TeamSection";
 
@@ -12,39 +13,23 @@ const pathways = [
   {
     title: "Connect your existing systems",
     copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
-    video: "/media/editorial-connect-higgs-v1.mp4",
-    poster: "/media/editorial-connect-higgs-v1-poster.jpg",
+    signal: "01 / Connect",
+    video: "/media/editorial-connect-systems-higgs-v2.mp4",
+    poster: "/media/editorial-connect-systems-higgs-v2-poster.jpg",
   },
   {
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
-    video: "/media/editorial-intelligence-higgs-v1.mp4",
-    poster: "/media/editorial-intelligence-higgs-v1-poster.jpg",
+    signal: "02 / Activate",
+    video: "/media/editorial-build-useful-higgs-v2.mp4",
+    poster: "/media/editorial-build-useful-higgs-v2-poster.jpg",
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
-    video: "/media/editorial-scale-higgs-v1.mp4",
-    poster: "/media/editorial-scale-higgs-v1-poster.jpg",
-  },
-];
-
-const outcomes = [
-  {
-    title: "Connected systems",
-    copy: "Your business tools and data work together in one secure AI layer.",
-  },
-  {
-    title: "AI automation",
-    copy: "AI agents handle repetitive work and support faster decisions.",
-  },
-  {
-    title: "Team adoption",
-    copy: "People understand the tools and stay in control of how they are used.",
-  },
-  {
-    title: "Business value",
-    copy: "The best solutions scale with clear goals, ownership, and results.",
+    signal: "03 / Scale",
+    video: "/media/editorial-scale-control-higgs-v2.mp4",
+    poster: "/media/editorial-scale-control-higgs-v2-poster.jpg",
   },
 ];
 
@@ -142,6 +127,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="pathway-content">
+                  <span>{pathway.signal}</span>
                   <h3>{pathway.title}</h3>
                   <p>{pathway.copy}</p>
                 </div>
@@ -153,20 +139,17 @@ export default function Home() {
         <AboutSection />
 
         <section id="work" className="system-section section-pad" aria-labelledby="system-title">
-          <div className="system-copy">
-            <p className="section-kicker">Connected business systems</p>
-            <h2 id="system-title">Connect your systems. Put your data to work.</h2>
-            <p>We integrate AI with your ERP, CRM, documents, operations, and internal knowledge so teams can act faster.</p>
-            <a className="primary-button" href="#contact">Plan AI integration</a>
+          <div className="system-heading">
+            <div className="system-copy">
+              <p className="section-kicker">Connected systems, measurable growth</p>
+              <h2 id="system-title">Connect your systems. Put your data to work.</h2>
+            </div>
+            <div className="system-summary">
+              <p>We map what you already use, build the software that is missing, integrate AI securely, and improve how customers discover your product through SEO, AEO, and smarter marketing.</p>
+              <a className="primary-button" href="#contact">Plan AI integration</a>
+            </div>
           </div>
-          <div className="outcome-ledger" aria-label="AI integration outcomes">
-            {outcomes.map((outcome) => (
-              <article key={outcome.title}>
-                <h3>{outcome.title}</h3>
-                <p>{outcome.copy}</p>
-              </article>
-            ))}
-          </div>
+          <IntegrationMap />
         </section>
 
         <section id="services" className="services section-pad" aria-labelledby="services-title">
@@ -201,17 +184,28 @@ export default function Home() {
           </div>
           <figure>
             <EditorialLoop
-              source={publicAsset("/media/editorial-people-team-higgs-v1.mp4")}
-              poster={publicAsset("/media/editorial-people-team-higgs-v1-poster.jpg")}
+              source={publicAsset("/media/editorial-people-logistics-higgs-v2.mp4")}
+              poster={publicAsset("/media/editorial-people-logistics-higgs-v2-poster.jpg")}
             />
-            <figcaption>Teams learning together</figcaption>
+            <figcaption>Operational teams learning together</figcaption>
           </figure>
           <figure>
             <EditorialLoop
-              source={publicAsset("/media/editorial-people-adoption-higgs-v1.mp4")}
-              poster={publicAsset("/media/editorial-people-adoption-higgs-v1-poster.jpg")}
+              source={publicAsset("/media/editorial-people-healthcare-higgs-v2.mp4")}
+              poster={publicAsset("/media/editorial-people-healthcare-higgs-v2-poster.jpg")}
             />
-            <figcaption>Practical adoption at work</figcaption>
+            <figcaption>Guided adoption in real workflows</figcaption>
+          </figure>
+          <figure className="people-still">
+            <Image
+              src={publicAsset("/media/uae-ai-workshop-v1.jpg")}
+              alt="UAE leaders and operational teams working together in an AI workshop"
+              width={1536}
+              height={1024}
+              loading="lazy"
+              unoptimized
+            />
+            <figcaption>Leaders and teams shaping the rollout</figcaption>
           </figure>
         </section>
 

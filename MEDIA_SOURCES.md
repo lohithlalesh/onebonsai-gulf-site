@@ -1,6 +1,6 @@
 # Editorial film generation
 
-The integration and adoption films were generated in Higgsfield as one connected visual system. Every scene uses the same cast reference, lighting language, camera direction, duration, and technical delivery profile.
+The first integration and adoption film set was generated in Higgsfield as one connected visual system. Every scene used the same cast reference, lighting language, camera direction, duration, and technical delivery profile.
 
 ## Shared production profile
 
@@ -17,6 +17,16 @@ The integration and adoption films were generated in Higgsfield as one connected
 - Scale AI with control: `7174dbf6-3fa2-4a09-968c-96adcb6cd3cd`
 - Teams learning together: `2a0a13fc-e132-46fa-9ff3-62324efb2456`
 - Practical adoption at work: `8365e3b2-1fcf-4c06-b88a-9dd85eea5dfd`
+
+## Distinct integration and adoption films
+
+The second film set deliberately changes subject, location, and visual metaphor for every section. Higgsfield Grok Video created the source motion studies. Each source was finished locally as a silent 1920x1080 H.264 loop at exactly 24 fps with a matching poster.
+
+- Connect enterprise systems: `21986dce-baef-46f3-91a6-7db01b4a05ed`
+- Build useful AI solutions: `29f43e26-f31b-4d96-8c7d-f9f246a1e331`
+- Scale AI with control: `5b69aa27-54ac-4cff-a2a1-d4a3ce9bae97`
+- Logistics team adoption: `212ae830-87d6-40de-ab05-570f77c70a37`
+- Healthcare team adoption: `e7420bc2-fedb-47ca-9698-5fde42513f48`
 
 ## Official OneBonsai case imagery
 

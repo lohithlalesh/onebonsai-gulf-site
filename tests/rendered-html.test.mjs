@@ -38,6 +38,10 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(html, /Connect your existing systems/);
   assert.match(html, /Build useful AI solutions/);
   assert.match(html, /Scale AI with control/);
+  assert.match(html, /Connected systems, measurable growth/);
+  assert.match(html, /AI \+ software layer/);
+  assert.match(html, /SEO \+ AEO/);
+  assert.match(html, /Marketing growth/);
   assert.match(html, /Global deep tech\. Built for the Gulf\./);
   assert.match(html, /One team from strategy to deployment\./);
   assert.match(html, /Delivered work across/);
@@ -64,12 +68,13 @@ test("server-renders the OneBonsai Gulf experience", async () => {
 });
 
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
-  const [page, about, journey, marquee, editorialLoop, team, layout, css, mediaSources] = await Promise.all([
+  const [page, about, journey, marquee, editorialLoop, integrationMap, team, layout, css, mediaSources] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/AboutSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CustomerMarquee.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/EditorialLoop.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/IntegrationMap.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/TeamSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -93,11 +98,16 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(marquee, /customer-marquee/);
   assert.match(marquee, /aria-pressed/);
-  assert.match(page, /editorial-connect-higgs-v1\.mp4/);
-  assert.match(page, /editorial-intelligence-higgs-v1\.mp4/);
-  assert.match(page, /editorial-scale-higgs-v1\.mp4/);
-  assert.match(page, /editorial-people-team-higgs-v1\.mp4/);
-  assert.match(page, /editorial-people-adoption-higgs-v1\.mp4/);
+  assert.match(page, /editorial-connect-systems-higgs-v2\.mp4/);
+  assert.match(page, /editorial-build-useful-higgs-v2\.mp4/);
+  assert.match(page, /editorial-scale-control-higgs-v2\.mp4/);
+  assert.match(page, /editorial-people-logistics-higgs-v2\.mp4/);
+  assert.match(page, /editorial-people-healthcare-higgs-v2\.mp4/);
+  assert.match(integrationMap, /AI integration/);
+  assert.match(integrationMap, /Custom software/);
+  assert.match(integrationMap, /Consulting/);
+  assert.match(integrationMap, /SEO \+ AEO/);
+  assert.match(integrationMap, /Marketing growth/);
   assert.match(editorialLoop, /new IntersectionObserver/);
   assert.match(editorialLoop, /preload="none"/);
   assert.match(editorialLoop, /video\.pause\(\)/);
@@ -125,7 +135,8 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /@media \(max-width: 700px\)/);
   assert.doesNotMatch(css, /\.journey-canvas|\.intelligence-flow|\.flow-sticky/);
   assert.match(css, /\.pathway-grid/);
-  assert.match(css, /\.outcome-ledger/);
+  assert.match(css, /\.integration-map/);
+  assert.match(css, /@keyframes integration-signal/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /100dvh/);
   assert.match(css, /@keyframes customer-marquee/);
@@ -138,6 +149,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /filter: grayscale\(1\)/);
   assert.doesNotMatch(css, /transition:\s*all/);
   assert.match(mediaSources, /Seedance 2\.0/);
+  assert.match(mediaSources, /Grok Video/);
   assert.match(mediaSources, /exactly 24 fps/);
   assert.doesNotMatch(mediaSources, /Pexels/i);
 
@@ -146,16 +158,17 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/icon-systems.png", import.meta.url));
   await access(new URL("../public/media/icon-intelligence.png", import.meta.url));
   await access(new URL("../public/media/icon-scale.png", import.meta.url));
-  await access(new URL("../public/media/editorial-connect-higgs-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-intelligence-higgs-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-scale-higgs-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-people-team-higgs-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-people-adoption-higgs-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-connect-higgs-v1-poster.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-intelligence-higgs-v1-poster.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-scale-higgs-v1-poster.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-people-team-higgs-v1-poster.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-people-adoption-higgs-v1-poster.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-connect-systems-higgs-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-build-useful-higgs-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-scale-control-higgs-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-people-logistics-higgs-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-people-healthcare-higgs-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-connect-systems-higgs-v2-poster.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-build-useful-higgs-v2-poster.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-scale-control-higgs-v2-poster.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-people-logistics-higgs-v2-poster.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-people-healthcare-higgs-v2-poster.jpg", import.meta.url));
+  await access(new URL("../public/media/uae-ai-workshop-v1.jpg", import.meta.url));
   await access(new URL("../public/team/ivan-m-grey.jpg", import.meta.url));
   await access(new URL("../public/team/hamad-al-khamais.jpg", import.meta.url));
   await access(new URL("../public/team/jelena-skoric.jpg", import.meta.url));
