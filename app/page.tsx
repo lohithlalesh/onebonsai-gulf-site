@@ -2,6 +2,7 @@ import Image from "next/image";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
 import ScrollJourney from "./ScrollJourney";
+import TeamSection from "./TeamSection";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -10,20 +11,20 @@ const pathways = [
   {
     title: "Connect your existing systems",
     copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
-    video: "/media/editorial-connect-v1.mp4",
-    poster: "/media/editorial-connect-poster-v1.jpg",
+    video: "/media/editorial-connect-mosaic-v2.mp4",
+    poster: "/media/editorial-connect-mosaic-poster-v2.jpg",
   },
   {
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
-    video: "/media/editorial-intelligence-v1.mp4",
-    poster: "/media/editorial-intelligence-poster-v1.jpg",
+    video: "/media/editorial-intelligence-mosaic-v2.mp4",
+    poster: "/media/editorial-intelligence-mosaic-poster-v2.jpg",
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
-    video: "/media/editorial-scale-v1.mp4",
-    poster: "/media/editorial-scale-poster-v1.jpg",
+    video: "/media/editorial-scale-mosaic-v2.mp4",
+    poster: "/media/editorial-scale-mosaic-poster-v2.jpg",
   },
 ];
 
@@ -103,6 +104,7 @@ export default function Home() {
           <a href="#about">About</a>
           <a href="#services">Services</a>
           <a href="#academy">Academy</a>
+          <a href="#team">Team</a>
           <a href="#work">Work</a>
         </nav>
         <a className="nav-cta" href="#contact">Plan AI integration</a>
@@ -197,19 +199,21 @@ export default function Home() {
           </div>
           <figure>
             <EditorialLoop
-              source={publicAsset("/media/editorial-people-team-v1.mp4")}
-              poster={publicAsset("/media/editorial-people-team-poster-v1.jpg")}
+              source={publicAsset("/media/editorial-people-team-mosaic-v2.mp4")}
+              poster={publicAsset("/media/editorial-people-team-mosaic-poster-v2.jpg")}
             />
             <figcaption>Teams learning together</figcaption>
           </figure>
           <figure>
             <EditorialLoop
-              source={publicAsset("/media/editorial-people-adoption-v1.mp4")}
-              poster={publicAsset("/media/editorial-people-adoption-poster-v1.jpg")}
+              source={publicAsset("/media/editorial-people-adoption-mosaic-v2.mp4")}
+              poster={publicAsset("/media/editorial-people-adoption-mosaic-poster-v2.jpg")}
             />
             <figcaption>Practical adoption at work</figcaption>
           </figure>
         </section>
+
+        <TeamSection />
 
         <section className="infrastructure-section" aria-labelledby="infrastructure-title">
           <Image

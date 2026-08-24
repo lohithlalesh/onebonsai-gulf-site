@@ -39,20 +39,25 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(html, /Build useful AI solutions/);
   assert.match(html, /Scale AI with control/);
   assert.match(html, /AI should improve how your business works/);
-  assert.match(html, /Trusted by organizations across the UAE and beyond/);
+  assert.match(html, /Trusted by organizations building what comes next/);
+  assert.match(html, /UAE \/ GLOBAL/);
+  assert.match(html, /Meet the team behind the work/);
+  assert.match(html, /Ivan M Grey/);
+  assert.match(html, /Rabeb Ben Hamouda/);
   assert.match(html, /AI-powered infrastructure inspection at scale\./);
-  assert.match(html, /Pause logos/);
+  assert.match(html, /Pause customer logos/);
   assert.match(html, /Skip to content/);
   assert.doesNotMatch(html, /SCROLL TO CULTIVATE|GO ↗|section-marker/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
-  const [page, journey, marquee, editorialLoop, layout, css] = await Promise.all([
+  const [page, journey, marquee, editorialLoop, team, layout, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CustomerMarquee.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/EditorialLoop.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/TeamSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
@@ -73,15 +78,16 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(marquee, /customer-marquee/);
   assert.match(marquee, /aria-pressed/);
-  assert.match(page, /editorial-connect-v1\.mp4/);
-  assert.match(page, /editorial-intelligence-v1\.mp4/);
-  assert.match(page, /editorial-scale-v1\.mp4/);
-  assert.match(page, /editorial-people-team-v1\.mp4/);
-  assert.match(page, /editorial-people-adoption-v1\.mp4/);
+  assert.match(page, /editorial-connect-mosaic-v2\.mp4/);
+  assert.match(page, /editorial-intelligence-mosaic-v2\.mp4/);
+  assert.match(page, /editorial-scale-mosaic-v2\.mp4/);
+  assert.match(page, /editorial-people-team-mosaic-v2\.mp4/);
+  assert.match(page, /editorial-people-adoption-mosaic-v2\.mp4/);
   assert.match(editorialLoop, /new IntersectionObserver/);
   assert.match(editorialLoop, /preload="none"/);
   assert.match(editorialLoop, /video\.pause\(\)/);
   assert.match(layout, /favicon-v2\.png/);
+  assert.match(team, /Meet the team behind the work/);
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
   assert.match(css, /\.journey-film/);
   assert.match(css, /\.journey-shell/);
@@ -93,6 +99,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /:focus-visible/);
   assert.match(css, /100dvh/);
   assert.match(css, /@keyframes customer-marquee/);
+  assert.match(css, /\.team-track/);
+  assert.match(css, /\.team-card:hover img/);
+  assert.match(css, /filter: grayscale\(1\)/);
   assert.doesNotMatch(css, /transition:\s*all/);
 
   await access(new URL("../public/media/onebonsai-hero-motion-4k.mp4", import.meta.url));
@@ -100,16 +109,25 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/icon-systems.png", import.meta.url));
   await access(new URL("../public/media/icon-intelligence.png", import.meta.url));
   await access(new URL("../public/media/icon-scale.png", import.meta.url));
-  await access(new URL("../public/media/editorial-connect-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-intelligence-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-scale-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-people-team-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-people-adoption-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-connect-poster-v1.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-intelligence-poster-v1.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-scale-poster-v1.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-people-team-poster-v1.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-people-adoption-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-connect-mosaic-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-intelligence-mosaic-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-scale-mosaic-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-people-team-mosaic-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-people-adoption-mosaic-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-connect-mosaic-poster-v2.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-intelligence-mosaic-poster-v2.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-scale-mosaic-poster-v2.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-people-team-mosaic-poster-v2.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-people-adoption-mosaic-poster-v2.jpg", import.meta.url));
+  await access(new URL("../public/team/ivan-m-grey.jpg", import.meta.url));
+  await access(new URL("../public/team/jelena-skoric.jpg", import.meta.url));
+  await access(new URL("../public/team/lohith-lalesh.jpg", import.meta.url));
+  await access(new URL("../public/team/olfa-hachfi.jpg", import.meta.url));
+  await access(new URL("../public/team/aditya-varshney.jpg", import.meta.url));
+  await access(new URL("../public/team/pankaj-birla.jpg", import.meta.url));
+  await access(new URL("../public/team/omar-abedlaziz.jpg", import.meta.url));
+  await access(new URL("../public/team/mohamed-ilyes-bouzayen.jpg", import.meta.url));
+  await access(new URL("../public/team/rabeb-ben-hamouda.jpg", import.meta.url));
   await access(new URL("../public/favicon-v2.png", import.meta.url));
   await access(new URL("../public/customers/ajman.webp", import.meta.url));
   await access(new URL("../public/customers/itc-pros.png", import.meta.url));
