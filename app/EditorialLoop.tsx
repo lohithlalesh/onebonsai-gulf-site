@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+const SMALL_SCREEN_QUERY = "(max-width: 760px)";
 
 type EditorialLoopProps = {
   poster: string;
@@ -14,7 +15,11 @@ export default function EditorialLoop({ poster, source }: EditorialLoopProps) {
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || window.matchMedia(REDUCED_MOTION_QUERY).matches) return;
+    if (
+      !video ||
+      window.matchMedia(REDUCED_MOTION_QUERY).matches ||
+      window.matchMedia(SMALL_SCREEN_QUERY).matches
+    ) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {

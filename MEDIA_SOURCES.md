@@ -28,6 +28,10 @@ The second film set deliberately changes subject, location, and visual metaphor 
 - Logistics team adoption: `212ae830-87d6-40de-ab05-570f77c70a37`
 - Healthcare team adoption: `e7420bc2-fedb-47ca-9698-5fde42513f48`
 
+## Unified 3D capability motion
+
+Activate and Scale use new 1920x1080 motion studies built from the existing OneBonsai black metal, chrome, and lime sculptural icon system. Both loops are finished as lightweight H.264 at exactly 24 fps to match the 3D Connect film while keeping mobile delivery fast. Small screens stay on the high-resolution posters instead of downloading autoplay video.
+
 ## Official OneBonsai case imagery
 
 The About case reel uses optimized local copies of official OneBonsai project imagery from:

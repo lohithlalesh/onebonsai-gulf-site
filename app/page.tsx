@@ -21,15 +21,15 @@ const pathways = [
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
     signal: "02 / Activate",
-    video: "/media/editorial-build-useful-higgs-v2.mp4",
-    poster: "/media/editorial-build-useful-higgs-v2-poster.jpg",
+    video: "/media/editorial-build-useful-3d-v3.mp4",
+    poster: "/media/editorial-build-useful-3d-v3-poster.jpg",
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
     signal: "03 / Scale",
-    video: "/media/editorial-scale-control-higgs-v2.mp4",
-    poster: "/media/editorial-scale-control-higgs-v2-poster.jpg",
+    video: "/media/editorial-scale-control-3d-v3.mp4",
+    poster: "/media/editorial-scale-control-3d-v3-poster.jpg",
   },
 ];
 
@@ -182,31 +182,44 @@ export default function Home() {
             <h2 id="people-title">AI works when people know how to use it.</h2>
             <p>We work with leaders, technology teams, and operational experts to make AI part of everyday work.</p>
           </div>
-          <figure>
+          <div className="people-rail">
+          <figure className="people-still people-boardroom">
+            <Image
+              src={publicAsset("/media/uae-ai-boardroom-v1.jpg")}
+              alt="UAE leaders and OneBonsai Gulf consultants reviewing an AI system together"
+              width={1672}
+              height={941}
+              loading="lazy"
+              unoptimized
+            />
+            <figcaption>Leaders shaping the AI roadmap together</figcaption>
+          </figure>
+          <figure className="people-logistics">
             <EditorialLoop
               source={publicAsset("/media/editorial-people-logistics-higgs-v2.mp4")}
               poster={publicAsset("/media/editorial-people-logistics-higgs-v2-poster.jpg")}
             />
-            <figcaption>Operational teams learning together</figcaption>
+            <figcaption>Operational teams learning in the workflow</figcaption>
           </figure>
-          <figure>
+          <figure className="people-still people-port">
+            <Image
+              src={publicAsset("/media/uae-port-ai-v1.jpg")}
+              alt="A UAE port operations team studying live infrastructure data with an AI consultant"
+              width={1672}
+              height={941}
+              loading="lazy"
+              unoptimized
+            />
+            <figcaption>AI decisions grounded in operational context</figcaption>
+          </figure>
+          <figure className="people-healthcare">
             <EditorialLoop
               source={publicAsset("/media/editorial-people-healthcare-higgs-v2.mp4")}
               poster={publicAsset("/media/editorial-people-healthcare-higgs-v2-poster.jpg")}
             />
             <figcaption>Guided adoption in real workflows</figcaption>
           </figure>
-          <figure className="people-still">
-            <Image
-              src={publicAsset("/media/uae-ai-workshop-v1.jpg")}
-              alt="UAE leaders and operational teams working together in an AI workshop"
-              width={1536}
-              height={1024}
-              loading="lazy"
-              unoptimized
-            />
-            <figcaption>Leaders and teams shaping the rollout</figcaption>
-          </figure>
+          </div>
         </section>
 
         <TeamSection />
