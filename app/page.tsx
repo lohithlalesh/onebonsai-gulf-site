@@ -1,6 +1,6 @@
 import Image from "next/image";
 import CustomerMarquee from "./CustomerMarquee";
-import PathwayVideo from "./PathwayVideo";
+import EditorialLoop from "./EditorialLoop";
 import ScrollJourney from "./ScrollJourney";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -10,20 +10,20 @@ const pathways = [
   {
     title: "Connect your existing systems",
     copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
-    video: "/media/pathway-connect-v1.mp4",
-    poster: "/media/pathway-connect-poster-v1.jpg",
+    video: "/media/editorial-connect-v1.mp4",
+    poster: "/media/editorial-connect-poster-v1.jpg",
   },
   {
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
-    video: "/media/pathway-activate-v1.mp4",
-    poster: "/media/pathway-activate-poster-v1.jpg",
+    video: "/media/editorial-intelligence-v1.mp4",
+    poster: "/media/editorial-intelligence-poster-v1.jpg",
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
-    video: "/media/pathway-scale-v1.mp4",
-    poster: "/media/pathway-scale-poster-v1.jpg",
+    video: "/media/editorial-scale-v1.mp4",
+    poster: "/media/editorial-scale-poster-v1.jpg",
   },
 ];
 
@@ -123,7 +123,7 @@ export default function Home() {
             {pathways.map((pathway, index) => (
               <article className={index === 0 ? "pathway-feature" : undefined} key={pathway.title}>
                 <div className="pathway-media">
-                  <PathwayVideo
+                  <EditorialLoop
                     source={publicAsset(pathway.video)}
                     poster={publicAsset(pathway.poster)}
                   />
@@ -196,26 +196,18 @@ export default function Home() {
             <p>We work with leaders, technology teams, and operational experts to make AI part of everyday work.</p>
           </div>
           <figure>
-            <Image
-              src={publicAsset("/media/uae-port-ai-v1.jpg")}
-              alt="OneBonsai Gulf consultant with Emirati logistics leaders"
-              width={1672}
-              height={941}
-              loading="lazy"
-              unoptimized
+            <EditorialLoop
+              source={publicAsset("/media/editorial-people-team-v1.mp4")}
+              poster={publicAsset("/media/editorial-people-team-poster-v1.jpg")}
             />
-            <figcaption>Logistics and operations</figcaption>
+            <figcaption>Teams learning together</figcaption>
           </figure>
           <figure>
-            <Image
-              src={publicAsset("/media/uae-ai-workshop-v1.jpg")}
-              alt="OneBonsai Gulf consultant leading an AI workshop in the UAE"
-              width={1672}
-              height={941}
-              loading="lazy"
-              unoptimized
+            <EditorialLoop
+              source={publicAsset("/media/editorial-people-adoption-v1.mp4")}
+              poster={publicAsset("/media/editorial-people-adoption-poster-v1.jpg")}
             />
-            <figcaption>People and adoption</figcaption>
+            <figcaption>Practical adoption at work</figcaption>
           </figure>
         </section>
 

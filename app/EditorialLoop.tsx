@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 
-type PathwayVideoProps = {
+type EditorialLoopProps = {
   poster: string;
   source: string;
 };
 
-export default function PathwayVideo({ poster, source }: PathwayVideoProps) {
+export default function EditorialLoop({ poster, source }: EditorialLoopProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -48,6 +48,8 @@ export default function PathwayVideo({ poster, source }: PathwayVideoProps) {
       muted
       loop
       playsInline
+      disablePictureInPicture
+      disableRemotePlayback
       preload="none"
       poster={poster}
     />

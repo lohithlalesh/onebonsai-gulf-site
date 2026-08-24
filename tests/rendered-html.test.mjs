@@ -48,11 +48,11 @@ test("server-renders the OneBonsai Gulf experience", async () => {
 });
 
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
-  const [page, journey, marquee, pathwayVideo, layout, css] = await Promise.all([
+  const [page, journey, marquee, editorialLoop, layout, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CustomerMarquee.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/PathwayVideo.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/EditorialLoop.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
@@ -73,15 +73,15 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(marquee, /customer-marquee/);
   assert.match(marquee, /aria-pressed/);
-  assert.match(page, /pathway-connect-v1\.mp4/);
-  assert.match(page, /pathway-activate-v1\.mp4/);
-  assert.match(page, /pathway-scale-v1\.mp4/);
-  assert.match(pathwayVideo, /new IntersectionObserver/);
-  assert.match(pathwayVideo, /preload="none"/);
-  assert.match(pathwayVideo, /video\.pause\(\)/);
+  assert.match(page, /editorial-connect-v1\.mp4/);
+  assert.match(page, /editorial-intelligence-v1\.mp4/);
+  assert.match(page, /editorial-scale-v1\.mp4/);
+  assert.match(page, /editorial-people-team-v1\.mp4/);
+  assert.match(page, /editorial-people-adoption-v1\.mp4/);
+  assert.match(editorialLoop, /new IntersectionObserver/);
+  assert.match(editorialLoop, /preload="none"/);
+  assert.match(editorialLoop, /video\.pause\(\)/);
   assert.match(layout, /favicon-v2\.png/);
-  assert.match(page, /uae-port-ai-v1\.jpg/);
-  assert.match(page, /uae-ai-workshop-v1\.jpg/);
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
   assert.match(css, /\.journey-film/);
   assert.match(css, /\.journey-shell/);
@@ -100,12 +100,16 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/icon-systems.png", import.meta.url));
   await access(new URL("../public/media/icon-intelligence.png", import.meta.url));
   await access(new URL("../public/media/icon-scale.png", import.meta.url));
-  await access(new URL("../public/media/pathway-connect-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/pathway-activate-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/pathway-scale-v1.mp4", import.meta.url));
-  await access(new URL("../public/media/pathway-connect-poster-v1.jpg", import.meta.url));
-  await access(new URL("../public/media/pathway-activate-poster-v1.jpg", import.meta.url));
-  await access(new URL("../public/media/pathway-scale-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-connect-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-intelligence-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-scale-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-people-team-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-people-adoption-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/editorial-connect-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-intelligence-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-scale-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-people-team-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/editorial-people-adoption-poster-v1.jpg", import.meta.url));
   await access(new URL("../public/favicon-v2.png", import.meta.url));
   await access(new URL("../public/customers/ajman.webp", import.meta.url));
   await access(new URL("../public/customers/itc-pros.png", import.meta.url));
