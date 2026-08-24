@@ -22,7 +22,7 @@ export default function CustomerMarquee() {
   return (
     <section className="customer-marquee" aria-labelledby="customer-marquee-title" data-paused={paused}>
       <div className="customer-marquee-heading">
-        <p id="customer-marquee-title">Trusted by organizations building what comes next</p>
+        <p id="customer-marquee-title">Trusted by organizations across the UAE and beyond</p>
         <button type="button" aria-pressed={paused} onClick={() => setPaused((value) => !value)}>
           {paused ? "Play logos" : "Pause logos"}
         </button>

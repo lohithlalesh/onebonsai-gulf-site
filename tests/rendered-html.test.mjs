@@ -29,26 +29,31 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>OneBonsai Gulf \| AI Strategy &amp; DeepTech<\/title>/i);
-  assert.match(html, /AI in the business/);
-  assert.match(html, /We connect AI to the systems your teams already use/);
-  assert.match(html, /Connect what works/);
-  assert.match(html, /Intelligence flow/);
-  assert.match(html, /Scale with control/);
-  assert.match(html, /AI should simplify the business you already have/);
-  assert.match(html, /Trusted by organizations building what comes next/);
-  assert.match(html, /Infrastructure intelligence, at scale\./);
+  assert.match(html, /<title>OneBonsai Gulf \| AI Consulting &amp; Integration UAE<\/title>/i);
+  assert.match(html, /Enterprise AI integration/);
+  assert.match(html, /We help UAE companies connect AI/);
+  assert.match(html, /AI system integration/);
+  assert.match(html, /Intelligent automation/);
+  assert.match(html, /AI governance and scale/);
+  assert.match(html, /Connect your existing systems/);
+  assert.match(html, /Build useful AI solutions/);
+  assert.match(html, /Scale AI with control/);
+  assert.match(html, /AI should improve how your business works/);
+  assert.match(html, /Trusted by organizations across the UAE and beyond/);
+  assert.match(html, /AI-powered infrastructure inspection at scale\./);
   assert.match(html, /Pause logos/);
   assert.match(html, /Skip to content/);
   assert.doesNotMatch(html, /SCROLL TO CULTIVATE|GO ↗|section-marker/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
-test("keeps one high-resolution Safari-safe scroll film, UAE imagery, and customer identities in source", async () => {
-  const [page, journey, marquee, css] = await Promise.all([
+test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
+  const [page, journey, marquee, pathwayVideo, layout, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CustomerMarquee.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/PathwayVideo.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
@@ -68,7 +73,13 @@ test("keeps one high-resolution Safari-safe scroll film, UAE imagery, and custom
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(marquee, /customer-marquee/);
   assert.match(marquee, /aria-pressed/);
-  assert.doesNotMatch(page, /uae-ai-boardroom-v1\.jpg/);
+  assert.match(page, /pathway-connect-v1\.mp4/);
+  assert.match(page, /pathway-activate-v1\.mp4/);
+  assert.match(page, /pathway-scale-v1\.mp4/);
+  assert.match(pathwayVideo, /new IntersectionObserver/);
+  assert.match(pathwayVideo, /preload="none"/);
+  assert.match(pathwayVideo, /video\.pause\(\)/);
+  assert.match(layout, /favicon-v2\.png/);
   assert.match(page, /uae-port-ai-v1\.jpg/);
   assert.match(page, /uae-ai-workshop-v1\.jpg/);
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
@@ -89,6 +100,13 @@ test("keeps one high-resolution Safari-safe scroll film, UAE imagery, and custom
   await access(new URL("../public/media/icon-systems.png", import.meta.url));
   await access(new URL("../public/media/icon-intelligence.png", import.meta.url));
   await access(new URL("../public/media/icon-scale.png", import.meta.url));
+  await access(new URL("../public/media/pathway-connect-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/pathway-activate-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/pathway-scale-v1.mp4", import.meta.url));
+  await access(new URL("../public/media/pathway-connect-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/pathway-activate-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/media/pathway-scale-poster-v1.jpg", import.meta.url));
+  await access(new URL("../public/favicon-v2.png", import.meta.url));
   await access(new URL("../public/customers/ajman.webp", import.meta.url));
   await access(new URL("../public/customers/itc-pros.png", import.meta.url));
   await access(new URL("../public/customers/masdar-city.svg", import.meta.url));

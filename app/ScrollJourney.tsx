@@ -21,51 +21,51 @@ const publicAsset = (path: string) => `${assetBase}${path}`;
 
 const acts: Act[] = [
   {
-    eyebrow: "AI in the business",
-    title: "There is a better way to bring AI into your company.",
-    copy: "We connect AI to the systems your teams already use, with governance and measurable value built in.",
+    eyebrow: "Enterprise AI integration",
+    title: "AI integration for the business you already run.",
+    copy: "We help UAE companies connect AI to existing systems, automate real work, and keep people in control.",
     signal: "OneBonsai Gulf. Abu Dhabi.",
   },
   {
-    eyebrow: "Connect what works",
-    title: "Start with the business you already have.",
-    copy: "ERP, CRM, documents, and operational knowledge enter one governed intelligence layer, without a disruptive rebuild.",
+    eyebrow: "AI system integration",
+    title: "Connect AI to your existing systems.",
+    copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
     signal: "Systems. Data. People.",
   },
   {
-    eyebrow: "Cultivate context",
-    title: "Let context take root.",
-    copy: "Signals become context, then useful agents, predictions, and automations that support real work.",
+    eyebrow: "Custom AI solutions",
+    title: "Turn business data into useful AI.",
+    copy: "Give your teams practical AI agents, search, predictions, and automation built around daily work.",
     signal: "Context. Action. Control.",
   },
   {
-    eyebrow: "Intelligence flow",
-    title: "Intelligence, cultivated.",
-    copy: "A clear path connects trusted systems to decisions your business can act on.",
+    eyebrow: "Intelligent automation",
+    title: "Move from data to decisions.",
+    copy: "Connect the tools you trust to faster answers and actions your business can use.",
     signal: "Governed. Explainable. Secure.",
   },
   {
-    eyebrow: "Scale with control",
-    title: "AI becomes infrastructure.",
-    copy: "Proven outcomes expand across teams and operations while control stays visible at every layer.",
+    eyebrow: "AI governance and scale",
+    title: "Scale AI across your business.",
+    copy: "Expand proven solutions across teams while governance, security, and ownership stay clear.",
     signal: "Pilot. Prove. Scale.",
   },
 ];
 
 const capabilityCards = [
   {
-    title: "Connect systems",
-    copy: "Bring software, data, and institutional knowledge into one useful flow.",
+    title: "AI integration",
+    copy: "Connect software, data, and company knowledge in one secure flow.",
     image: publicAsset("/media/icon-systems.png"),
   },
   {
-    title: "Govern intelligence",
-    copy: "Create secure context for agents, predictions, and automation.",
+    title: "AI governance",
+    copy: "Keep agents, predictions, and automation secure and accountable.",
     image: publicAsset("/media/icon-intelligence.png"),
   },
   {
-    title: "Scale value",
-    copy: "Expand proven outcomes without losing human control or operational trust.",
+    title: "Business scale",
+    copy: "Expand proven results without losing human control or operational trust.",
     image: publicAsset("/media/icon-scale.png"),
   },
 ];

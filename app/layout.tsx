@@ -9,46 +9,47 @@ const absoluteAsset = (path: string) => new URL(publicAsset(path), siteUrl).toSt
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "OneBonsai Gulf | AI Strategy & DeepTech",
+    default: "OneBonsai Gulf | AI Consulting & Integration UAE",
     template: "%s | OneBonsai Gulf",
   },
   description:
-    "OneBonsai Gulf integrates AI into the systems, workflows, and teams that UAE organizations already trust.",
+    "AI consulting, integration, custom AI solutions, automation, and practical AI training for companies across the UAE and Gulf.",
   applicationName: "OneBonsai Gulf",
   keywords: [
-    "AI consultancy Abu Dhabi",
-    "AI strategy UAE",
-    "DeepTech",
-    "AI transformation",
+    "AI consulting Abu Dhabi",
+    "AI consulting UAE",
+    "AI integration UAE",
+    "AI automation UAE",
+    "custom AI solutions",
     "enterprise AI",
     "AI Academy",
   ],
   icons: {
-    icon: publicAsset("/favicon.png"),
-    shortcut: publicAsset("/favicon.png"),
-    apple: publicAsset("/favicon.png"),
+    icon: publicAsset("/favicon-v2.png"),
+    shortcut: publicAsset("/favicon-v2.png"),
+    apple: publicAsset("/favicon-v2.png"),
   },
   openGraph: {
     type: "website",
     locale: "en_AE",
     url: siteUrl,
     siteName: "OneBonsai Gulf",
-    title: "Your business already works. We make it intelligent.",
+    title: "AI consulting and integration for UAE businesses",
     description:
-      "Practical AI integration, transformation, and engineering from Abu Dhabi.",
+      "Connect AI to your existing systems, automate real work, and scale safely with OneBonsai Gulf.",
     images: [
       {
         url: absoluteAsset("/og.png"),
         width: 1536,
         height: 1024,
-        alt: "OneBonsai Gulf: Your business already works. We make it intelligent.",
+        alt: "OneBonsai Gulf AI consulting and integration in Abu Dhabi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your business already works. We make it intelligent.",
-    description: "Practical AI integration, transformation, and engineering from Abu Dhabi.",
+    title: "AI consulting and integration for UAE businesses",
+    description: "Connect AI to your existing systems, automate real work, and scale safely with OneBonsai Gulf.",
     images: [absoluteAsset("/og.png")],
   },
 };
