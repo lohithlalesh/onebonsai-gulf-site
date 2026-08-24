@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.onebonsai.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://obgulf.com";
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 const absoluteAsset = (path: string) => new URL(publicAsset(path), siteUrl).toString();
@@ -51,6 +51,11 @@ export const metadata: Metadata = {
     description: "Practical AI integration, transformation, and engineering from Abu Dhabi.",
     images: [absoluteAsset("/og.png")],
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#f2f4ef",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

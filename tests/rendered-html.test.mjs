@@ -30,25 +30,31 @@ test("server-renders the OneBonsai Gulf experience", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>OneBonsai Gulf \| AI Strategy &amp; DeepTech<\/title>/i);
-  assert.match(html, /AI, BUILT INTO THE BUSINESS/);
-  assert.match(html, /If AI is not embedded in your organization yet/);
-  assert.match(html, /01 \/ CONNECT/);
-  assert.match(html, /03 \/ INTELLIGENCE FLOW/);
-  assert.match(html, /04 \/ SCALE/);
-  assert.match(html, /AI SHOULD SIMPLIFY THE BUSINESS YOU ALREADY HAVE/);
+  assert.match(html, /AI in the business/);
+  assert.match(html, /We connect AI to the systems your teams already use/);
+  assert.match(html, /Connect what works/);
+  assert.match(html, /Intelligence flow/);
+  assert.match(html, /Scale with control/);
+  assert.match(html, /AI should simplify the business you already have/);
   assert.match(html, /Trusted by organizations building what comes next/);
-  assert.match(html, /INFRASTRUCTURE INTELLIGENCE, AT SCALE\./);
+  assert.match(html, /Infrastructure intelligence, at scale\./);
+  assert.match(html, /Pause logos/);
+  assert.match(html, /Skip to content/);
+  assert.doesNotMatch(html, /SCROLL TO CULTIVATE|GO ↗|section-marker/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
 test("keeps one high-resolution Safari-safe scroll film, UAE imagery, and customer identities in source", async () => {
-  const [page, journey, css] = await Promise.all([
+  const [page, journey, marquee, css] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CustomerMarquee.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(page, /<ScrollJourney \/>/);
+  assert.match(page, /<CustomerMarquee \/>/);
+  assert.doesNotMatch(page, /^"use client";/);
   assert.match(journey, /onebonsai-hero-motion-4k\.mp4/);
   assert.match(journey, /onebonsai-hero-poster-v2\.jpg/);
   assert.match(journey, /icon-systems\.png/);
@@ -60,7 +66,8 @@ test("keeps one high-resolution Safari-safe scroll film, UAE imagery, and custom
   assert.match(journey, /new IntersectionObserver/);
   assert.match(journey, /video\.play\(\)\.then\(\(\) => video\.pause\(\)\)/);
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
-  assert.match(page, /customer-marquee/);
+  assert.match(marquee, /customer-marquee/);
+  assert.match(marquee, /aria-pressed/);
   assert.doesNotMatch(page, /uae-ai-boardroom-v1\.jpg/);
   assert.match(page, /uae-port-ai-v1\.jpg/);
   assert.match(page, /uae-ai-workshop-v1\.jpg/);
@@ -70,9 +77,12 @@ test("keeps one high-resolution Safari-safe scroll film, UAE imagery, and custom
   assert.match(css, /\.journey-flow-node/);
   assert.match(css, /@media \(max-width: 700px\)/);
   assert.doesNotMatch(css, /\.journey-canvas|\.intelligence-flow|\.flow-sticky/);
-  assert.match(css, /\.sculpture/);
   assert.match(css, /\.pathway-grid/);
+  assert.match(css, /\.outcome-ledger/);
+  assert.match(css, /:focus-visible/);
+  assert.match(css, /100dvh/);
   assert.match(css, /@keyframes customer-marquee/);
+  assert.doesNotMatch(css, /transition:\s*all/);
 
   await access(new URL("../public/media/onebonsai-hero-motion-4k.mp4", import.meta.url));
   await access(new URL("../public/media/onebonsai-hero-poster-v2.jpg", import.meta.url));

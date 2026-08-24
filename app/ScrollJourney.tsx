@@ -7,6 +7,7 @@ import {
   type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from "react";
+import Image from "next/image";
 
 type Act = {
   eyebrow: string;
@@ -20,52 +21,49 @@ const publicAsset = (path: string) => `${assetBase}${path}`;
 
 const acts: Act[] = [
   {
-    eyebrow: "AI, BUILT INTO THE BUSINESS",
+    eyebrow: "AI in the business",
     title: "There is a better way to bring AI into your company.",
-    copy: "If AI is not embedded in your organization yet, we integrate it into the systems your people already use, securely, practically, and around measurable value.",
-    signal: "ONEBONSAI GULF / ABU DHABI",
+    copy: "We connect AI to the systems your teams already use, with governance and measurable value built in.",
+    signal: "OneBonsai Gulf. Abu Dhabi.",
   },
   {
-    eyebrow: "01 / CONNECT",
+    eyebrow: "Connect what works",
     title: "Start with the business you already have.",
-    copy: "ERP, CRM, documents, operations, and human knowledge enter one governed intelligence layer. No rip-and-replace transformation theatre.",
-    signal: "SYSTEMS / DATA / PEOPLE",
+    copy: "ERP, CRM, documents, and operational knowledge enter one governed intelligence layer, without a disruptive rebuild.",
+    signal: "Systems. Data. People.",
   },
   {
-    eyebrow: "02 / CULTIVATE",
+    eyebrow: "Cultivate context",
     title: "Let context take root.",
-    copy: "Signals become context. Context becomes useful agents, predictions, and automations. Your teams stay in control as intelligence moves through real work.",
-    signal: "CONTEXT / ACTION / CONTROL",
+    copy: "Signals become context, then useful agents, predictions, and automations that support real work.",
+    signal: "Context. Action. Control.",
   },
   {
-    eyebrow: "03 / INTELLIGENCE FLOW",
+    eyebrow: "Intelligence flow",
     title: "Intelligence, cultivated.",
-    copy: "A visible path from the tools you trust to decisions your business can act on.",
-    signal: "GOVERNED / EXPLAINABLE / SECURE",
+    copy: "A clear path connects trusted systems to decisions your business can act on.",
+    signal: "Governed. Explainable. Secure.",
   },
   {
-    eyebrow: "04 / SCALE",
+    eyebrow: "Scale with control",
     title: "AI becomes infrastructure.",
-    copy: "What proves valuable expands across teams, operations, and the enterprise, with governance built into every layer.",
-    signal: "PILOT / PROVE / SCALE",
+    copy: "Proven outcomes expand across teams and operations while control stays visible at every layer.",
+    signal: "Pilot. Prove. Scale.",
   },
 ];
 
 const capabilityCards = [
   {
-    number: "01",
     title: "Connect systems",
     copy: "Bring software, data, and institutional knowledge into one useful flow.",
     image: publicAsset("/media/icon-systems.png"),
   },
   {
-    number: "02",
     title: "Govern intelligence",
     copy: "Create secure context for agents, predictions, and automation.",
     image: publicAsset("/media/icon-intelligence.png"),
   },
   {
-    number: "03",
     title: "Scale value",
     copy: "Expand proven outcomes without losing human control or operational trust.",
     image: publicAsset("/media/icon-scale.png"),
@@ -240,7 +238,7 @@ export default function ScrollJourney() {
           <div className="journey-topbar" aria-hidden="true">
             <span>ONEBONSAI GULF</span>
             <div className="journey-topbar-rail"><i /></div>
-            <span>{String(activeAct + 1).padStart(2, "0")} / 05</span>
+            <span>From systems to value</span>
           </div>
 
           <div className="journey-film" aria-hidden="true">
@@ -257,7 +255,14 @@ export default function ScrollJourney() {
               </video>
             )}
             {isSmallScreen !== false && (
-              <img src={publicAsset("/media/onebonsai-hero-poster-v2.jpg")} alt="" />
+              <Image
+                src={publicAsset("/media/onebonsai-hero-poster-v2.jpg")}
+                alt=""
+                width={5504}
+                height={3072}
+                fetchPriority="high"
+                unoptimized
+              />
             )}
           </div>
 
@@ -282,8 +287,8 @@ export default function ScrollJourney() {
           </div>
 
           <div className="journey-status" aria-hidden="true">
-            <span><i /> SECURE BY DESIGN</span>
-            <span>SCROLL TO CULTIVATE ↓</span>
+            <span><i /> Secure by design</span>
+            <span>Built around your business</span>
           </div>
 
           <div className="journey-dark-panel">
@@ -301,7 +306,6 @@ export default function ScrollJourney() {
               <div className="journey-flow-line" aria-hidden="true"><i /></div>
               {flowNodes.map((node, index) => (
                 <div className="journey-flow-node" key={node} style={{ "--flow-index": index } as CSSProperties}>
-                  <b>{String(index + 1).padStart(2, "0")}</b>
                   <span>{node}</span>
                   <i aria-hidden="true" />
                 </div>
@@ -310,18 +314,18 @@ export default function ScrollJourney() {
 
             <div className="journey-capabilities">
               {capabilityCards.map((card, index) => (
-                <article key={card.number} style={{ "--card-index": index } as CSSProperties}>
+                <article key={card.title} style={{ "--card-index": index } as CSSProperties}>
                   <div className="journey-icon-frame">
-                    <img src={card.image} alt="" />
+                    <Image src={card.image} alt="" width={2048} height={2048} loading="lazy" unoptimized />
                   </div>
-                  <div className="journey-card-meta"><span>{card.number}</span><span>GO ↗</span></div>
+                  <div className="journey-card-meta"><span>OneBonsai Gulf</span><span>Capability</span></div>
                   <h3>{card.title}</h3>
                   <p>{card.copy}</p>
                 </article>
               ))}
             </div>
 
-            <a className="journey-dark-cta" href="#services">Explore the system <span>↗</span></a>
+            <a className="journey-dark-cta" href="#services">Explore capabilities</a>
           </div>
 
           {!isReady && isSmallScreen === false && <div className="journey-loading" aria-hidden="true"><i /></div>}
