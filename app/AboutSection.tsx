@@ -1,52 +1,75 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import EditorialLoop from "./EditorialLoop";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const capabilities = [
+const cases = [
   {
-    label: "Production AI",
-    title: "AI that works in real operations",
-    copy: "Vision AI, digital assistants, knowledge systems, document processing, and automation built for real workloads.",
+    shortTitle: "UKB nurse training",
+    title: "Virtual nurse training for University Hospital Bonn",
+    sector: "Healthcare",
+    metric: "1,600 staff and students",
+    copy: "A multilingual VR platform helps clinical teams practise complex procedures without putting patients at risk.",
+    image: "/cases/ukb-vr-training.jpg",
+    alt: "Virtual nurse training simulation created for University Hospital Bonn",
+    href: "https://onebonsai.com/cases/projects/virtual-reality-nurse-training-program-vrntp-for-ukb",
   },
   {
-    label: "Immersive training",
-    title: "Training people can practise",
-    copy: "VR simulation, digital twins, virtual humans, and learning analytics for safety, healthcare, industry, and defense.",
+    shortTitle: "Nike warehouse training",
+    title: "Faster warehouse onboarding for Nike",
+    sector: "Logistics",
+    metric: "Five training days reduced to two",
+    copy: "A 1:1 virtual packing environment made onboarding repeatable, multilingual, and easier to scale across sites.",
+    image: "/cases/nike-warehouse-training.jpg",
+    alt: "Nike warehouse employee using a VR packing training simulation",
+    href: "https://onebonsai.com/cases/projects/vr-warehouse-packing",
   },
   {
-    label: "Secure deployment",
-    title: "AI deployed where your data lives",
-    copy: "Cloud, edge, hybrid, sovereign, and on-premise architecture shaped around security and operational requirements.",
+    shortTitle: "Port mooring safety",
+    title: "Risk-free mooring practice for dock workers",
+    sector: "Industry",
+    metric: "Dangerous procedures made repeatable",
+    copy: "A digital twin of the harbor lets teams practise cable handling, safe positioning, and full mooring procedures.",
+    image: "/cases/port-mooring-training.jpg",
+    alt: "Virtual reality mooring safety simulation at a commercial port",
+    href: "https://onebonsai.com/cases/projects/mooring",
   },
   {
-    label: "Custom software",
-    title: "Software built around the business",
-    copy: "Connected platforms, workflow automation, internal tools, and customer products that fit existing systems.",
+    shortTitle: "Police VR training",
+    title: "High-pressure training without live risk",
+    sector: "Public safety",
+    metric: "Safe and repeatable scenarios",
+    copy: "Officers train decision-making, coordination, and tactical response inside realistic virtual environments.",
+    image: "/cases/police-vr-training.jpg",
+    alt: "Police officers training together in an immersive virtual reality scenario",
+    href: "https://onebonsai.com/cases/projects/police-training",
   },
-  {
-    label: "AI marketing",
-    title: "Smarter growth systems",
-    copy: "AI-assisted marketing operations, content workflows, customer intelligence, and practical personalization.",
-  },
-  {
-    label: "Cybersecurity",
-    title: "Secure systems and prepared teams",
-    copy: "Cybersecurity training, secure AI governance, risk awareness, and operational safeguards built into delivery.",
-  },
+] as const;
+
+const caseSectors = [
+  "Training",
+  "Healthcare",
+  "Education",
+  "Safety",
+  "Defense",
+  "Police",
+  "Industry",
+  "Logistics",
+  "Retail",
+  "Public sector",
 ] as const;
 
 export default function AboutSection() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeCapability = capabilities[activeIndex];
+  const activeCase = cases[activeIndex];
   const selectPrevious = () => {
-    setActiveIndex((current) => (current - 1 + capabilities.length) % capabilities.length);
+    setActiveIndex((current) => (current - 1 + cases.length) % cases.length);
   };
   const selectNext = () => {
-    setActiveIndex((current) => (current + 1) % capabilities.length);
+    setActiveIndex((current) => (current + 1) % cases.length);
   };
 
   return (
@@ -60,9 +83,7 @@ export default function AboutSection() {
             We bring proven production AI and immersive training expertise into the UAE, then extend it with AI
             marketing, custom software, cybersecurity, and local delivery.
           </p>
-          <a href="https://onebonsai.com" target="_blank" rel="noreferrer">
-            Explore OneBonsai
-          </a>
+          <a href="https://onebonsai.com" target="_blank" rel="noreferrer">Explore OneBonsai</a>
         </div>
       </div>
 
@@ -80,58 +101,64 @@ export default function AboutSection() {
               workforce adoption, and products designed for organizations across the Gulf.
             </p>
           </div>
-          <dl>
-            <div>
-              <dt>Global foundation</dt>
-              <dd>Deep-tech engineering and proven delivery</dd>
-            </div>
-            <div>
-              <dt>Regional execution</dt>
-              <dd>Local context, relationships, and support</dd>
-            </div>
-            <div>
-              <dt>Built to last</dt>
-              <dd>Secure systems that move beyond demos</dd>
-            </div>
-          </dl>
+          <div className="about-case-sectors">
+            <span>Delivered work across</span>
+            <ul>
+              {caseSectors.map((sector) => <li key={sector}>{sector}</li>)}
+            </ul>
+            <a href="https://onebonsai.com/cases" target="_blank" rel="noreferrer">Browse all case studies</a>
+          </div>
         </article>
 
-        <div className="about-capability" aria-label="OneBonsai Gulf capabilities">
-          <div className="about-orbit">
-            <div className="about-orbit-ring" aria-hidden="true" />
-            <div className="about-orbit-media">
-              <EditorialLoop
-                source={publicAsset("/media/editorial-intelligence-higgs-v1.mp4")}
-                poster={publicAsset("/media/editorial-intelligence-higgs-v1-poster.jpg")}
-              />
-              <div className="about-orbit-copy" aria-live="polite">
-                <span>{String(activeIndex + 1).padStart(2, "0")} / 06</span>
-                <h3>{activeCapability.title}</h3>
-                <p>{activeCapability.copy}</p>
+        <div className="about-case-carousel" aria-label="Selected OneBonsai case studies">
+          <div className="about-case-stage">
+            <Image
+              key={activeCase.image}
+              src={publicAsset(activeCase.image)}
+              alt={activeCase.alt}
+              width={1600}
+              height={900}
+              loading="lazy"
+              unoptimized
+            />
+            <div className="about-case-stage-shade" aria-hidden="true" />
+            <article className="about-case-stage-copy" key={activeCase.title} aria-live="polite">
+              <p>
+                <span>{String(activeIndex + 1).padStart(2, "0")} / 04</span>
+                {activeCase.sector}
+              </p>
+              <h3>{activeCase.title}</h3>
+              <div>
+                <strong>{activeCase.metric}</strong>
+                <p>{activeCase.copy}</p>
               </div>
-            </div>
-
-            <div className="about-orbit-items">
-              {capabilities.map((capability, index) => (
-                <button
-                  type="button"
-                  className={index === activeIndex ? "is-active" : undefined}
-                  key={capability.label}
-                  aria-label={`Show ${capability.label}`}
-                  aria-pressed={index === activeIndex}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  <i aria-hidden="true">{index + 1}</i>
-                  <span>{capability.label}</span>
-                </button>
-              ))}
-            </div>
+              <a href={activeCase.href} target="_blank" rel="noreferrer">View case study</a>
+            </article>
           </div>
 
-          <div className="about-orbit-controls">
-            <button type="button" onClick={selectPrevious} aria-label="Previous capability">←</button>
-            <span>{activeCapability.label}</span>
-            <button type="button" onClick={selectNext} aria-label="Next capability">→</button>
+          <div className="about-case-index" role="tablist" aria-label="Choose a case study">
+            {cases.map((caseStudy, index) => (
+              <button
+                type="button"
+                role="tab"
+                className={index === activeIndex ? "is-active" : undefined}
+                key={caseStudy.shortTitle}
+                aria-selected={index === activeIndex}
+                onClick={() => setActiveIndex(index)}
+              >
+                <i aria-hidden="true">{String(index + 1).padStart(2, "0")}</i>
+                <span>
+                  <strong>{caseStudy.shortTitle}</strong>
+                  <small>{caseStudy.sector}</small>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="about-case-controls">
+            <button type="button" onClick={selectPrevious} aria-label="Previous case study">←</button>
+            <span>{activeCase.shortTitle}</span>
+            <button type="button" onClick={selectNext} aria-label="Next case study">→</button>
           </div>
         </div>
       </div>

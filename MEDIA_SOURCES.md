@@ -17,3 +17,12 @@ The integration and adoption films were generated in Higgsfield as one connected
 - Scale AI with control: `7174dbf6-3fa2-4a09-968c-96adcb6cd3cd`
 - Teams learning together: `2a0a13fc-e132-46fa-9ff3-62324efb2456`
 - Practical adoption at work: `8365e3b2-1fcf-4c06-b88a-9dd85eea5dfd`
+
+## Official OneBonsai case imagery
+
+The About case reel uses optimized local copies of official OneBonsai project imagery from:
+
+- UKB virtual nurse training: https://onebonsai.com/cases/projects/virtual-reality-nurse-training-program-vrntp-for-ukb
+- Nike warehouse training: https://onebonsai.com/cases/projects/vr-warehouse-packing
+- Port of Antwerp mooring training: https://onebonsai.com/cases/projects/mooring
+- Police VR training: https://onebonsai.com/cases/projects/police-training
