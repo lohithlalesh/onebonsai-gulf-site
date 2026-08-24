@@ -8,6 +8,7 @@ const publicAsset = (path: string) => `${assetBase}${path}`;
 
 const team = [
   ["Ivan M Grey", "Founder and CEO", "ivan-m-grey.jpg"],
+  ["Hamad Al Khamais", "Business Development Partner", "hamad-al-khamais.jpg"],
   ["Jelena Skoric", "Head of Strategy", "jelena-skoric.jpg"],
   ["Lohith Lalesh", "Head of Digital Marketing", "lohith-lalesh.jpg"],
   ["Olfa Hachfi", "Head of Sales", "olfa-hachfi.jpg"],

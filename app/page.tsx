@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AboutSection from "./AboutSection";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
 import ScrollJourney from "./ScrollJourney";
@@ -49,24 +50,34 @@ const outcomes = [
 
 const services = [
   {
-    title: "AI Consulting & Strategy",
-    copy: "Find the right AI opportunities, build a clear roadmap, and set practical governance.",
-    items: ["AI readiness", "Executive roadmaps", "Governance", "Enterprise adoption"],
+    title: "Enterprise AI & Integration",
+    copy: "Move from AI strategy to secure production systems connected to your data and daily operations.",
+    items: ["AI roadmaps", "Vision and language AI", "Digital assistants", "Knowledge systems"],
   },
   {
-    title: "AI Integration & Automation",
-    copy: "Connect AI to your existing software, data, documents, and business workflows.",
-    items: ["ERP and CRM integration", "Workflow automation", "AI agents", "Enterprise search"],
+    title: "VR Training & Simulation",
+    copy: "Build immersive training and digital twins for safety, healthcare, defense, and industry.",
+    items: ["VR safety training", "Digital twins", "Virtual humans", "Learning analytics"],
   },
   {
-    title: "Custom AI Solutions",
-    copy: "Build secure AI software around the way your teams and customers already work.",
-    items: ["Custom AI apps", "Document AI", "Computer vision", "Predictive analytics"],
+    title: "Custom Software & Automation",
+    copy: "Create connected software, internal platforms, and automation around the way your business works.",
+    items: ["Custom platforms", "ERP and CRM integration", "Workflow automation", "Data products"],
   },
   {
-    title: "AI Training & Academy",
-    copy: "Give leaders and teams the practical skills to use AI safely and confidently.",
-    items: ["Executive programs", "Team training", "Workforce upskilling", "Technical programs"],
+    title: "AI Marketing & Growth",
+    copy: "Use AI to improve marketing operations, customer intelligence, content, and personalization.",
+    items: ["Marketing automation", "Content systems", "Customer intelligence", "Personalization"],
+  },
+  {
+    title: "Cybersecurity & Secure AI",
+    copy: "Protect systems and prepare people with secure architecture, governance, and practical cyber training.",
+    items: ["Secure AI deployment", "Cybersecurity training", "Risk governance", "Operational safeguards"],
+  },
+  {
+    title: "AI Academy & Adoption",
+    copy: "Give leaders and teams the practical skills to use AI safely, confidently, and consistently.",
+    items: ["Executive programs", "Team training", "Workforce upskilling", "Responsible AI"],
   },
 ];
 
@@ -139,16 +150,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="manifesto section-pad" aria-labelledby="manifesto-title">
-          <div className="manifesto-heading">
-            <p className="section-kicker">Our point of view</p>
-            <h2 id="manifesto-title">AI should improve how your business works.</h2>
-          </div>
-          <div className="manifesto-proof">
-            <p>Your company already has valuable systems, data, processes, and people.</p>
-            <p>We connect them with practical AI that solves a clear problem and supports your team.</p>
-          </div>
-        </section>
+        <AboutSection />
 
         <section id="work" className="system-section section-pad" aria-labelledby="system-title">
           <div className="system-copy">
@@ -171,9 +173,9 @@ export default function Home() {
           <div className="services-heading">
             <div>
               <p className="section-kicker">Services</p>
-              <h2 id="services-title">AI consulting, development, and training in one team.</h2>
+              <h2 id="services-title">Deep tech, software, growth, and security in one team.</h2>
             </div>
-            <p>One partner for AI strategy, system integration, custom solutions, governance, and team adoption.</p>
+            <p>One regional partner for production AI, immersive training, custom software, AI marketing, cybersecurity, and team adoption.</p>
           </div>
           <div className="service-list">
             {services.map((service) => (

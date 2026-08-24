@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s | OneBonsai Gulf",
   },
   description:
-    "AI consulting, integration, custom AI solutions, automation, and practical AI training for companies across the UAE and Gulf.",
+    "Production AI, immersive training, custom software, AI marketing, cybersecurity, and practical AI adoption for organizations across the UAE and Gulf.",
   applicationName: "OneBonsai Gulf",
   keywords: [
     "AI consulting Abu Dhabi",
@@ -22,6 +22,10 @@ export const metadata: Metadata = {
     "AI automation UAE",
     "custom AI solutions",
     "enterprise AI",
+    "VR training UAE",
+    "AI marketing UAE",
+    "cybersecurity UAE",
+    "custom software Abu Dhabi",
     "AI Academy",
   ],
   icons: {
@@ -34,9 +38,9 @@ export const metadata: Metadata = {
     locale: "en_AE",
     url: siteUrl,
     siteName: "OneBonsai Gulf",
-    title: "AI consulting and integration for UAE businesses",
+    title: "Production AI and deep-tech solutions for UAE organizations",
     description:
-      "Connect AI to your existing systems, automate real work, and scale safely with OneBonsai Gulf.",
+      "Production AI, immersive training, custom software, AI marketing, cybersecurity, and team adoption from OneBonsai Gulf.",
     images: [
       {
         url: absoluteAsset("/og.png"),
@@ -48,8 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI consulting and integration for UAE businesses",
-    description: "Connect AI to your existing systems, automate real work, and scale safely with OneBonsai Gulf.",
+    title: "Production AI and deep-tech solutions for UAE organizations",
+    description: "Production AI, immersive training, custom software, AI marketing, cybersecurity, and team adoption from OneBonsai Gulf.",
     images: [absoluteAsset("/og.png")],
   },
 };
