@@ -88,6 +88,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(editorialLoop, /video\.pause\(\)/);
   assert.match(layout, /favicon-v2\.png/);
   assert.match(team, /Meet the team behind the work/);
+  assert.match(team, /new ResizeObserver/);
+  assert.match(team, /window\.addEventListener\("scroll", requestRender, \{ passive: true \}\)/);
+  assert.match(team, /translate3d\(\$\{-maxTravel \* clamped\}px, 0, 0\)/);
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
   assert.match(css, /\.journey-film/);
   assert.match(css, /\.journey-shell/);
@@ -101,6 +104,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /@keyframes customer-marquee/);
   assert.match(css, /\.team-track/);
   assert.match(css, /\.team-card:hover img/);
+  assert.match(css, /height: calc\(100dvh \+ var\(--team-scroll-span\)\)/);
   assert.match(css, /filter: grayscale\(1\)/);
   assert.doesNotMatch(css, /transition:\s*all/);
 
