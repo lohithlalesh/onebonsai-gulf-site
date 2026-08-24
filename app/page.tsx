@@ -11,20 +11,20 @@ const pathways = [
   {
     title: "Connect your existing systems",
     copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
-    video: "/media/editorial-connect-mosaic-v2.mp4",
-    poster: "/media/editorial-connect-mosaic-poster-v2.jpg",
+    video: "/media/editorial-connect-higgs-v1.mp4",
+    poster: "/media/editorial-connect-higgs-v1-poster.jpg",
   },
   {
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
-    video: "/media/editorial-intelligence-mosaic-v2.mp4",
-    poster: "/media/editorial-intelligence-mosaic-poster-v2.jpg",
+    video: "/media/editorial-intelligence-higgs-v1.mp4",
+    poster: "/media/editorial-intelligence-higgs-v1-poster.jpg",
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
-    video: "/media/editorial-scale-mosaic-v2.mp4",
-    poster: "/media/editorial-scale-mosaic-poster-v2.jpg",
+    video: "/media/editorial-scale-higgs-v1.mp4",
+    poster: "/media/editorial-scale-higgs-v1-poster.jpg",
   },
 ];
 
@@ -199,15 +199,15 @@ export default function Home() {
           </div>
           <figure>
             <EditorialLoop
-              source={publicAsset("/media/editorial-people-team-mosaic-v2.mp4")}
-              poster={publicAsset("/media/editorial-people-team-mosaic-poster-v2.jpg")}
+              source={publicAsset("/media/editorial-people-team-higgs-v1.mp4")}
+              poster={publicAsset("/media/editorial-people-team-higgs-v1-poster.jpg")}
             />
             <figcaption>Teams learning together</figcaption>
           </figure>
           <figure>
             <EditorialLoop
-              source={publicAsset("/media/editorial-people-adoption-mosaic-v2.mp4")}
-              poster={publicAsset("/media/editorial-people-adoption-mosaic-poster-v2.jpg")}
+              source={publicAsset("/media/editorial-people-adoption-higgs-v1.mp4")}
+              poster={publicAsset("/media/editorial-people-adoption-higgs-v1-poster.jpg")}
             />
             <figcaption>Practical adoption at work</figcaption>
           </figure>

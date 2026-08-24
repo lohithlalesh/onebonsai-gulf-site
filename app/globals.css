@@ -669,11 +669,12 @@ section[id] { scroll-margin-top: 92px; }
 }
 
 .team-track {
+  box-sizing: border-box;
   width: max-content;
   height: 100%;
   display: flex;
   gap: 14px;
-  padding: 14px max(var(--page-gutter), calc((100vw - 1440px) / 2)) 30px;
+  padding: 24px max(var(--page-gutter), calc((100vw - 1440px) / 2)) 34px;
   transform: translate3d(0, 0, 0);
   will-change: transform;
 }

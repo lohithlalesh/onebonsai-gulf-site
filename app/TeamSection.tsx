@@ -16,6 +16,8 @@ const team = [
   ["Omar Abedlaziz", "Business Development, Greece and Cyprus", "omar-abedlaziz.jpg"],
   ["Mohamed Ilyes Bouzayen", "Business Development, France", "mohamed-ilyes-bouzayen.jpg"],
   ["Rabeb Ben Hamouda", "Business Development, Canada", "rabeb-ben-hamouda.jpg"],
+  ["Khawla Zon", "Business Development, Middle East", "khawla-zon.jpg"],
+  ["Slim Garbouj", "Business Development, Switzerland", "slim-garbouj.jpg"],
 ] as const;
 
 export default function TeamSection() {
