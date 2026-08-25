@@ -1,7 +1,4 @@
-import Image from "next/image";
-
-const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const publicAsset = (path: string) => `${assetBase}${path}`;
+import GrowthTreeMotion from "./GrowthTreeMotion";
 
 const systemInputs = ["ERP + CRM", "Documents", "Operations", "Customer data"] as const;
 
@@ -36,17 +33,7 @@ export default function IntegrationMap() {
       </div>
 
       <div className="integration-tree-scene">
-        <Image
-          src={publicAsset("/media/onebonsai-hero-poster-v2.jpg")}
-          alt="A sculptural black and chrome technology tree representing connected business intelligence"
-          fill
-          sizes="(max-width: 760px) 100vw, 62vw"
-          loading="lazy"
-          unoptimized
-        />
-        <div className="integration-tree-glow" aria-hidden="true" />
-        <span className="integration-tree-spark integration-tree-spark-one" aria-hidden="true" />
-        <span className="integration-tree-spark integration-tree-spark-two" aria-hidden="true" />
+        <GrowthTreeMotion />
 
         <div className="integration-canopy">
           <p>Capabilities branch into measurable growth</p>

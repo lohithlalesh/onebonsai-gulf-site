@@ -68,13 +68,15 @@ test("server-renders the OneBonsai Gulf experience", async () => {
 });
 
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
-  const [page, about, journey, marquee, editorialLoop, integrationMap, team, layout, css, mediaSources] = await Promise.all([
+  const [page, about, journey, marquee, editorialLoop, capabilityMotion, integrationMap, growthTreeMotion, team, layout, css, mediaSources] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/AboutSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/CustomerMarquee.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/EditorialLoop.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CapabilityMotion.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/IntegrationMap.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/GrowthTreeMotion.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/TeamSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
@@ -99,8 +101,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(marquee, /customer-marquee/);
   assert.match(marquee, /aria-pressed/);
   assert.match(page, /editorial-connect-systems-higgs-v2\.mp4/);
-  assert.match(page, /editorial-build-useful-3d-v3\.mp4/);
-  assert.match(page, /editorial-scale-control-3d-v3\.mp4/);
+  assert.match(page, /<CapabilityMotion kind=\{pathway\.media\.kind\}/);
+  assert.match(capabilityMotion, /capability-motion-activate/);
+  assert.match(capabilityMotion, /capability-motion-scale/);
   assert.match(page, /editorial-people-logistics-higgs-v2\.mp4/);
   assert.match(page, /editorial-people-healthcare-higgs-v2\.mp4/);
   assert.match(integrationMap, /AI integration/);
@@ -108,7 +111,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(integrationMap, /Consulting/);
   assert.match(integrationMap, /SEO \+ AEO/);
   assert.match(integrationMap, /Marketing growth/);
-  assert.match(integrationMap, /onebonsai-hero-poster-v2\.jpg/);
+  assert.match(integrationMap, /<GrowthTreeMotion \/>/);
+  assert.match(growthTreeMotion, /growth-tree-trunk/);
+  assert.match(growthTreeMotion, /growth-leaf-nine/);
   assert.match(integrationMap, /Feed the roots/);
   assert.match(editorialLoop, /new IntersectionObserver/);
   assert.match(editorialLoop, /SMALL_SCREEN_QUERY/);
@@ -139,7 +144,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(css, /\.journey-canvas|\.intelligence-flow|\.flow-sticky/);
   assert.match(css, /\.pathway-grid/);
   assert.match(css, /\.integration-map/);
-  assert.match(css, /@keyframes integration-tree-float/);
+  assert.match(css, /@keyframes growth-leaf-float/);
+  assert.match(css, /@keyframes activate-orbit-one/);
+  assert.match(css, /@keyframes scale-column/);
   assert.match(css, /\.integration-root-nodes/);
   assert.match(css, /scroll-snap-type: inline mandatory/);
   assert.match(css, /:focus-visible/);
@@ -164,13 +171,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/icon-intelligence.png", import.meta.url));
   await access(new URL("../public/media/icon-scale.png", import.meta.url));
   await access(new URL("../public/media/editorial-connect-systems-higgs-v2.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-build-useful-3d-v3.mp4", import.meta.url));
-  await access(new URL("../public/media/editorial-scale-control-3d-v3.mp4", import.meta.url));
   await access(new URL("../public/media/editorial-people-logistics-higgs-v2.mp4", import.meta.url));
   await access(new URL("../public/media/editorial-people-healthcare-higgs-v2.mp4", import.meta.url));
   await access(new URL("../public/media/editorial-connect-systems-higgs-v2-poster.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-build-useful-3d-v3-poster.jpg", import.meta.url));
-  await access(new URL("../public/media/editorial-scale-control-3d-v3-poster.jpg", import.meta.url));
   await access(new URL("../public/media/editorial-people-logistics-higgs-v2-poster.jpg", import.meta.url));
   await access(new URL("../public/media/editorial-people-healthcare-higgs-v2-poster.jpg", import.meta.url));
   await access(new URL("../public/media/uae-ai-boardroom-v1.jpg", import.meta.url));

@@ -30,7 +30,9 @@ The second film set deliberately changes subject, location, and visual metaphor 
 
 ## Unified 3D capability motion
 
-Activate and Scale use new 1920x1080 motion studies built from the existing OneBonsai black metal, chrome, and lime sculptural icon system. Both loops are finished as lightweight H.264 at exactly 24 fps to match the 3D Connect film while keeping mobile delivery fast. Small screens stay on the high-resolution posters instead of downloading autoplay video.
+Activate and Scale now use live CSS 3D scenes instead of motion applied to still images. Orbiting intelligence nodes, a rotating governed core, growing metallic columns, traveling data signals, and depth-aware lighting match the black metal, chrome, and lime language of the Connect film while staying resolution independent and adding no video download.
+
+The logistics and healthcare adoption films are delivered as 1280x720 H.264 at exactly 24 fps with a short keyframe interval. Together they are under 2 MB, down from more than 8 MB, while small screens continue to use the compressed high-resolution posters.
 
 ## Official OneBonsai case imagery
 

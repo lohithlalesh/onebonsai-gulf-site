@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AboutSection from "./AboutSection";
+import CapabilityMotion from "./CapabilityMotion";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
 import IntegrationMap from "./IntegrationMap";
@@ -9,27 +10,37 @@ import TeamSection from "./TeamSection";
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const pathways = [
+type Pathway = {
+  title: string;
+  copy: string;
+  signal: string;
+  media:
+    | { type: "video"; video: string; poster: string }
+    | { type: "motion"; kind: "activate" | "scale" };
+};
+
+const pathways: Pathway[] = [
   {
     title: "Connect your existing systems",
     copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
     signal: "01 / Connect",
-    video: "/media/editorial-connect-systems-higgs-v2.mp4",
-    poster: "/media/editorial-connect-systems-higgs-v2-poster.jpg",
+    media: {
+      type: "video",
+      video: "/media/editorial-connect-systems-higgs-v2.mp4",
+      poster: "/media/editorial-connect-systems-higgs-v2-poster.jpg",
+    },
   },
   {
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
     signal: "02 / Activate",
-    video: "/media/editorial-build-useful-3d-v3.mp4",
-    poster: "/media/editorial-build-useful-3d-v3-poster.jpg",
+    media: { type: "motion", kind: "activate" },
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
     signal: "03 / Scale",
-    video: "/media/editorial-scale-control-3d-v3.mp4",
-    poster: "/media/editorial-scale-control-3d-v3-poster.jpg",
+    media: { type: "motion", kind: "scale" },
   },
 ];
 
@@ -121,10 +132,14 @@ export default function Home() {
             {pathways.map((pathway, index) => (
               <article className={index === 0 ? "pathway-feature" : undefined} key={pathway.title}>
                 <div className="pathway-media">
-                  <EditorialLoop
-                    source={publicAsset(pathway.video)}
-                    poster={publicAsset(pathway.poster)}
-                  />
+                  {pathway.media.type === "video" ? (
+                    <EditorialLoop
+                      source={publicAsset(pathway.media.video)}
+                      poster={publicAsset(pathway.media.poster)}
+                    />
+                  ) : (
+                    <CapabilityMotion kind={pathway.media.kind} />
+                  )}
                 </div>
                 <div className="pathway-content">
                   <span>{pathway.signal}</span>
