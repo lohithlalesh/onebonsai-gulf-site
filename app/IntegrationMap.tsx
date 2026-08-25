@@ -1,4 +1,7 @@
-import GrowthTreeMotion from "./GrowthTreeMotion";
+import EditorialLoop from "./EditorialLoop";
+
+const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const publicAsset = (path: string) => `${assetBase}${path}`;
 
 const systemInputs = ["ERP + CRM", "Documents", "Operations", "Customer data"] as const;
 
@@ -33,7 +36,10 @@ export default function IntegrationMap() {
       </div>
 
       <div className="integration-tree-scene">
-        <GrowthTreeMotion />
+        <EditorialLoop
+          source={publicAsset("/media/editorial-governed-intelligence-veo-v1.mp4")}
+          poster={publicAsset("/media/editorial-governed-intelligence-veo-v1-poster.jpg")}
+        />
 
         <div className="integration-canopy">
           <p>Capabilities branch into measurable growth</p>

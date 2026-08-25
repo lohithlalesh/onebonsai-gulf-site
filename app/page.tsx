@@ -1,6 +1,5 @@
 import Image from "next/image";
 import AboutSection from "./AboutSection";
-import CapabilityMotion from "./CapabilityMotion";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
 import IntegrationMap from "./IntegrationMap";
@@ -16,7 +15,7 @@ type Pathway = {
   signal: string;
   media:
     | { type: "video"; video: string; poster: string }
-    | { type: "motion"; kind: "activate" | "scale" };
+    | { type: "image"; image: string; alt: string };
 };
 
 const pathways: Pathway[] = [
@@ -34,13 +33,21 @@ const pathways: Pathway[] = [
     title: "Build useful AI solutions",
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
     signal: "02 / Activate",
-    media: { type: "motion", kind: "activate" },
+    media: {
+      type: "video",
+      video: "/media/editorial-ai-activation-veo-v1.mp4",
+      poster: "/media/editorial-ai-activation-veo-v1-poster.jpg",
+    },
   },
   {
     title: "Scale AI with control",
     copy: "Train your teams, set clear governance, and expand what works across the business.",
     signal: "03 / Scale",
-    media: { type: "motion", kind: "scale" },
+    media: {
+      type: "image",
+      image: "/media/editorial-controlled-scaling-veo-keyframe-v1.jpg",
+      alt: "A controlled scaling system arranged around a stable governance spine",
+    },
   },
 ];
 
@@ -138,7 +145,14 @@ export default function Home() {
                       poster={publicAsset(pathway.media.poster)}
                     />
                   ) : (
-                    <CapabilityMotion kind={pathway.media.kind} />
+                    <Image
+                      src={publicAsset(pathway.media.image)}
+                      alt={pathway.media.alt}
+                      fill
+                      sizes="(max-width: 760px) 86vw, 68vw"
+                      loading="lazy"
+                      unoptimized
+                    />
                   )}
                 </div>
                 <div className="pathway-content">

@@ -28,9 +28,9 @@ The second film set deliberately changes subject, location, and visual metaphor 
 - Logistics team adoption: `212ae830-87d6-40de-ab05-570f77c70a37`
 - Healthcare team adoption: `e7420bc2-fedb-47ca-9698-5fde42513f48`
 
-## Unified 3D capability motion
+## Veo 3D capability films
 
-Activate and Scale now use live CSS 3D scenes instead of motion applied to still images. Orbiting intelligence nodes, a rotating governed core, growing metallic columns, traveling data signals, and depth-aware lighting match the black metal, chrome, and lime language of the Connect film while staying resolution independent and adding no video download.
+The supplied AI Activation and Governed Intelligence Veo films replace the simulated CSS 3D scenes. Both films are delivered as silent 1280x720 H.264 at exactly 24 fps with a short keyframe interval, matching posters, and no generated text. Controlled Scaling uses the matching high-resolution approved keyframe until its final Veo motion pass is available. The still is intentionally presented without fake CSS movement.
 
 The logistics and healthcare adoption films are delivered as 1280x720 H.264 at exactly 24 fps with a short keyframe interval. Together they are under 2 MB, down from more than 8 MB, while small screens continue to use the compressed high-resolution posters.
 
