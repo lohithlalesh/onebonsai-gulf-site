@@ -71,7 +71,28 @@ const capabilityCards = [
   },
 ];
 
-const flowNodes = ["Existing systems", "Governed context", "AI action", "Business value"];
+const flowNodes = [
+  {
+    title: "Existing systems",
+    subtitle: "Connect what already powers your business.",
+    copy: "Bring your existing tools, data, and workflows together without replacing the systems your team already relies on.",
+  },
+  {
+    title: "Governed context",
+    subtitle: "Turn disconnected information into trusted context.",
+    copy: "Structure the right data with the right permissions, so AI understands your business before it takes action.",
+  },
+  {
+    title: "AI action",
+    subtitle: "Move from insight to intelligent action.",
+    copy: "Deploy AI that can understand context, automate workflows, and support decisions where the work actually happens.",
+  },
+  {
+    title: "Business value",
+    subtitle: "Turn intelligence into measurable growth.",
+    copy: "Reduce friction, unlock productivity, and create outcomes that scale across your organization.",
+  },
+] as const;
 const MOBILE_QUERY = "(max-width: 700px)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const FALLBACK_DURATION = 8;
@@ -97,6 +118,7 @@ export default function ScrollJourney() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const [activeAct, setActiveAct] = useState(0);
+  const [openFlowNode, setOpenFlowNode] = useState<number | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState<boolean | null>(null);
 
@@ -313,9 +335,24 @@ export default function ScrollJourney() {
             <div className="journey-flow" aria-label="From existing systems to business value">
               <div className="journey-flow-line" aria-hidden="true"><i /></div>
               {flowNodes.map((node, index) => (
-                <div className="journey-flow-node" key={node} style={{ "--flow-index": index } as CSSProperties}>
-                  <span>{node}</span>
-                  <i aria-hidden="true" />
+                <div
+                  className={`journey-flow-node${openFlowNode === index ? " is-open" : ""}`}
+                  key={node.title}
+                  style={{ "--flow-index": index } as CSSProperties}
+                >
+                  <button
+                    type="button"
+                    className="journey-flow-trigger"
+                    aria-expanded={openFlowNode === index}
+                    onClick={() => setOpenFlowNode(openFlowNode === index ? null : index)}
+                  >
+                    <span className="journey-flow-title">{node.title}</span>
+                    <i aria-hidden="true" />
+                  </button>
+                  <div className="journey-flow-body" aria-hidden={openFlowNode !== index}>
+                    <p className="journey-flow-subtitle">{node.subtitle}</p>
+                    <p className="journey-flow-copy">{node.copy}</p>
+                  </div>
                 </div>
               ))}
             </div>

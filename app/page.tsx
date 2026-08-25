@@ -6,6 +6,7 @@ import IntegrationMap from "./IntegrationMap";
 import ScrollJourney from "./ScrollJourney";
 import TeamSection from "./TeamSection";
 import { GlowEffect } from "@/components/core/glow-effect";
+import { Dock, DockItem } from "@/components/core/dock";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -111,13 +112,33 @@ export default function Home() {
           />
         </a>
         <nav aria-label="Primary navigation">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#academy">Academy</a>
-          <a href="#team">Team</a>
-          <a href="#work">Work</a>
+          <Dock className="site-dock">
+            <DockItem href="#about" label="About">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4" /><path d="M5 20c0-4 3.6-7 7-7s7 3 7 7" /></svg>
+            </DockItem>
+            <DockItem href="#services" label="Services">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></svg>
+            </DockItem>
+            <DockItem href="#academy" label="Academy">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3L1 9l11 6 9-4.91V17M5 13.18v4L12 21l7-3.82v-4" /></svg>
+            </DockItem>
+            <DockItem href="#team" label="Team">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="7" r="3" /><circle cx="17" cy="7" r="3" /><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" /><path d="M17 14a4 4 0 0 1 4 4v3" /></svg>
+            </DockItem>
+            <DockItem href="#work" label="Work">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /></svg>
+            </DockItem>
+          </Dock>
         </nav>
-        <a className="nav-cta" href="#contact">Plan AI integration</a>
+        <div className="nav-cta-wrap">
+          <GlowEffect
+            colors={["#dcff22", "#0894FF", "#C959DD"]}
+            mode="static"
+            blur="medium"
+            intensity={0.55}
+          />
+          <a className="nav-cta" href="#contact">Plan AI integration</a>
+        </div>
       </header>
 
       <main id="main-content">

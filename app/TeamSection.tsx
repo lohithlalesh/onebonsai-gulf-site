@@ -68,19 +68,19 @@ export default function TeamSection() {
                       style={{ borderRadius: "18px" }}
                     />
                     <article className="team-card">
-                    <Image
-                      src={publicAsset(`/team/${image}`)}
-                      alt={groupIndex === 0 ? name : ""}
-                      width={900}
-                      height={900}
-                      loading="lazy"
-                      unoptimized
-                    />
-                    <div className="team-card-copy">
-                      <h3>{name}</h3>
-                      <p>{role}</p>
-                    </div>
-                  </article>
+                      <Image
+                        src={publicAsset(`/team/${image}`)}
+                        alt={groupIndex === 0 ? name : ""}
+                        width={900}
+                        height={900}
+                        loading="lazy"
+                        unoptimized
+                      />
+                      <div className="team-card-copy">
+                        <h3>{name}</h3>
+                        <p>{role}</p>
+                      </div>
+                    </article>
                   </div>
                 ))}
               </div>
