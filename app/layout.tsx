@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import FluidCursorBackground from "./FluidCursorBackground";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://obgulf.com";
@@ -83,7 +84,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             font-display: swap;
           }
         `}</style>
-        {children}
+        <FluidCursorBackground />
+        <div className="site-shell">{children}</div>
       </body>
     </html>
   );
