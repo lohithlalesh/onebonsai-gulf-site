@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { GlowEffect } from "@/components/core/glow-effect";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -58,7 +59,15 @@ export default function TeamSection() {
                 aria-hidden={groupIndex === 1 ? "true" : undefined}
               >
                 {team.map(([name, role, image]) => (
-                  <article className="team-card" key={`${groupIndex}-${name}`}>
+                  <div className="glow-border-wrap" key={`${groupIndex}-${name}`}>
+                    <GlowEffect
+                      colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
+                      mode="static"
+                      blur="light"
+                      intensity={0.6}
+                      style={{ borderRadius: "18px" }}
+                    />
+                    <article className="team-card">
                     <Image
                       src={publicAsset(`/team/${image}`)}
                       alt={groupIndex === 0 ? name : ""}
@@ -72,6 +81,7 @@ export default function TeamSection() {
                       <p>{role}</p>
                     </div>
                   </article>
+                  </div>
                 ))}
               </div>
             ))}

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { GlowEffect } from "@/components/core/glow-effect";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -110,7 +111,15 @@ export default function AboutSection() {
           </div>
         </article>
 
-        <div className="about-case-carousel" aria-label="Selected OneBonsai case studies">
+        <div className="glow-border-wrap">
+          <GlowEffect
+            colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
+            mode="static"
+            blur="medium"
+            intensity={0.6}
+            style={{ borderRadius: "20px" }}
+          />
+          <div className="about-case-carousel" aria-label="Selected OneBonsai case studies">
           <div className="about-case-stage">
             <Image
               key={activeCase.image}
@@ -160,6 +169,7 @@ export default function AboutSection() {
             <span>{activeCase.shortTitle}</span>
             <button type="button" onClick={selectNext} aria-label="Next case study">→</button>
           </div>
+        </div>
         </div>
       </div>
     </section>

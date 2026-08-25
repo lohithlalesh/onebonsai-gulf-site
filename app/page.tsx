@@ -5,6 +5,7 @@ import EditorialLoop from "./EditorialLoop";
 import IntegrationMap from "./IntegrationMap";
 import ScrollJourney from "./ScrollJourney";
 import TeamSection from "./TeamSection";
+import { GlowEffect } from "@/components/core/glow-effect";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -137,30 +138,39 @@ export default function Home() {
 
           <div className="pathway-grid">
             {pathways.map((pathway, index) => (
-              <article className={index === 0 ? "pathway-feature" : undefined} key={pathway.title}>
-                <div className="pathway-media">
-                  {pathway.media.type === "video" ? (
-                    <EditorialLoop
-                      source={publicAsset(pathway.media.video)}
-                      poster={publicAsset(pathway.media.poster)}
-                    />
-                  ) : (
-                    <Image
-                      src={publicAsset(pathway.media.image)}
-                      alt={pathway.media.alt}
-                      fill
-                      sizes="(max-width: 760px) 86vw, 68vw"
-                      loading="lazy"
-                      unoptimized
-                    />
-                  )}
-                </div>
-                <div className="pathway-content">
-                  <span>{pathway.signal}</span>
-                  <h3>{pathway.title}</h3>
-                  <p>{pathway.copy}</p>
-                </div>
-              </article>
+              <div className="glow-border-wrap" key={pathway.title}>
+                <GlowEffect
+                  colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
+                  mode="static"
+                  blur="medium"
+                  intensity={0.6}
+                  style={{ borderRadius: "16px" }}
+                />
+                <article className={index === 0 ? "pathway-feature" : undefined}>
+                  <div className="pathway-media">
+                    {pathway.media.type === "video" ? (
+                      <EditorialLoop
+                        source={publicAsset(pathway.media.video)}
+                        poster={publicAsset(pathway.media.poster)}
+                      />
+                    ) : (
+                      <Image
+                        src={publicAsset(pathway.media.image)}
+                        alt={pathway.media.alt}
+                        fill
+                        sizes="(max-width: 760px) 86vw, 68vw"
+                        loading="lazy"
+                        unoptimized
+                      />
+                    )}
+                  </div>
+                  <div className="pathway-content">
+                    <span>{pathway.signal}</span>
+                    <h3>{pathway.title}</h3>
+                    <p>{pathway.copy}</p>
+                  </div>
+                </article>
+              </div>
             ))}
           </div>
         </section>

@@ -293,8 +293,8 @@ section[id] { scroll-margin-top: 92px; }
   background: var(--white);
 }
 
-.pathway-grid article:nth-child(even) { grid-template-columns: minmax(300px, 0.65fr) minmax(0, 1.65fr); }
-.pathway-grid article:nth-child(even) .pathway-media { order: 2; }
+.pathway-grid .glow-border-wrap:nth-child(even) article { grid-template-columns: minmax(300px, 0.65fr) minmax(0, 1.65fr); }
+.pathway-grid .glow-border-wrap:nth-child(even) .pathway-media { order: 2; }
 
 .pathway-media {
   position: relative;
@@ -2386,15 +2386,15 @@ section[id] { scroll-margin-top: 92px; }
     scroll-snap-align: center;
   }
 
-  .pathway-grid article:nth-child(even) { grid-template-columns: 1fr; }
-  .pathway-grid article:nth-child(even) .pathway-media { order: 0; }
+  .pathway-grid .glow-border-wrap:nth-child(even) article { grid-template-columns: 1fr; }
+  .pathway-grid .glow-border-wrap:nth-child(even) .pathway-media { order: 0; }
   .pathway-media { position: relative; aspect-ratio: 16 / 9; }
   .pathway-content { min-height: 260px; padding: 28px 24px 32px; }
   .pathway-grid h3 { max-width: 13ch; font-size: clamp(34px, 10.5vw, 48px); }
   .pathway-grid p { font-size: 14px; }
 
-  .pathway-grid article:nth-child(2),
-  .pathway-grid article:nth-child(3) { top: auto; }
+  .pathway-grid .glow-border-wrap:nth-child(2) article,
+  .pathway-grid .glow-border-wrap:nth-child(3) article { top: auto; }
 
   .about-intro { gap: 30px; margin-bottom: 84px; }
   .about-intro .section-kicker { grid-column: auto; }
@@ -2628,4 +2628,36 @@ section[id] { scroll-margin-top: 92px; }
   .team-track { animation: none !important; transform: none; }
   .team-group[aria-hidden="true"] { display: none; }
   .journey-word, .journey-copy article, .journey-dark-panel, .journey-flow-line i, .journey-flow-node, .journey-capabilities article { transform: none; }
+  .glow-spin { animation: none !important; }
+}
+
+/* Glow border effect */
+
+.glow-border-wrap {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.team-group .glow-border-wrap {
+  flex: 0 0 auto;
+}
+
+.glow-effect {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--glow-gradient, conic-gradient(from 0deg, #0894FF, #C959DD, #FF2E54, #FF9004, #0894FF));
+  filter: blur(var(--glow-blur, 24px));
+  opacity: var(--glow-opacity, 0.55);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.glow-spin {
+  animation: glow-rotate 12s linear infinite;
+}
+
+@keyframes glow-rotate {
+  to { transform: rotate(360deg); }
 }

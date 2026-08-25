@@ -8,6 +8,7 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import Image from "next/image";
+import { GlowEffect } from "@/components/core/glow-effect";
 
 type Act = {
   eyebrow: string;
@@ -229,12 +230,19 @@ export default function ScrollJourney() {
       aria-label="OneBonsai Gulf: bringing AI into your business"
     >
       <div className="journey-pin">
-        <div
-          ref={shellRef}
-          className="journey-shell"
-          onPointerMove={updatePointer}
-          onPointerLeave={resetPointer}
-        >
+        <div className="glow-border-wrap">
+          <GlowEffect
+            colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
+            mode="static"
+            blur="medium"
+            intensity={0.6}
+          />
+          <div
+            ref={shellRef}
+            className="journey-shell"
+            onPointerMove={updatePointer}
+            onPointerLeave={resetPointer}
+          >
           <div className="journey-topbar" aria-hidden="true">
             <span>ONEBONSAI GULF</span>
             <div className="journey-topbar-rail"><i /></div>
@@ -329,6 +337,7 @@ export default function ScrollJourney() {
           </div>
 
           {!isReady && isSmallScreen === false && <div className="journey-loading" aria-hidden="true"><i /></div>}
+        </div>
         </div>
       </div>
     </section>

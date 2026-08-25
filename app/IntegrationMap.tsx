@@ -1,4 +1,5 @@
 import EditorialLoop from "./EditorialLoop";
+import { GlowEffect } from "@/components/core/glow-effect";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -15,7 +16,15 @@ const growthOutputs = [
 
 export default function IntegrationMap() {
   return (
-    <div className="integration-map" aria-label="How OneBonsai Gulf grows useful AI capabilities from the systems a business already runs">
+    <div className="glow-border-wrap">
+      <GlowEffect
+        colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
+        mode="static"
+        blur="medium"
+        intensity={0.6}
+        style={{ borderRadius: "20px" }}
+      />
+      <div className="integration-map" aria-label="How OneBonsai Gulf grows useful AI capabilities from the systems a business already runs">
       <div className="integration-process">
         <p className="integration-process-label">Feed the roots</p>
         <h3>Your systems become one governed intelligence layer.</h3>
@@ -48,6 +57,7 @@ export default function IntegrationMap() {
           </ul>
         </div>
       </div>
+    </div>
     </div>
   );
 }
