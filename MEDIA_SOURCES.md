@@ -30,9 +30,19 @@ The second film set deliberately changes subject, location, and visual metaphor 
 
 ## Veo 3D capability films
 
-The supplied AI Activation and Governed Intelligence Veo films replace the simulated CSS 3D scenes. Both films are delivered as silent 1280x720 H.264 at exactly 24 fps with a short keyframe interval, matching posters, and no generated text. Controlled Scaling uses the matching high-resolution approved keyframe until its final Veo motion pass is available. The still is intentionally presented without fake CSS movement.
+The governed intelligence capability film is delivered as silent 1280x720 H.264 at exactly 24 fps with a short keyframe interval, a matching poster, and no generated text.
 
 The logistics and healthcare adoption films are delivered as 1280x720 H.264 at exactly 24 fps with a short keyframe interval. Together they are under 2 MB, down from more than 8 MB, while small screens continue to use the compressed high-resolution posters.
+
+## Artlist pathway film trilogy
+
+The final Connect, Build, and Scale pathway films were generated in Artlist with Seedance 2.0 from a shared 3D product-language start frame. Each source arrived as a silent 1920x1080 H.264 film at exactly 24 fps and 5.04 seconds.
+
+- Connect systems generation: `01a038ba-fd91-7a82-9e1f-e81229f5c6dd`
+- Build useful AI generation: `01a038ac-3670-7217-96ba-b14623f9dc67`
+- Scale with control generation: `01a038ac-46cf-7d01-b92f-1f3b9e7844f7`
+
+Each source was conformed locally into a true 10 second palindrome loop. The duplicate turning frame was removed before the reverse pass was appended. Final delivery is silent 1920x1080 H.264, exactly 24 fps, 240 frames, CRF 18, YUV 4:2:0, a 24-frame GOP, and fast-start metadata. Matching high-resolution posters are used before playback and on small screens.
 
 ## Official OneBonsai case imagery
 

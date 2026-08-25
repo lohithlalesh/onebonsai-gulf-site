@@ -14,9 +14,7 @@ type Pathway = {
   title: string;
   copy: string;
   signal: string;
-  media:
-    | { type: "video"; video: string; poster: string }
-    | { type: "image"; image: string; alt: string };
+  media: { video: string; poster: string };
 };
 
 const pathways: Pathway[] = [
@@ -25,9 +23,8 @@ const pathways: Pathway[] = [
     copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
     signal: "01 / Connect",
     media: {
-      type: "video",
-      video: "/media/editorial-connect-systems-higgs-v2.mp4",
-      poster: "/media/editorial-connect-systems-higgs-v2-poster.jpg",
+      video: "/media/editorial-connect-systems-artlist-v1.mp4",
+      poster: "/media/editorial-connect-systems-artlist-v1-poster.jpg",
     },
   },
   {
@@ -35,9 +32,8 @@ const pathways: Pathway[] = [
     copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
     signal: "02 / Activate",
     media: {
-      type: "video",
-      video: "/media/editorial-ai-activation-veo-v1.mp4",
-      poster: "/media/editorial-ai-activation-veo-v1-poster.jpg",
+      video: "/media/editorial-build-useful-ai-artlist-v1.mp4",
+      poster: "/media/editorial-build-useful-ai-artlist-v1-poster.jpg",
     },
   },
   {
@@ -45,9 +41,8 @@ const pathways: Pathway[] = [
     copy: "Train your teams, set clear governance, and expand what works across the business.",
     signal: "03 / Scale",
     media: {
-      type: "image",
-      image: "/media/editorial-controlled-scaling-veo-keyframe-v1.jpg",
-      alt: "A controlled scaling system arranged around a stable governance spine",
+      video: "/media/editorial-scale-with-control-artlist-v1.mp4",
+      poster: "/media/editorial-scale-with-control-artlist-v1-poster.jpg",
     },
   },
 ];
@@ -148,21 +143,10 @@ export default function Home() {
                 />
                 <article className={index === 0 ? "pathway-feature" : undefined}>
                   <div className="pathway-media">
-                    {pathway.media.type === "video" ? (
-                      <EditorialLoop
-                        source={publicAsset(pathway.media.video)}
-                        poster={publicAsset(pathway.media.poster)}
-                      />
-                    ) : (
-                      <Image
-                        src={publicAsset(pathway.media.image)}
-                        alt={pathway.media.alt}
-                        fill
-                        sizes="(max-width: 760px) 86vw, 68vw"
-                        loading="lazy"
-                        unoptimized
-                      />
-                    )}
+                    <EditorialLoop
+                      source={publicAsset(pathway.media.video)}
+                      poster={publicAsset(pathway.media.poster)}
+                    />
                   </div>
                   <div className="pathway-content">
                     <span>{pathway.signal}</span>
