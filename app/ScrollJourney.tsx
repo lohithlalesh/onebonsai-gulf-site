@@ -8,7 +8,6 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import Image from "next/image";
-import { GlowEffect } from "@/components/core/glow-effect";
 
 type Act = {
   eyebrow: string;
@@ -23,55 +22,43 @@ const publicAsset = (path: string) => `${assetBase}${path}`;
 const acts: Act[] = [
   {
     eyebrow: "Enterprise AI integration",
-    title: "AI integration for the business you already run.",
-    copy: "We help UAE companies connect AI to existing systems, automate real work, and keep people in control.",
+    title: "AI that works with the business you already run.",
+    copy: "We connect AI to your systems, automate specific workflows, and keep decisions with your team.",
     signal: "OneBonsai Gulf. Abu Dhabi.",
   },
   {
-    eyebrow: "AI system integration",
-    title: "Connect AI to your existing systems.",
-    copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
-    signal: "Systems. Data. People.",
+    eyebrow: "Start with the workflow",
+    title: "Choose one job worth improving.",
+    copy: "Map the people, data, and constraints around it before writing a line of software.",
+    signal: "Workflow. Data. Constraint.",
   },
   {
-    eyebrow: "Custom AI solutions",
-    title: "Turn business data into useful AI.",
-    copy: "Give your teams practical AI agents, search, predictions, and automation built around daily work.",
-    signal: "Context. Action. Control.",
+    eyebrow: "Build around what exists",
+    title: "Add only what the work needs.",
+    copy: "Connect the right model, interface, and approval points to the tools already in use.",
+    signal: "Model. Interface. Approval.",
   },
   {
-    eyebrow: "Intelligent automation",
-    title: "Move from data to decisions.",
-    copy: "Connect the tools you trust to faster answers and actions your business can use.",
-    signal: "Governed. Explainable. Secure.",
+    eyebrow: "Put it into daily use",
+    title: "Make the result easy to act on.",
+    copy: "Answers, alerts, and next steps appear inside the workflows where teams need them.",
+    signal: "Answer. Action. Record.",
   },
   {
-    eyebrow: "AI governance and scale",
-    title: "Scale AI across your business.",
-    copy: "Expand proven solutions across teams while governance, security, and ownership stay clear.",
-    signal: "Pilot. Prove. Scale.",
+    eyebrow: "Hand over real capability",
+    title: "Your team owns what works.",
+    copy: "We document the system, train its users, and set the rules for expanding it.",
+    signal: "Ownership. Control. Scale.",
   },
 ];
 
-const capabilityCards = [
-  {
-    title: "AI integration",
-    copy: "Connect software, data, and company knowledge in one secure flow.",
-    image: publicAsset("/media/icon-systems.png"),
-  },
-  {
-    title: "AI governance",
-    copy: "Keep agents, predictions, and automation secure and accountable.",
-    image: publicAsset("/media/icon-intelligence.png"),
-  },
-  {
-    title: "Business scale",
-    copy: "Expand proven results without losing human control or operational trust.",
-    image: publicAsset("/media/icon-scale.png"),
-  },
-];
+const flowNodes = ["One workflow", "Business context", "Useful output", "Team ownership"];
 
-const flowNodes = ["Existing systems", "Governed context", "AI action", "Business value"];
+const ownershipVisuals = [
+  { label: "Connected context", image: "/media/icon-systems.png" },
+  { label: "Useful decisions", image: "/media/icon-intelligence.png" },
+  { label: "Team ownership", image: "/media/icon-scale.png" },
+] as const;
 const MOBILE_QUERY = "(max-width: 700px)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const FALLBACK_DURATION = 8;
@@ -230,19 +217,12 @@ export default function ScrollJourney() {
       aria-label="OneBonsai Gulf: bringing AI into your business"
     >
       <div className="journey-pin">
-        <div className="glow-border-wrap">
-          <GlowEffect
-            colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
-            mode="static"
-            blur="medium"
-            intensity={0.6}
-          />
-          <div
-            ref={shellRef}
-            className="journey-shell"
-            onPointerMove={updatePointer}
-            onPointerLeave={resetPointer}
-          >
+        <div
+          ref={shellRef}
+          className="journey-shell"
+          onPointerMove={updatePointer}
+          onPointerLeave={resetPointer}
+        >
           <div className="journey-topbar" aria-hidden="true">
             <span>ONEBONSAI GULF</span>
             <div className="journey-topbar-rail"><i /></div>
@@ -256,18 +236,19 @@ export default function ScrollJourney() {
                 muted
                 playsInline
                 preload="auto"
-                poster={publicAsset("/media/onebonsai-hero-poster-v2.jpg")}
+                poster={publicAsset("/media/onebonsai-hero-poster-web-v3.jpg")}
                 disableRemotePlayback
               >
-                <source src={publicAsset("/media/onebonsai-hero-motion-4k.mp4")} type="video/mp4" />
+                <source src={publicAsset("/media/onebonsai-hero-motion-web-v2.mp4")} type="video/mp4" />
               </video>
             )}
             {isSmallScreen !== false && (
               <Image
-                src={publicAsset("/media/onebonsai-hero-poster-v2.jpg")}
+                src={publicAsset("/media/onebonsai-hero-poster-web-v3.jpg")}
                 alt=""
-                width={5504}
-                height={3072}
+                width={2400}
+                height={1350}
+                sizes="(max-width: 700px) 100vw, 1600px"
                 fetchPriority="high"
                 unoptimized
               />
@@ -282,7 +263,7 @@ export default function ScrollJourney() {
                   <p className="journey-eyebrow">{entry.eyebrow}</p>
                   <Heading><BouncyTitle>{entry.title}</BouncyTitle></Heading>
                   <p className="journey-body">{entry.copy}</p>
-                  <a className="journey-cta" href="#contact">Plan your AI integration</a>
+                  {index === 0 && <a className="journey-cta" href="#contact">Plan your AI integration</a>}
                 </article>
               );
             })}
@@ -320,24 +301,19 @@ export default function ScrollJourney() {
               ))}
             </div>
 
-            <div className="journey-capabilities">
-              {capabilityCards.map((card, index) => (
-                <article key={card.title} style={{ "--card-index": index } as CSSProperties}>
-                  <div className="journey-icon-frame">
-                    <Image src={card.image} alt="" width={2048} height={2048} loading="lazy" unoptimized />
-                  </div>
-                  <div className="journey-card-meta"><span>OneBonsai Gulf</span><span>Capability</span></div>
-                  <h3>{card.title}</h3>
-                  <p>{card.copy}</p>
-                </article>
+            <div className="journey-ownership-visuals" aria-label="Connected context, useful decisions, and team ownership">
+              {ownershipVisuals.map((visual, index) => (
+                <figure key={visual.label} style={{ "--visual-index": index } as CSSProperties}>
+                  <Image src={publicAsset(visual.image)} alt="" width={2048} height={2048} loading="lazy" unoptimized />
+                  <figcaption>{visual.label}</figcaption>
+                </figure>
               ))}
             </div>
 
-            <a className="journey-dark-cta" href="#services">Explore capabilities</a>
+            <a className="journey-dark-cta" href="#process">See how we work</a>
           </div>
 
           {!isReady && isSmallScreen === false && <div className="journey-loading" aria-hidden="true"><i /></div>}
-        </div>
         </div>
       </div>
     </section>

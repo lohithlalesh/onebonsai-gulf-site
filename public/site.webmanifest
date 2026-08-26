@@ -1,0 +1,16 @@
+{
+  "name": "OneBonsai Gulf",
+  "short_name": "OneBonsai Gulf",
+  "description": "AI consulting, integration, software, and training in Abu Dhabi, UAE.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f2f4ef",
+  "theme_color": "#f2f4ef",
+  "icons": [
+    {
+      "src": "favicon-v2.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

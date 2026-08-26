@@ -48,8 +48,8 @@ https://lohithlalesh.github.io/onebonsai-gulf-site/
 - `app/page.tsx`: page content and sections
 - `app/ScrollJourney.tsx`: cinematic hero, scroll interpolation, and mobile fallback
 - `app/globals.css`: responsive layout, interaction, and 3D styling
-- `public/media/onebonsai-hero-motion-4k.mp4`: 3840×2160 seek-optimized H.264 scroll film
-- `public/media/onebonsai-hero-poster-v2.jpg`: 5504×3072 first-paint and mobile poster
+- `public/media/onebonsai-hero-motion-web-v2.mp4`: 3200×1800 seek-optimized H.264 scroll film
+- `public/media/onebonsai-hero-poster-web-v3.jpg`: 2400×1350 first-paint and mobile poster
 - `public/media/icon-*.png`: custom 2K 3D capability icons
 - `outputs/higgsfield/v2/`: full-quality generated masters and source frames
 - `public/media/`: UAE editorial and capability imagery

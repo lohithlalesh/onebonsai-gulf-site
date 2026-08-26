@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { GlowEffect } from "@/components/core/glow-effect";
+import { useEffect, useRef, useState } from "react";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
 const team = [
   ["Ivan M Grey", "Founder and CEO", "ivan-m-grey.jpg"],
-  ["Hamad Al Khamais", "Business Development Partner", "hamad-al-khamais.jpg"],
+  ["Hamad Al Khamais", "Business Development Partner", "hamad-al-khamais-900.jpg"],
   ["Jelena Skoric", "Head of Strategy", "jelena-skoric.jpg"],
   ["Lohith Lalesh", "Head of Digital Marketing", "lohith-lalesh.jpg"],
   ["Olfa Hachfi", "Head of Sales", "olfa-hachfi.jpg"],
@@ -22,58 +21,82 @@ const team = [
   ["Slim Garbouj", "Business Development, Switzerland", "slim-garbouj.jpg"],
 ] as const;
 
+const marqueeGroups = [0, 1] as const;
+
 export default function TeamSection() {
   const [paused, setPaused] = useState(false);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    if (!marquee) return;
+
+    if (!("IntersectionObserver" in window)) {
+      marquee.dataset.active = "true";
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        marquee.dataset.active = entry.isIntersecting ? "true" : "false";
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(marquee);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
       id="team"
       className="team-section"
       aria-labelledby="team-title"
-      data-paused={paused}
     >
       <div className="team-pin">
         <div className="team-heading">
-          <p className="section-kicker">People at OneBonsai Gulf</p>
-          <h2 id="team-title">Meet the team behind the work.</h2>
+          <p className="section-kicker">Team</p>
+          <h2 id="team-title">The people doing the work.</h2>
           <div className="team-heading-copy">
-            <p>Strategy, engineering, growth, and regional business development working as one team.</p>
+            <p>Strategy, engineering, sales, marketing, and regional delivery.</p>
             <button
+              className="team-marquee-toggle"
               type="button"
-              aria-label={paused ? "Play team marquee" : "Pause team marquee"}
               aria-pressed={paused}
               onClick={() => setPaused((current) => !current)}
             >
-              <i className="team-control-icon" aria-hidden="true" />
               {paused ? "Play team" : "Pause team"}
             </button>
           </div>
         </div>
 
-        <div className="team-rail" aria-label="OneBonsai Gulf team members">
-          <div className="team-track">
-            {[0, 1].map((groupIndex) => (
+        <div
+          ref={marqueeRef}
+          className="team-marquee group flex overflow-hidden"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="OneBonsai Gulf team carousel"
+          data-active="false"
+          data-paused={paused}
+          tabIndex={0}
+        >
+          <div className="team-marquee-track flex w-max">
+            {marqueeGroups.map((groupIndex) => (
               <div
-                className="team-group"
+                className="team-marquee-group flex shrink-0"
+                aria-hidden={groupIndex === 1 || undefined}
                 key={groupIndex}
-                aria-hidden={groupIndex === 1 ? "true" : undefined}
               >
                 {team.map(([name, role, image]) => (
-                  <div className="glow-border-wrap" key={`${groupIndex}-${name}`}>
-                    <GlowEffect
-                      colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
-                      mode="static"
-                      blur="light"
-                      intensity={0.6}
-                      style={{ borderRadius: "18px" }}
-                    />
-                    <article className="team-card">
+                  <article className="team-card shrink-0" key={`${groupIndex}-${name}`}>
                     <Image
                       src={publicAsset(`/team/${image}`)}
                       alt={groupIndex === 0 ? name : ""}
                       width={900}
                       height={900}
                       loading="lazy"
+                      sizes="(max-width: 760px) 78vw, (max-width: 1080px) 42vw, 410px"
                       unoptimized
                     />
                     <div className="team-card-copy">
@@ -81,7 +104,6 @@ export default function TeamSection() {
                       <p>{role}</p>
                     </div>
                   </article>
-                  </div>
                 ))}
               </div>
             ))}

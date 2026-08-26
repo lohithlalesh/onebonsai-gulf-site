@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { GlowEffect } from "@/components/core/glow-effect";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -127,13 +126,24 @@ export default function AboutSection() {
   return (
     <section id="about" className="about-section section-pad" aria-labelledby="about-title">
       <div className="about-intro">
-        <p className="section-kicker">About OneBonsai Gulf</p>
-        <h2 id="about-title">Global deep tech. Built for the Gulf.</h2>
+        <p className="section-kicker">About</p>
+        <div className="about-parent-brand" aria-label="Regional sister company of OneBonsai">
+          <span>Regional sister company of</span>
+          <Image
+            src={publicAsset("/brand/onebonsai-wordmark-black.png")}
+            alt="OneBonsai"
+            width={1600}
+            height={181}
+            sizes="(max-width: 760px) 62vw, 420px"
+            loading="lazy"
+            unoptimized
+          />
+        </div>
+        <h2 id="about-title">Engineering, delivered in the Gulf.</h2>
         <div className="about-intro-copy">
           <p>
-            OneBonsai Gulf is the Abu Dhabi based regional sister company and independent reseller for OneBonsai.
-            We bring proven production AI and immersive training expertise into the UAE, then extend it with AI
-            marketing, custom software, cybersecurity, and local delivery.
+            OneBonsai Gulf is the Abu Dhabi regional sister company and independent reseller for OneBonsai. We pair
+            its AI and immersive training work with local delivery, software, marketing, and cybersecurity.
           </p>
           <a href="https://onebonsai.com" target="_blank" rel="noreferrer">Explore OneBonsai</a>
         </div>
@@ -142,15 +152,11 @@ export default function AboutSection() {
       <div className="about-body">
         <article className="about-story">
           <p>Abu Dhabi / Belgium</p>
-          <h3>One team from strategy to deployment.</h3>
+          <h3>Built in Belgium. Delivered from Abu Dhabi.</h3>
           <div className="about-story-copy">
             <p>
-              OneBonsai builds production AI, immersive VR training, digital twins, and advanced simulation for
-              organizations where security, safety, and operational reality matter.
-            </p>
-            <p>
-              OneBonsai Gulf pairs that engineering depth with regional business knowledge, implementation support,
-              workforce adoption, and products designed for organizations across the Gulf.
+              The wider OneBonsai team builds production AI, VR training, digital twins, and simulation. Our Gulf
+              team handles regional planning, implementation, adoption, and support.
             </p>
           </div>
           <div className="about-case-sectors">
@@ -162,26 +168,18 @@ export default function AboutSection() {
           </div>
         </article>
 
-        <div className="glow-border-wrap">
-          <GlowEffect
-            colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
-            mode="static"
-            blur="medium"
-            intensity={0.6}
-            style={{ borderRadius: "20px" }}
-          />
-          <div
-            ref={carouselRef}
-            className="about-case-carousel"
-            aria-label="Selected OneBonsai case studies"
-            data-paused={isPaused}
-            onPointerEnter={() => setIsPaused(true)}
-            onPointerLeave={() => setIsPaused(false)}
-            onFocusCapture={() => setIsPaused(true)}
-            onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
-            }}
-          >
+        <div
+          ref={carouselRef}
+          className="about-case-carousel"
+          aria-label="Selected OneBonsai case studies"
+          data-paused={isPaused}
+          onPointerEnter={() => setIsPaused(true)}
+          onPointerLeave={() => setIsPaused(false)}
+          onFocusCapture={() => setIsPaused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
+          }}
+        >
           <div className="about-case-stage">
             <Image
               key={activeCase.image}
@@ -190,6 +188,7 @@ export default function AboutSection() {
               width={1600}
               height={900}
               loading="lazy"
+              sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1600px) 62vw, 1400px"
               unoptimized
             />
             <div className="about-case-stage-shade" aria-hidden="true" />
@@ -229,12 +228,12 @@ export default function AboutSection() {
           <div className="about-case-controls">
             <button type="button" onClick={selectPrevious} aria-label="Previous case study">←</button>
             <span className="about-case-cycle">
-              {activeCase.shortTitle}
+              <b>{String(activeIndex + 1).padStart(2, "0")} / {String(cases.length).padStart(2, "0")}</b>
+              <em>{activeCase.shortTitle}</em>
               <i aria-hidden="true"><b key={`${activeIndex}-${cycleSeed}`} /></i>
             </span>
             <button type="button" onClick={selectNext} aria-label="Next case study">→</button>
           </div>
-        </div>
         </div>
       </div>
     </section>

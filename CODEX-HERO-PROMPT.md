@@ -14,8 +14,8 @@ This file records the production contract for the current hero.
 
 | Path | Purpose |
 |---|---|
-| `/media/onebonsai-hero-motion-4k.mp4` | 3840×2160 H.264, 8.04s, silent, GOP 6, fast-start scroll film |
-| `/media/onebonsai-hero-poster-v2.jpg` | 5504×3072 first frame and mobile fallback |
+| `/media/onebonsai-hero-motion-web-v2.mp4` | 3200×1800 H.264, 8.04s, 24 fps, silent, GOP 12, fast-start scroll film |
+| `/media/onebonsai-hero-poster-web-v3.jpg` | 2400×1350 optimized first frame and mobile fallback |
 | `/media/icon-systems.png` | Custom 2K 3D connection icon |
 | `/media/icon-intelligence.png` | Custom 2K 3D governance icon |
 | `/media/icon-scale.png` | Custom 2K 3D scale icon |

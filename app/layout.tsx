@@ -1,20 +1,67 @@
 import type { Metadata, Viewport } from "next";
+import { preload } from "react-dom";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://obgulf.com";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://obgulf.com");
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 const absoluteAsset = (path: string) => new URL(publicAsset(path), siteUrl).toString();
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "OneBonsai Gulf",
+  url: siteUrl,
+  logo: absoluteAsset("/brand/onebonsai-gulf-black.png"),
+  image: absoluteAsset("/og.png"),
+  email: "info@onebonsai.com",
+  description:
+    "AI integration, custom software, workflow automation, immersive training, and secure AI adoption for UAE organizations.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Abu Dhabi",
+    addressCountry: "AE",
+  },
+  areaServed: [
+    { "@type": "Country", name: "United Arab Emirates" },
+    { "@type": "Place", name: "Gulf Cooperation Council" },
+  ],
+  knowsAbout: [
+    "Enterprise AI integration",
+    "AI workflow automation",
+    "Custom software",
+    "AI training",
+    "Virtual reality training",
+    "Cybersecurity",
+    "SEO and answer engine optimization",
+  ],
+  sameAs: ["https://onebonsai.com"],
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "OneBonsai Gulf | AI Consulting & Integration UAE",
+    default: "AI Consulting & Integration in Abu Dhabi, UAE | OneBonsai Gulf",
     template: "%s | OneBonsai Gulf",
   },
   description:
-    "Production AI, immersive training, custom software, AI marketing, cybersecurity, and practical AI adoption for organizations across the UAE and Gulf.",
+    "OneBonsai Gulf helps UAE organizations integrate AI, build custom software, automate workflows, train teams, and deploy secure AI from Abu Dhabi.",
   applicationName: "OneBonsai Gulf",
+  alternates: { canonical: siteUrl },
+  manifest: publicAsset("/site.webmanifest"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   keywords: [
     "AI consulting Abu Dhabi",
     "AI consulting UAE",
@@ -28,19 +75,14 @@ export const metadata: Metadata = {
     "custom software Abu Dhabi",
     "AI Academy",
   ],
-  icons: {
-    icon: publicAsset("/favicon-v2.png"),
-    shortcut: publicAsset("/favicon-v2.png"),
-    apple: publicAsset("/favicon-v2.png"),
-  },
   openGraph: {
     type: "website",
     locale: "en_AE",
     url: siteUrl,
     siteName: "OneBonsai Gulf",
-    title: "Production AI and deep-tech solutions for UAE organizations",
+    title: "AI Consulting & Integration in Abu Dhabi, UAE",
     description:
-      "Production AI, immersive training, custom software, AI marketing, cybersecurity, and team adoption from OneBonsai Gulf.",
+      "Integrate AI, automate workflows, build custom software, and train teams with OneBonsai Gulf in Abu Dhabi.",
     images: [
       {
         url: absoluteAsset("/og.png"),
@@ -52,8 +94,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Production AI and deep-tech solutions for UAE organizations",
-    description: "Production AI, immersive training, custom software, AI marketing, cybersecurity, and team adoption from OneBonsai Gulf.",
+    title: "AI Consulting & Integration in Abu Dhabi, UAE",
+    description: "Integrate AI, automate workflows, build custom software, and train teams with OneBonsai Gulf.",
     images: [absoluteAsset("/og.png")],
   },
 };
@@ -64,8 +106,25 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  preload(publicAsset("/fonts/hanken-grotesk.ttf"), {
+    as: "font",
+    type: "font/ttf",
+    crossOrigin: "anonymous",
+  });
+  preload(publicAsset("/fonts/ibm-plex-mono.ttf"), {
+    as: "font",
+    type: "font/ttf",
+    crossOrigin: "anonymous",
+  });
+
   return (
-    <html lang="en">
+    <html lang="en-AE">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
+        />
+      </head>
       <body>
         <style>{`
           @font-face {

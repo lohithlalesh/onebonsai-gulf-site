@@ -1,81 +1,31 @@
 import Image from "next/image";
 import AboutSection from "./AboutSection";
+import ClarityJourney from "./ClarityJourney";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
 import IntegrationMap from "./IntegrationMap";
 import ScrollJourney from "./ScrollJourney";
+import ScrollReveal from "./ScrollReveal";
+import SiteHeader from "./SiteHeader";
 import TeamSection from "./TeamSection";
-import { GlowEffect } from "@/components/core/glow-effect";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-type Pathway = {
-  title: string;
-  copy: string;
-  signal: string;
-  media: { video: string; poster: string };
-};
-
-const pathways: Pathway[] = [
-  {
-    title: "Connect your existing systems",
-    copy: "Bring your ERP, CRM, documents, data, and workflows into one secure AI layer.",
-    signal: "01 / Connect",
-    media: {
-      video: "/media/editorial-connect-systems-artlist-v1.mp4",
-      poster: "/media/editorial-connect-systems-artlist-v1-poster.jpg",
-    },
-  },
-  {
-    title: "Build useful AI solutions",
-    copy: "Use AI agents, search, predictions, and automation to solve real work problems.",
-    signal: "02 / Activate",
-    media: {
-      video: "/media/editorial-build-useful-ai-artlist-v1.mp4",
-      poster: "/media/editorial-build-useful-ai-artlist-v1-poster.jpg",
-    },
-  },
-  {
-    title: "Scale AI with control",
-    copy: "Train your teams, set clear governance, and expand what works across the business.",
-    signal: "03 / Scale",
-    media: {
-      video: "/media/editorial-scale-with-control-artlist-v1.mp4",
-      poster: "/media/editorial-scale-with-control-artlist-v1-poster.jpg",
-    },
-  },
-];
-
 const services = [
   {
-    title: "Enterprise AI & Integration",
-    copy: "Move from AI strategy to secure production systems connected to your data and daily operations.",
-    items: ["AI roadmaps", "Vision and language AI", "Digital assistants", "Knowledge systems"],
-  },
-  {
     title: "VR Training & Simulation",
-    copy: "Build immersive training and digital twins for safety, healthcare, defense, and industry.",
-    items: ["VR safety training", "Digital twins", "Virtual humans", "Learning analytics"],
-  },
-  {
-    title: "Custom Software & Automation",
-    copy: "Create connected software, internal platforms, and automation around the way your business works.",
-    items: ["Custom platforms", "ERP and CRM integration", "Workflow automation", "Data products"],
-  },
-  {
-    title: "AI Marketing & Growth",
-    copy: "Use AI to improve marketing operations, customer intelligence, content, and personalization.",
-    items: ["Marketing automation", "Content systems", "Customer intelligence", "Personalization"],
+    copy: "Practise high-risk or complex work without interrupting live operations.",
+    items: ["Safety training", "Digital twins", "Virtual humans", "Learning analytics"],
   },
   {
     title: "Cybersecurity & Secure AI",
-    copy: "Protect systems and prepare people with secure architecture, governance, and practical cyber training.",
-    items: ["Secure AI deployment", "Cybersecurity training", "Risk governance", "Operational safeguards"],
+    copy: "Design the controls, architecture, and training required for secure deployment.",
+    items: ["Secure AI deployment", "Cyber training", "Risk governance", "Operational safeguards"],
   },
   {
     title: "AI Academy & Adoption",
-    copy: "Give leaders and teams the practical skills to use AI safely, confidently, and consistently.",
+    copy: "Train leaders and teams on the tools and decisions they face at work.",
     items: ["Executive programs", "Team training", "Workforce upskilling", "Responsible AI"],
   },
 ];
@@ -100,75 +50,25 @@ export default function Home() {
     <>
       <a className="skip-link" href="#main-content">Skip to content</a>
 
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="OneBonsai Gulf home">
-          <Image
-            src={publicAsset("/brand/onebonsai-gulf-white.png")}
-            alt="OneBonsai Gulf"
-            width={3390}
-            height={938}
-            unoptimized
-          />
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#academy">Academy</a>
-          <a href="#team">Team</a>
-          <a href="#work">Work</a>
-        </nav>
-        <a className="nav-cta" href="#contact">Plan AI integration</a>
-      </header>
+      <SiteHeader />
+      <ScrollReveal />
 
       <main id="main-content">
         <ScrollJourney />
         <CustomerMarquee />
 
-        <section className="pathways section-pad" aria-labelledby="pathways-title">
-          <div className="section-intro">
-            <p className="section-kicker">From system to outcome</p>
-            <h2 id="pathways-title">Connect AI to your business. Make it useful. Scale it safely.</h2>
-            <p>We help UAE companies move from AI strategy to working solutions without replacing the systems they already trust.</p>
-          </div>
-
-          <div className="pathway-grid">
-            {pathways.map((pathway, index) => (
-              <div className="glow-border-wrap" key={pathway.title}>
-                <GlowEffect
-                  colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
-                  mode="static"
-                  blur="medium"
-                  intensity={0.6}
-                  style={{ borderRadius: "16px" }}
-                />
-                <article className={index === 0 ? "pathway-feature" : undefined}>
-                  <div className="pathway-media">
-                    <EditorialLoop
-                      source={publicAsset(pathway.media.video)}
-                      poster={publicAsset(pathway.media.poster)}
-                    />
-                  </div>
-                  <div className="pathway-content">
-                    <span>{pathway.signal}</span>
-                    <h3>{pathway.title}</h3>
-                    <p>{pathway.copy}</p>
-                  </div>
-                </article>
-              </div>
-            ))}
-          </div>
-        </section>
+        <ClarityJourney />
 
         <AboutSection />
 
         <section id="work" className="system-section section-pad" aria-labelledby="system-title">
           <div className="system-heading">
             <div className="system-copy">
-              <p className="section-kicker">Connected systems, measurable growth</p>
-              <h2 id="system-title">Connect your systems. Put your data to work.</h2>
+              <p className="section-kicker">What we build</p>
+              <h2 id="system-title">Add the capability your business needs next.</h2>
             </div>
             <div className="system-summary">
-              <p>We map what you already use, build the software that is missing, integrate AI securely, and improve how customers discover your product through SEO, AEO, and smarter marketing.</p>
+              <p>Keep the systems that work. Add AI integration, custom software, search visibility, or marketing automation where it creates measurable value.</p>
               <a className="primary-button" href="#contact">Plan AI integration</a>
             </div>
           </div>
@@ -178,10 +78,10 @@ export default function Home() {
         <section id="services" className="services section-pad" aria-labelledby="services-title">
           <div className="services-heading">
             <div>
-              <p className="section-kicker">Services</p>
-              <h2 id="services-title">Deep tech, software, growth, and security in one team.</h2>
+              <p className="section-kicker">Specialist services</p>
+              <h2 id="services-title">Train teams and secure every deployment.</h2>
             </div>
-            <p>One regional partner for production AI, immersive training, custom software, AI marketing, cybersecurity, and team adoption.</p>
+            <p>Extend the core system with immersive simulation, cybersecurity, and practical AI training for each role.</p>
           </div>
           <div className="service-list">
             {services.map((service) => (
@@ -201,74 +101,58 @@ export default function Home() {
 
         <section className="people-section section-pad" aria-labelledby="people-title">
           <div className="people-copy">
-            <p className="section-kicker">AI adoption across UAE teams</p>
-            <h2 id="people-title">AI works when people know how to use it.</h2>
-            <p>We work with leaders, technology teams, and operational experts to make AI part of everyday work.</p>
+            <p className="section-kicker">Inside the workflow</p>
+            <h2 id="people-title">The people doing the work shape the system.</h2>
+            <p>We test each workflow with its users and document where human review belongs.</p>
           </div>
           <div className="people-rail">
-          <figure className="people-still people-boardroom">
-            <Image
-              src={publicAsset("/media/uae-ai-boardroom-v1.jpg")}
-              alt="UAE leaders and OneBonsai Gulf consultants reviewing an AI system together"
-              width={1672}
-              height={941}
-              loading="lazy"
-              unoptimized
-            />
-            <figcaption>Leaders shaping the AI roadmap together</figcaption>
-          </figure>
-          <figure className="people-logistics">
-            <EditorialLoop
-              source={publicAsset("/media/editorial-people-logistics-higgs-v2.mp4")}
-              poster={publicAsset("/media/editorial-people-logistics-higgs-v2-poster.jpg")}
-            />
-            <figcaption>Operational teams learning in the workflow</figcaption>
-          </figure>
-          <figure className="people-still people-port">
-            <Image
-              src={publicAsset("/media/uae-port-ai-v1.jpg")}
-              alt="A UAE port operations team studying live infrastructure data with an AI consultant"
-              width={1672}
-              height={941}
-              loading="lazy"
-              unoptimized
-            />
-            <figcaption>AI decisions grounded in operational context</figcaption>
-          </figure>
-          <figure className="people-healthcare">
-            <EditorialLoop
-              source={publicAsset("/media/editorial-people-healthcare-higgs-v2.mp4")}
-              poster={publicAsset("/media/editorial-people-healthcare-higgs-v2-poster.jpg")}
-            />
-            <figcaption>Guided adoption in real workflows</figcaption>
-          </figure>
+            <figure className="people-still people-workshop">
+              <Image
+                src={publicAsset("/media/uae-ai-workshop-v1.jpg")}
+                alt="Jelena Skoric facilitating an AI workshop with a UAE leadership team"
+                width={1672}
+                height={941}
+                loading="lazy"
+                sizes="(max-width: 760px) 100vw, 1400px"
+                unoptimized
+              />
+              <figcaption>Jelena shaping the workflow with the people who use it</figcaption>
+            </figure>
+            <figure className="people-still people-port">
+              <Image
+                src={publicAsset("/media/uae-port-ai-v1.jpg")}
+                alt="A UAE port operations team studying live infrastructure data with an AI consultant"
+                width={1672}
+                height={941}
+                loading="lazy"
+                sizes="(max-width: 760px) 100vw, 1400px"
+                unoptimized
+              />
+              <figcaption>AI decisions grounded in operational context</figcaption>
+            </figure>
           </div>
         </section>
 
         <TeamSection />
 
         <section className="infrastructure-section" aria-labelledby="infrastructure-title">
-          <Image
-            src={publicAsset("/media/infrastructure-intelligence-v2.jpg")}
-            alt="UAE engineers using AI and a drone to inspect bridge infrastructure"
-            width={1672}
-            height={941}
-            loading="lazy"
-            unoptimized
+          <EditorialLoop
+            source={publicAsset("/media/infrastructure-inspection-higgsfield-web-v1.mp4")}
+            poster={publicAsset("/media/infrastructure-intelligence-v2.jpg")}
           />
           <div className="infrastructure-copy">
-            <p>Computer vision for UAE infrastructure</p>
-            <h2 id="infrastructure-title">AI-powered infrastructure inspection at scale.</h2>
-            <span>Inspect. Detect. Act.</span>
+            <p>Computer vision for infrastructure</p>
+            <h2 id="infrastructure-title">Inspect assets without closing them down.</h2>
+            <span>Capture. Review. Repair.</span>
           </div>
         </section>
 
         <section id="academy" className="academy section-pad" aria-labelledby="academy-title">
           <div className="academy-mark" aria-hidden="true">AI<span>+</span></div>
           <div className="academy-copy">
-            <p className="section-kicker">AI training for UAE teams</p>
-            <h2 id="academy-title">Practical AI training for every level.</h2>
-            <p>Clear programs for executives, departments, technical teams, and employees who need to use AI at work.</p>
+            <p className="section-kicker">AI Academy</p>
+            <h2 id="academy-title">Train every role to use AI at work.</h2>
+            <p>Practical programs for executives, departments, and technical teams, built around the tools and decisions they handle every day.</p>
             <ul className="academy-programs">
               {programs.map((item) => <li key={item}>{item}</li>)}
             </ul>
@@ -279,7 +163,7 @@ export default function Home() {
         <section className="products section-pad" aria-labelledby="products-title">
           <div className="products-heading">
             <p className="section-kicker">Products built in-house</p>
-            <h2 id="products-title">AI products built for everyday work.</h2>
+            <h2 id="products-title">Products we build and run.</h2>
           </div>
           <div className="product-index">
             {products.map(([name, label, signal]) => (
@@ -297,15 +181,15 @@ export default function Home() {
             <span>Abu Dhabi, United Arab Emirates</span>
             <span>Enterprise AI across the Gulf</span>
           </div>
-          <p className="section-kicker">Let&apos;s build what comes next</p>
-          <h2 id="contact-title">Ready to use AI in your <em>business?</em></h2>
+          <p className="section-kicker">Start with a real workflow</p>
+          <h2 id="contact-title">Tell us what needs to work <em>better.</em></h2>
           <a href="mailto:info@onebonsai.com?subject=AI%20Strategy%20Consultation">Plan AI integration</a>
           <footer>
             <Image
-              src={publicAsset("/brand/onebonsai-gulf-white.png")}
+              src={publicAsset("/brand/onebonsai-gulf-white-800.png")}
               alt="OneBonsai Gulf"
-              width={3390}
-              height={938}
+              width={800}
+              height={221}
               loading="lazy"
               unoptimized
             />

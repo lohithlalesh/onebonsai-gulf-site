@@ -1,7 +1,6 @@
 "use client";
 
-import EditorialLoop from "./EditorialLoop";
-import { GlowEffect } from "@/components/core/glow-effect";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -12,33 +11,43 @@ const systemInputs = ["ERP + CRM", "Documents", "Operations", "Customer data"] a
 const capabilities = [
   {
     title: "AI integration",
-    signal: "Connect the systems",
-    copy: "Connect ERP, CRM, documents, customer data, and operational tools through one governed AI layer.",
-    outcome: "One secure source of context",
+    signal: "Use existing data",
+    copy: "Give teams one place to ask questions, find records, and trigger approved actions.",
+    outcome: "Shared context without a system replacement",
+    image: "/media/capability-ai-integration-v1.jpg",
+    alt: "UAE operations leaders reviewing an integrated enterprise AI workspace",
   },
   {
     title: "Custom software",
-    signal: "Build what is missing",
-    copy: "Add focused applications, interfaces, and automation around the workflows your teams already use.",
-    outcome: "Software shaped around real work",
+    signal: "Fill the workflow gap",
+    copy: "Build the interface or automation your current tools cannot provide.",
+    outcome: "Software matched to the job",
+    image: "/media/capability-custom-software-v1.jpg",
+    alt: "A UAE product team testing custom operations software",
   },
   {
     title: "Consulting",
-    signal: "Choose what matters",
-    copy: "Prioritize useful AI cases, define delivery phases, and set clear measures for value, risk, and adoption.",
-    outcome: "A practical route to production",
+    signal: "Set the order of work",
+    copy: "Choose a first use case, delivery plan, and measures before committing to a build.",
+    outcome: "A scoped route to production",
+    image: "/media/capability-consulting-v1.jpg",
+    alt: "A Gulf leadership team planning an AI delivery roadmap",
   },
   {
     title: "SEO + AEO",
-    signal: "Make products discoverable",
-    copy: "Structure websites, product knowledge, and content for search engines and AI answer experiences.",
-    outcome: "More qualified discovery",
+    signal: "Be easier to find",
+    copy: "Structure product pages and knowledge so search engines and AI answers can understand them.",
+    outcome: "Qualified discovery",
+    image: "/media/capability-seo-aeo-v1.jpg",
+    alt: "A search specialist reviewing structured product knowledge and discovery performance",
   },
   {
-    title: "Marketing growth",
-    signal: "Turn insight into demand",
-    copy: "Use connected data to improve campaigns, personalization, customer journeys, and measurable pipeline.",
-    outcome: "Growth tied to business signals",
+    title: "Marketing systems",
+    signal: "Use customer signals",
+    copy: "Connect campaign and customer data so teams can see what creates demand.",
+    outcome: "Marketing tied to pipeline",
+    image: "/media/capability-marketing-systems-v1.jpg",
+    alt: "A marketing operator using a node based campaign and customer data workflow",
   },
 ] as const;
 
@@ -69,28 +78,27 @@ export default function IntegrationMap() {
   }, []);
 
   return (
-    <div className="glow-border-wrap">
-      <GlowEffect
-        colors={["#dcff22", "#0894FF", "#C959DD", "#FF9004"]}
-        mode="static"
-        blur="medium"
-        intensity={0.6}
-        style={{ borderRadius: "20px" }}
-      />
-      <div className="integration-scroll-map" aria-label="How OneBonsai Gulf turns connected business systems into measurable capabilities">
+    <div className="integration-scroll-map" aria-label="How OneBonsai Gulf turns connected business systems into measurable capabilities">
       <aside className="integration-scroll-sticky">
         <div className="integration-scroll-heading">
-          <p>From systems to value</p>
-          <h3>Your systems become one governed intelligence layer.</h3>
+          <p>Start with what is already there</p>
+          <h3>Your current setup stays in place.</h3>
           <ul>
             {systemInputs.map((input) => <li key={input}>{input}</li>)}
           </ul>
         </div>
 
         <div className="integration-scroll-visual">
-          <EditorialLoop
-            source={publicAsset("/media/editorial-governed-intelligence-veo-v1.mp4")}
-            poster={publicAsset("/media/editorial-governed-intelligence-veo-v1-poster.jpg")}
+          <Image
+            key={activeCapability.image}
+            src={publicAsset(activeCapability.image)}
+            alt={activeCapability.alt}
+            data-active="true"
+            width={1672}
+            height={941}
+            sizes="(max-width: 760px) 100vw, 52vw"
+            loading="lazy"
+            unoptimized
           />
           <div className="integration-scroll-shade" aria-hidden="true" />
           <div className="integration-live-capability" key={activeCapability.title} aria-live="polite">
@@ -124,7 +132,6 @@ export default function IntegrationMap() {
           </li>
         ))}
       </ol>
-      </div>
     </div>
   );
 }
