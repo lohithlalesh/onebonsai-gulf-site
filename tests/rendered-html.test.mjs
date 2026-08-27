@@ -100,7 +100,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(journey, /icon-systems-1200\.avif/);
   assert.match(journey, /icon-intelligence-1200\.avif/);
   assert.match(journey, /icon-scale-1200\.avif/);
-  assert.match(journey, /onebonsai-hero-poster-mobile-1200\.avif/);
+  assert.match(journey, /onebonsai-hero-poster-mobile-1200\.jpg/);
   assert.doesNotMatch(journey, /journey-signal-card|journey-signal-orb/);
   assert.match(journey, /disableRemotePlayback/);
   assert.match(journey, /renderedTime \+= \(targetTime - renderedTime\) \* 0\.16/);
@@ -243,7 +243,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/icon-systems-1200.avif", import.meta.url));
   await access(new URL("../public/media/icon-intelligence-1200.avif", import.meta.url));
   await access(new URL("../public/media/icon-scale-1200.avif", import.meta.url));
-  await access(new URL("../public/media/onebonsai-hero-poster-mobile-1200.avif", import.meta.url));
+  await access(new URL("../public/media/onebonsai-hero-poster-mobile-1200.jpg", import.meta.url));
   await access(new URL("../public/media/editorial-connect-systems-artlist-v1.mp4", import.meta.url));
   await access(new URL("../public/media/editorial-connect-systems-artlist-v1-poster.jpg", import.meta.url));
   await access(new URL("../public/media/editorial-build-useful-ai-artlist-v1.mp4", import.meta.url));

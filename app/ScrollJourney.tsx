@@ -283,7 +283,7 @@ export default function ScrollJourney() {
             )}
             {isSmallScreen !== false && (
               <Image
-                src={publicAsset("/media/onebonsai-hero-poster-mobile-1200.avif")}
+                src={publicAsset("/media/onebonsai-hero-poster-mobile-1200.jpg")}
                 alt=""
                 width={1200}
                 height={675}
