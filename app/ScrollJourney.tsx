@@ -102,15 +102,18 @@ export default function ScrollJourney() {
     if (!section || !video || isSmallScreen !== true) return;
 
     const motionPreference = window.matchMedia(REDUCED_MOTION_QUERY);
+    const requestController = new AbortController();
     let reduceMotion = motionPreference.matches;
     let duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : FALLBACK_DURATION;
     let animationFrame = 0;
     let lastAct = -1;
     let lastReducedAct = -1;
+    let objectUrl = "";
 
     const updateReadyState = () => {
       if (video.readyState >= 2) setIsReady(true);
       if (Number.isFinite(video.duration) && video.duration > 0) duration = video.duration;
+      requestMobileUpdate();
     };
 
     const updateMobileJourney = () => {
@@ -146,9 +149,27 @@ export default function ScrollJourney() {
       animationFrame = window.requestAnimationFrame(updateMobileJourney);
     };
 
+    const loadMobileVideo = async () => {
+      try {
+        const response = await fetch(publicAsset("/media/onebonsai-hero-motion-mobile-v1.mp4"), {
+          cache: "force-cache",
+          signal: requestController.signal,
+        });
+        if (!response.ok) return;
+
+        const blob = await response.blob();
+        if (requestController.signal.aborted) return;
+
+        objectUrl = URL.createObjectURL(blob);
+        video.src = objectUrl;
+        video.load();
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === "AbortError")) return;
+      }
+    };
+
     updateMobileJourney();
     video.pause();
-    void video.play().then(() => video.pause()).catch(() => {});
     updateReadyState();
     video.addEventListener("loadedmetadata", updateReadyState);
     video.addEventListener("loadeddata", updateReadyState);
@@ -161,14 +182,17 @@ export default function ScrollJourney() {
       requestMobileUpdate();
     };
     motionPreference.addEventListener("change", syncMotionPreference);
+    void loadMobileVideo();
 
     return () => {
+      requestController.abort();
       window.removeEventListener("scroll", requestMobileUpdate);
       window.removeEventListener("resize", requestMobileUpdate);
       video.removeEventListener("loadedmetadata", updateReadyState);
       video.removeEventListener("loadeddata", updateReadyState);
       motionPreference.removeEventListener("change", syncMotionPreference);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
   }, [isSmallScreen]);
 
@@ -326,7 +350,7 @@ export default function ScrollJourney() {
                 ref={videoRef}
                 muted
                 playsInline
-                preload="auto"
+                preload={isSmallScreen ? "none" : "auto"}
                 poster={publicAsset(
                   isSmallScreen
                     ? "/media/onebonsai-hero-poster-mobile-1200.jpg"
@@ -334,14 +358,9 @@ export default function ScrollJourney() {
                 )}
                 disableRemotePlayback
               >
-                <source
-                  src={publicAsset(
-                    isSmallScreen
-                      ? "/media/onebonsai-hero-motion-mobile-v1.mp4"
-                      : "/media/onebonsai-hero-motion-web-v2.mp4",
-                  )}
-                  type="video/mp4"
-                />
+                {isSmallScreen === false && (
+                  <source src={publicAsset("/media/onebonsai-hero-motion-web-v2.mp4")} type="video/mp4" />
+                )}
               </video>
             )}
           </div>

@@ -111,6 +111,8 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(journey, /updateMobileJourney/);
   assert.match(journey, /Math\.abs\(targetTime - video\.currentTime\) > 1 \/ 48/);
+  assert.match(journey, /URL\.createObjectURL\(blob\)/);
+  assert.match(journey, /cache: "force-cache"/);
   assert.match(journey, /window\.addEventListener\("scroll", requestMobileUpdate, \{ passive: true \}\)/);
   assert.match(scrollReveal, /new IntersectionObserver/);
   assert.doesNotMatch(scrollReveal, /mobileJourneySelector|\.clarity-mobile-steps article/);
