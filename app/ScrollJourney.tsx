@@ -98,10 +98,20 @@ export default function ScrollJourney() {
 
   useEffect(() => {
     const section = sectionRef.current;
-    if (!section || isSmallScreen !== true) return;
+    const video = videoRef.current;
+    if (!section || !video || isSmallScreen !== true) return;
 
+    const motionPreference = window.matchMedia(REDUCED_MOTION_QUERY);
+    let reduceMotion = motionPreference.matches;
+    let duration = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : FALLBACK_DURATION;
     let animationFrame = 0;
     let lastAct = -1;
+    let lastReducedAct = -1;
+
+    const updateReadyState = () => {
+      if (video.readyState >= 2) setIsReady(true);
+      if (Number.isFinite(video.duration) && video.duration > 0) duration = video.duration;
+    };
 
     const updateMobileJourney = () => {
       animationFrame = 0;
@@ -117,6 +127,18 @@ export default function ScrollJourney() {
         lastAct = nextAct;
         setActiveAct(nextAct);
       }
+
+      if (video.readyState >= 2) {
+        const availableDuration = Math.max(duration - 0.06, 0);
+        const targetTime = reduceMotion
+          ? (nextAct / (acts.length - 1)) * availableDuration
+          : progress * availableDuration;
+
+        if (!reduceMotion || nextAct !== lastReducedAct) {
+          lastReducedAct = nextAct;
+          if (Math.abs(targetTime - video.currentTime) > 1 / 48) video.currentTime = targetTime;
+        }
+      }
     };
 
     const requestMobileUpdate = () => {
@@ -125,12 +147,27 @@ export default function ScrollJourney() {
     };
 
     updateMobileJourney();
+    video.pause();
+    void video.play().then(() => video.pause()).catch(() => {});
+    updateReadyState();
+    video.addEventListener("loadedmetadata", updateReadyState);
+    video.addEventListener("loadeddata", updateReadyState);
     window.addEventListener("scroll", requestMobileUpdate, { passive: true });
     window.addEventListener("resize", requestMobileUpdate);
+
+    const syncMotionPreference = () => {
+      reduceMotion = motionPreference.matches;
+      lastReducedAct = -1;
+      requestMobileUpdate();
+    };
+    motionPreference.addEventListener("change", syncMotionPreference);
 
     return () => {
       window.removeEventListener("scroll", requestMobileUpdate);
       window.removeEventListener("resize", requestMobileUpdate);
+      video.removeEventListener("loadedmetadata", updateReadyState);
+      video.removeEventListener("loadeddata", updateReadyState);
+      motionPreference.removeEventListener("change", syncMotionPreference);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
     };
   }, [isSmallScreen]);
@@ -269,29 +306,43 @@ export default function ScrollJourney() {
           </div>
 
           <div className="journey-film" aria-hidden="true">
-            {isSmallScreen === false && (
+            <Image
+              src={publicAsset(
+                isSmallScreen === false
+                  ? "/media/onebonsai-hero-poster-web-v3.jpg"
+                  : "/media/onebonsai-hero-poster-mobile-1200.jpg",
+              )}
+              alt=""
+              width={isSmallScreen === false ? 2400 : 1200}
+              height={isSmallScreen === false ? 1350 : 675}
+              sizes="100vw"
+              loading="eager"
+              fetchPriority="high"
+              unoptimized
+            />
+            {isSmallScreen !== null && (
               <video
+                key={isSmallScreen ? "mobile" : "desktop"}
                 ref={videoRef}
                 muted
                 playsInline
                 preload="auto"
-                poster={publicAsset("/media/onebonsai-hero-poster-web-v3.jpg")}
+                poster={publicAsset(
+                  isSmallScreen
+                    ? "/media/onebonsai-hero-poster-mobile-1200.jpg"
+                    : "/media/onebonsai-hero-poster-web-v3.jpg",
+                )}
                 disableRemotePlayback
               >
-                <source src={publicAsset("/media/onebonsai-hero-motion-web-v2.mp4")} type="video/mp4" />
+                <source
+                  src={publicAsset(
+                    isSmallScreen
+                      ? "/media/onebonsai-hero-motion-mobile-v1.mp4"
+                      : "/media/onebonsai-hero-motion-web-v2.mp4",
+                  )}
+                  type="video/mp4"
+                />
               </video>
-            )}
-            {isSmallScreen !== false && (
-              <Image
-                src={publicAsset("/media/onebonsai-hero-poster-mobile-1200.jpg")}
-                alt=""
-                width={1200}
-                height={675}
-                sizes="100vw"
-                loading="eager"
-                fetchPriority="high"
-                unoptimized
-              />
             )}
           </div>
 

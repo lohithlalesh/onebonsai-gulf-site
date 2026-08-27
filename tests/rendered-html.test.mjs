@@ -94,6 +94,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(page, /<ScrollReveal \/>/);
   assert.doesNotMatch(page, /^"use client";/);
   assert.match(journey, /onebonsai-hero-motion-web-v2\.mp4/);
+  assert.match(journey, /onebonsai-hero-motion-mobile-v1\.mp4/);
   assert.match(journey, /onebonsai-hero-poster-web-v3\.jpg/);
   assert.doesNotMatch(journey, /capabilityCards|journey-capabilities/);
   assert.match(journey, /ownershipVisuals/);
@@ -109,6 +110,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(journey, /video\.play\(\)\.then\(\(\) => video\.pause\(\)\)/);
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(journey, /updateMobileJourney/);
+  assert.match(journey, /Math\.abs\(targetTime - video\.currentTime\) > 1 \/ 48/);
   assert.match(journey, /window\.addEventListener\("scroll", requestMobileUpdate, \{ passive: true \}\)/);
   assert.match(scrollReveal, /new IntersectionObserver/);
   assert.doesNotMatch(scrollReveal, /mobileJourneySelector|\.clarity-mobile-steps article/);
@@ -239,6 +241,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(mediaSources, /Pexels/i);
 
   await access(new URL("../public/media/onebonsai-hero-motion-web-v2.mp4", import.meta.url));
+  await access(new URL("../public/media/onebonsai-hero-motion-mobile-v1.mp4", import.meta.url));
   await access(new URL("../public/media/onebonsai-hero-poster-web-v3.jpg", import.meta.url));
   await access(new URL("../public/media/icon-systems-1200.avif", import.meta.url));
   await access(new URL("../public/media/icon-intelligence-1200.avif", import.meta.url));
