@@ -180,6 +180,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(siteHeader, /brand-gulf/);
   assert.match(css, /\.journey \{ height: 500dvh; padding: 0 10px; \}/);
   assert.match(css, /\.clarity-journey \{ height: 300dvh; overflow: clip; \}/);
+  assert.match(css, /object-position: 76% 38%/);
   assert.match(about, /OneBonsai Gulf is the Abu Dhabi regional sister company/);
   assert.match(about, /onebonsai-wordmark-black\.png/);
   assert.match(about, /aria-live="polite"/);

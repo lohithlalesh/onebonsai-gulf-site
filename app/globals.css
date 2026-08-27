@@ -2521,8 +2521,11 @@ html.scroll-reveal-enabled [data-scroll-reveal="visible"] {
     background: linear-gradient(to bottom, transparent 15%, rgba(243, 242, 236, 0.12) 35%, rgba(243, 242, 236, 0.9) 61%, #f3f2ec 76%);
   }
   .journey-film img {
+    top: 0;
+    bottom: auto;
+    height: 48%;
     object-fit: cover;
-    object-position: 58% 18%;
+    object-position: 76% 38%;
     transform: scale(1.03) translate3d(0, 0, 0);
     transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
