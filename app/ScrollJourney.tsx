@@ -249,6 +249,7 @@ export default function ScrollJourney() {
                 width={1200}
                 height={675}
                 sizes="100vw"
+                loading="eager"
                 fetchPriority="high"
                 unoptimized
               />

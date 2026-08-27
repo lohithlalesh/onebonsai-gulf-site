@@ -143,7 +143,9 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(layout, /favicon-v2\.png/);
   assert.match(layout, /organizationJsonLd/);
   assert.match(layout, /alternates: \{ canonical: siteUrl \}/);
-  assert.match(layout, /preload\(publicAsset\("\/fonts\/hanken-grotesk\.ttf"\)/);
+  assert.match(layout, /preload\(publicAsset\("\/fonts\/hanken-grotesk\.woff2"\)/);
+  assert.doesNotMatch(layout, /preload\(publicAsset\("\/fonts\/ibm-plex-mono/);
+  assert.match(journey, /loading="eager"/);
   assert.match(layout, /max-video-preview/);
   assert.match(team, /The people doing the work/);
   assert.match(team, /Hamad Al Khamais/);
@@ -257,6 +259,8 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/clarity-diagnose-3d-v1.jpg", import.meta.url));
   await access(new URL("../public/media/clarity-integrate-3d-v1.jpg", import.meta.url));
   await access(new URL("../public/media/clarity-scale-3d-v1.jpg", import.meta.url));
+  await access(new URL("../public/fonts/hanken-grotesk.woff2", import.meta.url));
+  await access(new URL("../public/fonts/ibm-plex-mono.woff2", import.meta.url));
   await access(new URL("../public/brand/onebonsai-wordmark-black.png", import.meta.url));
   await access(new URL("../public/brand/onebonsai-gulf-white-800.png", import.meta.url));
   await access(new URL("../public/robots.txt", import.meta.url));

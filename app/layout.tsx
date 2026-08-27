@@ -106,14 +106,9 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  preload(publicAsset("/fonts/hanken-grotesk.ttf"), {
+  preload(publicAsset("/fonts/hanken-grotesk.woff2"), {
     as: "font",
-    type: "font/ttf",
-    crossOrigin: "anonymous",
-  });
-  preload(publicAsset("/fonts/ibm-plex-mono.ttf"), {
-    as: "font",
-    type: "font/ttf",
+    type: "font/woff2",
     crossOrigin: "anonymous",
   });
 
@@ -129,14 +124,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <style>{`
           @font-face {
             font-family: "Hanken";
-            src: url("${publicAsset("/fonts/hanken-grotesk.ttf")}") format("truetype");
+            src: url("${publicAsset("/fonts/hanken-grotesk.woff2")}") format("woff2");
             font-style: normal;
             font-weight: 100 900;
             font-display: swap;
           }
           @font-face {
             font-family: "IBM Plex Mono";
-            src: url("${publicAsset("/fonts/ibm-plex-mono.ttf")}") format("truetype");
+            src: url("${publicAsset("/fonts/ibm-plex-mono.woff2")}") format("woff2");
             font-style: normal;
             font-weight: 400;
             font-display: swap;

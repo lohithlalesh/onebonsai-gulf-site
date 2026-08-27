@@ -129,7 +129,7 @@ export default function ClarityJourney() {
             alt=""
             width={1254}
             height={1254}
-            loading={activeIndex === 0 ? "eager" : "lazy"}
+            loading="lazy"
             unoptimized
           />
         </div>
