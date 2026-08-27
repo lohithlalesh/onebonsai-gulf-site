@@ -55,9 +55,9 @@ const acts: Act[] = [
 const flowNodes = ["One workflow", "Business context", "Useful output", "Team ownership"];
 
 const ownershipVisuals = [
-  { label: "Connected context", image: "/media/icon-systems.png" },
-  { label: "Useful decisions", image: "/media/icon-intelligence.png" },
-  { label: "Team ownership", image: "/media/icon-scale.png" },
+  { label: "Connected context", image: "/media/icon-systems-1200.avif" },
+  { label: "Useful decisions", image: "/media/icon-intelligence-1200.avif" },
+  { label: "Team ownership", image: "/media/icon-scale-1200.avif" },
 ] as const;
 const MOBILE_QUERY = "(max-width: 700px)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
@@ -244,11 +244,11 @@ export default function ScrollJourney() {
             )}
             {isSmallScreen !== false && (
               <Image
-                src={publicAsset("/media/onebonsai-hero-poster-web-v3.jpg")}
+                src={publicAsset("/media/onebonsai-hero-poster-mobile-1200.avif")}
                 alt=""
-                width={2400}
-                height={1350}
-                sizes="(max-width: 700px) 100vw, 1600px"
+                width={1200}
+                height={675}
+                sizes="100vw"
                 fetchPriority="high"
                 unoptimized
               />
@@ -267,12 +267,6 @@ export default function ScrollJourney() {
                 </article>
               );
             })}
-          </div>
-
-          <div className="journey-signal-card" aria-hidden="true">
-            <span className="journey-signal-orb"><i /></span>
-            <p>{acts[activeAct].signal}</p>
-            <b>{activeAct < 3 ? "INTELLIGENCE TAKING ROOT" : "VALUE MOVING DOWNSTREAM"}</b>
           </div>
 
           <div className="journey-status" aria-hidden="true">
@@ -304,7 +298,15 @@ export default function ScrollJourney() {
             <div className="journey-ownership-visuals" aria-label="Connected context, useful decisions, and team ownership">
               {ownershipVisuals.map((visual, index) => (
                 <figure key={visual.label} style={{ "--visual-index": index } as CSSProperties}>
-                  <Image src={publicAsset(visual.image)} alt="" width={2048} height={2048} loading="lazy" unoptimized />
+                  <Image
+                    src={publicAsset(visual.image)}
+                    alt=""
+                    width={1200}
+                    height={1200}
+                    loading="lazy"
+                    sizes="(max-width: 700px) calc(100vw - 52px), 28vw"
+                    unoptimized
+                  />
                   <figcaption>{visual.label}</figcaption>
                 </figure>
               ))}

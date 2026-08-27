@@ -20,11 +20,23 @@ const revealSelector = [
   "main section:not(.journey):not(.clarity-journey) .contact > a",
 ].join(",");
 
+const mobileJourneySelector = [
+  ".journey-copy article",
+  ".journey-dark-heading > article",
+  ".journey-flow-node",
+  ".journey-ownership-visuals figure",
+  ".clarity-mobile-steps article",
+].join(",");
+
 export default function ScrollReveal() {
   useEffect(() => {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector)).filter(
+    const mobileViewport = window.matchMedia("(max-width: 760px)");
+    const selector = mobileViewport.matches
+      ? `${revealSelector},${mobileJourneySelector}`
+      : revealSelector;
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(selector)).filter(
       (target) => !target.closest(".team-card"),
     );
 
