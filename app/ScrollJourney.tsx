@@ -98,6 +98,45 @@ export default function ScrollJourney() {
 
   useEffect(() => {
     const section = sectionRef.current;
+    if (!section || isSmallScreen !== true) return;
+
+    let animationFrame = 0;
+    let lastAct = -1;
+
+    const updateMobileJourney = () => {
+      animationFrame = 0;
+      const bounds = section.getBoundingClientRect();
+      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const progress = Math.min(1, Math.max(0, -bounds.top / travel));
+      const nextAct = Math.min(acts.length - 1, Math.floor(progress * acts.length));
+
+      section.style.setProperty("--journey-progress", progress.toFixed(4));
+      section.style.setProperty("--journey-fill", `${(progress * 100).toFixed(2)}%`);
+
+      if (nextAct !== lastAct) {
+        lastAct = nextAct;
+        setActiveAct(nextAct);
+      }
+    };
+
+    const requestMobileUpdate = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(updateMobileJourney);
+    };
+
+    updateMobileJourney();
+    window.addEventListener("scroll", requestMobileUpdate, { passive: true });
+    window.addEventListener("resize", requestMobileUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", requestMobileUpdate);
+      window.removeEventListener("resize", requestMobileUpdate);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+    };
+  }, [isSmallScreen]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
     const video = videoRef.current;
     if (!section || !video || isSmallScreen !== false) return;
 
@@ -260,7 +299,7 @@ export default function ScrollJourney() {
             {acts.slice(0, 3).map((entry, index) => {
               const Heading = index === 0 ? "h1" : "h2";
               return (
-                <article key={entry.eyebrow} data-index={index} aria-hidden={isSmallScreen === true ? false : activeAct !== index}>
+                <article key={entry.eyebrow} data-index={index} aria-hidden={activeAct !== index}>
                   <p className="journey-eyebrow">{entry.eyebrow}</p>
                   <Heading><BouncyTitle>{entry.title}</BouncyTitle></Heading>
                   <p className="journey-body">{entry.copy}</p>
@@ -278,7 +317,7 @@ export default function ScrollJourney() {
           <div className="journey-dark-panel">
             <div className="journey-dark-heading">
               {acts.slice(3).map((entry, offset) => (
-                <article key={entry.eyebrow} data-index={offset + 3} aria-hidden={isSmallScreen === true ? false : activeAct !== offset + 3}>
+                <article key={entry.eyebrow} data-index={offset + 3} aria-hidden={activeAct !== offset + 3}>
                   <p>{entry.eyebrow}</p>
                   <h2><BouncyTitle>{entry.title}</BouncyTitle></h2>
                   <span>{entry.copy}</span>

@@ -41,7 +41,7 @@ export default function ClarityJourney() {
     const updateStep = () => {
       frame = 0;
       const section = sectionRef.current;
-      if (!section || window.matchMedia("(max-width: 760px)").matches) return;
+      if (!section) return;
 
       const rect = section.getBoundingClientRect();
       const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
