@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
+async function render(pathname = "/") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
+    new Request(`http://localhost${pathname}`, {
       headers: { accept: "text/html" },
     }),
     {
@@ -44,35 +44,49 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(html, /Shared context without a system replacement/);
   assert.match(html, /SEO \+ AEO/);
   assert.match(html, /Marketing systems/);
-  assert.match(html, /Regional sister company of/);
-  assert.match(html, /Engineering, delivered in the Gulf\./);
-  assert.match(html, /Built in Belgium\. Delivered from Abu Dhabi\./);
-  assert.match(html, /Delivered work across/);
-  assert.match(html, /Virtual nurse training for University Hospital Bonn/);
-  assert.match(html, /1,600 staff and students/);
-  assert.match(html, /Browse all case studies/);
   assert.match(html, /immersive (?:VR )?training/i);
   assert.match(html, /Cybersecurity &amp; Secure AI/);
   assert.match(html, /Trusted by organizations building what comes next/);
   assert.match(html, /UAE \/ GLOBAL/);
-  assert.match(html, /The people doing the work/);
-  assert.match(html, /Ivan M Grey/);
-  assert.match(html, /Hamad Al Khamais/);
-  assert.match(html, /Rabeb Ben Hamouda/);
-  assert.match(html, /Khawla Zon/);
-  assert.match(html, /Slim Garbouj/);
+  assert.doesNotMatch(html, /The people doing the work shape the system/);
+  assert.doesNotMatch(html, /uae-ai-workshop-v1/);
+  assert.doesNotMatch(html, /Ivan M Grey/);
   assert.match(html, /Inspect assets without closing them down\./);
   assert.match(html, /Pause customer logos/);
-  assert.match(html, /Pause team/);
   assert.match(html, /Skip to content/);
   assert.doesNotMatch(html, /SCROLL TO CULTIVATE|GO ↗|section-marker/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
+test("renders dedicated About and Team pages", async () => {
+  const [aboutResponse, teamResponse] = await Promise.all([render("/about"), render("/team")]);
+  assert.equal(aboutResponse.status, 200);
+  assert.equal(teamResponse.status, 200);
+
+  const [aboutHtml, teamHtml] = await Promise.all([aboutResponse.text(), teamResponse.text()]);
+  assert.match(aboutHtml, /Regional sister company of/);
+  assert.match(aboutHtml, /Engineering, delivered in the Gulf\./);
+  assert.match(aboutHtml, /Built in Belgium\. Delivered from Abu Dhabi\./);
+  assert.match(aboutHtml, /From first use case to a system your team can run\./);
+  assert.match(aboutHtml, /Virtual nurse training for University Hospital Bonn/);
+  assert.match(aboutHtml, /rel="canonical" href="https:\/\/obgulf\.com\/about/);
+
+  assert.match(teamHtml, /A team built around the work, not around handoffs\./);
+  assert.match(teamHtml, /Ivan M Grey/);
+  assert.match(teamHtml, /Hamad Al Khamais/);
+  assert.match(teamHtml, /Jelena Skoric/);
+  assert.match(teamHtml, /Rabeb Ben Hamouda/);
+  assert.match(teamHtml, /Khawla Zon/);
+  assert.match(teamHtml, /Slim Garbouj/);
+  assert.match(teamHtml, /rel="canonical" href="https:\/\/obgulf\.com\/team/);
+});
+
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
-  const [page, about, clarity, journey, scrollReveal, marquee, editorialLoop, integrationMap, team, siteHeader, layout, css, mediaSources] = await Promise.all([
+  const [page, about, aboutPage, teamPage, clarity, journey, scrollReveal, marquee, editorialLoop, integrationMap, team, siteHeader, siteContact, layout, css, mediaSources] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/AboutSection.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/about/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/team/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ClarityJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollReveal.tsx", import.meta.url), "utf8"),
@@ -81,6 +95,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
     readFile(new URL("../app/IntegrationMap.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/TeamSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/SiteHeader.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/SiteContact.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
     readFile(new URL("../MEDIA_SOURCES.md", import.meta.url), "utf8"),
@@ -88,7 +103,6 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
 
   assert.match(page, /<ScrollJourney \/>/);
   assert.match(page, /<ClarityJourney \/>/);
-  assert.match(page, /<AboutSection \/>/);
   assert.match(page, /<CustomerMarquee \/>/);
   assert.match(page, /<SiteHeader \/>/);
   assert.match(page, /<ScrollReveal \/>/);
@@ -121,8 +135,10 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(marquee, /customer-marquee/);
   assert.match(marquee, /aria-pressed/);
   assert.doesNotMatch(page, /pathway-grid|const pathways/);
-  assert.match(page, /uae-ai-workshop-v1\.jpg/);
-  assert.match(page, /uae-port-ai-v1\.jpg/);
+  assert.doesNotMatch(page, /uae-ai-workshop-v1\.jpg/);
+  assert.doesNotMatch(page, /uae-port-ai-v1\.jpg/);
+  assert.doesNotMatch(page, /<TeamSection \/>/);
+  assert.match(page, /<SiteContact \/>/);
   assert.match(page, /infrastructure-inspection-higgsfield-web-v1\.mp4/);
   assert.doesNotMatch(page, /editorial-people-(logistics|healthcare)-higgs-v2\.mp4/);
   assert.match(integrationMap, /AI integration/);
@@ -152,20 +168,15 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(layout, /preload\(publicAsset\("\/fonts\/ibm-plex-mono/);
   assert.match(journey, /loading="eager"/);
   assert.match(layout, /max-video-preview/);
-  assert.match(team, /The people doing the work/);
+  assert.match(teamPage, /<TeamSection \/>/);
+  assert.match(aboutPage, /<AboutSection \/>/);
+  assert.match(siteContact, /Tell us what needs to work/);
+  assert.match(team, /One team, close to the work/);
   assert.match(team, /Hamad Al Khamais/);
-  assert.match(team, /marqueeGroups/);
-  assert.match(team, /team-marquee/);
-  assert.match(team, /aria-roledescription="carousel"/);
-  assert.match(team, /aria-hidden=\{groupIndex === 1/);
-  assert.match(team, /useState/);
-  assert.match(team, /useEffect/);
-  assert.match(team, /IntersectionObserver/);
-  assert.match(team, /data-active="false"/);
-  assert.match(team, /Pause team/);
-  assert.match(team, /aria-pressed=\{paused\}/);
-  assert.doesNotMatch(team, /scrollIntoView/);
-  assert.match(scrollReveal, /!target\.closest\("\.team-card"\)/);
+  assert.match(team, /className="team-wall"/);
+  assert.match(team, /className="team-person"/);
+  assert.match(team, /role="list"/);
+  assert.match(scrollReveal, /\.team-card, \.team-person/);
   assert.match(clarity, /From complexity to clarity in 3 steps/);
   assert.match(clarity, /Diagnose/);
   assert.match(clarity, /Integrate/);
@@ -212,20 +223,16 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /\.integration-scroll-visual > img/);
   assert.doesNotMatch(css, /growth-tree-motion|capability-motion/);
   assert.match(css, /\.integration-capability-steps/);
-  assert.match(css, /scroll-snap-type: inline mandatory/);
   assert.match(css, /:focus-visible/);
   assert.match(css, /100dvh/);
   assert.match(css, /@keyframes customer-marquee/);
-  assert.match(css, /\.team-marquee-track/);
-  assert.match(css, /animation: team-marquee 180s linear 3s infinite/);
-  assert.match(css, /@keyframes team-marquee/);
-  assert.match(css, /\.team-marquee:hover \.team-marquee-track/);
-  assert.match(css, /\.team-marquee\[data-paused="true"\]/);
-  assert.match(css, /\.team-marquee-group\[aria-hidden="true"\]/);
+  assert.match(css, /\.team-wall/);
+  assert.match(css, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.match(css, /\.team-person:first-child/);
   assert.match(css, /content-visibility: auto/);
-  assert.match(css, /\.team-card:hover img/);
-  assert.match(css, /\.team-card img[\s\S]*?filter: none/);
-  assert.doesNotMatch(css, /\.team-grid|team-page-in/);
+  assert.match(css, /\.team-person:hover img/);
+  assert.match(css, /\.inner-page-hero/);
+  assert.match(css, /\.about-page-principles/);
   assert.match(css, /@keyframes scroll-text-reveal/);
   assert.match(css, /data-scroll-reveal="pending"/);
   assert.match(css, /\.clarity-orbit/);

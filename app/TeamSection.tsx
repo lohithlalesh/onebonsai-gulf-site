@@ -1,12 +1,9 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const team = [
+export const team = [
   ["Ivan M Grey", "Founder and CEO", "ivan-m-grey.jpg"],
   ["Hamad Al Khamais", "Business Development Partner", "hamad-al-khamais-900.jpg"],
   ["Jelena Skoric", "Head of Strategy", "jelena-skoric.jpg"],
@@ -21,94 +18,34 @@ const team = [
   ["Slim Garbouj", "Business Development, Switzerland", "slim-garbouj.jpg"],
 ] as const;
 
-const marqueeGroups = [0, 1] as const;
-
 export default function TeamSection() {
-  const [paused, setPaused] = useState(false);
-  const marqueeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const marquee = marqueeRef.current;
-    if (!marquee) return;
-
-    if (!("IntersectionObserver" in window)) {
-      marquee.dataset.active = "true";
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        marquee.dataset.active = entry.isIntersecting ? "true" : "false";
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(marquee);
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section
-      id="team"
-      className="team-section"
-      aria-labelledby="team-title"
-    >
-      <div className="team-pin">
-        <div className="team-heading">
-          <p className="section-kicker">Team</p>
-          <h2 id="team-title">The people doing the work.</h2>
-          <div className="team-heading-copy">
-            <p>Strategy, engineering, sales, marketing, and regional delivery.</p>
-            <button
-              className="team-marquee-toggle"
-              type="button"
-              aria-pressed={paused}
-              onClick={() => setPaused((current) => !current)}
-            >
-              {paused ? "Play team" : "Pause team"}
-            </button>
-          </div>
-        </div>
+    <section id="team" className="team-wall-section" aria-labelledby="team-wall-title">
+      <header className="team-wall-heading section-pad">
+        <p className="section-kicker">One team, close to the work</p>
+        <h2 id="team-wall-title">Strategy, engineering, growth, and regional delivery.</h2>
+        <p>Meet the people who plan, build, launch, and support OneBonsai Gulf projects.</p>
+      </header>
 
-        <div
-          ref={marqueeRef}
-          className="team-marquee group flex overflow-hidden"
-          role="region"
-          aria-roledescription="carousel"
-          aria-label="OneBonsai Gulf team carousel"
-          data-active="false"
-          data-paused={paused}
-          tabIndex={0}
-        >
-          <div className="team-marquee-track flex w-max">
-            {marqueeGroups.map((groupIndex) => (
-              <div
-                className="team-marquee-group flex shrink-0"
-                aria-hidden={groupIndex === 1 || undefined}
-                key={groupIndex}
-              >
-                {team.map(([name, role, image]) => (
-                  <article className="team-card shrink-0" key={`${groupIndex}-${name}`}>
-                    <Image
-                      src={publicAsset(`/team/${image}`)}
-                      alt={groupIndex === 0 ? name : ""}
-                      width={900}
-                      height={900}
-                      loading="lazy"
-                      sizes="(max-width: 760px) 78vw, (max-width: 1080px) 42vw, 410px"
-                      unoptimized
-                    />
-                    <div className="team-card-copy">
-                      <h3>{name}</h3>
-                      <p>{role}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="team-wall" role="list">
+        {team.map(([name, role, image], index) => (
+          <article className="team-person" role="listitem" tabIndex={0} key={name}>
+            <Image
+              src={publicAsset(`/team/${image}`)}
+              alt={name}
+              width={900}
+              height={900}
+              loading={index < 3 ? "eager" : "lazy"}
+              sizes="(max-width: 680px) 50vw, (max-width: 1080px) 33vw, 25vw"
+              unoptimized
+            />
+            <div className="team-person-copy">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{name}</h3>
+              <p>{role}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );

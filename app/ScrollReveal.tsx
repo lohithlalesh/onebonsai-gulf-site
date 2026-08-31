@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 const revealSelector = [
   "main section:not(.journey):not(.clarity-journey) .section-kicker",
+  "main .inner-page-hero h1",
   "main section:not(.journey):not(.clarity-journey) h2",
   "main section:not(.journey):not(.clarity-journey) h3",
   "main section:not(.journey):not(.clarity-journey) p",
@@ -25,7 +26,7 @@ export default function ScrollReveal() {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector)).filter(
-      (target) => !target.closest(".team-card"),
+      (target) => !target.closest(".team-card, .team-person"),
     );
 
     root.classList.add("scroll-reveal-enabled");

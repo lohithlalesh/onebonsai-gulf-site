@@ -37,7 +37,7 @@ export default function SiteHeader() {
 
   return (
     <header className={`site-header${isScrolled ? " is-scrolled" : ""}`} data-scrolled={isScrolled}>
-      <a className="brand" href="#top" aria-label="OneBonsai Gulf home">
+      <a className="brand" href={publicAsset("/")} aria-label="OneBonsai Gulf home">
         <Image
           src={publicAsset("/brand/onebonsai-gulf-white-800.png")}
           alt="OneBonsai Gulf"
@@ -48,13 +48,13 @@ export default function SiteHeader() {
         />
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#process">Process</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="#work">Work</a>
+        <a href={publicAsset("/about")}>About</a>
+        <a href={`${publicAsset("/")}#process`}>Process</a>
+        <a href={`${publicAsset("/")}#services`}>Services</a>
+        <a href={publicAsset("/team")}>Team</a>
+        <a href={`${publicAsset("/")}#work`}>Work</a>
       </nav>
-      <a className="nav-cta" href="#contact">Plan AI integration <span aria-hidden="true">↗</span></a>
+      <a className="nav-cta" href={`${publicAsset("/")}#contact`}>Plan AI integration <span aria-hidden="true">↗</span></a>
     </header>
   );
 }

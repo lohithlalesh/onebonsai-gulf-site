@@ -1,13 +1,11 @@
-import Image from "next/image";
-import AboutSection from "./AboutSection";
 import ClarityJourney from "./ClarityJourney";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
 import IntegrationMap from "./IntegrationMap";
 import ScrollJourney from "./ScrollJourney";
 import ScrollReveal from "./ScrollReveal";
+import SiteContact from "./SiteContact";
 import SiteHeader from "./SiteHeader";
-import TeamSection from "./TeamSection";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -59,8 +57,6 @@ export default function Home() {
 
         <ClarityJourney />
 
-        <AboutSection />
-
         <section id="work" className="system-section section-pad" aria-labelledby="system-title">
           <div className="system-heading">
             <div className="system-copy">
@@ -98,42 +94,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
-        <section className="people-section section-pad" aria-labelledby="people-title">
-          <div className="people-copy">
-            <p className="section-kicker">Inside the workflow</p>
-            <h2 id="people-title">The people doing the work shape the system.</h2>
-            <p>We test each workflow with its users and document where human review belongs.</p>
-          </div>
-          <div className="people-rail">
-            <figure className="people-still people-workshop">
-              <Image
-                src={publicAsset("/media/uae-ai-workshop-v1.jpg")}
-                alt="Jelena Skoric facilitating an AI workshop with a UAE leadership team"
-                width={1672}
-                height={941}
-                loading="lazy"
-                sizes="(max-width: 760px) 100vw, 1400px"
-                unoptimized
-              />
-              <figcaption>Jelena shaping the workflow with the people who use it</figcaption>
-            </figure>
-            <figure className="people-still people-port">
-              <Image
-                src={publicAsset("/media/uae-port-ai-v1.jpg")}
-                alt="A UAE port operations team studying live infrastructure data with an AI consultant"
-                width={1672}
-                height={941}
-                loading="lazy"
-                sizes="(max-width: 760px) 100vw, 1400px"
-                unoptimized
-              />
-              <figcaption>AI decisions grounded in operational context</figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <TeamSection />
 
         <section className="infrastructure-section" aria-labelledby="infrastructure-title">
           <EditorialLoop
@@ -176,27 +136,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="contact" className="contact" aria-labelledby="contact-title">
-          <div className="contact-top">
-            <span>Abu Dhabi, United Arab Emirates</span>
-            <span>Enterprise AI across the Gulf</span>
-          </div>
-          <p className="section-kicker">Start with a real workflow</p>
-          <h2 id="contact-title">Tell us what needs to work <em>better.</em></h2>
-          <a href="mailto:info@onebonsai.com?subject=AI%20Strategy%20Consultation">Plan AI integration</a>
-          <footer>
-            <Image
-              src={publicAsset("/brand/onebonsai-gulf-white-800.png")}
-              alt="OneBonsai Gulf"
-              width={800}
-              height={221}
-              loading="lazy"
-              unoptimized
-            />
-            <p><a href="mailto:info@onebonsai.com">info@onebonsai.com</a><br /><a href="https://obgulf.com">obgulf.com</a></p>
-            <p>© {new Date().getFullYear()} OneBonsai Gulf LLC</p>
-          </footer>
-        </section>
+        <SiteContact />
       </main>
     </>
   );
