@@ -27,23 +27,25 @@ export default function TeamSection() {
     <section id="team" className="team-wall-section" aria-labelledby="team-wall-title">
       <header className="team-wall-heading team-wall-heading-compact section-pad">
         <p className="section-kicker">Our team</p>
-        <h1 id="team-wall-title">The people behind the work.</h1>
+        <h1 id="team-wall-title">Meet our team.</h1>
       </header>
 
       <div className="team-wall" role="list">
         {team.map(([name, role, image], index) => (
           <article className="team-person" role="listitem" tabIndex={0} key={name}>
-            <Image
-              src={publicAsset(`/team/${image}`)}
-              alt={name}
-              width={900}
-              height={1125}
-              loading={index < 4 ? "eager" : "lazy"}
-              sizes="(max-width: 680px) 50vw, (max-width: 1080px) 33vw, 25vw"
-              unoptimized
-            />
+            <div className="team-person-portrait">
+              <Image
+                src={publicAsset(`/team/${image}`)}
+                alt={name}
+                fill
+                loading={index === 0 ? "eager" : "lazy"}
+                fetchPriority={index === 0 ? "high" : "auto"}
+                sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                unoptimized
+              />
+            </div>
             <div className="team-person-copy">
-              <span>{String(index + 1).padStart(2, "0")}</span>
+              <span aria-hidden="true" />
               <h3>{name}</h3>
               <p>{role}</p>
             </div>

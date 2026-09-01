@@ -9,7 +9,7 @@ const publicAsset = (path: string) => `${assetBase}${path}`;
 type Customer = {
   name: string;
   image: string;
-  treatment?: "original";
+  treatment?: "screen";
 };
 
 const customers: readonly Customer[] = [
@@ -20,18 +20,18 @@ const customers: readonly Customer[] = [
   { name: "OneBonsai", image: "/customers/onebonsai.png" },
   { name: "Northstone", image: "/customers/northstone.png" },
   { name: "Stare", image: "/customers/stare.png" },
-  { name: "Fuego Charcoal", image: "/customers/fuego.png", treatment: "original" },
+  { name: "Fuego Charcoal", image: "/customers/fuego.png" },
   { name: "Reqilo", image: "/customers/reqilo.svg" },
-  { name: "FitHub", image: "/customers/fithub.jpeg", treatment: "original" },
-  { name: "Animalia", image: "/customers/animalia.png", treatment: "original" },
+  { name: "FitHub", image: "/customers/fithub.jpeg", treatment: "screen" },
+  { name: "Animalia", image: "/customers/animalia.png" },
   { name: "Buildin", image: "/customers/buildin.svg" },
   { name: "Motto Automotive", image: "/customers/motto.webp" },
   { name: "Casinos Austria International", image: "/customers/casinos-austria.png" },
   { name: "European External Action Service", image: "/customers/eeas.png" },
   { name: "Red Cross EU Office", image: "/customers/red-cross-eu.svg" },
   { name: "Mbare Drinks", image: "/customers/mbare.png" },
-  { name: "Elite Labs", image: "/customers/elite-labs.png", treatment: "original" },
-  { name: "Vyonix", image: "/customers/vyonix.png", treatment: "original" },
+  { name: "Elite Labs", image: "/customers/elite-labs.png", treatment: "screen" },
+  { name: "Vyonix", image: "/customers/vyonix.png", treatment: "screen" },
 ];
 
 export default function CustomerMarquee() {
@@ -60,7 +60,7 @@ export default function CustomerMarquee() {
             >
               {customers.map(({ name, image, treatment }) => (
                 <div
-                  className={`customer-logo${treatment === "original" ? " customer-logo--original" : ""}`}
+                  className={`customer-logo${treatment === "screen" ? " customer-logo--screen" : ""}`}
                   key={`${groupIndex}-${name}`}
                 >
                   <Image

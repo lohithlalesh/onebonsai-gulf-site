@@ -71,7 +71,7 @@ test("renders dedicated About and Team pages", async () => {
   assert.match(aboutHtml, /Virtual nurse training for University Hospital Bonn/);
   assert.match(aboutHtml, /rel="canonical" href="https:\/\/obgulf\.com\/about/);
 
-  assert.match(teamHtml, /The people behind the work\./);
+  assert.match(teamHtml, /Meet our team\./);
   assert.match(teamHtml, /Ivan M Grey/);
   assert.match(teamHtml, /Niels Ongena/);
   assert.match(teamHtml, /Hamad Al Khamais/);
@@ -84,6 +84,16 @@ test("renders dedicated About and Team pages", async () => {
   assert.match(teamHtml, /Khawla Zon/);
   assert.match(teamHtml, /Slim Garbouj/);
   assert.match(teamHtml, /rel="canonical" href="https:\/\/obgulf\.com\/team/);
+});
+
+test("renders the custom not-found page", async () => {
+  const response = await render("/this-page-does-not-exist");
+  assert.equal(response.status, 404);
+
+  const html = await response.text();
+  assert.match(html, /This page is not here\./);
+  assert.match(html, /Return home/);
+  assert.match(html, /Skip to content/);
 });
 
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
@@ -176,7 +186,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(teamPage, /<TeamSection \/>/);
   assert.match(aboutPage, /<AboutSection \/>/);
   assert.match(siteContact, /Tell us what needs to work/);
-  assert.match(team, /The people behind the work/);
+  assert.match(team, /Meet our team/);
   assert.match(team, /Hamad Al Khamais/);
   assert.match(team, /className="team-wall"/);
   assert.match(team, /className="team-person"/);
@@ -233,9 +243,10 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /@keyframes customer-marquee/);
   assert.match(css, /\.team-wall/);
   assert.match(css, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
-  assert.match(css, /\.team-person:first-child/);
+  assert.match(css, /\.team-person-portrait/);
+  assert.doesNotMatch(css, /\.team-person:first-child/);
   assert.match(css, /content-visibility: auto/);
-  assert.match(css, /\.team-person:hover img/);
+  assert.match(css, /\.team-person:hover \.team-person-portrait img/);
   assert.match(css, /\.inner-page-hero/);
   assert.match(css, /\.about-page-principles/);
   assert.match(css, /@keyframes scroll-text-reveal/);
@@ -290,13 +301,12 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/sitemap.xml", import.meta.url));
   await access(new URL("../public/site.webmanifest", import.meta.url));
   await access(new URL("../public/team/ivan-m-grey.jpg", import.meta.url));
-  await access(new URL("../public/team/hamad-al-khamais-900.jpg", import.meta.url));
+  await access(new URL("../public/team/hamad-al-khamais.jpg", import.meta.url));
   await access(new URL("../public/team/jelena-skoric.jpg", import.meta.url));
   await access(new URL("../public/team/lohith-lalesh.jpg", import.meta.url));
   await access(new URL("../public/team/olfa-hachfi.jpg", import.meta.url));
   await access(new URL("../public/team/aditya-varshney.jpg", import.meta.url));
   await access(new URL("../public/team/pankaj-birla.jpg", import.meta.url));
-  await access(new URL("../public/team/omar-abedlaziz.jpg", import.meta.url));
   await access(new URL("../public/team/mohamed-ilyes-bouzayen.jpg", import.meta.url));
   await access(new URL("../public/team/rabeb-ben-hamouda.jpg", import.meta.url));
   await access(new URL("../public/team/khawla-zon.jpg", import.meta.url));
