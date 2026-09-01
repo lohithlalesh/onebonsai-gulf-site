@@ -211,6 +211,26 @@ section[id] { scroll-margin-top: 92px; }
 
 .nav-cta:hover { color: var(--lime); opacity: 1; transform: none; }
 
+@media (min-width: 841px) {
+  .site-header {
+    min-height: 76px;
+    padding: 12px clamp(28px, 3.4vw, 58px);
+    background: rgba(9, 11, 10, 0.92);
+    backdrop-filter: blur(18px) saturate(108%);
+    -webkit-backdrop-filter: blur(18px) saturate(108%);
+  }
+
+  .site-header.is-scrolled {
+    min-height: 66px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: rgba(9, 11, 10, 0.86);
+  }
+
+  .brand { width: clamp(150px, 11.5vw, 184px); }
+  .site-header nav { gap: clamp(28px, 3vw, 48px); }
+}
+
 /* Customer proof */
 
 .customer-marquee {

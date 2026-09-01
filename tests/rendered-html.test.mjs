@@ -237,6 +237,8 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(css, /\.journey-shell/);
   assert.match(css, /\.journey-flow-node/);
   assert.match(css, /@media \(max-width: 700px\)/);
+  assert.match(css, /@media \(min-width: 841px\)/);
+  assert.match(css, /background: rgba\(9, 11, 10, 0\.92\)/);
   assert.doesNotMatch(css, /\.journey-canvas|\.intelligence-flow|\.flow-sticky/);
   assert.doesNotMatch(css, /\.pathway-grid|\.journey-capabilities/);
   assert.match(css, /\.integration-scroll-map/);
