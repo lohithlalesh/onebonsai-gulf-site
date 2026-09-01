@@ -10,7 +10,6 @@ const navigation = [
   ["About", "/about"],
   ["Process", "/#process"],
   ["Services", "/#services"],
-  ["Team", "/team"],
   ["Work", "/#work"],
 ] as const;
 

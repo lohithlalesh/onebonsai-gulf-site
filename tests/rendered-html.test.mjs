@@ -58,32 +58,28 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
 });
 
-test("renders dedicated About and Team pages", async () => {
+test("renders the consolidated About and team experience", async () => {
   const [aboutResponse, teamResponse] = await Promise.all([render("/about"), render("/team")]);
   assert.equal(aboutResponse.status, 200);
-  assert.equal(teamResponse.status, 200);
+  assert.equal(teamResponse.status, 307);
 
-  const [aboutHtml, teamHtml] = await Promise.all([aboutResponse.text(), teamResponse.text()]);
+  const aboutHtml = await aboutResponse.text();
   assert.match(aboutHtml, /Regional sister company of/);
   assert.match(aboutHtml, /Engineering, delivered in the Gulf\./);
   assert.match(aboutHtml, /Built in Belgium\. Delivered from Abu Dhabi\./);
   assert.match(aboutHtml, /From first use case to a system your team can run\./);
   assert.match(aboutHtml, /Virtual nurse training for University Hospital Bonn/);
+  assert.match(aboutHtml, /AI talent &amp; expertise/i);
+  assert.match(aboutHtml, /The right AI transformation starts with the right people\./);
+  assert.match(aboutHtml, /The world does not need more conversations about AI/);
+  assert.match(aboutHtml, /Ivan M Grey/);
+  assert.match(aboutHtml, /Founder and CEO/);
+  assert.match(aboutHtml, /The people behind the work\./);
+  assert.match(aboutHtml, /Omar Abedlaziz/);
+  assert.match(aboutHtml, /Business Development, Greece and Cyprus/);
+  assert.match(aboutHtml, /Business Development, Italy/);
   assert.match(aboutHtml, /rel="canonical" href="https:\/\/obgulf\.com\/about/);
-
-  assert.match(teamHtml, /Meet our team\./);
-  assert.match(teamHtml, /Ivan M Grey/);
-  assert.match(teamHtml, /Niels Ongena/);
-  assert.match(teamHtml, /Hamad Al Khamais/);
-  assert.match(teamHtml, /Jelena Skoric/);
-  assert.match(teamHtml, /Hugo Mathias/);
-  assert.match(teamHtml, /Lazar Miletic/);
-  assert.match(teamHtml, /Riadh Ajroudi/);
-  assert.match(teamHtml, /Bharath Jethani/);
-  assert.match(teamHtml, /Rabeb Ben Hamouda/);
-  assert.match(teamHtml, /Khawla Zon/);
-  assert.match(teamHtml, /Slim Garbouj/);
-  assert.match(teamHtml, /rel="canonical" href="https:\/\/obgulf\.com\/team/);
+  assert.equal(teamResponse.headers.get("location"), "http://localhost/about#team");
 });
 
 test("renders the custom not-found page", async () => {
@@ -184,11 +180,15 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(layout, /preload\(publicAsset\("\/fonts\/ibm-plex-mono/);
   assert.match(journey, /loading="eager"/);
   assert.match(layout, /max-video-preview/);
-  assert.match(teamPage, /<TeamSection \/>/);
+  assert.match(teamPage, /redirect\("\/about#team"\)/);
   assert.match(aboutPage, /<AboutSection \/>/);
+  assert.match(aboutPage, /<AboutPeople \/>/);
+  assert.match(aboutPage, /<TeamSection \/>/);
   assert.match(siteContact, /Tell us what needs to work/);
-  assert.match(team, /Meet our team/);
+  assert.match(team, /The people behind the work/);
   assert.match(team, /Hamad Al Khamais/);
+  assert.match(team, /Omar Abedlaziz/);
+  assert.match(team, /Business Development, Italy/);
   assert.match(team, /className="team-wall"/);
   assert.match(team, /className="team-person"/);
   assert.match(team, /role="list"/);
@@ -306,6 +306,8 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/sitemap.xml", import.meta.url));
   await access(new URL("../public/site.webmanifest", import.meta.url));
   await access(new URL("../public/team/ivan-m-grey.jpg", import.meta.url));
+  await access(new URL("../public/team/ivan-founder-office.jpg", import.meta.url));
+  await access(new URL("../public/team/omar-abedlaziz.jpg", import.meta.url));
   await access(new URL("../public/team/hamad-al-khamais.jpg", import.meta.url));
   await access(new URL("../public/team/jelena-skoric.jpg", import.meta.url));
   await access(new URL("../public/team/lohith-lalesh.jpg", import.meta.url));

@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import AboutSection from "../AboutSection";
+import AboutPeople from "../AboutPeople";
 import ScrollReveal from "../ScrollReveal";
 import SiteContact from "../SiteContact";
 import SiteHeader from "../SiteHeader";
+import TeamSection from "../TeamSection";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://obgulf.com";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn how OneBonsai Gulf combines Abu Dhabi delivery with OneBonsai engineering, AI, software, cybersecurity, and immersive training expertise.",
+  description: "Meet OneBonsai Gulf, our founder, and the AI specialists connecting strategy, engineering, and implementation from Abu Dhabi.",
   alternates: { canonical: `${siteUrl}/about` },
   openGraph: {
     url: `${siteUrl}/about`,
     title: "About OneBonsai Gulf",
-    description: "Local delivery in Abu Dhabi, backed by OneBonsai engineering and immersive technology expertise.",
+    description: "AI talent, local delivery, and proven DeepTech engineering brought together in Abu Dhabi.",
   },
 };
 
@@ -24,6 +26,7 @@ export default function AboutPage() {
       <SiteHeader />
       <ScrollReveal />
       <main id="main-content" className="inner-page-main about-page">
+        <h1 className="sr-only">About OneBonsai Gulf</h1>
         <AboutSection />
         <section className="about-page-principles section-pad" aria-labelledby="about-principles-title">
           <div>
@@ -48,6 +51,8 @@ export default function AboutPage() {
             </article>
           </div>
         </section>
+        <AboutPeople />
+        <TeamSection />
         <SiteContact />
       </main>
     </>

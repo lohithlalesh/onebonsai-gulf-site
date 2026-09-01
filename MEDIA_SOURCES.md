@@ -66,3 +66,7 @@ The customer marquee uses local copies of official marks from the supplied organ
 - European External Action Service: https://www.eeas.europa.eu/_en
 - Red Cross EU Office: https://redcross.eu/
 - Mbare Drinks: https://www.mbaredrinks.com/
+
+## Supplied people portraits
+
+The founder office portrait and Omar Abedlaziz portrait were supplied directly for the OneBonsai Gulf About page. Web-ready JPEG copies are stored locally at 1600 and 1100 pixels respectively.
