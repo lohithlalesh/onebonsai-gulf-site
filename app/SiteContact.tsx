@@ -24,7 +24,7 @@ export default function SiteContact() {
         />
         <p>
           <a href="mailto:info@onebonsai.com">info@onebonsai.com</a><br />
-          <a href={publicAsset("/about")}>About</a> · <a href={publicAsset("/team")}>Team</a>
+          <a href={publicAsset("/about")}>About</a> · <a href={publicAsset("/work")}>Work</a>
         </p>
         <p>© {new Date().getFullYear()} OneBonsai Gulf LLC</p>
       </footer>

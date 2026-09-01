@@ -10,7 +10,7 @@ const navigation = [
   ["About", "/about"],
   ["Process", "/#process"],
   ["Services", "/#services"],
-  ["Work", "/#work"],
+  ["Work", "/work"],
 ] as const;
 
 export default function SiteHeader() {

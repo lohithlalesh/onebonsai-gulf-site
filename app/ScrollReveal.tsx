@@ -13,21 +13,23 @@ const revealSelector = [
   "main section:not(.journey):not(.clarity-journey) .primary-button",
   "main section:not(.journey):not(.clarity-journey) .about-intro-copy > a",
   "main section:not(.journey):not(.clarity-journey) .about-parent-brand > span",
-  "main section:not(.journey):not(.clarity-journey) .about-case-sectors > a",
   "main section:not(.journey):not(.clarity-journey) .about-case-stage-copy > a",
   "main section:not(.journey):not(.clarity-journey) .infrastructure-copy > span",
   "main section:not(.journey):not(.clarity-journey) .product-index article > span",
   "main section:not(.journey):not(.clarity-journey) .contact-top > span",
   "main section:not(.journey):not(.clarity-journey) .contact > a",
+  "main .mechanical-reveal",
 ].join(",");
 
 export default function ScrollReveal() {
   useEffect(() => {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector)).filter(
-      (target) => !target.closest(".team-card, .team-person"),
-    );
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector)).filter((target) => {
+      if (target.closest(".team-card, .team-person")) return false;
+      const mechanicalParent = target.closest<HTMLElement>(".mechanical-reveal");
+      return !mechanicalParent || mechanicalParent === target;
+    });
 
     root.classList.add("scroll-reveal-enabled");
 
@@ -45,10 +47,15 @@ export default function ScrollReveal() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
           const target = entry.target as HTMLElement;
-          target.dataset.scrollReveal = "visible";
-          observer.unobserve(target);
+          const repeats = target.classList.contains("mechanical-reveal");
+
+          if (entry.isIntersecting) {
+            target.dataset.scrollReveal = "visible";
+            if (!repeats) observer.unobserve(target);
+          } else if (repeats) {
+            target.dataset.scrollReveal = "pending";
+          }
         });
       },
       { rootMargin: "0px 0px -12%", threshold: 0.12 },

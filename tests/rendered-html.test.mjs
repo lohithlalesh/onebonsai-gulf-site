@@ -59,16 +59,22 @@ test("server-renders the OneBonsai Gulf experience", async () => {
 });
 
 test("renders the consolidated About and team experience", async () => {
-  const [aboutResponse, teamResponse] = await Promise.all([render("/about"), render("/team")]);
+  const [aboutResponse, workResponse, teamResponse] = await Promise.all([
+    render("/about"),
+    render("/work"),
+    render("/team"),
+  ]);
   assert.equal(aboutResponse.status, 200);
+  assert.equal(workResponse.status, 200);
   assert.equal(teamResponse.status, 307);
 
   const aboutHtml = await aboutResponse.text();
   assert.match(aboutHtml, /Regional sister company of/);
   assert.match(aboutHtml, /Engineering, delivered in the Gulf\./);
-  assert.match(aboutHtml, /Built in Belgium\. Delivered from Abu Dhabi\./);
-  assert.match(aboutHtml, /From first use case to a system your team can run\./);
-  assert.match(aboutHtml, /Virtual nurse training for University Hospital Bonn/);
+  assert.doesNotMatch(aboutHtml, /Built in Belgium\. Delivered from Abu Dhabi\./);
+  assert.match(aboutHtml, /From a first use case to a system your team can run\./);
+  assert.doesNotMatch(aboutHtml, /Selected work in complex, high-stakes environments\./);
+  assert.doesNotMatch(aboutHtml, /Virtual nurse training for University Hospital Bonn/);
   assert.match(aboutHtml, /AI talent &amp; expertise/i);
   assert.match(aboutHtml, /The right AI transformation starts with the right people\./);
   assert.match(aboutHtml, /The world does not need more conversations about AI/);
@@ -79,6 +85,14 @@ test("renders the consolidated About and team experience", async () => {
   assert.match(aboutHtml, /Business Development, Greece and Cyprus/);
   assert.match(aboutHtml, /Business Development, Italy/);
   assert.match(aboutHtml, /rel="canonical" href="https:\/\/obgulf\.com\/about/);
+
+  const workHtml = await workResponse.text();
+  assert.match(workHtml, /Built for complex, high-stakes environments\./);
+  assert.match(workHtml, /Virtual nurse training for University Hospital Bonn/);
+  assert.match(workHtml, /Nike warehouse training/);
+  assert.match(workHtml, /Port mooring safety/);
+  assert.match(workHtml, /Police VR training/);
+  assert.match(workHtml, /rel="canonical" href="https:\/\/obgulf\.com\/work/);
   assert.equal(teamResponse.headers.get("location"), "http://localhost/about#team");
 });
 
@@ -93,10 +107,12 @@ test("renders the custom not-found page", async () => {
 });
 
 test("keeps high-resolution scroll media, UAE imagery, and customer identities in source", async () => {
-  const [page, about, aboutPage, teamPage, clarity, journey, scrollReveal, marquee, editorialLoop, integrationMap, team, siteHeader, siteContact, layout, css, mediaSources] = await Promise.all([
+  const [page, about, aboutPage, caseStudies, workPage, teamPage, clarity, journey, scrollReveal, marquee, editorialLoop, integrationMap, team, siteHeader, siteContact, layout, css, mediaSources] = await Promise.all([
     readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/AboutSection.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/about/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CaseStudies.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/work/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/team/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ClarityJourney.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/ScrollJourney.tsx", import.meta.url), "utf8"),
@@ -184,6 +200,8 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(aboutPage, /<AboutSection \/>/);
   assert.match(aboutPage, /<AboutPeople \/>/);
   assert.match(aboutPage, /<TeamSection \/>/);
+  assert.match(workPage, /<CaseStudies \/>/);
+  assert.match(workPage, /canonical: `\$\{siteUrl\}\/work`/);
   assert.match(siteContact, /Tell us what needs to work/);
   assert.match(team, /The people behind the work/);
   assert.match(team, /Hamad Al Khamais/);
@@ -212,26 +230,28 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(siteHeader, /Mobile navigation/);
   assert.match(siteHeader, /aria-expanded=\{isMenuOpen\}/);
   assert.doesNotMatch(siteHeader, /brand-gulf/);
+  assert.match(siteHeader, /\["Work", "\/work"\]/);
   assert.match(css, /\.journey \{ height: 500dvh; padding: 0 10px; \}/);
   assert.match(css, /\.clarity-journey \{ height: 300dvh; overflow: clip; \}/);
   assert.match(css, /object-position: center top/);
   assert.match(css, /height: 100svh/);
   assert.doesNotMatch(css, /journey\[data-act="[12]"\] \.journey-film (?:video|img)/);
-  assert.match(about, /OneBonsai Gulf is the Abu Dhabi regional sister company/);
+  assert.match(about, /OneBonsai Gulf brings proven AI and immersive engineering into the region/);
+  assert.doesNotMatch(about, /Built in Belgium\. Delivered from Abu Dhabi\./);
   assert.match(about, /onebonsai-wordmark-black\.png/);
-  assert.match(about, /aria-live="polite"/);
-  assert.match(about, /role="tablist"/);
-  assert.match(about, /CASE_ROTATION_MS = 7200/);
-  assert.match(about, /setInterval/);
-  assert.match(about, /visibilitychange/);
-  assert.match(about, /about-case-cycle/);
-  assert.match(about, /UKB nurse training/);
-  assert.match(about, /Nike warehouse training/);
-  assert.match(about, /Port mooring safety/);
-  assert.match(about, /Police VR training/);
-  assert.match(about, /Delivered work across/);
   assert.match(about, /marketing/);
   assert.match(about, /cybersecurity/i);
+  assert.doesNotMatch(about, /UKB nurse training|about-case-carousel/);
+  assert.match(caseStudies, /aria-live="polite"/);
+  assert.match(caseStudies, /role="tablist"/);
+  assert.match(caseStudies, /CASE_ROTATION_MS = 7200/);
+  assert.match(caseStudies, /setInterval/);
+  assert.match(caseStudies, /visibilitychange/);
+  assert.match(caseStudies, /about-case-cycle/);
+  assert.match(caseStudies, /UKB nurse training/);
+  assert.match(caseStudies, /Nike warehouse training/);
+  assert.match(caseStudies, /Port mooring safety/);
+  assert.match(caseStudies, /Police VR training/);
   assert.match(page, /infrastructure-intelligence-v2\.jpg/);
   assert.match(css, /\.journey-film/);
   assert.match(css, /\.journey-shell/);
