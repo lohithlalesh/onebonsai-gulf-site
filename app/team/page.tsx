@@ -24,13 +24,6 @@ export default function TeamPage() {
       <SiteHeader />
       <ScrollReveal />
       <main id="main-content" className="inner-page-main team-page">
-        <section className="inner-page-hero team-page-hero" aria-labelledby="team-page-title">
-          <div>
-            <p className="section-kicker">People</p>
-            <h1 id="team-page-title">A team built around the work, not around handoffs.</h1>
-          </div>
-          <p>Our Gulf team stays close to the business while OneBonsai engineering brings deep AI, software, and immersive technology experience.</p>
-        </section>
         <TeamSection />
         <section className="team-page-note section-pad" aria-labelledby="team-page-note-title">
           <p className="section-kicker">How we collaborate</p>

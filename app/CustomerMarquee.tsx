@@ -6,14 +6,32 @@ import Image from "next/image";
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const customers = [
-  ["Ajman", "/customers/ajman.webp"],
-  ["ITC Pros", "/customers/itc-pros.png"],
-  ["Masdar City", "/customers/masdar-city.svg"],
-  ["NEXT", "/customers/next.png"],
-  ["OneBonsai", "/customers/onebonsai.png"],
-  ["Northstone", "/customers/northstone.png"],
-  ["Stare", "/customers/stare.png"],
+type Customer = {
+  name: string;
+  image: string;
+  treatment?: "original";
+};
+
+const customers: readonly Customer[] = [
+  { name: "Ajman", image: "/customers/ajman.webp" },
+  { name: "ITC Pros", image: "/customers/itc-pros.png" },
+  { name: "Masdar City", image: "/customers/masdar-city.svg" },
+  { name: "NEXT", image: "/customers/next.png" },
+  { name: "OneBonsai", image: "/customers/onebonsai.png" },
+  { name: "Northstone", image: "/customers/northstone.png" },
+  { name: "Stare", image: "/customers/stare.png" },
+  { name: "Fuego Charcoal", image: "/customers/fuego.png", treatment: "original" },
+  { name: "Reqilo", image: "/customers/reqilo.svg" },
+  { name: "FitHub", image: "/customers/fithub.jpeg", treatment: "original" },
+  { name: "Animalia", image: "/customers/animalia.png", treatment: "original" },
+  { name: "Buildin", image: "/customers/buildin.svg" },
+  { name: "Motto Automotive", image: "/customers/motto.webp" },
+  { name: "Casinos Austria International", image: "/customers/casinos-austria.png" },
+  { name: "European External Action Service", image: "/customers/eeas.png" },
+  { name: "Red Cross EU Office", image: "/customers/red-cross-eu.svg" },
+  { name: "Mbare Drinks", image: "/customers/mbare.png" },
+  { name: "Elite Labs", image: "/customers/elite-labs.png", treatment: "original" },
+  { name: "Vyonix", image: "/customers/vyonix.png", treatment: "original" },
 ];
 
 export default function CustomerMarquee() {
@@ -40,8 +58,11 @@ export default function CustomerMarquee() {
               key={groupIndex}
               aria-hidden={groupIndex === 1 ? "true" : undefined}
             >
-              {customers.map(([name, image]) => (
-                <div className="customer-logo" key={`${groupIndex}-${name}`}>
+              {customers.map(({ name, image, treatment }) => (
+                <div
+                  className={`customer-logo${treatment === "original" ? " customer-logo--original" : ""}`}
+                  key={`${groupIndex}-${name}`}
+                >
                   <Image
                     src={publicAsset(image)}
                     alt={groupIndex === 0 ? name : ""}

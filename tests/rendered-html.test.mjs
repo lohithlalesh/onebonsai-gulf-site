@@ -71,10 +71,15 @@ test("renders dedicated About and Team pages", async () => {
   assert.match(aboutHtml, /Virtual nurse training for University Hospital Bonn/);
   assert.match(aboutHtml, /rel="canonical" href="https:\/\/obgulf\.com\/about/);
 
-  assert.match(teamHtml, /A team built around the work, not around handoffs\./);
+  assert.match(teamHtml, /The people behind the work\./);
   assert.match(teamHtml, /Ivan M Grey/);
+  assert.match(teamHtml, /Niels Ongena/);
   assert.match(teamHtml, /Hamad Al Khamais/);
   assert.match(teamHtml, /Jelena Skoric/);
+  assert.match(teamHtml, /Hugo Mathias/);
+  assert.match(teamHtml, /Lazar Miletic/);
+  assert.match(teamHtml, /Riadh Ajroudi/);
+  assert.match(teamHtml, /Bharath Jethani/);
   assert.match(teamHtml, /Rabeb Ben Hamouda/);
   assert.match(teamHtml, /Khawla Zon/);
   assert.match(teamHtml, /Slim Garbouj/);
@@ -171,7 +176,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(teamPage, /<TeamSection \/>/);
   assert.match(aboutPage, /<AboutSection \/>/);
   assert.match(siteContact, /Tell us what needs to work/);
-  assert.match(team, /One team, close to the work/);
+  assert.match(team, /The people behind the work/);
   assert.match(team, /Hamad Al Khamais/);
   assert.match(team, /className="team-wall"/);
   assert.match(team, /className="team-person"/);
@@ -296,6 +301,11 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/team/rabeb-ben-hamouda.jpg", import.meta.url));
   await access(new URL("../public/team/khawla-zon.jpg", import.meta.url));
   await access(new URL("../public/team/slim-garbouj.jpg", import.meta.url));
+  await access(new URL("../public/team/niels-ongena.jpg", import.meta.url));
+  await access(new URL("../public/team/hugo-mathias.jpg", import.meta.url));
+  await access(new URL("../public/team/lazar-miletic.jpg", import.meta.url));
+  await access(new URL("../public/team/riadh-ajroudi.jpg", import.meta.url));
+  await access(new URL("../public/team/bharath-jethani.jpg", import.meta.url));
   await access(new URL("../public/cases/ukb-vr-training.jpg", import.meta.url));
   await access(new URL("../public/cases/nike-warehouse-training.jpg", import.meta.url));
   await access(new URL("../public/cases/port-mooring-training.jpg", import.meta.url));
@@ -308,4 +318,16 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/customers/onebonsai.png", import.meta.url));
   await access(new URL("../public/customers/northstone.png", import.meta.url));
   await access(new URL("../public/customers/stare.png", import.meta.url));
+  await access(new URL("../public/customers/fuego.png", import.meta.url));
+  await access(new URL("../public/customers/reqilo.svg", import.meta.url));
+  await access(new URL("../public/customers/fithub.jpeg", import.meta.url));
+  await access(new URL("../public/customers/animalia.png", import.meta.url));
+  await access(new URL("../public/customers/buildin.svg", import.meta.url));
+  await access(new URL("../public/customers/motto.webp", import.meta.url));
+  await access(new URL("../public/customers/casinos-austria.png", import.meta.url));
+  await access(new URL("../public/customers/eeas.png", import.meta.url));
+  await access(new URL("../public/customers/red-cross-eu.svg", import.meta.url));
+  await access(new URL("../public/customers/mbare.png", import.meta.url));
+  await access(new URL("../public/customers/elite-labs.png", import.meta.url));
+  await access(new URL("../public/customers/vyonix.png", import.meta.url));
 });

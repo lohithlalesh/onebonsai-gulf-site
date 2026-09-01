@@ -52,3 +52,17 @@ The About case reel uses optimized local copies of official OneBonsai project im
 - Nike warehouse training: https://onebonsai.com/cases/projects/vr-warehouse-packing
 - Port of Antwerp mooring training: https://onebonsai.com/cases/projects/mooring
 - Police VR training: https://onebonsai.com/cases/projects/police-training
+
+## Customer marks
+
+The customer marquee uses local copies of official marks from the supplied organizations. Existing customer assets remain unchanged. New marks were sourced from each organization’s public site, except for the supplied Reqilo, Elite Labs, and Vyonix files.
+
+- Fuego Charcoal: https://fuegocharcoal.com/
+- FitHub: https://fithubme.com/
+- Animalia: https://www.animalia.ae/
+- Buildin: https://buildin.ae/en
+- Motto Automotive: https://motto.ae/
+- Casinos Austria International: https://www.casinosaustriainternational.com/
+- European External Action Service: https://www.eeas.europa.eu/_en
+- Red Cross EU Office: https://redcross.eu/
+- Mbare Drinks: https://www.mbaredrinks.com/
