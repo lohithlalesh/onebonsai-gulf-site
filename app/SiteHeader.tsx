@@ -6,8 +6,17 @@ import { useEffect, useRef, useState } from "react";
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
+const navigation = [
+  ["About", "/about"],
+  ["Process", "/#process"],
+  ["Services", "/#services"],
+  ["Team", "/team"],
+  ["Work", "/#work"],
+] as const;
+
 export default function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrolledRef = useRef(false);
 
   useEffect(() => {
@@ -35,8 +44,30 @@ export default function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+
+    const closeAtDesktop = () => {
+      if (window.innerWidth > 840) setIsMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("resize", closeAtDesktop);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("resize", closeAtDesktop);
+    };
+  }, [isMenuOpen]);
+
   return (
-    <header className={`site-header${isScrolled ? " is-scrolled" : ""}`} data-scrolled={isScrolled}>
+    <header
+      className={`site-header${isScrolled ? " is-scrolled" : ""}${isMenuOpen ? " is-menu-open" : ""}`}
+      data-scrolled={isScrolled}
+    >
       <a className="brand" href={publicAsset("/")} aria-label="OneBonsai Gulf home">
         <Image
           src={publicAsset("/brand/onebonsai-gulf-white-800.png")}
@@ -47,14 +78,30 @@ export default function SiteHeader() {
           unoptimized
         />
       </a>
-      <nav aria-label="Primary navigation">
-        <a href={publicAsset("/about")}>About</a>
-        <a href={`${publicAsset("/")}#process`}>Process</a>
-        <a href={`${publicAsset("/")}#services`}>Services</a>
-        <a href={publicAsset("/team")}>Team</a>
-        <a href={`${publicAsset("/")}#work`}>Work</a>
+      <nav className="desktop-navigation" aria-label="Primary navigation">
+        {navigation.map(([label, path]) => <a href={publicAsset(path)} key={label}>{label}</a>)}
       </nav>
-      <a className="nav-cta" href={`${publicAsset("/")}#contact`}>Plan AI integration <span aria-hidden="true">↗</span></a>
+      <div className="site-header-actions">
+        <a className="nav-cta" href={`${publicAsset("/")}#contact`}>Plan AI integration <span aria-hidden="true">↗</span></a>
+        <button
+          className="mobile-menu-toggle"
+          type="button"
+          aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-controls="mobile-navigation"
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+        </button>
+      </div>
+      <nav id="mobile-navigation" className="mobile-navigation" aria-label="Mobile navigation">
+        {navigation.map(([label, path], index) => (
+          <a href={publicAsset(path)} key={label} onClick={() => setIsMenuOpen(false)}>
+            <span>{String(index + 1).padStart(2, "0")}</span>{label}
+          </a>
+        ))}
+      </nav>
     </header>
   );
 }

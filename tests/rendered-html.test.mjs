@@ -130,7 +130,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(journey, /icon-systems-1200\.avif/);
   assert.match(journey, /icon-intelligence-1200\.avif/);
   assert.match(journey, /icon-scale-1200\.avif/);
-  assert.match(journey, /onebonsai-hero-poster-mobile-1200\.jpg/);
+  assert.match(journey, /onebonsai-hero-poster-mobile-1200\.avif/);
   assert.doesNotMatch(journey, /journey-signal-card|journey-signal-orb/);
   assert.match(journey, /disableRemotePlayback/);
   assert.match(journey, /renderedTime \+= \(targetTime - renderedTime\) \* 0\.16/);
@@ -140,9 +140,10 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.doesNotMatch(journey, /<canvas|\/frames\/|FRAME_COUNT/);
   assert.match(journey, /updateMobileJourney/);
   assert.match(journey, /Math\.abs\(targetTime - video\.currentTime\) > 1 \/ 48/);
-  assert.match(journey, /URL\.createObjectURL\(blob\)/);
-  assert.match(journey, /cache: "force-cache"/);
-  assert.match(journey, /window\.addEventListener\("scroll", requestMobileUpdate, \{ passive: true \}\)/);
+  assert.match(journey, /const ensureMobileVideo/);
+  assert.match(journey, /video\.src = publicAsset\("\/media\/onebonsai-hero-motion-mobile-v1\.mp4"\)/);
+  assert.doesNotMatch(journey, /URL\.createObjectURL|response\.blob\(\)/);
+  assert.match(journey, /window\.addEventListener\("scroll", handleMobileScroll, \{ passive: true \}\)/);
   assert.match(scrollReveal, /new IntersectionObserver/);
   assert.doesNotMatch(scrollReveal, /mobileJourneySelector|\.clarity-mobile-steps article/);
   assert.match(scrollReveal, /dataset\.scrollReveal = reducedMotion\.matches \? "visible" : "pending"/);
@@ -207,10 +208,14 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   assert.match(siteHeader, /window\.scrollY > 72/);
   assert.match(siteHeader, /passive: true/);
   assert.match(siteHeader, /is-scrolled/);
+  assert.match(siteHeader, /mobile-menu-toggle/);
+  assert.match(siteHeader, /Mobile navigation/);
+  assert.match(siteHeader, /aria-expanded=\{isMenuOpen\}/);
   assert.doesNotMatch(siteHeader, /brand-gulf/);
   assert.match(css, /\.journey \{ height: 500dvh; padding: 0 10px; \}/);
   assert.match(css, /\.clarity-journey \{ height: 300dvh; overflow: clip; \}/);
-  assert.match(css, /object-position: 76% 38%/);
+  assert.match(css, /object-position: center top/);
+  assert.match(css, /height: 100svh/);
   assert.doesNotMatch(css, /journey\[data-act="[12]"\] \.journey-film (?:video|img)/);
   assert.match(about, /OneBonsai Gulf is the Abu Dhabi regional sister company/);
   assert.match(about, /onebonsai-wordmark-black\.png/);
@@ -272,7 +277,7 @@ test("keeps high-resolution scroll media, UAE imagery, and customer identities i
   await access(new URL("../public/media/icon-systems-1200.avif", import.meta.url));
   await access(new URL("../public/media/icon-intelligence-1200.avif", import.meta.url));
   await access(new URL("../public/media/icon-scale-1200.avif", import.meta.url));
-  await access(new URL("../public/media/onebonsai-hero-poster-mobile-1200.jpg", import.meta.url));
+  await access(new URL("../public/media/onebonsai-hero-poster-mobile-1200.avif", import.meta.url));
   await access(new URL("../public/media/editorial-connect-systems-artlist-v1.mp4", import.meta.url));
   await access(new URL("../public/media/editorial-connect-systems-artlist-v1-poster.jpg", import.meta.url));
   await access(new URL("../public/media/editorial-build-useful-ai-artlist-v1.mp4", import.meta.url));
