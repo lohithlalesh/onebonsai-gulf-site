@@ -27,18 +27,84 @@ interface ScheduledController {
 }
 
 const CANONICAL_HOST = "obgulf.com";
+const SECURITY_TXT_PATH = "/.well-known/security.txt";
+const SECURITY_TXT = `Contact: mailto:ivan@obgulf.com
+Expires: 2027-09-11T00:00:00.000Z
+Preferred-Languages: en, ar
+Canonical: https://obgulf.com/.well-known/security.txt
+`;
 
-function withSecurityHeaders(response: Response) {
+function createCsp(nonce?: string) {
+  const scriptPolicy = nonce
+    ? `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https://challenges.cloudflare.com`
+    : "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com";
+
+  return [
+    "default-src 'none'",
+    "base-uri 'none'",
+    "connect-src 'self' https://challenges.cloudflare.com",
+    "font-src 'self' data:",
+    "form-action 'self'",
+    "frame-ancestors 'none'",
+    "frame-src https://challenges.cloudflare.com",
+    "img-src 'self' data: blob:",
+    "manifest-src 'self'",
+    "media-src 'self'",
+    "object-src 'none'",
+    scriptPolicy,
+    "script-src-attr 'none'",
+    "style-src 'self' 'unsafe-inline'",
+    "upgrade-insecure-requests",
+    "worker-src 'self' blob:",
+  ].join("; ");
+}
+
+function isForbiddenHiddenPath(pathname: string) {
+  let decodedPath: string;
+  try {
+    decodedPath = decodeURIComponent(pathname);
+  } catch {
+    return true;
+  }
+
+  if (decodedPath === SECURITY_TXT_PATH) return false;
+  return decodedPath.split("/").some((segment) => segment.startsWith("."));
+}
+
+function withSecurityHeaders(response: Response, request?: Request) {
   const headers = new Headers(response.headers);
-  headers.set("Strict-Transport-Security", "max-age=31536000");
-  headers.set("X-Content-Type-Options", "nosniff");
-  headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  const isHtml = /^text\/html(?:;|$)/i.test(headers.get("content-type") ?? "");
+  const canRewriteHtml = isHtml && request?.method !== "HEAD" && typeof HTMLRewriter !== "undefined";
+  const nonce = crypto.randomUUID().replaceAll("-", "");
 
-  return new Response(response.body, {
+  headers.set("Strict-Transport-Security", "max-age=31536000");
+  if (isHtml) headers.set("Content-Security-Policy", createCsp(canRewriteHtml ? nonce : undefined));
+  else headers.set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'; object-src 'none'");
+  headers.set("Cross-Origin-Opener-Policy", "same-origin");
+  headers.set("Cross-Origin-Resource-Policy", "same-site");
+  headers.set("Permissions-Policy", "browsing-topics=(), camera=(), geolocation=(), microphone=(), payment=(), usb=()");
+  headers.set("X-Content-Type-Options", "nosniff");
+  headers.set("X-Frame-Options", "DENY");
+  headers.set("X-Permitted-Cross-Domain-Policies", "none");
+  headers.set("X-XSS-Protection", "0");
+  headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  headers.delete("content-length");
+
+  const securedResponse = new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
     headers,
   });
+
+  if (!canRewriteHtml) return securedResponse;
+
+  return new HTMLRewriter()
+    .on("script", {
+      element(element) {
+        element.setAttribute("nonce", nonce);
+      },
+    })
+    .transform(securedResponse);
 }
 
 function canonicalRedirect(request: Request) {
@@ -50,7 +116,7 @@ function canonicalRedirect(request: Request) {
   url.protocol = "https:";
   url.hostname = CANONICAL_HOST;
   url.port = "";
-  return withSecurityHeaders(Response.redirect(url.toString(), 308));
+  return withSecurityHeaders(Response.redirect(url.toString(), 308), request);
 }
 
 function withArabicLocale(request: Request) {
@@ -78,6 +144,22 @@ const worker = {
     const redirect = canonicalRedirect(request);
     if (redirect) return redirect;
 
+    const requestUrl = new URL(request.url);
+    if (isForbiddenHiddenPath(requestUrl.pathname)) {
+      return withSecurityHeaders(new Response("Not found", {
+        status: 404,
+        headers: { "Cache-Control": "no-store" },
+      }), request);
+    }
+    if (requestUrl.pathname === SECURITY_TXT_PATH || requestUrl.pathname === "/security.txt") {
+      return withSecurityHeaders(new Response(SECURITY_TXT, {
+        headers: {
+          "Cache-Control": "public, max-age=3600",
+          "Content-Type": "text/plain; charset=utf-8",
+        },
+      }), request);
+    }
+
     const localizedRequest = withArabicLocale(request);
     const url = new URL(localizedRequest.url);
 
@@ -90,10 +172,10 @@ const worker = {
           return result.response();
         },
       }, allowedWidths);
-      return withSecurityHeaders(response);
+      return withSecurityHeaders(response, request);
     }
 
-    return withSecurityHeaders(await handler.fetch(localizedRequest, env, ctx));
+    return withSecurityHeaders(await handler.fetch(localizedRequest, env, ctx), request);
   },
   async scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(pruneExpiredCareerApplications(env));

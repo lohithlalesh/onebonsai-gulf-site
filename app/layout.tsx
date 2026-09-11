@@ -25,7 +25,7 @@ const siteJsonLd = {
         "@type": "ImageObject",
         url: absoluteAsset("/brand/onebonsai-gulf-black.png"),
       },
-      image: absoluteAsset("/og.png"),
+      image: absoluteAsset("/og-v2.jpg"),
       email: "info@onebonsai.com",
       // [VERIFY: telephone] Reconfirm against the live business profile before deployment.
       telephone: "+971 50 207 7215",
@@ -135,9 +135,9 @@ export const metadata: Metadata = {
       "AI consulting, enterprise integration, agentic AI, custom software, training, and specialist talent from Abu Dhabi.",
     images: [
       {
-        url: absoluteAsset("/og.png"),
-        width: 1536,
-        height: 1024,
+        url: absoluteAsset("/og-v2.jpg"),
+        width: 1200,
+        height: 630,
         alt: "OneBonsai Gulf custom software and AI integration in Abu Dhabi",
       },
     ],
@@ -146,7 +146,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Custom Software & AI Integration in Abu Dhabi",
     description: "AI consulting, enterprise integration, agentic AI, custom software, training, and specialist talent from Abu Dhabi.",
-    images: [absoluteAsset("/og.png")],
+    images: [absoluteAsset("/og-v2.jpg")],
   },
 };
 

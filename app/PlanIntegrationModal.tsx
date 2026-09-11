@@ -11,6 +11,7 @@ import {
 } from "react";
 import type { FormEvent, MouseEvent as ReactMouseEvent, ReactNode } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useLocale } from "./LocaleProvider";
 import { localizedPath } from "./locale";
 
@@ -124,6 +125,7 @@ export function usePlanIntegration() {
 
 export default function PlanIntegrationModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const { locale, isArabic } = useLocale();
+  const router = useRouter();
   const copy = modalCopy[locale];
   const dialogRef = useRef<HTMLDialogElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -167,7 +169,7 @@ export default function PlanIntegrationModal({ isOpen, onClose }: { isOpen: bool
         return;
       }
 
-      window.location.assign(`${publicAsset(localizedPath("/contact", locale))}#contact`);
+      router.push(`${publicAsset(localizedPath("/contact", locale))}#contact`);
     });
   };
 
@@ -215,7 +217,7 @@ export default function PlanIntegrationModal({ isOpen, onClose }: { isOpen: bool
       form.reset();
       setSubmissionState("idle");
       onClose();
-      window.location.assign(`${publicAsset(localizedPath("/contact", locale))}?enquiry=sent`);
+      router.push(`${publicAsset(localizedPath("/contact", locale))}?enquiry=sent`);
     } catch {
       setSubmissionState("error");
     }

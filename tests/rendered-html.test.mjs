@@ -48,10 +48,15 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
+  assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /script-src (?:'nonce-[a-f0-9]+' 'strict-dynamic'|'self' 'unsafe-inline')/);
+  assert.equal(response.headers.get("x-frame-options"), "DENY");
+  assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 
   const html = await response.text();
   assert.match(html, /<title>AI &amp; Custom Software Abu Dhabi \| OneBonsai Gulf<\/title>/i);
   assert.match(html, /rel="canonical" href="https:\/\/obgulf\.com/);
+  assert.match(html, /og-v2\.jpg/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /\"@type\":\"Organization\"/);
   assert.match(html, /Enterprise AI integration/);
@@ -81,6 +86,12 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(html, /Skip to content/);
   assert.doesNotMatch(html, /SCROLL TO CULTIVATE|GO ↗|section-marker/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
+});
+
+test("blocks hidden deployment files", async () => {
+  const response = await requestApp("/.DS_Store");
+  assert.equal(response.status, 404);
+  assert.equal(await response.text(), "Not found");
 });
 
 test("renders the consolidated About, work, and team experience", async () => {
