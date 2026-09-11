@@ -70,3 +70,27 @@ The customer marquee uses local copies of official marks from the supplied organ
 ## Supplied people portraits
 
 The founder office portrait and Omar Abedlaziz portrait were supplied directly for the OneBonsai Gulf About page. Web-ready JPEG copies are stored locally at 1600 and 1100 pixels respectively.
+
+## SEO hub imagery
+
+Three editorial stills were generated in Higgsfield for the expanded service, industry, and insight hubs. They use the Nano Banana 2 image model, an Abu Dhabi/Gulf enterprise setting, restrained natural light, and no intentional logos or headline text.
+
+- AI services hub: `23da118d-eea2-4a16-abaf-949d8549181f`
+- Industries hub: `002ff74e-5913-441c-aad7-51233c1dfcbe`
+- AI insights hub: `7fa1daef-75ce-44d4-ad0c-75ddcf646ac8`
+
+Local web-ready files are `higgsfield-ai-services-uae-v1.jpg`, `higgsfield-industries-uae-v1.jpg`, and `higgsfield-ai-insights-uae-v1.jpg`.
+
+## Work archive, product, and partner visuals
+
+The four existing official OneBonsai case images above were restored to the Work page as sector-level visual evidence. They were re-encoded as lightweight AVIF files and the public copy does not disclose client identities.
+
+The Simplify Suite campaign visual and Blinking.id verification-flow screenshot were supplied directly for this website update. Web-ready AVIF copies are stored in `public/work/` and are lazy-loaded below the Work page introduction.
+
+Product and partner copy was checked against the official public sources:
+
+- Simplify Suite: https://www.simplifysuite.io/
+- Blinking.id: https://www.blinking.id/
+- OneBonsai cases index: https://onebonsai.com/cases
+
+No additional generated imagery was required for this update.

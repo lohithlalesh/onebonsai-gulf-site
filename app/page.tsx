@@ -1,16 +1,24 @@
+import type { Metadata } from "next";
+import AboutPrinciples from "./AboutPrinciples";
+import Link from "next/link";
 import ClarityJourney from "./ClarityJourney";
 import CustomerMarquee from "./CustomerMarquee";
 import EditorialLoop from "./EditorialLoop";
+import HomeIndustries from "./HomeIndustries";
+import HomeInsights from "./HomeInsights";
 import IntegrationMap from "./IntegrationMap";
 import ScrollJourney from "./ScrollJourney";
 import ScrollReveal from "./ScrollReveal";
 import SiteContact from "./SiteContact";
 import SiteHeader from "./SiteHeader";
+import { getRequestLocale } from "./i18n";
+import { localizedPath } from "./locale";
+import { localizedAlternates } from "./seo";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const services = [
+const specialistServices = [
   {
     title: "VR Training & Simulation",
     copy: "Practise high-risk or complex work without interrupting live operations.",
@@ -28,6 +36,24 @@ const services = [
   },
 ];
 
+const arabicSpecialistServices = [
+  {
+    title: "التدريب والمحاكاة بالواقع الافتراضي",
+    copy: "تدرّب على الأعمال عالية المخاطر أو المعقّدة من دون تعطيل العمليات الفعلية.",
+    items: ["تدريب السلامة", "التوائم الرقمية", "البشر الافتراضيون", "تحليلات التعلّم"],
+  },
+  {
+    title: "الأمن السيبراني والذكاء الاصطناعي الآمن",
+    copy: "صمّم الضوابط والبنية والتدريب اللازم للنشر الآمن.",
+    items: ["نشر آمن للذكاء الاصطناعي", "تدريب سيبراني", "حوكمة المخاطر", "ضوابط تشغيلية"],
+  },
+  {
+    title: "أكاديمية الذكاء الاصطناعي والتبنّي",
+    copy: "درّب القيادات والفرق على الأدوات والقرارات التي تواجهها في العمل.",
+    items: ["برامج تنفيذية", "تدريب الفرق", "تطوير مهارات القوى العاملة", "ذكاء اصطناعي مسؤول"],
+  },
+];
+
 const programs = [
   "AI for CEOs",
   "AI governance",
@@ -37,16 +63,48 @@ const programs = [
   "Responsible AI",
 ];
 
+const arabicPrograms = ["الذكاء الاصطناعي للرؤساء التنفيذيين", "حوكمة الذكاء الاصطناعي", "Copilot وGemini", "هندسة الأوامر", "وكلاء الذكاء الاصطناعي", "الذكاء الاصطناعي المسؤول"];
+
 const products = [
   ["Tarteeb", "Home and lifestyle intelligence", "Life admin powered by AI"],
   ["Marengo", "The intelligent equestrian platform", "Equine data, connected globally"],
   ["MedHub", "AI healthcare navigation", "Clearer access to care"],
 ];
 
-export default function Home() {
+const arabicProducts = [
+  ["Tarteeb", "ذكاء المنزل وأسلوب الحياة", "إدارة الحياة اليومية بالذكاء الاصطناعي"],
+  ["Marengo", "المنصة الذكية للفروسية", "بيانات الخيل مترابطة عالمياً"],
+  ["MedHub", "التوجيه الصحي بالذكاء الاصطناعي", "وصول أوضح إلى الرعاية"],
+];
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getRequestLocale();
+  if (locale === "ar") {
+    return {
+      title: { absolute: "تكامل الذكاء الاصطناعي والبرمجيات المخصّصة في أبوظبي | ون بونساي الخليج" },
+      description: "شركة استشارات وهندسة ذكاء اصطناعي في أبوظبي، متخصصة في التكامل المؤسسي والوكلاء الأذكياء والبرمجيات المخصّصة والتدريب وبناء القدرات.",
+      alternates: localizedAlternates("/", locale),
+      openGraph: {
+        locale: "ar_AE",
+        title: "تكامل الذكاء الاصطناعي والبرمجيات المخصّصة في أبوظبي",
+        description: "استشارات وهندسة وتكامل ذكاء اصطناعي مؤسسي من أبوظبي إلى دولة الإمارات والخليج.",
+      },
+    };
+  }
+
+  return { alternates: localizedAlternates("/", locale) };
+}
+
+export default async function Home() {
+  const locale = await getRequestLocale();
+  const isArabic = locale === "ar";
+  const renderedServices = isArabic ? arabicSpecialistServices : specialistServices;
+  const renderedPrograms = isArabic ? arabicPrograms : programs;
+  const renderedProducts = isArabic ? arabicProducts : products;
+
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to content</a>
+      <a className="skip-link" href="#main-content">{isArabic ? "الانتقال إلى المحتوى" : "Skip to content"}</a>
 
       <SiteHeader />
       <ScrollReveal />
@@ -55,17 +113,19 @@ export default function Home() {
         <ScrollJourney />
         <CustomerMarquee />
 
+        <AboutPrinciples locale={locale} />
+
         <ClarityJourney />
 
         <section id="work" className="system-section section-pad" aria-labelledby="system-title">
           <div className="system-heading">
             <div className="system-copy">
-              <p className="section-kicker">What we build</p>
-              <h2 id="system-title">Add the capability your business needs next.</h2>
+              <p className="section-kicker">{isArabic ? "قدرات التنفيذ" : "Delivery capabilities"}</p>
+              <h2 id="system-title">{isArabic ? "أضف القدرة التالية التي تحتاجها أعمالك." : "Add the capability your business needs next."}</h2>
             </div>
             <div className="system-summary">
-              <p>Keep the systems that work. Add AI integration, custom software, search visibility, or marketing automation where it creates measurable value.</p>
-              <a className="primary-button" href="#contact">Plan AI integration</a>
+              <p>{isArabic ? "بعد وضوح الاتجاه، نضيف البرمجيات أو التكامل أو البحث أو القدرات التسويقية التي تصنع قيمة قابلة للقياس." : "After the direction is clear, we add the software, integration, search, or marketing capability that creates measurable value."}</p>
+              <Link className="primary-button" href={localizedPath("/services", locale)}>{isArabic ? "استكشف خدمات الذكاء الاصطناعي والبرمجيات" : "Explore AI and software services"}</Link>
             </div>
           </div>
           <IntegrationMap />
@@ -74,13 +134,13 @@ export default function Home() {
         <section id="services" className="services section-pad" aria-labelledby="services-title">
           <div className="services-heading">
             <div>
-              <p className="section-kicker">Specialist services</p>
-              <h2 id="services-title">Train teams and secure every deployment.</h2>
+              <p className="section-kicker">{isArabic ? "خدمات متخصصة" : "Specialist services"}</p>
+              <h2 id="services-title">{isArabic ? "درّب فرقك، وأمّن كل عملية نشر." : "Train teams and secure every deployment."}</h2>
             </div>
-            <p>Extend the core system with immersive simulation, cybersecurity, and practical AI training for each role.</p>
+            <p>{isArabic ? "وسّع النظام الأساسي بالمحاكاة الغامرة والأمن السيبراني والتدريب العملي على الذكاء الاصطناعي لكل دور." : "Extend the core system with immersive simulation, cybersecurity, and practical AI training for each role."}</p>
           </div>
           <div className="service-list">
-            {services.map((service) => (
+            {renderedServices.map((service) => (
               <details key={service.title}>
                 <summary>
                   <h3>{service.title}</h3>
@@ -95,38 +155,40 @@ export default function Home() {
           </div>
         </section>
 
+        <HomeIndustries locale={locale} />
+
         <section className="infrastructure-section" aria-labelledby="infrastructure-title">
           <EditorialLoop
             source={publicAsset("/media/infrastructure-inspection-higgsfield-web-v1.mp4")}
-            poster={publicAsset("/media/infrastructure-intelligence-v2.jpg")}
+            poster={publicAsset("/media/infrastructure-intelligence-v2.avif")}
           />
           <div className="infrastructure-copy">
-            <p>Computer vision for infrastructure</p>
-            <h2 id="infrastructure-title">Inspect assets without closing them down.</h2>
-            <span>Capture. Review. Repair.</span>
+            <p>{isArabic ? "الرؤية الحاسوبية للبنية التحتية" : "Computer vision for infrastructure"}</p>
+            <h2 id="infrastructure-title">{isArabic ? "افحص الأصول من دون إيقافها عن العمل." : "Inspect assets without closing them down."}</h2>
+            <span>{isArabic ? "التقط. راجع. أصلح." : "Capture. Review. Repair."}</span>
           </div>
         </section>
 
         <section id="academy" className="academy section-pad" aria-labelledby="academy-title">
           <div className="academy-mark" aria-hidden="true">AI<span>+</span></div>
           <div className="academy-copy">
-            <p className="section-kicker">AI Academy</p>
-            <h2 id="academy-title">Train every role to use AI at work.</h2>
-            <p>Practical programs for executives, departments, and technical teams, built around the tools and decisions they handle every day.</p>
+            <p className="section-kicker">{isArabic ? "أكاديمية الذكاء الاصطناعي" : "AI Academy"}</p>
+            <h2 id="academy-title">{isArabic ? "مكّن كل دور من استخدام الذكاء الاصطناعي في العمل." : "Train every role to use AI at work."}</h2>
+            <p>{isArabic ? "برامج عملية للقيادات والإدارات والفرق التقنية، مبنية حول الأدوات والقرارات التي تتعامل معها يومياً." : "Practical programs for executives, departments, and technical teams, built around the tools and decisions they handle every day."}</p>
             <ul className="academy-programs">
-              {programs.map((item) => <li key={item}>{item}</li>)}
+              {renderedPrograms.map((item) => <li key={item}>{item}</li>)}
             </ul>
-            <a className="primary-button" href="#contact">Bring the Academy to your team</a>
+            <a className="primary-button" href="#contact">{isArabic ? "أحضر الأكاديمية إلى فريقك" : "Bring the Academy to your team"}</a>
           </div>
         </section>
 
         <section className="products section-pad" aria-labelledby="products-title">
           <div className="products-heading">
-            <p className="section-kicker">Products built in-house</p>
-            <h2 id="products-title">Products we build and run.</h2>
+            <p className="section-kicker">{isArabic ? "منتجات نطوّرها داخلياً" : "Products built in-house"}</p>
+            <h2 id="products-title">{isArabic ? "منتجات نبنيها ونديرها." : "Products we build and run."}</h2>
           </div>
           <div className="product-index">
-            {products.map(([name, label, signal]) => (
+            {renderedProducts.map(([name, label, signal]) => (
               <article key={name}>
                 <h3>{name}</h3>
                 <p>{label}</p>
@@ -135,6 +197,8 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <HomeInsights locale={locale} />
 
         <SiteContact />
       </main>

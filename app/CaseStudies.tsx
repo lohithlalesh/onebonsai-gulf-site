@@ -1,192 +1,162 @@
-"use client";
+import { getRequestLocale } from "./i18n";
 
-import Image from "next/image";
-import { ArrowLeft } from "@phosphor-icons/react/dist/icons/ArrowLeft";
-import { ArrowRight } from "@phosphor-icons/react/dist/icons/ArrowRight";
-import { ArrowUpRight } from "@phosphor-icons/react/dist/icons/ArrowUpRight";
-import { useEffect, useRef, useState } from "react";
+const caseLibraries = {
+  en: [
+    {
+      sector: "Healthcare",
+      title: "Hospital group — from fragmented processes to an AI roadmap",
+      challenge:
+        "Patient information was spread across multiple systems. Appointment and administrative workflows were manual, waiting times were long, and staff repeated the same tasks. Leadership wanted to use AI but had no agreed starting point.",
+      approach:
+        "Interview leadership and operational teams, map the process, data, and technology landscape, rank high-impact opportunities, and build a phased roadmap that moves from quick wins into controlled pilots and then scale.",
+      outcomes: [
+        "A prioritised portfolio of use cases",
+        "Clear business cases and named ownership",
+        "Defined pilots with measurable KPIs",
+        "A practical roadmap instead of scattered experiments",
+      ],
+    },
+    {
+      sector: "Banking",
+      title: "AI-assisted quality assurance for digital delivery",
+      challenge:
+        "Large volumes of digital journeys required repeated testing. Manual quality assurance consumed significant team capacity, human testing missed edge cases, and continuous release pressure left little room for inconsistent coverage.",
+      approach:
+        "Build an AI-assisted quality-assurance and workflow platform, generate repeatable testing scenarios, flag anomalies and defects for human review, and integrate the result into the existing delivery workflow.",
+      outcomes: [
+        "Faster testing and release cycles",
+        "More consistent quality assurance",
+        "Reduced repetitive manual workload",
+        "A scalable foundation for future digital products",
+      ],
+    },
+    {
+      sector: "Aviation",
+      title: "Immersive maintenance training without live asset risk",
+      challenge:
+        "Physical training required expensive equipment, aircraft availability limited training windows, some procedures carried operational risk, and training quality varied by instructor and location.",
+      approach:
+        "Create a realistic immersive aircraft environment, guide technicians through procedures step by step, track actions, errors, and performance, and deploy standardised scenarios across teams.",
+      outcomes: [
+        "Repeatable training without real-world risk",
+        "Less dependency on aircraft availability",
+        "Consistent assessment standards",
+        "Faster onboarding",
+      ],
+    },
+    {
+      sector: "Product traceability",
+      title: "Vyonix — an AI-ready digital product passport",
+      challenge:
+        "A brand needed product traceability and compliance information. The requirement was not framed as an AI problem; it was a need to make product identity, material, origin, and lifecycle evidence usable.",
+      approach:
+        "Build a unique digital identity for each product, structure material and origin data, connect supply-chain and lifecycle traceability, and provide QR-based access to sourcing and lab-verification information.",
+      outcomes: [
+        "Structured data that can feed AI systems",
+        "Intelligent querying of product information",
+        "Analytics that surface patterns and risks",
+        "A platform that evolves with regulation",
+      ],
+      note: "The need was compliance and traceability, not AI. It was translated into a digital product that is ready for intelligent use.",
+    },
+  ],
+  ar: [
+    {
+      sector: "الرعاية الصحية",
+      title: "مجموعة مستشفيات — من عمليات متفرقة إلى خارطة طريق للذكاء الاصطناعي",
+      challenge:
+        "كانت معلومات المرضى موزعة بين أنظمة متعددة، بينما اعتمدت المواعيد والإجراءات الإدارية على العمل اليدوي وتكرار المهام. أرادت الإدارة توظيف الذكاء الاصطناعي، لكن لم يكن هناك اتفاق على نقطة البداية.",
+      approach:
+        "أجرينا مقابلات مع القيادات والفرق التشغيلية، ورسمنا صورة العمليات والبيانات والتقنية، ثم رتبنا الفرص الأعلى أثراً وبنينا خارطة طريق تبدأ بمكاسب سريعة وتنتقل إلى تجارب مضبوطة ثم التوسع.",
+      outcomes: [
+        "محفظة مرتبة حسب الأولوية لحالات الاستخدام",
+        "مبررات أعمال واضحة ومسؤوليات محددة",
+        "تجارب بمؤشرات أداء قابلة للقياس",
+        "خارطة طريق عملية بدلاً من مبادرات متفرقة",
+      ],
+    },
+    {
+      sector: "الخدمات المصرفية",
+      title: "ضمان جودة مدعوم بالذكاء الاصطناعي للتسليم الرقمي",
+      challenge:
+        "تطلب العدد الكبير من الرحلات الرقمية اختبارات متكررة. استهلك ضمان الجودة اليدوي وقتاً كبيراً من الفرق، وفوّتت الاختبارات البشرية بعض الحالات الطرفية، بينما فرضت وتيرة الإصدارات المستمرة حاجة إلى تغطية أكثر اتساقاً.",
+      approach:
+        "بنينا منصة مدعومة بالذكاء الاصطناعي لضمان الجودة وسير العمل، تولّد سيناريوهات قابلة للتكرار، وترفع الحالات الشاذة والعيوب للمراجعة البشرية، وتتكامل مع مسار التسليم القائم.",
+      outcomes: [
+        "دورات اختبار وإصدار أسرع",
+        "ضمان جودة أكثر اتساقاً",
+        "تقليل العمل اليدوي المتكرر",
+        "أساس قابل للتوسع للمنتجات الرقمية المقبلة",
+      ],
+    },
+    {
+      sector: "الطيران",
+      title: "تدريب غامر للصيانة من دون المخاطرة بالأصول الحية",
+      challenge:
+        "احتاج التدريب الميداني إلى معدات مرتفعة التكلفة، وحدّ توفر الطائرات من أوقات التدريب، وحملت بعض الإجراءات مخاطر تشغيلية، كما تفاوتت جودة التدريب بين المدربين والمواقع.",
+      approach:
+        "أنشأنا بيئة طيران غامرة وواقعية ترشد الفنيين خلال الإجراءات خطوة بخطوة، وتقيس الأفعال والأخطاء والأداء، وتتيح نشر سيناريوهات موحدة بين الفرق.",
+      outcomes: [
+        "تدريب قابل للتكرار من دون مخاطر ميدانية",
+        "اعتماد أقل على توفر الطائرات",
+        "معايير تقييم متسقة",
+        "تأهيل أسرع للكوادر",
+      ],
+    },
+    {
+      sector: "تتبّع المنتجات",
+      title: "Vyonix — جواز منتج رقمي مهيأ للذكاء الاصطناعي",
+      challenge:
+        "احتاجت إحدى العلامات إلى تتبع المنتجات وإتاحة معلومات الامتثال. لم تكن الحاجة مصاغة كمشكلة ذكاء اصطناعي، بل كضرورة لجعل هوية المنتج ومواده ومنشئه وأدلة دورة حياته قابلة للاستخدام.",
+      approach:
+        "أنشأنا هوية رقمية فريدة لكل منتج، ونظمنا بيانات المواد والمنشأ، وربطنا التتبع عبر سلسلة التوريد ودورة الحياة، وأتحنا الوصول عبر رمز QR إلى معلومات التوريد والتحقق المختبري.",
+      outcomes: [
+        "بيانات منظمة يمكن لأنظمة الذكاء الاصطناعي استخدامها",
+        "استعلام ذكي عن معلومات المنتج",
+        "تحليلات تكشف الأنماط والمخاطر",
+        "منصة تتطور مع المتطلبات التنظيمية",
+      ],
+      note: "كانت الحاجة هي الامتثال والتتبع، لا الذكاء الاصطناعي بحد ذاته. وقد تحولت إلى منتج رقمي مهيأ للاستخدام الذكي.",
+    },
+  ],
+} as const;
 
-const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const publicAsset = (path: string) => `${assetBase}${path}`;
-const CASE_ROTATION_MS = 7200;
+const labels = {
+  en: { challenge: "Challenge", approach: "Approach", outcome: "Outcome" },
+  ar: { challenge: "التحدي", approach: "النهج", outcome: "النتيجة" },
+} as const;
 
-const cases = [
-  {
-    shortTitle: "UKB nurse training",
-    title: "Virtual nurse training for University Hospital Bonn",
-    sector: "Healthcare",
-    metric: "1,600 staff and students",
-    copy: "A multilingual VR platform helps clinical teams practise complex procedures without putting patients at risk.",
-    image: "/cases/ukb-vr-training.jpg",
-    alt: "Virtual nurse training simulation created for University Hospital Bonn",
-    href: "https://onebonsai.com/cases/projects/virtual-reality-nurse-training-program-vrntp-for-ukb",
-  },
-  {
-    shortTitle: "Nike warehouse training",
-    title: "Faster warehouse onboarding for Nike",
-    sector: "Logistics",
-    metric: "Five training days reduced to two",
-    copy: "A 1:1 virtual packing environment made onboarding repeatable, multilingual, and easier to scale across sites.",
-    image: "/cases/nike-warehouse-training.jpg",
-    alt: "Nike warehouse employee using a VR packing training simulation",
-    href: "https://onebonsai.com/cases/projects/vr-warehouse-packing",
-  },
-  {
-    shortTitle: "Port mooring safety",
-    title: "Risk-free mooring practice for dock workers",
-    sector: "Industry",
-    metric: "Dangerous procedures made repeatable",
-    copy: "A digital twin of the harbor lets teams practise cable handling, safe positioning, and full mooring procedures.",
-    image: "/cases/port-mooring-training.jpg",
-    alt: "Virtual reality mooring safety simulation at a commercial port",
-    href: "https://onebonsai.com/cases/projects/mooring",
-  },
-  {
-    shortTitle: "Police VR training",
-    title: "High-pressure training without live risk",
-    sector: "Public safety",
-    metric: "Safe and repeatable scenarios",
-    copy: "Officers train decision-making, coordination, and tactical response inside realistic virtual environments.",
-    image: "/cases/police-vr-training.jpg",
-    alt: "Police officers training together in an immersive virtual reality scenario",
-    href: "https://onebonsai.com/cases/projects/police-training",
-  },
-] as const;
-
-export default function CaseStudies() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [cycleSeed, setCycleSeed] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const activeCase = cases[activeIndex];
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel || isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let timer: number | undefined;
-    let isInView = false;
-    const stop = () => {
-      if (timer) window.clearInterval(timer);
-      timer = undefined;
-    };
-    const start = () => {
-      stop();
-      timer = window.setInterval(() => {
-        setActiveIndex((current) => (current + 1) % cases.length);
-      }, CASE_ROTATION_MS);
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isInView = entry.isIntersecting;
-        if (isInView && !document.hidden) start();
-        else stop();
-      },
-      { threshold: 0.42 },
-    );
-    const handleVisibility = () => {
-      if (document.hidden) stop();
-      else if (isInView) start();
-    };
-
-    observer.observe(carousel);
-    document.addEventListener("visibilitychange", handleVisibility);
-
-    return () => {
-      stop();
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
-  }, [cycleSeed, isPaused]);
-
-  const selectCase = (index: number) => {
-    setActiveIndex(index);
-    setCycleSeed((current) => current + 1);
-  };
-  const selectPrevious = () => {
-    setActiveIndex((current) => (current - 1 + cases.length) % cases.length);
-    setCycleSeed((current) => current + 1);
-  };
-  const selectNext = () => {
-    setActiveIndex((current) => (current + 1) % cases.length);
-    setCycleSeed((current) => current + 1);
-  };
+export default async function CaseStudies() {
+  const locale = await getRequestLocale();
+  const cases = caseLibraries[locale];
+  const t = labels[locale];
 
   return (
-    <div
-      ref={carouselRef}
-      className="about-case-carousel"
-      aria-label="Selected OneBonsai case studies"
-      data-paused={isPaused}
-      onPointerEnter={() => setIsPaused(true)}
-      onPointerLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
-      }}
-    >
-      <div className="about-case-stage">
-        <Image
-          key={activeCase.image}
-          src={publicAsset(activeCase.image)}
-          alt={activeCase.alt}
-          width={1600}
-          height={900}
-          loading="eager"
-          fetchPriority="high"
-          sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1600px) 82vw, 1280px"
-          unoptimized
-        />
-        <div className="about-case-stage-shade" aria-hidden="true" />
-        <article className="about-case-stage-copy" key={activeCase.title} aria-live="polite">
-          <p>
-            <span>{String(activeIndex + 1).padStart(2, "0")} / 04</span>
-            {activeCase.sector}
-          </p>
-          <h2>{activeCase.title}</h2>
-          <div>
-            <strong>{activeCase.metric}</strong>
-            <p>{activeCase.copy}</p>
+    <div className="work-case-library">
+      {cases.map((caseStudy, index) => (
+        <article className="work-case" key={caseStudy.title}>
+          <header>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <p>{caseStudy.sector}</p>
+            <h2>{caseStudy.title}</h2>
+          </header>
+          <div className="work-case-story">
+            <section>
+              <p className="section-kicker">{t.challenge}</p>
+              <p>{caseStudy.challenge}</p>
+            </section>
+            <section>
+              <p className="section-kicker">{t.approach}</p>
+              <p>{caseStudy.approach}</p>
+            </section>
+            <section>
+              <p className="section-kicker">{t.outcome}</p>
+              <ul>{caseStudy.outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul>
+            </section>
+            {"note" in caseStudy ? <p className="work-case-note">{caseStudy.note}</p> : null}
           </div>
-          <a href={activeCase.href} target="_blank" rel="noreferrer">
-            View case study <ArrowUpRight size={14} weight="thin" aria-hidden="true" />
-          </a>
         </article>
-      </div>
-
-      <div className="about-case-index" role="tablist" aria-label="Choose a case study">
-        {cases.map((caseStudy, index) => (
-          <button
-            type="button"
-            role="tab"
-            className={index === activeIndex ? "is-active" : undefined}
-            key={caseStudy.shortTitle}
-            aria-selected={index === activeIndex}
-            onClick={() => selectCase(index)}
-          >
-            <i aria-hidden="true">{String(index + 1).padStart(2, "0")}</i>
-            <span>
-              <strong>{caseStudy.shortTitle}</strong>
-              <small>{caseStudy.sector}</small>
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <div className="about-case-controls">
-        <button type="button" onClick={selectPrevious} aria-label="Previous case study">
-          <ArrowLeft size={17} weight="thin" aria-hidden="true" />
-        </button>
-        <span className="about-case-cycle">
-          <b>{String(activeIndex + 1).padStart(2, "0")} / {String(cases.length).padStart(2, "0")}</b>
-          <em>{activeCase.shortTitle}</em>
-          <i aria-hidden="true"><b key={`${activeIndex}-${cycleSeed}`} /></i>
-        </span>
-        <button type="button" onClick={selectNext} aria-label="Next case study">
-          <ArrowRight size={17} weight="thin" aria-hidden="true" />
-        </button>
-      </div>
+      ))}
     </div>
   );
 }

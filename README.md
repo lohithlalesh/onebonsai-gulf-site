@@ -29,6 +29,25 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+### Inquiry and careers intake
+
+The CEO conversation posts to `/api/enquire`. Careers use the dedicated
+`/api/careers/*` flow: a progressive introduction, managed Turnstile check,
+three server-scored questions selected from a bilingual 100-question bank, one
+fresh retry, and a private PDF résumé upload. D1 stores the application,
+answers, and—in the zero-billing deployment—private résumé chunks.
+Download links expire after 14 days and a daily Worker cron removes application
+data after 90 days. The routes are already R2-aware and will use a private R2
+bucket automatically when a `RESUMES` binding is added.
+
+Set `ENQUIRY_WEBHOOK_URL` in `.env.local` to the deployed Google Apps Script
+`/exec` URL. The Worker stores this as a secret and calls it only after a résumé
+has been stored successfully. The existing script in
+`integrations/google-apps-script/Code.gs` appends the validated intake to the
+`OneBonsai Gulf Enquiries` sheet and emails `ivan@obgulf.com`; it does not
+change Google Workspace, Zoho, MX, or mail-routing configuration. Age and
+university are never submitted.
+
 ## Verify
 
 ```bash
@@ -37,7 +56,25 @@ npm test
 
 This builds the vinext application and validates the rendered brand experience and required visual assets.
 
-## GitHub Pages
+## Cloudflare deployment
+
+The current production Worker preview is:
+
+https://onebonsai-gulf.laleshlohith.workers.dev/
+
+`wrangler.jsonc` binds the `onebonsai-gulf-careers` D1 database, static assets,
+Cloudflare image transforms, and the 03:00 UTC retention cron. Deploy with:
+
+```bash
+npx wrangler d1 migrations apply onebonsai-gulf-careers --remote
+npx vinext deploy
+```
+
+The custom `obgulf.com` hostname is intentionally not declared in this project
+until the zone and its existing mail-related DNS records have been inventoried.
+The Workers preview therefore does not disturb the current live site or email.
+
+## Legacy GitHub Pages preview
 
 Every push to `main` runs the Pages workflow in `.github/workflows/deploy-pages.yml`. The workflow creates a static export with the repository base path, uploads the generated site, and publishes it at:
 
@@ -53,4 +90,7 @@ https://lohithlalesh.github.io/onebonsai-gulf-site/
 - `public/media/icon-*.png`: custom 2K 3D capability icons
 - `outputs/higgsfield/v2/`: full-quality generated masters and source frames
 - `public/media/`: UAE editorial and capability imagery
-- `.openai/hosting.json`: Sites deployment configuration
+- `wrangler.jsonc`: direct Cloudflare Worker, D1, assets, and cron configuration
+- `app/api/careers/`: application, assessment, private upload, and download routes
+- `worker/career-retention.ts`: 90-day D1/R2 retention cleanup
+- `.openai/hosting.json`: legacy Sites project metadata; not used for Cloudflare deployment

@@ -2,18 +2,35 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "./LocaleProvider";
+import { localizedPath } from "./locale";
+import { usePlanIntegration } from "./PlanIntegrationModal";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const navigation = [
-  ["About", "/about"],
-  ["Process", "/#process"],
-  ["Services", "/#services"],
-  ["Work", "/work"],
-] as const;
+const navigation = {
+  en: [
+    ["About", "/about"],
+    ["Services", "/services"],
+    ["Industries", "/industries"],
+    ["Work", "/work"],
+    ["Careers", "/careers"],
+    ["Insights", "/insights"],
+  ],
+  ar: [
+    ["من نحن", "/about"],
+    ["خدماتنا", "/services"],
+    ["القطاعات", "/industries"],
+    ["أعمالنا", "/work"],
+    ["الوظائف", "/careers"],
+    ["الرؤى", "/insights"],
+  ],
+} as const;
 
 export default function SiteHeader() {
+  const { locale, isArabic, directionArrow, switchLocale } = useLocale();
+  const { openPlanIntegration } = usePlanIntegration();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrolledRef = useRef(false);
@@ -67,7 +84,7 @@ export default function SiteHeader() {
       className={`site-header${isScrolled ? " is-scrolled" : ""}${isMenuOpen ? " is-menu-open" : ""}`}
       data-scrolled={isScrolled}
     >
-      <a className="brand" href={publicAsset("/")} aria-label="OneBonsai Gulf home">
+      <a className="brand" href={publicAsset(localizedPath("/", locale))} aria-label={isArabic ? "الصفحة الرئيسية لون بونساي الخليج" : "OneBonsai Gulf home"}>
         <Image
           src={publicAsset("/brand/onebonsai-gulf-white-800.png")}
           alt="OneBonsai Gulf"
@@ -77,15 +94,20 @@ export default function SiteHeader() {
           unoptimized
         />
       </a>
-      <nav className="desktop-navigation" aria-label="Primary navigation">
-        {navigation.map(([label, path]) => <a href={publicAsset(path)} key={label}>{label}</a>)}
+      <nav className="desktop-navigation" aria-label={isArabic ? "التنقل الرئيسي" : "Primary navigation"}>
+        {navigation[locale].map(([label, path]) => <a href={publicAsset(localizedPath(path, locale))} key={label}>{label}</a>)}
       </nav>
       <div className="site-header-actions">
-        <a className="nav-cta" href={`${publicAsset("/")}#contact`}>Plan AI integration <span aria-hidden="true">↗</span></a>
+        <button className="language-toggle language-toggle-desktop" type="button" onClick={switchLocale} lang={isArabic ? "en" : "ar"}>
+          {isArabic ? "English" : "العربية"}
+        </button>
+        <button className="nav-cta" type="button" onClick={openPlanIntegration}>
+          {isArabic ? "خطّط لتكامل الذكاء الاصطناعي" : "Plan AI integration"} <span aria-hidden="true">{directionArrow}</span>
+        </button>
         <button
           className="mobile-menu-toggle"
           type="button"
-          aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-label={isArabic ? (isMenuOpen ? "إغلاق قائمة التنقل" : "فتح قائمة التنقل") : (isMenuOpen ? "Close navigation" : "Open navigation")}
           aria-controls="mobile-navigation"
           aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen((open) => !open)}
@@ -94,12 +116,15 @@ export default function SiteHeader() {
           <span />
         </button>
       </div>
-      <nav id="mobile-navigation" className="mobile-navigation" aria-label="Mobile navigation">
-        {navigation.map(([label, path], index) => (
-          <a href={publicAsset(path)} key={label} onClick={() => setIsMenuOpen(false)}>
+      <nav id="mobile-navigation" className="mobile-navigation" aria-label={isArabic ? "التنقل عبر الهاتف" : "Mobile navigation"}>
+        {navigation[locale].map(([label, path], index) => (
+          <a href={publicAsset(localizedPath(path, locale))} key={label} onClick={() => setIsMenuOpen(false)}>
             <span>{String(index + 1).padStart(2, "0")}</span>{label}
           </a>
         ))}
+        <button className="language-toggle language-toggle-mobile" type="button" onClick={switchLocale} lang={isArabic ? "en" : "ar"}>
+          {isArabic ? "Switch to English" : "التبديل إلى العربية"}
+        </button>
       </nav>
     </header>
   );

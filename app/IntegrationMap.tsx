@@ -2,13 +2,17 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "./LocaleProvider";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const systemInputs = ["ERP + CRM", "Documents", "Operations", "Customer data"] as const;
+const systemInputs = {
+  en: ["ERP + CRM", "Documents", "Operations", "Customer data"],
+  ar: ["تخطيط الموارد وإدارة العملاء", "المستندات", "العمليات", "بيانات العملاء"],
+} as const;
 
-const capabilities = [
+const capabilities = { en: [
   {
     title: "AI integration",
     signal: "Use existing data",
@@ -49,12 +53,55 @@ const capabilities = [
     image: "/media/capability-marketing-systems-v1.jpg",
     alt: "A marketing operator using a node based campaign and customer data workflow",
   },
-] as const;
+], ar: [
+  {
+    title: "تكامل الذكاء الاصطناعي",
+    signal: "استفد من البيانات القائمة",
+    copy: "امنح الفرق مكاناً واحداً لطرح الأسئلة والعثور على السجلات وتشغيل الإجراءات المعتمدة.",
+    outcome: "سياق مشترك من دون استبدال الأنظمة",
+    image: "/media/capability-ai-integration-v1.jpg",
+    alt: "قيادات عمليات إماراتية تراجع مساحة عمل متكاملة للذكاء الاصطناعي المؤسسي",
+  },
+  {
+    title: "برمجيات مخصّصة",
+    signal: "سدّ فجوة سير العمل",
+    copy: "ابنِ الواجهة أو الأتمتة التي لا تستطيع أدواتك الحالية توفيرها.",
+    outcome: "برمجيات مصمّمة للمهمة",
+    image: "/media/capability-custom-software-v1.jpg",
+    alt: "فريق منتجات إماراتي يختبر برمجيات عمليات مخصّصة",
+  },
+  {
+    title: "الاستشارات",
+    signal: "رتّب أولويات العمل",
+    copy: "حدّد حالة الاستخدام الأولى وخطة التنفيذ والمقاييس قبل الالتزام بالبناء.",
+    outcome: "مسار محدّد نحو التشغيل",
+    image: "/media/capability-consulting-v1.jpg",
+    alt: "فريق قيادة خليجي يخطط لخريطة طريق تنفيذ الذكاء الاصطناعي",
+  },
+  {
+    title: "تحسين البحث وإجابات الذكاء الاصطناعي",
+    signal: "اجعل العثور عليك أسهل",
+    copy: "نظّم صفحات المنتجات والمعرفة بحيث تفهمها محركات البحث ومنصات الإجابة الذكية.",
+    outcome: "وصول مؤهل",
+    image: "/media/capability-seo-aeo-v1.jpg",
+    alt: "خبير بحث يراجع معرفة منتجات منظمة وأداء الاكتشاف",
+  },
+  {
+    title: "أنظمة التسويق",
+    signal: "استفد من إشارات العملاء",
+    copy: "اربط بيانات الحملات والعملاء حتى ترى الفرق بوضوح ما الذي يصنع الطلب.",
+    outcome: "تسويق مرتبط بخط المبيعات",
+    image: "/media/capability-marketing-systems-v1.jpg",
+    alt: "مسؤول تسويق يستخدم سير عمل مترابطاً لبيانات الحملات والعملاء",
+  },
+] } as const;
 
 export default function IntegrationMap() {
+  const { locale, isArabic } = useLocale();
+  const localizedCapabilities = capabilities[locale];
   const [activeIndex, setActiveIndex] = useState(0);
   const stepRefs = useRef<Array<HTMLLIElement | null>>([]);
-  const activeCapability = capabilities[activeIndex];
+  const activeCapability = localizedCapabilities[activeIndex];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -78,13 +125,13 @@ export default function IntegrationMap() {
   }, []);
 
   return (
-    <div className="integration-scroll-map" aria-label="How OneBonsai Gulf turns connected business systems into measurable capabilities">
+    <div className="integration-scroll-map" aria-label={isArabic ? "كيف تحوّل ون بونساي الخليج الأنظمة المترابطة إلى قدرات قابلة للقياس" : "How OneBonsai Gulf turns connected business systems into measurable capabilities"}>
       <aside className="integration-scroll-sticky">
         <div className="integration-scroll-heading">
-          <p>Start with what is already there</p>
-          <h3>Your current setup stays in place.</h3>
+          <p>{isArabic ? "ابدأ بما لديك بالفعل" : "Start with what is already there"}</p>
+          <h3>{isArabic ? "تبقى بيئتكم الحالية في مكانها." : "Your current setup stays in place."}</h3>
           <ul>
-            {systemInputs.map((input) => <li key={input}>{input}</li>)}
+            {systemInputs[locale].map((input) => <li key={input}>{input}</li>)}
           </ul>
         </div>
 
@@ -102,12 +149,12 @@ export default function IntegrationMap() {
           />
           <div className="integration-scroll-shade" aria-hidden="true" />
           <div className="integration-live-capability" key={activeCapability.title} aria-live="polite">
-            <span>{String(activeIndex + 1).padStart(2, "0")} / {String(capabilities.length).padStart(2, "0")}</span>
+            <span>{String(activeIndex + 1).padStart(2, "0")} / {String(localizedCapabilities.length).padStart(2, "0")}</span>
             <strong>{activeCapability.title}</strong>
             <small>{activeCapability.outcome}</small>
           </div>
           <div className="integration-branch-meter" aria-hidden="true">
-            {capabilities.map((capability, index) => (
+            {localizedCapabilities.map((capability, index) => (
               <i className={index <= activeIndex ? "is-active" : undefined} key={capability.title} />
             ))}
           </div>
@@ -115,7 +162,7 @@ export default function IntegrationMap() {
       </aside>
 
       <ol className="integration-capability-steps">
-        {capabilities.map((capability, index) => (
+        {localizedCapabilities.map((capability, index) => (
           <li
             ref={(node) => { stepRefs.current[index] = node; }}
             data-capability-index={index}

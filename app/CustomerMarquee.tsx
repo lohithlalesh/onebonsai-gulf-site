@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useLocale } from "./LocaleProvider";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -35,19 +36,20 @@ const customers: readonly Customer[] = [
 ];
 
 export default function CustomerMarquee() {
+  const { isArabic } = useLocale();
   const [paused, setPaused] = useState(false);
 
   return (
     <section className="customer-marquee" aria-labelledby="customer-marquee-title" data-paused={paused}>
       <div className="customer-marquee-heading">
-        <p id="customer-marquee-title">Trusted by organizations building what comes next</p>
+        <p id="customer-marquee-title">{isArabic ? "موضع ثقة جهات تبني ما هو آتٍ" : "Trusted by organizations building what comes next"}</p>
         <button
           type="button"
-          aria-label={paused ? "Play customer logos" : "Pause customer logos"}
+          aria-label={isArabic ? (paused ? "تشغيل شعارات العملاء" : "إيقاف شعارات العملاء") : (paused ? "Play customer logos" : "Pause customer logos")}
           aria-pressed={paused}
           onClick={() => setPaused((value) => !value)}
         >
-          UAE / GLOBAL
+          {isArabic ? "الإمارات / العالم" : "UAE / GLOBAL"}
         </button>
       </div>
       <div className="customer-marquee-viewport">

@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useLocale } from "./LocaleProvider";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const steps = [
+const steps = { en: [
   {
     label: "Diagnose",
     title: "Find the workflow worth fixing.",
@@ -28,12 +29,38 @@ const steps = [
     outcomes: ["Team adoption", "AI governance", "Measured expansion"],
     image: "/media/clarity-scale-3d-v1.jpg",
   },
-] as const;
+], ar: [
+  {
+    label: "شخّص",
+    title: "حدّد سير العمل الذي يستحق التحسين.",
+    copy: "نرسم الأشخاص والأنظمة ونقاط التسليم والاختناقات خلف مهمة واحدة قبل تحديد موضع الذكاء الاصطناعي.",
+    outcomes: ["خريطة الأنظمة", "أولويات حالات الاستخدام", "مقاييس نجاح واضحة"],
+    image: "/media/clarity-diagnose-3d-v1.jpg",
+  },
+  {
+    label: "ادمج",
+    title: "ابنِ حول الأدوات المستخدمة بالفعل.",
+    copy: "نربط النموذج والواجهة ونقاط الاعتماد المناسبة من دون فرض استبدال الأنظمة القائمة.",
+    outcomes: ["تكاملات آمنة", "أدوات ذكاء اصطناعي مفيدة", "نقاط اعتماد بشرية"],
+    image: "/media/clarity-integrate-3d-v1.jpg",
+  },
+  {
+    label: "وسّع",
+    title: "توسّع فقط بعد نجاح سير العمل الأول.",
+    copy: "ندرّب المستخدمين، ونحدّد الملكية، ونضع الضوابط اللازمة قبل انتقال القدرة إلى فريق آخر.",
+    outcomes: ["تبنّي الفريق", "حوكمة الذكاء الاصطناعي", "توسّع قابل للقياس"],
+    image: "/media/clarity-scale-3d-v1.jpg",
+  },
+] } as const;
+
+const STEP_COUNT = 3;
 
 export default function ClarityJourney() {
+  const { locale, isArabic } = useLocale();
+  const localizedSteps = steps[locale];
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const activeStep = steps[activeIndex];
+  const activeStep = localizedSteps[activeIndex];
 
   useEffect(() => {
     let frame = 0;
@@ -46,7 +73,7 @@ export default function ClarityJourney() {
       const rect = section.getBoundingClientRect();
       const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
       const progress = Math.min(1, Math.max(0, -rect.top / travel));
-      setActiveIndex(Math.round(progress * (steps.length - 1)));
+      setActiveIndex(Math.round(progress * (STEP_COUNT - 1)));
     };
 
     const requestUpdate = () => {
@@ -72,7 +99,7 @@ export default function ClarityJourney() {
     const sectionTop = window.scrollY + section.getBoundingClientRect().top;
     const travel = Math.max(section.offsetHeight - window.innerHeight, 0);
     window.scrollTo({
-      top: sectionTop + travel * (index / (steps.length - 1)),
+      top: sectionTop + travel * (index / (STEP_COUNT - 1)),
       behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
     });
   };
@@ -89,20 +116,20 @@ export default function ClarityJourney() {
         "--clarity-orbit-turn": `${(1 - activeIndex) * 42}deg`,
       } as CSSProperties}
     >
-      <h2 id="clarity-title" className="sr-only">How we work: From complexity to clarity in 3 steps.</h2>
+      <h2 id="clarity-title" className="sr-only">{isArabic ? "أسلوب عملنا: من التعقيد إلى الوضوح في ثلاث خطوات." : "How we work: From complexity to clarity in 3 steps."}</h2>
       <div className="clarity-sticky">
-        <nav className="clarity-orbit" aria-label="Choose a delivery step">
+        <nav className="clarity-orbit" aria-label={isArabic ? "اختر خطوة من خطوات التنفيذ" : "Choose a delivery step"}>
           <div className="clarity-orbit-track">
             <div className="clarity-orbit-line" />
             <div className="clarity-orbit-ticks" />
             <div className="clarity-orbit-sweep" />
-            {steps.map((step, index) => (
+            {localizedSteps.map((step, index) => (
               <button
                 type="button"
                 key={step.label}
                 className={index === activeIndex ? "is-active" : undefined}
                 onClick={() => selectStep(index)}
-                aria-label={`Show step ${index + 1}: ${step.label}`}
+                aria-label={isArabic ? `اعرض الخطوة ${index + 1}: ${step.label}` : `Show step ${index + 1}: ${step.label}`}
                 aria-pressed={index === activeIndex}
               >
                 <span className="clarity-orbit-marker">
@@ -136,13 +163,13 @@ export default function ClarityJourney() {
 
         <div className="clarity-counter" aria-hidden="true">
           <span>{String(activeIndex + 1).padStart(2, "0")}</span>
-          <i><b style={{ transform: `scaleX(${(activeIndex + 1) / steps.length})` }} /></i>
-          <span>{String(steps.length).padStart(2, "0")}</span>
+          <i><b style={{ transform: `scaleX(${(activeIndex + 1) / STEP_COUNT})` }} /></i>
+          <span>{String(STEP_COUNT).padStart(2, "0")}</span>
         </div>
       </div>
 
       <div className="clarity-mobile-steps">
-        {steps.map((step, index) => (
+        {localizedSteps.map((step, index) => (
           <article key={step.label}>
             <Image src={publicAsset(step.image)} alt="" width={1254} height={1254} loading="lazy" unoptimized />
             <div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 const revealSelector = [
   "main section:not(.journey):not(.clarity-journey) .section-kicker",
@@ -22,7 +22,7 @@ const revealSelector = [
 ].join(",");
 
 export default function ScrollReveal() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector)).filter((target) => {
@@ -31,12 +31,15 @@ export default function ScrollReveal() {
       return !mechanicalParent || mechanicalParent === target;
     });
 
-    root.classList.add("scroll-reveal-enabled");
-
     targets.forEach((target, index) => {
       target.dataset.scrollReveal = reducedMotion.matches ? "visible" : "pending";
       target.style.setProperty("--reveal-delay", `${(index % 4) * 55}ms`);
+      const bounds = target.getBoundingClientRect();
+      if (!reducedMotion.matches && bounds.top < window.innerHeight && bounds.bottom > 0) {
+        target.dataset.scrollReveal = "visible";
+      }
     });
+    root.classList.add("scroll-reveal-enabled");
 
     if (reducedMotion.matches) {
       return () => {
@@ -48,20 +51,18 @@ export default function ScrollReveal() {
       (entries) => {
         entries.forEach((entry) => {
           const target = entry.target as HTMLElement;
-          const repeats = target.classList.contains("mechanical-reveal");
-
           if (entry.isIntersecting) {
             target.dataset.scrollReveal = "visible";
-            if (!repeats) observer.unobserve(target);
-          } else if (repeats) {
-            target.dataset.scrollReveal = "pending";
+            observer.unobserve(target);
           }
         });
       },
       { rootMargin: "0px 0px -12%", threshold: 0.12 },
     );
 
-    targets.forEach((target) => observer.observe(target));
+    targets.forEach((target) => {
+      if (target.dataset.scrollReveal === "pending") observer.observe(target);
+    });
 
     return () => {
       observer.disconnect();

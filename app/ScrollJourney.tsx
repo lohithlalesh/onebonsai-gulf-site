@@ -8,6 +8,8 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import Image from "next/image";
+import { useLocale } from "./LocaleProvider";
+import { usePlanIntegration } from "./PlanIntegrationModal";
 
 type Act = {
   eyebrow: string;
@@ -19,11 +21,11 @@ type Act = {
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 
-const acts: Act[] = [
+const acts: Record<"en" | "ar", Act[]> = { en: [
   {
-    eyebrow: "Enterprise AI integration",
-    title: "AI that works with the business you already run.",
-    copy: "We connect AI to your systems, automate specific workflows, and keep decisions with your team.",
+    eyebrow: "Custom software and AI integration in Abu Dhabi",
+    title: "Custom software and AI integration, built in Abu Dhabi.",
+    copy: "AI that works with the business you already run. We advise, build, integrate, and help your team operate the result.",
     signal: "OneBonsai Gulf. Abu Dhabi.",
   },
   {
@@ -50,29 +52,76 @@ const acts: Act[] = [
     copy: "We document the system, train its users, and set the rules for expanding it.",
     signal: "Ownership. Control. Scale.",
   },
-];
+], ar: [
+  {
+    eyebrow: "البرمجيات المخصّصة وتكامل الذكاء الاصطناعي في أبوظبي",
+    title: "برمجيات مخصّصة وذكاء اصطناعي يتكامل مع أعمالكم، من أبوظبي.",
+    copy: "نستشير ونبني ونربط الأنظمة، ثم نمكّن فريقكم من تشغيل النتيجة وامتلاكها.",
+    signal: "ون بونساي الخليج. أبوظبي.",
+  },
+  {
+    eyebrow: "ابدأ بسير العمل",
+    title: "اختر مهمة واحدة تستحق التحسين.",
+    copy: "ارسم الأشخاص والبيانات والقيود المحيطة بها قبل كتابة أي سطر برمجي.",
+    signal: "سير العمل. البيانات. القيود.",
+  },
+  {
+    eyebrow: "ابنِ حول ما هو قائم",
+    title: "أضف فقط ما يحتاجه العمل.",
+    copy: "اربط النموذج والواجهة ونقاط الاعتماد المناسبة بالأدوات المستخدمة بالفعل.",
+    signal: "النموذج. الواجهة. الاعتماد.",
+  },
+  {
+    eyebrow: "أدخله في العمل اليومي",
+    title: "اجعل النتيجة سهلة التنفيذ.",
+    copy: "تظهر الإجابات والتنبيهات والخطوات التالية داخل مسارات العمل التي تحتاجها الفرق.",
+    signal: "إجابة. إجراء. سجل.",
+  },
+  {
+    eyebrow: "سلّم قدرة حقيقية",
+    title: "فريقكم يمتلك ما ينجح.",
+    copy: "نوثّق النظام، وندرّب مستخدميه، ونضع ضوابط واضحة لتوسّعه.",
+    signal: "ملكية. تحكّم. توسّع.",
+  },
+] };
 
-const flowNodes = ["One workflow", "Business context", "Useful output", "Team ownership"];
+const ACT_COUNT = 5;
 
-const ownershipVisuals = [
+const flowNodes = {
+  en: ["One workflow", "Business context", "Useful output", "Team ownership"],
+  ar: ["سير عمل واحد", "سياق الأعمال", "مخرجات مفيدة", "ملكية الفريق"],
+};
+
+const ownershipVisuals = {
+  en: [
   { label: "Connected context", image: "/media/icon-systems-1200.avif" },
   { label: "Useful decisions", image: "/media/icon-intelligence-1200.avif" },
   { label: "Team ownership", image: "/media/icon-scale-1200.avif" },
-] as const;
+  ],
+  ar: [
+    { label: "سياق مترابط", image: "/media/icon-systems-1200.avif" },
+    { label: "قرارات مفيدة", image: "/media/icon-intelligence-1200.avif" },
+    { label: "ملكية الفريق", image: "/media/icon-scale-1200.avif" },
+  ],
+} as const;
 const MOBILE_QUERY = "(max-width: 700px)";
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const FALLBACK_DURATION = 8;
 
 function BouncyTitle({ children }: { children: string }) {
+  const words = children.split(" ");
+
   return (
     <span className="journey-title-line">
-      {children.split(" ").map((word, index) => (
-        <span
-          className="journey-word"
-          key={`${word}-${index}`}
-          style={{ "--word-index": index } as CSSProperties}
-        >
-          {word}
+      {words.map((word, index) => (
+        <span key={`${word}-${index}`}>
+          <span
+            className="journey-word"
+            style={{ "--word-index": index } as CSSProperties}
+          >
+            {word}
+          </span>
+          {index < words.length - 1 ? " " : null}
         </span>
       ))}
     </span>
@@ -80,6 +129,9 @@ function BouncyTitle({ children }: { children: string }) {
 }
 
 export default function ScrollJourney() {
+  const { locale, isArabic } = useLocale();
+  const { openPlanIntegration } = usePlanIntegration();
+  const localizedActs = acts[locale];
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
@@ -120,7 +172,7 @@ export default function ScrollJourney() {
       const bounds = section.getBoundingClientRect();
       const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
       const progress = Math.min(1, Math.max(0, -bounds.top / travel));
-      const nextAct = Math.min(acts.length - 1, Math.floor(progress * acts.length));
+      const nextAct = Math.min(ACT_COUNT - 1, Math.floor(progress * ACT_COUNT));
 
       section.style.setProperty("--journey-progress", progress.toFixed(4));
       section.style.setProperty("--journey-fill", `${(progress * 100).toFixed(2)}%`);
@@ -133,7 +185,7 @@ export default function ScrollJourney() {
       if (video.readyState >= 2) {
         const availableDuration = Math.max(duration - 0.06, 0);
         const targetTime = reduceMotion
-          ? (nextAct / (acts.length - 1)) * availableDuration
+          ? (nextAct / (ACT_COUNT - 1)) * availableDuration
           : progress * availableDuration;
 
         if (!reduceMotion || nextAct !== lastReducedAct) {
@@ -215,7 +267,7 @@ export default function ScrollJourney() {
       const bounds = section.getBoundingClientRect();
       const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
       const progress = Math.min(1, Math.max(0, -bounds.top / travel));
-      const nextAct = Math.min(acts.length - 1, Math.floor(progress * acts.length));
+      const nextAct = Math.min(ACT_COUNT - 1, Math.floor(progress * ACT_COUNT));
 
       section.style.setProperty("--journey-progress", progress.toFixed(4));
       section.style.setProperty("--journey-fill", `${(progress * 100).toFixed(2)}%`);
@@ -229,7 +281,7 @@ export default function ScrollJourney() {
         if (reduceMotion) {
           if (nextAct !== lastReducedAct) {
             lastReducedAct = nextAct;
-            renderedTime = (nextAct / (acts.length - 1)) * Math.max(duration - 0.06, 0);
+            renderedTime = (nextAct / (ACT_COUNT - 1)) * Math.max(duration - 0.06, 0);
             targetTime = renderedTime;
             video.currentTime = renderedTime;
           }
@@ -263,7 +315,6 @@ export default function ScrollJourney() {
     };
 
     video.pause();
-    void video.play().then(() => video.pause()).catch(() => {});
     updateReadyState();
     video.addEventListener("loadedmetadata", updateReadyState);
     video.addEventListener("loadeddata", updateReadyState);
@@ -303,7 +354,7 @@ export default function ScrollJourney() {
       data-act={activeAct}
       data-ready={isReady ? "true" : "false"}
       style={{ "--journey-progress": "0", "--journey-fill": "0%" } as CSSProperties}
-      aria-label="OneBonsai Gulf: bringing AI into your business"
+      aria-label={isArabic ? "ون بونساي الخليج: إدخال الذكاء الاصطناعي إلى أعمالكم" : "OneBonsai Gulf: bringing AI into your business"}
     >
       <div className="journey-pin">
         <div
@@ -315,7 +366,7 @@ export default function ScrollJourney() {
           <div className="journey-topbar" aria-hidden="true">
             <span>ONEBONSAI GULF</span>
             <div className="journey-topbar-rail"><i /></div>
-            <span>From systems to value</span>
+            <span>{isArabic ? "من الأنظمة إلى القيمة" : "From systems to value"}</span>
           </div>
 
           <div className="journey-film" aria-hidden="true">
@@ -323,7 +374,7 @@ export default function ScrollJourney() {
               src={publicAsset(
                 isSmallScreen === false
                   ? "/media/onebonsai-hero-poster-web-v3.jpg"
-                  : "/media/onebonsai-hero-poster-mobile-1200.avif",
+                  : "/media/onebonsai-hero-poster-mobile-v2.jpg",
               )}
               alt=""
               width={isSmallScreen === false ? 2400 : 1200}
@@ -342,7 +393,7 @@ export default function ScrollJourney() {
                 preload={isSmallScreen ? "none" : "auto"}
                 poster={publicAsset(
                   isSmallScreen
-                    ? "/media/onebonsai-hero-poster-mobile-1200.avif"
+                    ? "/media/onebonsai-hero-poster-mobile-v2.jpg"
                     : "/media/onebonsai-hero-poster-web-v3.jpg",
                 )}
                 disableRemotePlayback
@@ -355,28 +406,28 @@ export default function ScrollJourney() {
           </div>
 
           <div className="journey-copy">
-            {acts.slice(0, 3).map((entry, index) => {
+            {localizedActs.slice(0, 3).map((entry, index) => {
               const Heading = index === 0 ? "h1" : "h2";
               return (
-                <article key={entry.eyebrow} data-index={index} aria-hidden={activeAct !== index}>
+                <article key={entry.eyebrow} data-index={index} aria-hidden={index === 0 ? undefined : true}>
                   <p className="journey-eyebrow">{entry.eyebrow}</p>
                   <Heading><BouncyTitle>{entry.title}</BouncyTitle></Heading>
                   <p className="journey-body">{entry.copy}</p>
-                  {index === 0 && <a className="journey-cta" href="#contact">Plan your AI integration</a>}
+                  {index === 0 && <button className="journey-cta" type="button" onClick={openPlanIntegration}>{isArabic ? "خطّط لتكامل الذكاء الاصطناعي" : "Plan your AI integration"}</button>}
                 </article>
               );
             })}
           </div>
 
           <div className="journey-status" aria-hidden="true">
-            <span><i /> Secure by design</span>
-            <span>Built around your business</span>
+            <span><i /> {isArabic ? "الأمان جزء من التصميم" : "Secure by design"}</span>
+            <span>{isArabic ? "مصمّم حول أعمالكم" : "Built around your business"}</span>
           </div>
 
           <div className="journey-dark-panel">
             <div className="journey-dark-heading">
-              {acts.slice(3).map((entry, offset) => (
-                <article key={entry.eyebrow} data-index={offset + 3} aria-hidden={activeAct !== offset + 3}>
+              {localizedActs.slice(3).map((entry, offset) => (
+                <article key={entry.eyebrow} data-index={offset + 3} aria-hidden="true">
                   <p>{entry.eyebrow}</p>
                   <h2><BouncyTitle>{entry.title}</BouncyTitle></h2>
                   <span>{entry.copy}</span>
@@ -384,9 +435,9 @@ export default function ScrollJourney() {
               ))}
             </div>
 
-            <div className="journey-flow" aria-label="From existing systems to business value">
+            <div className="journey-flow" aria-label={isArabic ? "من الأنظمة القائمة إلى قيمة الأعمال" : "From existing systems to business value"}>
               <div className="journey-flow-line" aria-hidden="true"><i /></div>
-              {flowNodes.map((node, index) => (
+              {flowNodes[locale].map((node, index) => (
                 <div className="journey-flow-node" key={node} style={{ "--flow-index": index } as CSSProperties}>
                   <span>{node}</span>
                   <i aria-hidden="true" />
@@ -394,8 +445,8 @@ export default function ScrollJourney() {
               ))}
             </div>
 
-            <div className="journey-ownership-visuals" aria-label="Connected context, useful decisions, and team ownership">
-              {ownershipVisuals.map((visual, index) => (
+            <div className="journey-ownership-visuals" aria-label={isArabic ? "سياق مترابط وقرارات مفيدة وملكية الفريق" : "Connected context, useful decisions, and team ownership"}>
+              {ownershipVisuals[locale].map((visual, index) => (
                 <figure key={visual.label} style={{ "--visual-index": index } as CSSProperties}>
                   <Image
                     src={publicAsset(visual.image)}
@@ -411,11 +462,22 @@ export default function ScrollJourney() {
               ))}
             </div>
 
-            <a className="journey-dark-cta" href="#process">See how we work</a>
+            <a className="journey-dark-cta" href="#process">{isArabic ? "تعرّف إلى أسلوب عملنا" : "See how we work"}</a>
           </div>
 
           {!isReady && isSmallScreen === false && <div className="journey-loading" aria-hidden="true"><i /></div>}
         </div>
+      </div>
+      <div className="sr-only journey-accessible-steps">
+        <h2>{isArabic ? "كيف ننتقل من الفكرة إلى قدرة يملكها فريقكم" : "How we move from an idea to capability your team owns"}</h2>
+        <ol>
+          {localizedActs.slice(1).map((entry) => (
+            <li key={entry.eyebrow}>
+              <h3>{entry.title}</h3>
+              <p>{entry.copy}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

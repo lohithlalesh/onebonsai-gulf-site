@@ -1,55 +1,115 @@
 import type { Metadata, Viewport } from "next";
 import { preload } from "react-dom";
+import LocaleProvider from "./LocaleProvider";
+import { PlanIntegrationProvider } from "./PlanIntegrationModal";
+import { getRequestLocale } from "./i18n";
 import "./globals.css";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://obgulf.com");
+  (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://obgulf.com");
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
 const absoluteAsset = (path: string) => new URL(publicAsset(path), siteUrl).toString();
 
-const organizationJsonLd = {
+const siteJsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "OneBonsai Gulf",
-  url: siteUrl,
-  logo: absoluteAsset("/brand/onebonsai-gulf-black.png"),
-  image: absoluteAsset("/og.png"),
-  email: "info@onebonsai.com",
-  description:
-    "AI integration, custom software, workflow automation, immersive training, and secure AI adoption for UAE organizations.",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Abu Dhabi",
-    addressCountry: "AE",
-  },
-  areaServed: [
-    { "@type": "Country", name: "United Arab Emirates" },
-    { "@type": "Place", name: "Gulf Cooperation Council" },
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "OneBonsai Gulf",
+      legalName: "OneBonsai Gulf LLC",
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteAsset("/brand/onebonsai-gulf-black.png"),
+      },
+      image: absoluteAsset("/og.png"),
+      email: "info@onebonsai.com",
+      // [VERIFY: telephone] Reconfirm against the live business profile before deployment.
+      telephone: "+971 50 207 7215",
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        email: "info@onebonsai.com",
+        telephone: "+971 50 207 7215",
+        availableLanguage: ["English", "Arabic"],
+        areaServed: ["AE", "GCC"],
+      },
+      founder: { "@type": "Person", name: "Ivan M Grey", jobTitle: "Founder and CEO" },
+      foundingLocation: { "@type": "Place", name: "Abu Dhabi, United Arab Emirates" },
+      description:
+        "OneBonsai Gulf is an Abu Dhabi AI consulting and engineering company that advises, builds, integrates, and connects specialist capability for organizations in the UAE and GCC.",
+      address: {
+        "@type": "PostalAddress",
+        // [VERIFY: streetAddress] Reconfirm against the live business profile before deployment.
+        streetAddress: "SE45 02, Masdar City Free Zone, Masdar City",
+        addressLocality: "Abu Dhabi",
+        addressCountry: "AE",
+      },
+      areaServed: [
+        { "@type": "Country", name: "United Arab Emirates" },
+        { "@type": "Place", name: "Gulf Cooperation Council" },
+      ],
+      sameAs: [
+        "https://www.instagram.com/onebonsai_gulf/",
+        "https://ae.linkedin.com/company/thegreyworld",
+      ],
+      knowsAbout: [
+        "AI consulting",
+        "Enterprise AI integration",
+        "Agentic AI implementation",
+        "AI workflow automation",
+        "Custom software development",
+        "AI talent and specialists",
+        "Corporate AI training",
+        "Virtual reality training and simulation",
+        "Digital twins",
+        "Industrial simulation",
+        "AI talent and staff augmentation",
+        "UAE market entry",
+        "Cybersecurity",
+      ],
+      parentOrganization: {
+        "@type": "Organization",
+        name: "OneBonsai",
+        url: "https://onebonsai.com",
+      },
+      memberOf: {
+        "@type": "Organization",
+        name: "Masdar City Free Zone",
+        description: "Strategic partner of OneBonsai Gulf in Abu Dhabi",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "OneBonsai Gulf",
+      inLanguage: ["en-AE", "ar-AE"],
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
   ],
-  knowsAbout: [
-    "Enterprise AI integration",
-    "AI workflow automation",
-    "Custom software",
-    "AI training",
-    "Virtual reality training",
-    "Cybersecurity",
-    "SEO and answer engine optimization",
-  ],
-  sameAs: ["https://onebonsai.com"],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "AI Consulting & Integration in Abu Dhabi, UAE | OneBonsai Gulf",
+    default: "AI & Custom Software Abu Dhabi | OneBonsai Gulf",
     template: "%s | OneBonsai Gulf",
   },
   description:
-    "OneBonsai Gulf helps UAE organizations integrate AI, build custom software, automate workflows, train teams, and deploy secure AI from Abu Dhabi.",
+    "OneBonsai Gulf is an Abu Dhabi AI consulting and engineering company for enterprise AI integration, agentic AI, custom software, training, and specialists.",
   applicationName: "OneBonsai Gulf",
-  alternates: { canonical: siteUrl },
+  alternates: {
+    canonical: siteUrl,
+    languages: {
+      "en-AE": siteUrl,
+      "ar-AE": `${siteUrl}/ar`,
+      "x-default": siteUrl,
+    },
+  },
   manifest: publicAsset("/site.webmanifest"),
   robots: {
     index: true,
@@ -62,40 +122,30 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  keywords: [
-    "AI consulting Abu Dhabi",
-    "AI consulting UAE",
-    "AI integration UAE",
-    "AI automation UAE",
-    "custom AI solutions",
-    "enterprise AI",
-    "VR training UAE",
-    "AI marketing UAE",
-    "cybersecurity UAE",
-    "custom software Abu Dhabi",
-    "AI Academy",
-  ],
+  authors: [{ name: "OneBonsai Gulf", url: siteUrl }],
+  creator: "OneBonsai Gulf",
+  publisher: "OneBonsai Gulf",
   openGraph: {
     type: "website",
     locale: "en_AE",
     url: siteUrl,
     siteName: "OneBonsai Gulf",
-    title: "AI Consulting & Integration in Abu Dhabi, UAE",
+    title: "Custom Software & AI Integration in Abu Dhabi",
     description:
-      "Integrate AI, automate workflows, build custom software, and train teams with OneBonsai Gulf in Abu Dhabi.",
+      "AI consulting, enterprise integration, agentic AI, custom software, training, and specialist talent from Abu Dhabi.",
     images: [
       {
         url: absoluteAsset("/og.png"),
         width: 1536,
         height: 1024,
-        alt: "OneBonsai Gulf AI consulting and integration in Abu Dhabi",
+        alt: "OneBonsai Gulf custom software and AI integration in Abu Dhabi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Consulting & Integration in Abu Dhabi, UAE",
-    description: "Integrate AI, automate workflows, build custom software, and train teams with OneBonsai Gulf.",
+    title: "Custom Software & AI Integration in Abu Dhabi",
+    description: "AI consulting, enterprise integration, agentic AI, custom software, training, and specialist talent from Abu Dhabi.",
     images: [absoluteAsset("/og.png")],
   },
 };
@@ -105,19 +155,28 @@ export const viewport: Viewport = {
   themeColor: "#f2f4ef",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getRequestLocale();
+
   preload(publicAsset("/fonts/hanken-grotesk.woff2"), {
     as: "font",
     type: "font/woff2",
     crossOrigin: "anonymous",
   });
+  if (locale === "ar") {
+    preload(publicAsset("/fonts/ibm-plex-sans-arabic-regular.woff2"), {
+      as: "font",
+      type: "font/woff2",
+      crossOrigin: "anonymous",
+    });
+  }
 
   return (
-    <html lang="en-AE">
+    <html lang={locale === "ar" ? "ar-AE" : "en-AE"} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd).replace(/</g, "\\u003c") }}
         />
       </head>
       <body>
@@ -136,8 +195,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             font-weight: 400;
             font-display: swap;
           }
+          @font-face {
+            font-family: "IBM Plex Sans Arabic";
+            src: url("${publicAsset("/fonts/ibm-plex-sans-arabic-regular.woff2")}") format("woff2");
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+          }
+          @font-face {
+            font-family: "IBM Plex Sans Arabic";
+            src: url("${publicAsset("/fonts/ibm-plex-sans-arabic-semibold.woff2")}") format("woff2");
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+          }
         `}</style>
-        {children}
+        <LocaleProvider locale={locale}>
+          <PlanIntegrationProvider>{children}</PlanIntegrationProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

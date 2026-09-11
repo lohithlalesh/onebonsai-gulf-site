@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "onebonsai-gulf",
+  "account_id": "f56984770fdce1c460ede86c32b8d3a5",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "obgulf.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.obgulf.com",
+      "custom_domain": true
+    }
+  ],
+  "vars": {
+    "TURNSTILE_SITE_KEY": "0x4AAAAAAEwDEFV7Hpxl5InA"
+  },
+  "assets": {
+    "directory": "dist/client",
+    "not_found_handling": "none",
+    "binding": "ASSETS"
+  },
+  "images": {
+    "binding": "IMAGES"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "onebonsai-gulf-careers",
+      "database_id": "e01e6ece-d8b1-42d3-a07b-1eea968d59c6",
+      "migrations_dir": "drizzle"
+    }
+  ],
+  "triggers": {
+    "crons": ["0 3 * * *"]
+  }
+}
