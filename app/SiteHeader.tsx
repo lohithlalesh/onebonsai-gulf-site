@@ -40,7 +40,10 @@ export default function SiteHeader() {
 
     const updateHeader = () => {
       frame = 0;
-      const nextScrolled = window.scrollY > 72;
+      // Keep the compact-header transition off mobile. On iOS Safari, changing
+      // the height of a fixed, translucent header while the browser chrome is
+      // also resizing can cause the layer to flash during upward scrolling.
+      const nextScrolled = window.innerWidth > 760 && window.scrollY > 72;
       if (nextScrolled === scrolledRef.current) return;
       scrolledRef.current = nextScrolled;
       setIsScrolled(nextScrolled);
@@ -53,12 +56,19 @@ export default function SiteHeader() {
 
     updateHeader();
     window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
 
     return () => {
       window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("mobile-navigation-open", isMenuOpen);
+    return () => document.body.classList.remove("mobile-navigation-open");
+  }, [isMenuOpen]);
 
   useEffect(() => {
     if (!isMenuOpen) return;

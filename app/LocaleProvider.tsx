@@ -17,7 +17,7 @@ export default function LocaleProvider({ locale, children }: { locale: Locale; c
   const router = useRouter();
 
   useLayoutEffect(() => {
-    document.documentElement.lang = locale === "ar" ? "ar-AE" : "en-AE";
+    document.documentElement.lang = locale === "ar" ? "ar" : "en-AE";
     document.documentElement.dir = locale === "ar" ? "rtl" : "ltr";
     document.documentElement.dataset.locale = locale;
   }, [locale]);
@@ -25,7 +25,7 @@ export default function LocaleProvider({ locale, children }: { locale: Locale; c
   const switchLocale = () => {
     const nextLocale: Locale = locale === "ar" ? "en" : "ar";
     document.cookie = `${localeCookie}=${nextLocale}; Path=/; Max-Age=31536000; SameSite=Lax`;
-    document.documentElement.lang = nextLocale === "ar" ? "ar-AE" : "en-AE";
+    document.documentElement.lang = nextLocale === "ar" ? "ar" : "en-AE";
     document.documentElement.dir = nextLocale === "ar" ? "rtl" : "ltr";
     router.push(`${localizedPath(window.location.pathname, nextLocale)}${window.location.search}${window.location.hash}`);
   };

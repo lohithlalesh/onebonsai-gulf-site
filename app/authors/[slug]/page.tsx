@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
   const isArabic = locale === "ar";
 
   return {
-    title: `${author.name} — ${isArabic ? author.roleAr : author.role}`,
+    title: `${author.name}: ${isArabic ? author.roleAr : author.role}`,
     description: isArabic ? author.bioAr : author.bio,
     authors: [{ name: author.name, url: `${siteUrl}/authors/${author.slug}` }],
     alternates: localizedAlternates(`/authors/${author.slug}`, locale),
@@ -57,7 +57,7 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
     url: authorUrl,
-    name: `${author.name} — ${isArabic ? author.roleAr : author.role}`,
+    name: `${author.name}: ${isArabic ? author.roleAr : author.role}`,
     inLanguage: isArabic ? "ar-AE" : "en-AE",
     mainEntity: {
       "@type": "Person",

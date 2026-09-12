@@ -42,7 +42,7 @@ const requirementOptions: Array<{
   { value: "custom-software", en: "Custom Software", ar: "برمجيات مخصّصة" },
   { value: "ai-readiness", en: "AI Readiness", ar: "الجاهزية للذكاء الاصطناعي" },
   { value: "corporate-academy", en: "Corporate Academy", ar: "أكاديمية مؤسسية" },
-  { value: "tech-catch-up", en: "Just want to catch up on tech", ar: "مجرد دردشة حول التقنية" },
+  { value: "tech-catch-up", en: "Just want to catch up on tech", ar: "أرغب فقط في مناقشة التقنية" },
   { value: "other", en: "Other", ar: "أخرى" },
 ];
 

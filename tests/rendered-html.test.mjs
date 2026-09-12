@@ -54,7 +54,7 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 
   const html = await response.text();
-  assert.match(html, /<title>AI &amp; Custom Software Abu Dhabi \| OneBonsai Gulf<\/title>/i);
+  assert.match(html, /<title>AI Company in Abu Dhabi &amp; Custom Software \| OneBonsai Gulf<\/title>/i);
   assert.match(html, /rel="canonical" href="https:\/\/obgulf\.com/);
   assert.match(html, /og-v2\.jpg/);
   assert.match(html, /application\/ld\+json/);
@@ -149,7 +149,7 @@ test("renders the consolidated About, work, and team experience", async () => {
   assert.match(aboutHtml, /hrefLang="ar-AE" href="https:\/\/obgulf\.com\/ar\/about"/);
 
   const arabicAboutHtml = await arabicAboutResponse.text();
-  assert.match(arabicAboutHtml, /<html lang="ar-AE" dir="rtl"/);
+  assert.match(arabicAboutHtml, /<html lang="ar" dir="rtl"/);
   assert.match(arabicAboutHtml, /rel="canonical" href="https:\/\/obgulf\.com\/ar\/about"/);
   assert.match(arabicAboutHtml, /شركة ذكاء اصطناعي من أبوظبي/);
   assert.doesNotMatch(arabicAboutHtml, /نستشير\. نبني\. نربط\./);
@@ -157,10 +157,10 @@ test("renders the consolidated About, work, and team experience", async () => {
 
   const workHtml = await workResponse.text();
   assert.match(workHtml, /AI, software, and immersive training built for high-stakes work\./);
-  assert.match(workHtml, /Hospital group — from fragmented processes to an AI roadmap/);
+  assert.match(workHtml, /Hospital group: from fragmented processes to an AI roadmap/);
   assert.match(workHtml, /AI-assisted quality assurance for digital delivery/);
   assert.match(workHtml, /Immersive maintenance training without live asset risk/);
-  assert.match(workHtml, /Vyonix — an AI-ready digital product passport/);
+  assert.match(workHtml, /Vyonix: an AI-ready digital product passport/);
   assert.match(workHtml, /Simplify Suite turns fragmented business administration into one operating space/);
   assert.match(workHtml, /Blinking\.id makes regulated onboarding configurable/);
   assert.match(workHtml, /\/work\/healthcare-simulation\.avif/);
@@ -170,7 +170,7 @@ test("renders the consolidated About, work, and team experience", async () => {
   assert.match(workHtml, /rel="canonical" href="https:\/\/obgulf\.com\/work/);
 
   const arabicWorkHtml = await arabicWorkResponse.text();
-  assert.match(arabicWorkHtml, /<html lang="ar-AE" dir="rtl"/);
+  assert.match(arabicWorkHtml, /<html lang="ar" dir="rtl"/);
   assert.match(arabicWorkHtml, /يجمع Simplify Suite إدارة الأعمال المشتتة/);
   assert.match(arabicWorkHtml, /Blinking\.id هو شريكنا المتخصص/);
   assert.match(arabicWorkHtml, /rel="canonical" href="https:\/\/obgulf\.com\/ar\/work/);
@@ -215,7 +215,7 @@ test("renders the bilingual progressive careers experience with AI fluency and p
   assert.match(careersHtml, /rel="canonical" href="https:\/\/obgulf\.com\/careers"/);
 
   const arabicCareersHtml = await arabicCareersResponse.text();
-  assert.match(arabicCareersHtml, /<html lang="ar-AE" dir="rtl"/);
+  assert.match(arabicCareersHtml, /<html lang="ar" dir="rtl"/);
   assert.match(arabicCareersHtml, /هل تشمل مهاراتك الذكاء الاصطناعي؟/);
   assert.match(arabicCareersHtml, /نريدك معنا\./);
   assert.match(arabicCareersHtml, /rel="canonical" href="https:\/\/obgulf\.com\/ar\/careers"/);
@@ -274,11 +274,11 @@ test("renders and validates the bilingual AI integration enquiry flow", async ()
   const arabicHomeHtml = await arabicHomeResponse.text();
   assert.match(arabicHomeHtml, /لنتحدث عمّا يحتاج إلى التقدّم\./);
   assert.match(arabicHomeHtml, /الذكاء الاصطناعي الوكيلي/);
-  assert.match(arabicHomeHtml, /مجرد دردشة حول التقنية/);
+  assert.match(arabicHomeHtml, /أرغب فقط في مناقشة التقنية/);
   assert.match(arabicHomeHtml, /إرسال الطلب/);
 
   const confirmationHtml = await confirmationResponse.text();
-  assert.match(confirmationHtml, /Thank you — your enquiry has been sent\./);
+  assert.match(confirmationHtml, /Thank you\. Your enquiry has been sent/);
 
   assert.equal(invalidResponse.status, 400);
   assert.deepEqual(await invalidResponse.json(), { success: false, error: "A full name is required." });
@@ -448,10 +448,10 @@ test("keeps high-resolution scroll media, UAE imagery, and private sector-level 
   assert.match(caseStudies, /Challenge/);
   assert.match(caseStudies, /Approach/);
   assert.match(caseStudies, /Outcome/);
-  assert.match(caseStudies, /Hospital group — from fragmented processes to an AI roadmap/);
+  assert.match(caseStudies, /Hospital group: from fragmented processes to an AI roadmap/);
   assert.match(caseStudies, /AI-assisted quality assurance for digital delivery/);
   assert.match(caseStudies, /Immersive maintenance training without live asset risk/);
-  assert.match(caseStudies, /Vyonix — an AI-ready digital product passport/);
+  assert.match(caseStudies, /Vyonix: an AI-ready digital product passport/);
   assert.doesNotMatch(caseStudies, /target="_blank"|onebonsai\.com\/cases/);
   assert.match(page, /infrastructure-intelligence-v2\.avif/);
   assert.match(css, /\.journey-film/);
@@ -709,6 +709,7 @@ test("gives every canonical sitemap route one H1 and complete search metadata", 
     assert.match(html, /<title>[^<]+<\/title>/i, `${canonicalUrl} should have a title`);
     assert.match(html, /<meta name="description" content="[^"]+"\/>/i, `${canonicalUrl} should have a description`);
     assert.equal(html.match(/rel="canonical" href="([^"]+)"/i)?.[1], canonicalUrl.replace(/\/$/, "") || canonicalUrl);
+    assert.doesNotMatch(html, /\u2014/, `${canonicalUrl} should not contain an em dash`);
   }
 });
 

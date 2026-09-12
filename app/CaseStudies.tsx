@@ -4,7 +4,7 @@ const caseLibraries = {
   en: [
     {
       sector: "Healthcare",
-      title: "Hospital group — from fragmented processes to an AI roadmap",
+      title: "Hospital group: from fragmented processes to an AI roadmap",
       challenge:
         "Patient information was spread across multiple systems. Appointment and administrative workflows were manual, waiting times were long, and staff repeated the same tasks. Leadership wanted to use AI but had no agreed starting point.",
       approach:
@@ -46,7 +46,7 @@ const caseLibraries = {
     },
     {
       sector: "Product traceability",
-      title: "Vyonix — an AI-ready digital product passport",
+      title: "Vyonix: an AI-ready digital product passport",
       challenge:
         "A brand needed product traceability and compliance information. The requirement was not framed as an AI problem; it was a need to make product identity, material, origin, and lifecycle evidence usable.",
       approach:
@@ -63,7 +63,7 @@ const caseLibraries = {
   ar: [
     {
       sector: "الرعاية الصحية",
-      title: "مجموعة مستشفيات — من عمليات متفرقة إلى خارطة طريق للذكاء الاصطناعي",
+      title: "مجموعة مستشفيات: من عمليات متفرقة إلى خارطة طريق للذكاء الاصطناعي",
       challenge:
         "كانت معلومات المرضى موزعة بين أنظمة متعددة، بينما اعتمدت المواعيد والإجراءات الإدارية على العمل اليدوي وتكرار المهام. أرادت الإدارة توظيف الذكاء الاصطناعي، لكن لم يكن هناك اتفاق على نقطة البداية.",
       approach:
@@ -105,7 +105,7 @@ const caseLibraries = {
     },
     {
       sector: "تتبّع المنتجات",
-      title: "Vyonix — جواز منتج رقمي مهيأ للذكاء الاصطناعي",
+      title: "Vyonix: جواز منتج رقمي مهيأ للذكاء الاصطناعي",
       challenge:
         "احتاجت إحدى العلامات إلى تتبع المنتجات وإتاحة معلومات الامتثال. لم تكن الحاجة مصاغة كمشكلة ذكاء اصطناعي، بل كضرورة لجعل هوية المنتج ومواده ومنشئه وأدلة دورة حياته قابلة للاستخدام.",
       approach:

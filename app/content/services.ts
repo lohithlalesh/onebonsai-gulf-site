@@ -31,7 +31,7 @@ export const services: Service[] = [
     description:
       "AI consulting in Abu Dhabi for UAE organizations that need a practical strategy, prioritized use cases, governance, and a clear route from pilot to production.",
     summary:
-      "We work with leaders and delivery teams to identify where AI can create measurable value, what must be true for implementation to succeed, and which use case should move first. The result is a decision-ready plan—not a catalogue of tools.",
+      "We work with leaders and delivery teams to identify where AI can create measurable value, what must be true for implementation to succeed, and which use case should move first. The result is a decision-ready plan, not a catalogue of tools.",
     image: "/media/capability-consulting-v1.jpg",
     imageAlt: "OneBonsai Gulf AI consulting workshop in Abu Dhabi",
     primaryKeyword: "AI consulting Abu Dhabi",
@@ -146,7 +146,7 @@ export const services: Service[] = [
     description:
       "Agentic AI implementation in the UAE for enterprises that need controlled automation across data, software, approvals, and human teams.",
     summary:
-      "Agentic AI is useful when a system must complete a bounded sequence of work—not when a chatbot is simply renamed an agent. We define the job, available tools, permissions, stopping conditions, and human checkpoints before automating it.",
+      "Agentic AI is useful when a system must complete a bounded sequence of work, not when a chatbot is simply renamed an agent. We define the job, available tools, permissions, stopping conditions, and human checkpoints before automating it.",
     image: "/media/capability-ai-integration-v1.jpg",
     imageAlt: "Governed agentic AI workflow for a UAE enterprise",
     primaryKeyword: "agentic AI UAE implementation",
@@ -164,7 +164,7 @@ export const services: Service[] = [
       { title: "Operations and observability", copy: "Record inputs, tool calls, decisions, approvals, cost, latency, and outcomes so teams can manage the system." },
     ],
     process: [
-      { title: "Choose a bounded workflow", copy: "Start where inputs, outputs, tools, and owners can be defined—not with an open-ended mandate." },
+      { title: "Choose a bounded workflow", copy: "Start where inputs, outputs, tools, and owners can be defined, not with an open-ended mandate." },
       { title: "Set authority levels", copy: "Specify what the agent may read, draft, recommend, or execute and where people must intervene." },
       { title: "Test against reality", copy: "Use representative cases, edge conditions, hostile inputs, and failure scenarios to evaluate behavior." },
       { title: "Release with supervision", copy: "Introduce the agent to a limited group, monitor outcomes, and expand authority only when evidence supports it." },
@@ -228,7 +228,7 @@ export const services: Service[] = [
           "Commercial terms should address intellectual-property assignment, third-party and open-source components, credentials, documentation, data export, warranty obligations, and the conditions for transition to another team. Source-code escrow or contractual step-in rights may be appropriate where a system is operationally critical. UAE legal advice should be obtained for the final contract; our role is to make the technical dependencies and handover evidence explicit.",
         ],
         points: [
-          "Tie payments to accepted, demonstrable increments—not activity reports.",
+          "Tie payments to accepted, demonstrable increments, not activity reports.",
           "Keep production credentials and core cloud accounts under client control.",
           "Require a software bill of materials and dependency policy where risk warrants it.",
           "Define documentation, training, and transition as deliverables from the start.",
@@ -244,7 +244,7 @@ export const services: Service[] = [
       {
         title: "Define what production-ready means before the first sprint.",
         copy: [
-          "A first release is not production-ready simply because its core screen works. The release definition should include identity and role access, data validation, audit events, performance under realistic load, accessibility, backup and recovery, operational monitoring, user support, and a controlled deployment path. Bilingual services should test complete Arabic and English journeys—including right-to-left layout—rather than translating isolated labels at the end.",
+          "A first release is not production-ready simply because its core screen works. The release definition should include identity and role access, data validation, audit events, performance under realistic load, accessibility, backup and recovery, operational monitoring, user support, and a controlled deployment path. Bilingual services should test complete Arabic and English journeys, including right-to-left layout, rather than translating isolated labels at the end.",
           "Quality evidence belongs inside each milestone. Automated tests should cover critical business rules and integrations; security checks should cover dependencies, secrets, authorization, and likely misuse; product analytics should show whether users complete the intended job. The team should rehearse rollback and recovery before the application carries business-critical work.",
         ],
         points: [
@@ -271,7 +271,7 @@ export const services: Service[] = [
     description:
       "Corporate AI training in the UAE for executives, business teams, and technical leaders, built around real workflows, responsible use, and practical adoption.",
     summary:
-      "AI training works when it changes how people perform a real job. We tailor programs to the decisions, tools, policies, and data each audience handles—from executive oversight to everyday knowledge work and technical delivery.",
+      "AI training works when it changes how people perform a real job. We tailor programs to the decisions, tools, policies, and data each audience handles, from executive oversight to everyday knowledge work and technical delivery.",
     image: "/media/uae-ai-workshop-v1.jpg",
     imageAlt: "Corporate AI training workshop for UAE leaders and teams",
     primaryKeyword: "AI courses in UAE",
@@ -401,7 +401,7 @@ export const services: Service[] = [
         title: "Plan licences around concurrent use, not headcount.",
         copy: [
           "Fire, First Aid, and Hazard Spotting each cost €2,000 per licence per year. A licence is consumed while a learner is using the module; it is not permanently assigned to one person. This concurrent model allows the same licence to train several people in sequence, so the right quantity depends on the module duration, available headsets, shift pattern, locations, and deadline.",
-          "A 100-person organisation training everyone within one week typically needs around four licences—roughly €8,000–10,000—because an eight-hour shift pattern limits how many people can pass through a single headset. Educational institutions receive 50% off all modules. The calculation should be based on the actual delivery window rather than buying one licence for every employee.",
+          "A 100-person organisation training everyone within one week needs around four licences, roughly €8,000–10,000, because an eight-hour shift pattern limits how many people can pass through a single headset. Educational institutions receive 50% off all modules. The calculation should be based on the delivery window rather than buying one licence for every employee.",
         ],
         points: [
           "Software licences are sold separately from the hardware chosen by the client.",
@@ -520,7 +520,7 @@ export const services: Service[] = [
       {
         title: "Evaluate a UAE systems integrator on operating evidence.",
         copy: [
-          "A proposal should show how the partner will inspect existing architecture, work with incumbent vendors, protect production systems, and demonstrate value before a broad rollout. Ask to see sample interface contracts, architecture decision records, automated tests, monitoring views, release controls, and handover material—not only a list of technologies or partner badges.",
+          "A proposal should show how the partner will inspect existing architecture, work with incumbent vendors, protect production systems, and demonstrate value before a broad rollout. Ask to see sample interface contracts, architecture decision records, automated tests, monitoring views, release controls, and handover material, not only a list of technologies or partner badges.",
           "For system integration companies in Dubai or Abu Dhabi, local availability can help with workshops, stakeholder coordination, and restricted environments, but it is not a substitute for engineering discipline. Commercial evaluation should cover milestone acceptance, defect responsibility, subcontractors, third-party licensing, data access, source ownership, warranty, support response, and transition rights.",
         ],
         points: [
@@ -643,7 +643,7 @@ export const services: Service[] = [
         points: [
           "Define the critical service and acceptable recovery objectives.",
           "Test identity and privileged-access paths across employees, suppliers, and machines.",
-          "Verify that logs support detection and investigation—not only retention.",
+          "Verify that logs support detection and investigation, not only retention.",
           "Assign remediation owners and retest material findings.",
         ],
       },
@@ -760,7 +760,7 @@ export const services: Service[] = [
         title: "Evaluate an application development company on delivery control.",
         copy: [
           "A strong Abu Dhabi or UAE application development company should be able to explain how product decisions, architecture, security, testing, and release ownership work together. Ask who owns the backlog and technical decisions, where source code and cloud environments live, how quality is measured, and what evidence is required before a milestone is accepted.",
-          "Relevant experience is more than a portfolio image. Look for evidence of production operation, integration with comparable systems, accessibility and performance practice, secure development, support, and a clean client handover. References should describe how the team handled uncertainty and failure—not only whether the interface looked polished.",
+          "Relevant experience is more than a portfolio image. Look for evidence of production operation, integration with comparable systems, accessibility and performance practice, secure development, support, and a clean client handover. References should describe how the team handled uncertainty and failure, not only whether the interface looked polished.",
         ],
         points: [
           "Use paid discovery to retire material uncertainty before a large estimate.",
@@ -772,7 +772,7 @@ export const services: Service[] = [
       {
         title: "Make IP, escrow, and exit terms explicit.",
         copy: [
-          "The contract should state which project-specific materials are assigned to the client, which pre-existing components remain with a supplier, how open-source and commercial dependencies are handled, and when ownership transfers. The UAE Federal Copyright Law—Federal Decree-Law No. 38 of 2021—forms part of the legal context, but specific drafting and enforceability should be reviewed by UAE counsel.",
+          "The contract should state which project-specific materials are assigned to the client, which pre-existing components remain with a supplier, how open-source and commercial dependencies are handled, and when ownership transfers. The UAE Federal Copyright Law, Federal Decree-Law No. 38 of 2021, forms part of the legal context, but specific drafting and enforceability should be reviewed by UAE counsel.",
           "Operational independence also requires the practical assets: current source, build instructions, infrastructure definitions, credentials under client control, architecture records, test suites, a software bill of materials where appropriate, and data export procedures. Source-code escrow or step-in provisions may reduce continuity risk when the application is critical and immediate repository access alone is insufficient.",
         ],
         points: [
@@ -792,7 +792,7 @@ export const services: Service[] = [
       {
         title: "Design for UAE operation from the first release.",
         copy: [
-          "Production design should account for Arabic and English experiences where required, right-to-left layout, accessibility, mobile conditions, identity integration, local support expectations, and the location and sensitivity of data. Hosting in a UAE cloud region may support residency objectives, but the full data path—including backups, analytics, logs, support access, and third-party APIs—must be reviewed.",
+          "Production design should account for Arabic and English experiences where required, right-to-left layout, accessibility, mobile conditions, identity integration, local support expectations, and the location and sensitivity of data. Hosting in a UAE cloud region may support residency objectives, but the full data path, including backups, analytics, logs, support access, and third-party APIs, must be reviewed.",
           "Where personal data is processed, teams should map purpose, fields, access, retention, deletion, and transfers so the organization can assess the UAE Personal Data Protection Law and any sector or free-zone obligations. Technical controls support that assessment; they do not replace qualified legal advice.",
         ],
       },
@@ -825,7 +825,7 @@ export const services: Service[] = [
     description:
       "AI talent in the UAE from a curated network of 50+ vetted AI and IT specialists for project, fractional, embedded, and full-team delivery.",
     summary:
-      "OneBonsai Gulf connects a defined business and delivery need to a curated network of more than 50 vetted AI and IT specialists, local and international. Engage one fractional advisor, an expert embedded with your team, or a multidisciplinary delivery unit—and change the capacity as the work evolves.",
+      "OneBonsai Gulf connects a defined business and delivery need to a curated network of more than 50 vetted AI and IT specialists, local and international. Engage one fractional advisor, an expert embedded with your team, or a multidisciplinary delivery unit, and change the capacity as the work evolves.",
     image: "/media/uae-ai-boardroom-v1.jpg",
     imageAlt: "AI specialists planning an enterprise delivery program in Abu Dhabi",
     primaryKeyword: "AI talent UAE",
@@ -1059,7 +1059,7 @@ export const services: Service[] = [
     description:
       "UAE market entry from Abu Dhabi: entity setup, licensing, visas, partner introductions, representation, and a team that can also build the technology.",
     summary:
-      "OneBonsai Gulf is a strategic partner of Masdar City Free Zone in Abu Dhabi. We provide international technology companies entering the GCC—and regional companies expanding through the OneBonsai group's European network—with a combined technical, operational, and administrative launchpad.",
+      "OneBonsai Gulf is a strategic partner of Masdar City Free Zone in Abu Dhabi. We provide international technology companies entering the GCC, and regional companies expanding through the OneBonsai group's European network, with a combined technical, operational, and administrative launchpad.",
     image: "/media/uae-port-ai-v1.jpg",
     imageAlt: "Abu Dhabi gateway connecting businesses into the GCC and international markets",
     primaryKeyword: "UAE market entry",

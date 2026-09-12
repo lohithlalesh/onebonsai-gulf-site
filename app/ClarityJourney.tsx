@@ -129,7 +129,9 @@ export default function ClarityJourney() {
                 key={step.label}
                 className={index === activeIndex ? "is-active" : undefined}
                 onClick={() => selectStep(index)}
-                aria-label={isArabic ? `اعرض الخطوة ${index + 1}: ${step.label}` : `Show step ${index + 1}: ${step.label}`}
+                aria-label={isArabic
+                  ? `${String(index + 1).padStart(2, "0")}: اعرض الخطوة ${index + 1}: ${step.label}`
+                  : `${String(index + 1).padStart(2, "0")}: Show step ${index + 1}: ${step.label}`}
                 aria-pressed={index === activeIndex}
               >
                 <span className="clarity-orbit-marker">

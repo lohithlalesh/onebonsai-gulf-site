@@ -21,7 +21,7 @@ export default function EnquiryConfirmationBanner({ show }: { show: boolean }) {
 
   return (
     <div className="enquiry-confirmation" role="status" aria-live="polite">
-      <p>{isArabic ? "شكراً، وصلنا طلبكم. سيتواصل معكم فريقنا قريباً." : "Thank you — your enquiry has been sent. Our team will be in touch shortly."}</p>
+      <p>{isArabic ? "شكراً، وصلنا طلبكم. سيتواصل معكم فريقنا قريباً." : "Thank you. Your enquiry has been sent, and our team will be in touch shortly."}</p>
       <button type="button" aria-label={isArabic ? "إغلاق التأكيد" : "Dismiss confirmation"} onClick={() => setIsVisible(false)}>×</button>
     </div>
   );

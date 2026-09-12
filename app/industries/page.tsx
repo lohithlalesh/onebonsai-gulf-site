@@ -49,7 +49,7 @@ export default function IndustriesPage() {
             <h1 id="industries-page-title">Applied AI for the systems the Gulf depends on.</h1>
           </div>
           <div>
-            <p>Every sector has different data, risk, users, and operating constraints. We start there—then combine strategy, software, integration, specialist expertise, and training around a real workflow.</p>
+            <p>Every sector has different data, risk, users, and operating constraints. We start there, then combine strategy, software, integration, specialist expertise, and training around a real workflow.</p>
             <PlanIntegrationButton className="primary-button">Discuss your sector</PlanIntegrationButton>
           </div>
         </section>

@@ -23,7 +23,7 @@ const publicAsset = (path: string) => `${assetBase}${path}`;
 
 const acts: Record<"en" | "ar", Act[]> = { en: [
   {
-    eyebrow: "Custom software and AI integration in Abu Dhabi",
+    eyebrow: "AI company in Abu Dhabi",
     title: "Custom software and AI integration, built in Abu Dhabi.",
     copy: "AI that works with the business you already run. We advise, build, integrate, and help your team operate the result.",
     signal: "OneBonsai Gulf. Abu Dhabi.",

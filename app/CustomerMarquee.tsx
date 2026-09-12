@@ -45,7 +45,9 @@ export default function CustomerMarquee() {
         <p id="customer-marquee-title">{isArabic ? "موضع ثقة جهات تبني ما هو آتٍ" : "Trusted by organizations building what comes next"}</p>
         <button
           type="button"
-          aria-label={isArabic ? (paused ? "تشغيل شعارات العملاء" : "إيقاف شعارات العملاء") : (paused ? "Play customer logos" : "Pause customer logos")}
+          aria-label={isArabic
+            ? `${paused ? "تشغيل شعارات العملاء" : "إيقاف شعارات العملاء"}: الإمارات / العالم`
+            : `${paused ? "Play customer logos" : "Pause customer logos"}: UAE / GLOBAL`}
           aria-pressed={paused}
           onClick={() => setPaused((value) => !value)}
         >

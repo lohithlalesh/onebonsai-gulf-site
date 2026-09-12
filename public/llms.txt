@@ -1,6 +1,6 @@
 # OneBonsai Gulf
 
-> OneBonsai Gulf is an Abu Dhabi AI consulting and engineering company. We help UAE and Gulf organizations select valuable AI use cases, build custom software, integrate AI with existing systems, implement governed AI agents, develop workforce capability, and create immersive training.
+> OneBonsai Gulf is an AI company in Abu Dhabi focused on consulting, engineering, and custom software development. We help UAE and Gulf organizations select valuable AI use cases, integrate AI with existing systems, implement governed AI agents, develop workforce capability, and create immersive training.
 
 ## Primary pages
 
@@ -13,7 +13,7 @@
 - [Digital twins & simulation](https://obgulf.com/services/digital-twins-simulation): Operational modelling, industrial simulation, and repeatable procedure training
 - [UAE market entry](https://obgulf.com/services/uae-market-entry): Abu Dhabi entity setup, licensing, visas, introductions, representation, and technical execution
 - [Industries](https://obgulf.com/industries): Sector-specific opportunity areas and operating considerations
-- [Work](https://obgulf.com/work): Selected projects from the OneBonsai delivery network
+- [Work](https://obgulf.com/work): Custom software development, enterprise AI, and immersive training work delivered from Abu Dhabi
 - [Insights](https://obgulf.com/insights): Practical UAE AI implementation and industry guides
 - [About](https://obgulf.com/about): Company, founder, delivery model, and team
 - [Contact](https://obgulf.com/contact): Direct business enquiry information
@@ -27,7 +27,7 @@ Our guidance distinguishes general operational information from legal, regulator
 - More than 80,000 people have trained on immersive solutions across the OneBonsai group.
 - More than 70 case studies and work for more than 49 clients have been delivered across the OneBonsai group.
 - OneBonsai Gulf is a strategic partner of Masdar City Free Zone in Abu Dhabi.
-- Four ready-made VR modules—Fire, First Aid, Hazard Spotting, and Cybersecurity—each include an AI avatar.
+- Four ready-made VR modules, Fire, First Aid, Hazard Spotting, and Cybersecurity, each include an AI avatar.
 - AI experts on demand are selected from a curated network of more than 50 vetted AI and IT specialists, local and international.
 
 ## Contact

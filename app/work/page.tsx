@@ -12,10 +12,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://obgulf.com";
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getRequestLocale();
   const isArabic = locale === "ar";
-  const title = isArabic ? "أعمال الذكاء الاصطناعي والبرمجيات" : "AI & Software Case Studies";
+  const title = isArabic ? "أعمال الذكاء الاصطناعي والبرمجيات" : "Custom Software Development Abu Dhabi";
   const description = isArabic
     ? "أمثلة على أعمال OneBonsai Gulf في الذكاء الاصطناعي والبرمجيات والتدريب الغامر، إضافة إلى Simplify Suite وشريك التحقق Blinking.id."
-    : "See OneBonsai Gulf work across AI, software, immersive training, Simplify Suite, and our Blinking.id identity-verification partnership.";
+    : "Explore custom software development in Abu Dhabi, enterprise AI work, immersive training, Simplify Suite, and our Blinking.id partnership.";
 
   return {
     title,
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       url: isArabic ? `${siteUrl}/ar/work` : `${siteUrl}/work`,
       locale: isArabic ? "ar_AE" : "en_AE",
-      title: isArabic ? "أعمال مختارة | OneBonsai Gulf" : "Selected work | OneBonsai Gulf",
+      title: isArabic ? "أعمال مختارة | OneBonsai Gulf" : "Custom software development work in Abu Dhabi",
       description,
     },
   };
@@ -54,7 +54,7 @@ export default async function WorkPage() {
               <p>
                 {isArabic
                   ? "نستعرض مشكلات تشغيلية حقيقية، وخيار التنفيذ في كل حالة، والأدلة التي صُمم العمل لإنتاجها. تبقى هويات العملاء خاصة، بينما يظل منطق القرار واضحاً."
-                  : "Real operating problems, the delivery choice made for each, and the evidence the work was designed to produce. Client identities remain private; the decision pattern stays visible."}
+                  : "Our custom software development work in Abu Dhabi starts with a real operating problem, then makes the delivery choice and intended evidence explicit. Client identities remain private; the decision pattern stays visible."}
               </p>
             </div>
           </header>

@@ -113,13 +113,13 @@ export const insights: Insight[] = [
         heading: "What changed in the UAE in 2026",
         paragraphs: [
           "On 23 April 2026, the UAE Cabinet announced a National Agentic AI System framework intended to transform 50% of federal government sectors, services, and operations into agentic AI applications within two years. The Cabinet approved phase one on 18 May 2026, alongside job categories and training plans for more than 80,000 federal employees.",
-          "This is best understood as a federal government implementation direction—not a general legal mandate requiring every UAE company to automate half of its operations. For enterprise leaders, however, it raises the expected standard: proposals should move beyond chat interfaces and show how governed AI can complete bounded work inside real operating systems.",
+          "This is best understood as a federal government implementation direction, not a general legal mandate requiring every UAE company to automate half of its operations. For enterprise leaders, however, it raises the expected standard: proposals should move beyond chat interfaces and show how governed AI can complete bounded work inside real operating systems.",
         ],
       },
       {
         heading: "Define the agent as an operating role",
         paragraphs: [
-          "An AI agent pursues a defined goal by selecting steps and using approved tools. It may retrieve records, compare options, draft a response, prepare a case update, or trigger a controlled system action. Production implementation is therefore an operating-model decision: it includes identity, data access, permissions, evaluation, monitoring, fallback behavior, and accountable ownership—not only a model and a prompt.",
+          "An AI agent pursues a defined goal by selecting steps and using approved tools. It may retrieve records, compare options, draft a response, prepare a case update, or trigger a controlled system action. Production implementation is therefore an operating-model decision: it includes identity, data access, permissions, evaluation, monitoring, fallback behavior, and accountable ownership, not only a model and a prompt.",
           "Choose one repeatable workflow with a named owner, measurable baseline, accessible sources, a small tool set, and exceptions that staff already know how to handle. Good first candidates include assembling a service-case brief, preparing a maintenance work order for approval, or checking a submission for missing evidence.",
         ],
         bullets: ["Business outcome, baseline, and accountable owner", "Trigger and completion condition", "Authoritative data and approved tools", "Read, recommend, prepare, approve, and execute permissions", "Stopping and escalation conditions", "Evidence retained for operational review"],
@@ -267,11 +267,11 @@ export const insights: Insight[] = [
       { heading: "Select support roles carefully", paragraphs: ["Strong early opportunities often support people rather than replace command or safety authority. They can improve retrieval from approved technical knowledge, maintenance planning, simulation, training debriefs, sensor triage, logistics, or preparation of material for review. Suitability depends on consequence, data, environment, and assurance requirements."] },
       { heading: "Engineer for the operating environment", paragraphs: ["Architecture must reflect classification, network boundaries, supply-chain controls, identity, device constraints, resilience, and the possibility of disconnected or degraded operation. Models, dependencies, and update mechanisms need the same scrutiny as other software in the system."] },
       { heading: "Evaluate beyond normal accuracy", paragraphs: ["Test edge conditions, adversarial manipulation, sensor or data degradation, ambiguous instructions, inappropriate tool use, and operator over-reliance. Simulation can help teams observe how the human and system behave together under pressure."], bullets: ["Mission-relevant test cases", "Adversarial and deceptive inputs", "Uncertainty and abstention", "Authority and override behavior", "Traceability and debrief evidence", "Failure and recovery drills"] },
-      { heading: "Scale through assurance", paragraphs: ["Expand scope only when operational evidence, security review, training, and governance support it. Maintain configuration records, model and data lineage, change control, monitoring, and a responsible owner. In security-critical work, disciplined limits are part of capability—not a constraint around it."] },
+      { heading: "Scale through assurance", paragraphs: ["Expand scope only when operational evidence, security review, training, and governance support it. Maintain configuration records, model and data lineage, change control, monitoring, and a responsible owner. In security-critical work, disciplined limits are part of capability, not a constraint around it."] },
     ],
     faqs: [
       { question: "Where can AI support defence and aerospace organizations?", answer: "Potential areas include training and simulation, maintenance intelligence, secure knowledge access, logistics, sensor triage, planning support, and cyber operations. Every use case requires context-specific security and authority review." },
-      { question: "Can AI make high-stakes decisions autonomously?", answer: "Authority should be determined by law, policy, consequence, assurance, and accountable command—not by technical possibility. Many valuable systems support qualified decision-makers without replacing them." },
+      { question: "Can AI make high-stakes decisions autonomously?", answer: "Authority should be determined by law, policy, consequence, assurance, and accountable command, not by technical possibility. Many valuable systems support qualified decision-makers without replacing them." },
     ],
     sources: [officialSources.aiEthics, officialSources.uaeStrategy],
   },
@@ -332,7 +332,7 @@ export const insights: Insight[] = [
     readTime: "8 min read",
     tldr: ["Map the operational control loop and safety owner.", "Use AI to improve context, prediction, and coordination where evidence supports it.", "Integrate with operational systems and exception procedures.", "Validate in simulation and supervised operation before expanding authority."],
     sections: [
-      { heading: "Start with an operational control loop", paragraphs: ["Transportation performance depends on sensing, planning, coordination, execution, and recovery. Choose one loop—maintenance planning, turnaround coordination, disruption response, fleet allocation, or customer communication—and map the data, systems, people, and timing constraints inside it."] },
+      { heading: "Start with an operational control loop", paragraphs: ["Transportation performance depends on sensing, planning, coordination, execution, and recovery. Choose one loop, such as maintenance planning, turnaround coordination, disruption response, fleet allocation, or customer communication, and map the data, systems, people, and timing constraints inside it."] },
       { heading: "Choose use cases by operational evidence", paragraphs: ["AI may help interpret maintenance records, forecast demand, detect anomalies, summarize disruption context, coordinate responses, or personalize service. The value comes from a better operational decision or faster recovery, not from an isolated prediction score."] },
       { heading: "Respect safety and authority boundaries", paragraphs: ["Separate advisory, preparatory, and executable actions. Define when a controller, engineer, dispatcher, driver, or other qualified person must review. Record source data and system recommendations so events can be understood later. Degraded and manual modes must remain workable."] },
       { heading: "Test the abnormal day", paragraphs: ["Normal operations are not enough. Evaluate weather disruption, missing sensors, incorrect records, changing capacity, cyber incidents, conflicting priorities, and unavailable integrations. Use simulation or shadow operation to observe the joint performance of people and system before changing authority."], bullets: ["Safety case and accountable owner", "Real-time data quality", "System latency and availability", "Human factors and alert load", "Fallback operation", "Post-event review"] },
@@ -362,7 +362,7 @@ export const insights: Insight[] = [
       { heading: "Measure field outcomes", paragraphs: ["Track time to find information, inspection coverage, issue confirmation, response time, rework, schedule risk, asset downtime, energy performance, and service completion. Validate whether recommendations lead to better work rather than simply creating more alerts."] },
     ],
     faqs: [
-      { question: "How can AI help construction companies?", answer: "AI can support document retrieval, progress analysis, risk signals, quality and safety observations, planning, commercial workflows, and handover—provided the output connects to accountable project processes." },
+      { question: "How can AI help construction companies?", answer: "AI can support document retrieval, progress analysis, risk signals, quality and safety observations, planning, commercial workflows, and handover, provided the output connects to accountable project processes." },
       { question: "What is AI-based infrastructure inspection?", answer: "It uses imagery, sensors, or records to identify and prioritize potential asset conditions. A production system also includes capture standards, location context, expert review, work management, evidence, and monitoring." },
     ],
     sources: [officialSources.uaeStrategy],
@@ -376,7 +376,7 @@ export const insights: Insight[] = [
     primaryKeyword: "AI in hospitality UAE",
     cluster: "Tourism, hospitality, retail & consumer",
     readTime: "9 min read",
-    tldr: ["Connect customer context across the journey before personalizing.", "Use AI to assist service and operations, with a fast route to people.", "Protect consent, preference, payment, and identity data.", "Measure experience and operational outcomes—not content volume."],
+    tldr: ["Connect customer context across the journey before personalizing.", "Use AI to assist service and operations, with a fast route to people.", "Protect consent, preference, payment, and identity data.", "Measure experience and operational outcomes, not content volume."],
     sections: [
       { heading: "Design across the customer journey", paragraphs: ["A guest, visitor, shopper, or entertainment customer may discover, book, arrive, ask for help, purchase, change plans, and return through several channels. Map that journey and the systems behind it. Personalization is only useful when context is current and the experience remains coherent."] },
       { heading: "Combine service and operations", paragraphs: ["AI can support multilingual enquiries, staff knowledge, itinerary or product discovery, demand forecasting, inventory-space planning, inventory, workforce coordination, service recovery, and loyalty. The strongest use cases connect a customer need to an operational response rather than optimizing a message in isolation."] },
@@ -404,7 +404,7 @@ export const insights: Insight[] = [
       { heading: "Start with the operator’s decision", paragraphs: ["Industrial AI should improve a decision about reliability, throughput, quality, energy, safety, or response. Begin with the control room, plant, field, or maintenance workflow where that decision occurs. A prediction that does not reach an accountable action is an analytics project, not an operational capability."] },
       { heading: "Connect heterogeneous evidence", paragraphs: ["Useful context may include sensors, historian data, maintenance records, inspection images, manuals, permits, weather, inventory, and operator notes. Define time alignment, asset identifiers, source quality, and access. The model should expose enough evidence for engineers and operators to assess its recommendation."] },
       { heading: "Select practical use cases", paragraphs: ["Potential areas include anomaly detection, predictive maintenance, inspection, production optimization, energy forecasting, work preparation, field knowledge, safety simulation, and incident learning. Compare expected value with data readiness, false-alarm cost, operational consequence, and integration effort."] },
-      { heading: "Engineer for safe operation", paragraphs: ["Define advisory and control boundaries, alarm and approval behavior, fallback modes, cybersecurity, change management, and model monitoring. Test startup, shutdown, unusual operating modes, sensor failure, maintenance states, and environmental changes—not only steady-state history."], bullets: ["Asset and process owner", "Authoritative operating limits", "Time and source integrity", "Human review and override", "OT/IT security boundaries", "Drift, failure, and rollback monitoring"] },
+      { heading: "Engineer for safe operation", paragraphs: ["Define advisory and control boundaries, alarm and approval behavior, fallback modes, cybersecurity, change management, and model monitoring. Test startup, shutdown, unusual operating modes, sensor failure, maintenance states, and environmental changes, not only steady-state history."], bullets: ["Asset and process owner", "Authoritative operating limits", "Time and source integrity", "Human review and override", "OT/IT security boundaries", "Drift, failure, and rollback monitoring"] },
       { heading: "Use the first deployment as a pattern", paragraphs: ["A well-designed use case creates reusable data connections, evaluation practices, security controls, and operator engagement. Capture those patterns so the next asset or workflow starts from working infrastructure rather than repeating a standalone pilot."] },
     ],
     faqs: [
@@ -424,7 +424,7 @@ export const insights: Insight[] = [
     readTime: "8 min read",
     tldr: ["Define the learning or workforce outcome before selecting a tool.", "Teach durable judgment, verification, and responsible use.", "Keep assessment validity and educator authority explicit.", "Use adoption evidence to improve programs over time."],
     sections: [
-      { heading: "Begin with capability", paragraphs: ["AI can help explain, practise, translate, give feedback, retrieve knowledge, design learning, and support administration. The objective should be a learner or workforce capability—not simply more generated material. State what people should understand, decide, or perform after the intervention."] },
+      { heading: "Begin with capability", paragraphs: ["AI can help explain, practise, translate, give feedback, retrieve knowledge, design learning, and support administration. The objective should be a learner or workforce capability, not simply more generated material. State what people should understand, decide, or perform after the intervention."] },
       { heading: "Design different paths for different roles", paragraphs: ["Students, educators, executives, business teams, technical specialists, and frontline workers have different responsibilities. Build role-specific paths with relevant scenarios. Awareness can be shared, but applied practice and governance should reflect the work and information each group handles."] },
       { heading: "Protect the validity of learning and assessment", paragraphs: ["Clarify when AI is allowed, how it must be acknowledged, what evidence shows individual competence, and which tasks require unaided performance. Use oral review, supervised practice, projects, or scenario-based assessment where a generated answer would hide the skill being measured."] },
       { heading: "Teach responsible use as a daily habit", paragraphs: ["Participants need routines for checking sources, protecting personal and confidential data, identifying bias, escalating uncertainty, and using approved platforms. Educators and managers must model those behaviors and update guidance as tools change."], bullets: ["Task framing and context", "Source verification", "Privacy and confidentiality", "Bias and accessibility", "Disclosure and attribution", "Human judgment and escalation"] },
@@ -472,7 +472,7 @@ export const insights: Insight[] = [
     tldr: [
       "Readiness is specific to a use case; an organization is not simply ready or unready for AI.",
       "Assess four pillars together: executive sponsorship, data sovereignty, infrastructure and security, and team literacy.",
-      "The assessment should leave evidence, owners, and decisions—not only a maturity score.",
+      "The assessment should leave evidence, owners, and decisions, not only a maturity score.",
       "Finish with a ranked gap register, target architecture, first-use-case recommendation, and go, reshape, or stop decision.",
     ],
     sections: [
@@ -480,7 +480,7 @@ export const insights: Insight[] = [
         heading: "Assess readiness against one real workflow",
         paragraphs: [
           "A generic maturity score can start a conversation, but it cannot authorize investment. The same organization may be ready for an internal knowledge assistant and unready to automate a regulated approval. Anchor the review to the exact outcome, users, systems, data, decisions, exceptions, and consequences in scope.",
-          "Establish a baseline before discussing models: cycle time, manual effort, quality, error or rework rate, service outcome, and operating cost. Readiness means the organization can improve that outcome responsibly—not that it owns a particular platform or has run an AI workshop.",
+          "Establish a baseline before discussing models: cycle time, manual effort, quality, error or rework rate, service outcome, and operating cost. Readiness means the organization can improve that outcome responsibly, not that it owns a particular platform or has run an AI workshop.",
         ],
       },
       {
@@ -577,7 +577,7 @@ export const insights: Insight[] = [
       { heading: "Test the working relationship", paragraphs: ["A short paid discovery or technical prototype can reveal more than a long credentials presentation. Use it to test whether the team asks precise questions, communicates trade-offs, surfaces bad news early, and produces artifacts your stakeholders can use. Select the partner whose process reduces uncertainty, not merely the lowest initial estimate."] },
     ],
     faqs: [
-      { question: "What does custom software development include?", answer: "It can include product discovery, UX design, architecture, application development, integrations, testing, deployment, security, documentation, support, and—in suitable cases—AI capabilities." },
+      { question: "What does custom software development include?", answer: "It can include product discovery, UX design, architecture, application development, integrations, testing, deployment, security, documentation, support, and, in suitable cases, AI capabilities." },
       { question: "Should we choose a UAE-based software company?", answer: "Local presence can help with workshops, stakeholder access, procurement, and regional context. It should be evaluated alongside domain fit, technical capability, delivery quality, security, and handover." },
     ],
   },
@@ -591,7 +591,7 @@ export const insights: Insight[] = [
     primaryKeyword: "software development companies in Abu Dhabi",
     cluster: "Custom software",
     readTime: "12 min read",
-    tldr: ["Compare vendors against one brief, one weighted rubric, and evidence from the team that will actually deliver.", "Verify the vendor’s legal entity, licence, contracting jurisdiction, security controls, IP chain of title, and exit plan before award.", "Make repository access, documentation, cloud ownership, third-party licences, and code escrow or step-in rights explicit.", "Treat public rate bands as planning evidence, then compare milestone assumptions and total ownership cost—not the headline estimate alone."],
+    tldr: ["Compare vendors against one brief, one weighted rubric, and evidence from the team that will actually deliver.", "Verify the vendor’s legal entity, licence, contracting jurisdiction, security controls, IP chain of title, and exit plan before award.", "Make repository access, documentation, cloud ownership, third-party licences, and code escrow or step-in rights explicit.", "Treat public rate bands as planning evidence, then compare milestone assumptions and total ownership cost, not the headline estimate alone."],
     sections: [
       {
         heading: "Create one decision-ready brief",
@@ -633,7 +633,7 @@ export const insights: Insight[] = [
         heading: "Use realistic local pricing benchmarks",
         paragraphs: [
           "Public Abu Dhabi directory listings in September 2026 display software-company hourly bands from below US$25 to US$150–199. At an eight-hour day, that is roughly AED 735 to AED 5,845 before VAT, travel, cloud, licences, or specialist assurance. Many listed firms sit in the US$25–99 range; senior UAE-based product, architecture, cybersecurity, data, and AI roles can push a blended enterprise team higher.",
-          "For initial planning—not as a OneBonsai Gulf quotation—a focused paid discovery may fall around AED 30,000–90,000, a production MVP around AED 180,000–550,000, and a regulated or multi-system programme around AED 500,000–1.8 million or more. Scope, delivery location, assurance, integrations, data work, and support can move these ranges materially. Ask vendors to expose role mix, days, contingency, third-party cost, and the evidence due at each milestone.",
+          "For initial planning, and not as a OneBonsai Gulf quotation, a focused paid discovery may fall around AED 30,000–90,000, a production MVP around AED 180,000–550,000, and a regulated or multi-system programme around AED 500,000–1.8 million or more. Scope, delivery location, assurance, integrations, data work, and support can move these ranges materially. Ask vendors to expose role mix, days, contingency, third-party cost, and the evidence due at each milestone.",
         ],
         matrix: {
           caption: "Illustrative milestone payment structure",
@@ -669,7 +669,7 @@ export const insights: Insight[] = [
     slug: "business-process-automation-with-ai",
     author: "aditya",
     publishedAt: "2026-09-09",
-    title: "What is business process automation—and where does AI belong?",
+    title: "What is business process automation, and where does AI belong?",
     description: "A plain-language guide to business process automation, deterministic rules, AI-assisted work, and agentic automation for UAE operations teams.",
     primaryKeyword: "what is business process automation",
     cluster: "Automation",
@@ -744,11 +744,11 @@ export const insights: Insight[] = [
     readTime: "9 min read",
     tldr: ["National ambition creates momentum; each enterprise still needs a specific operating case.", "Capability, infrastructure, governance, and talent must develop together.", "Use public strategy as direction, then make investment decisions from workflow evidence.", "Build a repeatable path from use-case selection to supervised production."],
     sections: [
-      { heading: "The UAE context", paragraphs: ["The UAE National Strategy for Artificial Intelligence 2031 frames AI as an enabler across government, the economy, talent, research, infrastructure, and governance. Abu Dhabi’s Digital Strategy 2025–2027 pushes this direction into operational government systems, cloud, data, services, cybersecurity, and workforce capability.", "For an enterprise, these strategies are market context—not a ready-made roadmap. Leaders still need to decide where AI creates value in their organization, which risks must be controlled, and what capability must exist to operate the result."] },
+      { heading: "The UAE context", paragraphs: ["The UAE National Strategy for Artificial Intelligence 2031 frames AI as an enabler across government, the economy, talent, research, infrastructure, and governance. Abu Dhabi’s Digital Strategy 2025–2027 pushes this direction into operational government systems, cloud, data, services, cybersecurity, and workforce capability.", "For an enterprise, these strategies are market context, not a ready-made roadmap. Leaders still need to decide where AI creates value in their organization, which risks must be controlled, and what capability must exist to operate the result."] },
       { heading: "Translate ambition into a portfolio", paragraphs: ["Collect opportunities from business units, but compare them consistently. Look for operational pain, information friction, decision delays, service demand, asset performance, customer outcomes, and new product potential. Score ideas by value, feasibility, readiness, time to evidence, adoption effort, and risk."] },
       { heading: "Build the enabling system", paragraphs: ["Successful adoption requires more than access to models. Organizations need authoritative data, integration patterns, identity and permissions, evaluation methods, observability, vendor management, and people able to redesign work. These shared capabilities reduce the cost of every use case that follows."], bullets: ["Data and integration foundation", "Approved model and vendor standards", "Security and privacy controls", "AI product and delivery capability", "Training and change support", "Use-case governance and measurement"] },
       { heading: "Treat skills as operating infrastructure", paragraphs: ["Executives need investment and governance literacy. Process owners need to identify suitable work and measure change. Employees need safe, practical ways to use approved tools. Technical teams need architecture, evaluation, and operations depth. A broad awareness session is useful, but it does not replace role-specific capability."] },
-      { heading: "Measure enterprise progress", paragraphs: ["Count production workflows with accountable owners, measured outcomes, monitored risk, and active users—not demonstrations or licenses alone. The goal is a system that repeatedly turns strategy into responsibly operated capability. That is how national ambition becomes organizational advantage."] },
+      { heading: "Measure enterprise progress", paragraphs: ["Count production workflows with accountable owners, measured outcomes, monitored risk, and active users, not demonstrations or licenses alone. The goal is a system that repeatedly turns strategy into responsibly operated capability. That is how national ambition becomes organizational advantage."] },
     ],
     faqs: [
       { question: "What is the UAE AI Strategy 2031?", answer: "It is the national strategy setting the UAE’s direction for AI leadership, adoption, capability, infrastructure, talent, governance, and economic development through 2031." },

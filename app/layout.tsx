@@ -96,11 +96,11 @@ const siteJsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "AI & Custom Software Abu Dhabi | OneBonsai Gulf",
+    default: "AI Company in Abu Dhabi & Custom Software | OneBonsai Gulf",
     template: "%s | OneBonsai Gulf",
   },
   description:
-    "OneBonsai Gulf is an Abu Dhabi AI consulting and engineering company for enterprise AI integration, agentic AI, custom software, training, and specialists.",
+    "OneBonsai Gulf is an AI company in Abu Dhabi for enterprise AI integration, agentic AI, custom software development, training, and specialists.",
   applicationName: "OneBonsai Gulf",
   alternates: {
     canonical: siteUrl,
@@ -130,7 +130,7 @@ export const metadata: Metadata = {
     locale: "en_AE",
     url: siteUrl,
     siteName: "OneBonsai Gulf",
-    title: "Custom Software & AI Integration in Abu Dhabi",
+    title: "AI Company in Abu Dhabi & Custom Software",
     description:
       "AI consulting, enterprise integration, agentic AI, custom software, training, and specialist talent from Abu Dhabi.",
     images: [
@@ -144,7 +144,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom Software & AI Integration in Abu Dhabi",
+    title: "AI Company in Abu Dhabi & Custom Software",
     description: "AI consulting, enterprise integration, agentic AI, custom software, training, and specialist talent from Abu Dhabi.",
     images: [absoluteAsset("/og-v2.jpg")],
   },
@@ -172,7 +172,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   }
 
   return (
-    <html lang={locale === "ar" ? "ar-AE" : "en-AE"} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} suppressHydrationWarning>
+    <html lang={locale === "ar" ? "ar" : "en-AE"} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
