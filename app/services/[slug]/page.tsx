@@ -26,9 +26,9 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = getService(slug);
-  if (!service) return {};
   const locale = await getRequestLocale();
+  const service = getService(slug, locale);
+  if (!service) return {};
   const isArabic = locale === "ar";
   const path = `/services/${service.slug}`;
   const url = `${siteUrl}${localizedPath(path, locale)}`;
@@ -58,9 +58,9 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
 export default async function ServicePage({ params }: ServicePageProps) {
   const { slug } = await params;
-  const service = getService(slug);
-  if (!service) notFound();
   const locale = await getRequestLocale();
+  const service = getService(slug, locale);
+  if (!service) notFound();
   const isArabic = locale === "ar";
   const servicePath = `/services/${service.slug}`;
   const url = `${siteUrl}${localizedPath(servicePath, locale)}`;
@@ -71,6 +71,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     directAnswer: "إجابة مباشرة",
     twinQuestion: "ما هو التوأم الرقمي؟",
     twinAnswer: "التوأم الرقمي هو تمثيل افتراضي لأصل مادي أو مسار عمل أو منشأة. يستخدم بيانات التشغيل والسلوك المحدد لاختبار التغييرات قبل تطبيقها في الواقع، بما يتيح فحص القيود والتدرّب على الإجراءات ومقارنة القرارات من دون تعطيل العملية الحية.",
+    searchQuestion: "ما هو تحسين البحث المدعوم بالذكاء الاصطناعي؟",
+    searchAnswer: "هو تحسين دقة اكتشاف المؤسسة وخبرتها واسترجاعها وفهمها والاستشهاد بها في البحث التقليدي والإجابات المولدة. ويجمع بين تحسين البحث التقني وبنية المعلومات واتساق الكيانات والمحتوى القائم على الأدلة والسلطة الخارجية والقياس المستمر.",
     discuss: "ناقش هذه القدرة معنا",
     visual: "صورة الخدمة",
     visualCaption: "سياق تشغيلي.",
@@ -88,6 +90,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     relatedLink: "استكشف التدريب والمحاكاة بالواقع الافتراضي",
     questions: "الأسئلة",
     questionsTitle: "ما الذي تسأل عنه الفرق قبل البدء.",
+    references: "مصادر موثوقة",
+    referencesTitle: "إرشادات وأبحاث أولية تدعم منهج العمل.",
   } : {
     skip: "Skip to content",
     home: "Home",
@@ -95,6 +99,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     directAnswer: "Direct answer",
     twinQuestion: "What is a digital twin?",
     twinAnswer: "A digital twin is a virtual replica of a physical asset, workflow, or facility. It uses operational data and defined behaviour to test changes before they are made in the real world, helping teams examine constraints, practise procedures, and compare decisions without interrupting the live operation.",
+    searchQuestion: "What is AI search optimization?",
+    searchAnswer: "AI search optimization improves how accurately an organization and its expertise can be discovered, retrieved, understood, and cited across conventional search and AI-generated answers. It combines technical SEO, information architecture, entity consistency, evidence-led content, external authority, and ongoing measurement.",
     discuss: "Discuss this capability",
     visual: "Visual",
     visualCaption: "Operational context.",
@@ -112,7 +118,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
     relatedLink: "Explore VR training and simulation",
     questions: "Questions",
     questionsTitle: "What teams ask before starting.",
+    references: "Primary sources",
+    referencesTitle: "Guidance and research behind the working method.",
   };
+  const directAnswer = service.slug === "digital-twins-simulation"
+    ? { question: copy.twinQuestion, answer: copy.twinAnswer }
+    : service.slug === "ai-search-optimization"
+      ? { question: copy.searchQuestion, answer: copy.searchAnswer }
+      : null;
   const schema = [
     {
       "@context": "https://schema.org",
@@ -122,6 +135,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
       description: service.description,
       url,
       image: new URL(service.image, siteUrl).toString(),
+      inLanguage: isArabic ? "ar-AE" : "en-AE",
       provider: { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "OneBonsai Gulf" },
       areaServed: { "@type": "Country", name: "United Arab Emirates" },
     },
@@ -162,11 +176,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <p className="service-hero-tagline">{service.title}</p>
           </div>
           <div>
-            {service.slug === "digital-twins-simulation" ? (
-              <section className="service-hero-direct-answer" aria-labelledby="digital-twin-definition-title">
+            {directAnswer ? (
+              <section className="service-hero-direct-answer" aria-labelledby="service-definition-title">
                 <p className="section-kicker">{copy.directAnswer}</p>
-                <h2 id="digital-twin-definition-title">{copy.twinQuestion}</h2>
-                <p>{copy.twinAnswer}</p>
+                <h2 id="service-definition-title">{directAnswer.question}</h2>
+                <p>{directAnswer.answer}</p>
               </section>
             ) : null}
             <p>{service.summary}</p>
@@ -229,6 +243,24 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <header><p className="section-kicker">{copy.questions}</p><h2 id="faq-title">{copy.questionsTitle}</h2></header>
           <div>{service.faqs.map((faq) => <article key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}</div>
         </section>
+        {service.references?.length ? (
+          <section className="service-references section-pad" aria-labelledby="service-references-title">
+            <header>
+              <p className="section-kicker">{copy.references}</p>
+              <h2 id="service-references-title">{copy.referencesTitle}</h2>
+            </header>
+            <ol>
+              {service.references.map((reference, index) => (
+                <li key={reference.href}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <a href={reference.href} target="_blank" rel="noopener noreferrer">
+                    {reference.label} <b className="directional-icon" aria-hidden="true">{isArabic ? "↖" : "↗"}</b>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ) : null}
         <SiteContact />
       </main>
     </>

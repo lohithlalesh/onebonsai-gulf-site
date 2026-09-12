@@ -580,9 +580,11 @@ test("keeps high-resolution scroll media, UAE imagery, and private sector-level 
 });
 
 test("renders the SEO service, industry, and insight architecture", async () => {
-  const [services, service, systemIntegration, cybersecurity, applicationDevelopment, customSoftware, aiExperts, digitalTwins, marketEntry, vrTraining, industries, insightHub, insight, readiness, vendorGuide, author, contact] = await Promise.all([
+  const [services, service, aiSearch, arabicAiSearch, systemIntegration, cybersecurity, applicationDevelopment, customSoftware, aiExperts, digitalTwins, marketEntry, vrTraining, industries, insightHub, insight, readiness, vendorGuide, author, contact] = await Promise.all([
     render("/services"),
     render("/services/agentic-ai-implementation"),
+    render("/services/ai-search-optimization"),
+    render("/ar/services/ai-search-optimization"),
     render("/services/system-integration"),
     render("/services/cybersecurity"),
     render("/services/application-development"),
@@ -600,13 +602,15 @@ test("renders the SEO service, industry, and insight architecture", async () => 
     render("/contact"),
   ]);
 
-  for (const response of [services, service, systemIntegration, cybersecurity, applicationDevelopment, customSoftware, aiExperts, digitalTwins, marketEntry, vrTraining, industries, insightHub, insight, readiness, vendorGuide, author, contact]) {
+  for (const response of [services, service, aiSearch, arabicAiSearch, systemIntegration, cybersecurity, applicationDevelopment, customSoftware, aiExperts, digitalTwins, marketEntry, vrTraining, industries, insightHub, insight, readiness, vendorGuide, author, contact]) {
     assert.equal(response.status, 200);
   }
 
-  const [servicesHtml, serviceHtml, systemIntegrationHtml, cybersecurityHtml, applicationDevelopmentHtml, customSoftwareHtml, aiExpertsHtml, digitalTwinsHtml, marketEntryHtml, vrTrainingHtml, industriesHtml, insightHubHtml, insightHtml, readinessHtml, vendorGuideHtml, authorHtml, contactHtml] = await Promise.all([
+  const [servicesHtml, serviceHtml, aiSearchHtml, arabicAiSearchHtml, systemIntegrationHtml, cybersecurityHtml, applicationDevelopmentHtml, customSoftwareHtml, aiExpertsHtml, digitalTwinsHtml, marketEntryHtml, vrTrainingHtml, industriesHtml, insightHubHtml, insightHtml, readinessHtml, vendorGuideHtml, authorHtml, contactHtml] = await Promise.all([
     services.text(),
     service.text(),
+    aiSearch.text(),
+    arabicAiSearch.text(),
     systemIntegration.text(),
     cybersecurity.text(),
     applicationDevelopment.text(),
@@ -628,6 +632,11 @@ test("renders the SEO service, industry, and insight architecture", async () => 
   assert.match(serviceHtml, /Agentic AI implementation in the UAE/);
   assert.match(serviceHtml, /\"@type\":\"Service\"/);
   assert.match(serviceHtml, /\"@type\":\"FAQPage\"/);
+  assert.match(aiSearchHtml, /Make your expertise easier to find, understand, and cite\./);
+  assert.match(aiSearchHtml, /Google Search Central: AI features and your website/);
+  assert.match(aiSearchHtml, /rel="canonical" href="https:\/\/obgulf\.com\/services\/ai-search-optimization"/);
+  assert.match(arabicAiSearchHtml, /اجعل خبرتكم أسهل وصولاً وفهماً واستشهاداً/);
+  assert.match(arabicAiSearchHtml, /rel="canonical" href="https:\/\/obgulf\.com\/ar\/services\/ai-search-optimization"/);
   assert.match(systemIntegrationHtml, /System integration services for UAE enterprises\./);
   assert.match(systemIntegrationHtml, /system integration companies in Dubai/);
   assert.match(cybersecurityHtml, /Cybersecurity services for UAE enterprises\./);
@@ -694,11 +703,12 @@ test("renders the SEO service, industry, and insight architecture", async () => 
 test("gives every canonical sitemap route one H1 and complete search metadata", async () => {
   const sitemap = await readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  assert.equal(urls.length, 46);
+  assert.equal(urls.length, 47);
   assert.equal(new Set(urls).size, urls.length);
   assert.ok(urls.includes("https://obgulf.com/services/ai-experts-on-demand"));
   assert.ok(urls.includes("https://obgulf.com/services/digital-twins-simulation"));
   assert.ok(urls.includes("https://obgulf.com/services/uae-market-entry"));
+  assert.ok(urls.includes("https://obgulf.com/services/ai-search-optimization"));
   assert.ok(urls.includes("https://obgulf.com/careers"));
 
   for (const canonicalUrl of urls) {

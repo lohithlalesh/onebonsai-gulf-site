@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLocale } from "./LocaleProvider";
+import { localizedPath } from "./locale";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -18,6 +20,7 @@ const capabilities = { en: [
     signal: "Use existing data",
     copy: "Give teams one place to ask questions, find records, and trigger approved actions.",
     outcome: "Shared context without a system replacement",
+    href: null,
     image: "/media/capability-ai-integration-v1.jpg",
     alt: "UAE operations leaders reviewing an integrated enterprise AI workspace",
   },
@@ -26,6 +29,7 @@ const capabilities = { en: [
     signal: "Fill the workflow gap",
     copy: "Build the interface or automation your current tools cannot provide.",
     outcome: "Software matched to the job",
+    href: null,
     image: "/media/capability-custom-software-v1.jpg",
     alt: "A UAE product team testing custom operations software",
   },
@@ -34,6 +38,7 @@ const capabilities = { en: [
     signal: "Set the order of work",
     copy: "Choose a first use case, delivery plan, and measures before committing to a build.",
     outcome: "A scoped route to production",
+    href: null,
     image: "/media/capability-consulting-v1.jpg",
     alt: "A Gulf leadership team planning an AI delivery roadmap",
   },
@@ -42,6 +47,7 @@ const capabilities = { en: [
     signal: "Be easier to find",
     copy: "Structure product pages and knowledge so search engines and AI answers can understand them.",
     outcome: "Qualified discovery",
+    href: "/services/ai-search-optimization",
     image: "/media/capability-seo-aeo-v1.jpg",
     alt: "A search specialist reviewing structured product knowledge and discovery performance",
   },
@@ -50,6 +56,7 @@ const capabilities = { en: [
     signal: "Use customer signals",
     copy: "Connect campaign and customer data so teams can see what creates demand.",
     outcome: "Marketing tied to pipeline",
+    href: null,
     image: "/media/capability-marketing-systems-v1.jpg",
     alt: "A marketing operator using a node based campaign and customer data workflow",
   },
@@ -59,6 +66,7 @@ const capabilities = { en: [
     signal: "استفد من البيانات القائمة",
     copy: "امنح الفرق مكاناً واحداً لطرح الأسئلة والعثور على السجلات وتشغيل الإجراءات المعتمدة.",
     outcome: "سياق مشترك من دون استبدال الأنظمة",
+    href: null,
     image: "/media/capability-ai-integration-v1.jpg",
     alt: "قيادات عمليات إماراتية تراجع مساحة عمل متكاملة للذكاء الاصطناعي المؤسسي",
   },
@@ -67,6 +75,7 @@ const capabilities = { en: [
     signal: "سدّ فجوة سير العمل",
     copy: "ابنِ الواجهة أو الأتمتة التي لا تستطيع أدواتك الحالية توفيرها.",
     outcome: "برمجيات مصمّمة للمهمة",
+    href: null,
     image: "/media/capability-custom-software-v1.jpg",
     alt: "فريق منتجات إماراتي يختبر برمجيات عمليات مخصّصة",
   },
@@ -75,6 +84,7 @@ const capabilities = { en: [
     signal: "رتّب أولويات العمل",
     copy: "حدّد حالة الاستخدام الأولى وخطة التنفيذ والمقاييس قبل الالتزام بالبناء.",
     outcome: "مسار محدّد نحو التشغيل",
+    href: null,
     image: "/media/capability-consulting-v1.jpg",
     alt: "فريق قيادة خليجي يخطط لخريطة طريق تنفيذ الذكاء الاصطناعي",
   },
@@ -83,6 +93,7 @@ const capabilities = { en: [
     signal: "اجعل العثور عليك أسهل",
     copy: "نظّم صفحات المنتجات والمعرفة بحيث تفهمها محركات البحث ومنصات الإجابة الذكية.",
     outcome: "وصول مؤهل",
+    href: "/services/ai-search-optimization",
     image: "/media/capability-seo-aeo-v1.jpg",
     alt: "خبير بحث يراجع معرفة منتجات منظمة وأداء الاكتشاف",
   },
@@ -91,6 +102,7 @@ const capabilities = { en: [
     signal: "استفد من إشارات العملاء",
     copy: "اربط بيانات الحملات والعملاء حتى ترى الفرق بوضوح ما الذي يصنع الطلب.",
     outcome: "تسويق مرتبط بخط المبيعات",
+    href: null,
     image: "/media/capability-marketing-systems-v1.jpg",
     alt: "مسؤول تسويق يستخدم سير عمل مترابطاً لبيانات الحملات والعملاء",
   },
@@ -172,7 +184,7 @@ export default function IntegrationMap() {
             <span>{String(index + 1).padStart(2, "0")}</span>
             <article>
               <small>{capability.signal}</small>
-              <h3>{capability.title}</h3>
+              <h3>{capability.href ? <Link href={localizedPath(capability.href, locale)}>{capability.title}</Link> : capability.title}</h3>
               <p>{capability.copy}</p>
               <strong>{capability.outcome}</strong>
             </article>

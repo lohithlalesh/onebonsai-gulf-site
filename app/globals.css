@@ -4158,6 +4158,7 @@ html.scroll-reveal-enabled .mechanical-reveal[data-scroll-reveal="pending"] svg 
 .service-capabilities,
 .service-guidance,
 .service-process,
+.service-references,
 .faq-section,
 .industry-boundary {
   display: grid;
@@ -4169,6 +4170,7 @@ html.scroll-reveal-enabled .mechanical-reveal[data-scroll-reveal="pending"] svg 
 .service-capabilities h2,
 .service-guidance h2,
 .service-process h2,
+.service-references h2,
 .faq-section h2,
 .industry-boundary h2,
 .contact-options h2 {
@@ -4213,6 +4215,26 @@ html.scroll-reveal-enabled .mechanical-reveal[data-scroll-reveal="pending"] svg 
 .faq-section > div article:last-child { border-bottom: 1px solid var(--line); }
 .faq-section h3 { max-width: 34ch; margin: 0 0 10px; font-size: clamp(1.2rem, 1.8vw, 1.7rem); font-weight: 520; line-height: 1.15; letter-spacing: -0.03em; }
 .faq-section article p { max-width: 62ch; margin: 0; color: var(--muted); line-height: 1.65; }
+
+.service-references {
+  color: var(--white);
+  background: var(--ink);
+}
+
+.service-references .section-kicker { color: var(--lime); }
+.service-references ol { margin: 0; padding: 0; list-style: none; }
+.service-references li {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  align-items: center;
+  border-top: 1px solid var(--line-light);
+}
+.service-references li:last-child { border-bottom: 1px solid var(--line-light); }
+.service-references li > span { color: rgba(251, 252, 248, 0.46); font: 400 10px/1 "IBM Plex Mono", monospace; }
+.service-references a { width: fit-content; color: var(--white); line-height: 1.45; transition: color 180ms ease; }
+.service-references a:hover { color: var(--lime); }
+.service-references a b { margin-inline-start: 8px; font-weight: 400; }
 
 .industry-directory > article {
   padding: 34px 0 40px;
@@ -4830,6 +4852,7 @@ html[dir="rtl"] .insight-body section > ul li::before { content: "↲"; }
   .service-capabilities,
   .service-guidance,
   .service-process,
+  .service-references,
   .faq-section,
   .industry-boundary,
   .home-industries-heading,

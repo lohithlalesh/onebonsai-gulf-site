@@ -18,6 +18,7 @@ export type Service = {
     copy: string[];
     points?: string[];
   }>;
+  references?: Array<{ label: string; href: string }>;
   faqs: Array<{ question: string; answer: string }>;
 };
 
@@ -300,6 +301,181 @@ export const services: Service[] = [
       { question: "Can training use our company workflows?", answer: "Yes. We can design exercises around representative workflows and approved, sanitized materials so participants practise work that matters without exposing sensitive information." },
       { question: "Do you provide public AI courses?", answer: "Our current focus is organization-led programs for executive, functional, and technical teams. Contact us with the audience and outcome you have in mind and we will recommend the right format." },
       { question: "Can the Academy include immersive training?", answer: "Yes. A program can include ready-made or custom VR training where repeatable practice, spatial understanding, risk recognition, or procedure rehearsal matters. Educational institutions receive 50% off all VR modules; licence requirements depend on concurrent use and the delivery timetable." },
+    ],
+  },
+  {
+    slug: "ai-search-optimization",
+    name: "AI search optimization",
+    eyebrow: "AI search optimization in the UAE",
+    headline: "Make your expertise easier to find, understand, and cite.",
+    title: "Build visibility across Google AI, ChatGPT, Copilot, Perplexity, and answer engines.",
+    description:
+      "AI search optimization in the UAE combining SEO, GEO, and AEO to improve how organizations are discovered, understood, and cited across AI answers.",
+    summary:
+      "AI search visibility starts with the same foundations as strong search visibility: accessible pages, clear entities, useful answers, credible evidence, and consistent information across the web. We turn those foundations into a measurable program for UAE organizations that want to be represented accurately when buyers research their market through search and generative AI.",
+    image: "/media/capability-seo-aeo-v1.jpg",
+    imageAlt: "AI search optimization specialist reviewing structured content and citation visibility",
+    primaryKeyword: "AI search optimization UAE",
+    relatedKeywords: [
+      "generative engine optimization services",
+      "answer engine optimization",
+      "GEO agency UAE",
+      "LLM SEO",
+      "ChatGPT SEO",
+      "AI search visibility",
+    ],
+    outcomes: [
+      "Priority pages that search and AI retrieval systems can access and interpret",
+      "Consistent descriptions of the organization, services, people, locations, and evidence",
+      "Useful answers that are easier to extract, verify, quote, and reference",
+      "Measurement connecting rankings, AI citations, referral traffic, and qualified enquiries",
+    ],
+    capabilities: [
+      {
+        title: "AI search visibility audit",
+        copy: "Establish a baseline across technical crawl access, indexing, priority queries, answer-engine citations, brand representation, competitor coverage, and the sources AI systems currently use.",
+      },
+      {
+        title: "Technical discovery and access",
+        copy: "Align robots directives, canonical URLs, sitemaps, internal links, server-rendered content, metadata, structured data, and Cloudflare controls so approved search crawlers can reach the right version of each page.",
+      },
+      {
+        title: "Entity and answer architecture",
+        copy: "Give every important page a clear purpose, one primary answer, descriptive headings, consistent organization and service facts, and relationships that search systems can follow without guessing.",
+      },
+      {
+        title: "Evidence-led content",
+        copy: "Strengthen priority pages with named expertise, first-hand examples, primary-source citations, definitions, comparisons, decision criteria, and specific claims that a buyer can verify.",
+      },
+      {
+        title: "Authority beyond the website",
+        copy: "Improve consistency across business profiles, industry directories, partner pages, expert profiles, earned coverage, and other independent sources that may corroborate what the organization says about itself.",
+      },
+      {
+        title: "Citation and demand measurement",
+        copy: "Track search performance, Bing AI citations, selected answer-engine prompts, referral traffic, branded demand, and enquiries. Reporting separates evidence from assumptions and avoids presenting one prompt result as a durable ranking.",
+      },
+    ],
+    process: [
+      {
+        title: "Define the questions that matter",
+        copy: "Build a controlled set of commercial, informational, comparison, and local questions that real buyers may ask before contacting a provider in the UAE.",
+      },
+      {
+        title: "Measure the current answer",
+        copy: "Record whether the organization appears, how it is described, which pages or third-party sources are cited, and whether the result is accurate enough to support a buying decision.",
+      },
+      {
+        title: "Repair access and meaning",
+        copy: "Resolve crawl, indexation, duplication, entity, metadata, internal-linking, structured-data, and page-intent problems before producing more content.",
+      },
+      {
+        title: "Strengthen priority evidence",
+        copy: "Improve the pages closest to commercial value with direct answers, expert ownership, original experience, verifiable proof, and useful supporting formats.",
+      },
+      {
+        title: "Earn corroboration",
+        copy: "Develop legitimate third-party references and maintain consistent business information where buyers and retrieval systems already look for independent confirmation.",
+      },
+      {
+        title: "Monitor and learn",
+        copy: "Review visibility, citations, referral quality, conversion, inaccuracies, and competitor movement on a repeatable schedule, then invest where the evidence shows a useful change.",
+      },
+    ],
+    guidance: [
+      {
+        title: "Treat GEO and AEO as an extension of responsible SEO.",
+        copy: [
+          "Generative engine optimization, answer engine optimization, and LLM optimization describe an emerging objective: being accurately represented when an AI system retrieves and synthesizes information. They do not replace technical SEO, useful content, reputation, or a clear offer. Google states that its generative search features use the same foundational search systems and require no special AI markup.",
+          "The practical program therefore begins with indexable canonical pages and a coherent information architecture. It then improves how clearly those pages answer real questions, identifies the organization and its experts, supports material claims, and connects each topic to independent evidence. The page remains valuable to a buyer even if every AI crawler disappeared tomorrow.",
+        ],
+        points: [
+          "Write one authoritative page for each distinct buyer intent.",
+          "Keep visible content and structured data consistent.",
+          "Avoid near-duplicate pages made only for keyword variations.",
+          "Use llms.txt as a maintained reading map, not a ranking promise.",
+        ],
+      },
+      {
+        title: "Make the source easy to retrieve and hard to misunderstand.",
+        copy: [
+          "Important information should exist as readable text in the server response, not only inside animation, video, an image, or an interaction that requires a user to reveal it. A clear H1, descriptive section headings, concise definitions, tables where comparison helps, and stable internal links reduce ambiguity for people and retrieval systems alike.",
+          "Machine readability does not mean writing robotic copy. It means stating the subject, scope, location, evidence, limitations, and next action without filler. Organization, Person, Service, Article, and Breadcrumb structured data can clarify relationships when it matches the visible page, but no special GEO schema creates rankings or citations by itself.",
+        ],
+        points: [
+          "Allow search crawlers that support the channels you want to appear in.",
+          "Use canonical URLs and hreflang consistently across English and Arabic.",
+          "Keep critical facts in HTML with descriptive links and headings.",
+          "Separate search discovery crawlers from model-training crawlers in policy decisions.",
+        ],
+      },
+      {
+        title: "Build authority with evidence another source can confirm.",
+        copy: [
+          "A brand-owned page is necessary, but it cannot independently prove every claim it makes. Strong pages identify the responsible expert, explain how conclusions were reached, cite primary laws or official guidance where relevant, and show first-hand work without exposing confidential client information. Independent partner pages, directories, profiles, media, research, and client references can reinforce the same entity and expertise signals.",
+          "The objective is not to manufacture mentions. It is to make genuine expertise specific enough to reference and consistent enough to corroborate. Claims should carry the level of evidence appropriate to their consequence. Dates, sources, named authors, review responsibility, and limitations make a useful answer more trustworthy for both buyers and retrieval systems.",
+        ],
+        points: [
+          "Prefer primary sources for regulation, policy, and market facts.",
+          "Name authors and reviewers with relevant experience.",
+          "Publish original examples, methods, and decision tools where possible.",
+          "Correct inaccurate AI descriptions instead of amplifying them as proof.",
+        ],
+      },
+      {
+        title: "Measure citations without pretending they are conventional rankings.",
+        copy: [
+          "AI answers vary by platform, model, location, freshness, context, and the exact wording of a question. A single manual prompt is not a reliable performance measure. We define a stable prompt set, record the engine and date, distinguish a mention from a source citation, and compare results over time alongside normal search and commercial outcomes.",
+          "Useful reporting connects four layers: technical eligibility, search visibility, AI representation, and business response. Bing Webmaster Tools can now report citations across supported AI experiences. Search Console and analytics provide complementary evidence about discovery and visits. Enquiries, assisted conversions, and the quality of referred conversations determine whether visibility is commercially useful.",
+        ],
+        points: [
+          "Track mentions, citations, cited URLs, and description accuracy separately.",
+          "Keep a stable query and prompt set for trend comparison.",
+          "Record AI referrals and assisted conversions where analytics permits.",
+          "Do not promise permanent placement inside a changing generated answer.",
+        ],
+      },
+    ],
+    references: [
+      { label: "Google Search Central: AI features and your website", href: "https://developers.google.com/search/docs/appearance/ai-features" },
+      { label: "OpenAI: Publishers and Developers FAQ", href: "https://help.openai.com/en/articles/12627856" },
+      { label: "Bing Webmaster Tools: AI Performance", href: "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview" },
+      { label: "Princeton University: GEO research", href: "https://collaborate.princeton.edu/en/publications/geo-generative-engine-optimization/" },
+      { label: "Cloudflare: Markdown for Agents", href: "https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/" },
+    ],
+    faqs: [
+      {
+        question: "What is AI search optimization?",
+        answer: "AI search optimization improves how accurately an organization and its expertise can be discovered, retrieved, understood, and cited across conventional search and AI-generated answers. It combines technical SEO, clear information architecture, entity consistency, evidence-led content, external authority, and measured answer-engine visibility.",
+      },
+      {
+        question: "How are GEO, AEO, LLM optimization, and SEO different?",
+        answer: "SEO improves visibility in search systems. AEO focuses on content that directly satisfies questions. GEO and LLM optimization focus on representation and citation in generative answers. In practice they share the same foundations, so we manage them as one search visibility program rather than four disconnected services.",
+      },
+      {
+        question: "Can you guarantee that ChatGPT or Google AI will cite us?",
+        answer: "No responsible provider can guarantee a citation or fixed placement in a generated answer. Platforms select sources dynamically and do not publish a controllable ranking formula. We can improve technical eligibility, content clarity, evidence, corroboration, and measurement, then report what changes without presenting correlation as a guarantee.",
+      },
+      {
+        question: "Does a website need llms.txt to appear in AI search?",
+        answer: "No. Google states that it does not use llms.txt for Search or its generative AI features. The file remains a useful voluntary reading map for systems that choose to use it, provided it is concise, accurate, and maintained. It should complement canonical HTML pages and a sitemap, not duplicate them.",
+      },
+      {
+        question: "Does blocking GPTBot prevent a site appearing in ChatGPT search?",
+        answer: "Not necessarily. GPTBot is associated with model training, while OAI-SearchBot is used for ChatGPT search discovery. An organization can make a separate policy decision for each crawler. The implementation should be checked against the current published crawler documentation because user agents and controls can change.",
+      },
+      {
+        question: "Should we create a separate page only for AI crawlers?",
+        answer: "No. The strongest page should serve the buyer and be fully available to approved crawlers. A duplicate or keyword-heavy robot page can blur intent, split authority, and create maintenance risk. Machine-friendly structure should improve the human page rather than create a second version of the truth.",
+      },
+      {
+        question: "What does an AI search visibility audit deliver?",
+        answer: "The audit provides a crawl and indexation review, entity and message consistency findings, a priority query and prompt set, a citation and competitor baseline, page-level content recommendations, structured-data checks, third-party authority gaps, measurement requirements, and a sequenced implementation plan.",
+      },
+      {
+        question: "How should AI search visibility be measured?",
+        answer: "Measure technical eligibility, conventional search performance, answer-engine mentions, source citations, cited URLs, representation accuracy, referral traffic, branded demand, and qualified enquiries. Record the platform, date, location, and prompt because generated answers can change between sessions and models.",
+      },
     ],
   },
   {
@@ -1167,6 +1343,184 @@ export const services: Service[] = [
   },
 ];
 
-export function getService(slug: string) {
+const arabicServices: Partial<Record<string, Service>> = {
+  "ai-search-optimization": {
+    slug: "ai-search-optimization",
+    name: "تحسين الظهور في البحث المدعوم بالذكاء الاصطناعي",
+    eyebrow: "تحسين البحث المدعوم بالذكاء الاصطناعي في الإمارات",
+    headline: "اجعل خبرتكم أسهل وصولاً وفهماً واستشهاداً.",
+    title: "عزّز حضوركم في بحث Google وChatGPT وCopilot وPerplexity ومحركات الإجابة.",
+    description:
+      "خدمات تحسين البحث المدعوم بالذكاء الاصطناعي في الإمارات لتعزيز اكتشاف المؤسسات وفهمها والاستشهاد بها في نتائج البحث والإجابات الذكية.",
+    summary:
+      "يبدأ الظهور في البحث المدعوم بالذكاء الاصطناعي من أسس البحث الجيد نفسها: صفحات متاحة للفهرسة، وكيانات واضحة، وإجابات مفيدة، وأدلة موثوقة، ومعلومات متسقة عبر الويب. نحوّل هذه الأسس إلى برنامج قابل للقياس للمؤسسات الإماراتية التي تريد تمثيلاً دقيقاً عندما يبحث المشترون عن السوق عبر محركات البحث ومنصات الذكاء الاصطناعي التوليدي.",
+    image: "/media/capability-seo-aeo-v1.jpg",
+    imageAlt: "متخصص في تحسين البحث يراجع المحتوى المنظم وظهور الاستشهادات",
+    primaryKeyword: "تحسين البحث بالذكاء الاصطناعي في الإمارات",
+    relatedKeywords: [
+      "خدمات تحسين المحركات التوليدية",
+      "تحسين محركات الإجابة",
+      "تحسين الظهور في ChatGPT",
+      "تحسين المحتوى للنماذج اللغوية الكبيرة",
+      "الظهور في نتائج الذكاء الاصطناعي",
+    ],
+    outcomes: [
+      "صفحات ذات أولوية تستطيع أنظمة البحث والاسترجاع بالذكاء الاصطناعي الوصول إليها وتفسيرها",
+      "وصف متسق للمؤسسة وخدماتها وخبرائها ومواقعها وأدلتها",
+      "إجابات مفيدة يسهل استخراجها والتحقق منها واقتباسها والاستناد إليها",
+      "قياس يربط ترتيب البحث والاستشهادات والزيارات والاستفسارات التجارية المؤهلة",
+    ],
+    capabilities: [
+      {
+        title: "تدقيق الظهور في البحث الذكي",
+        copy: "نضع خط أساس يشمل إتاحة الزحف والفهرسة والاستفسارات ذات الأولوية واستشهادات محركات الإجابة وتمثيل العلامة التجارية وتغطية المنافسين والمصادر التي تعتمد عليها أنظمة الذكاء الاصطناعي حالياً.",
+      },
+      {
+        title: "الإتاحة التقنية للاكتشاف",
+        copy: "نوحّد توجيهات الروبوتات والعناوين الأساسية وخرائط الموقع والروابط الداخلية والمحتوى المعروض من الخادم والبيانات الوصفية والبيانات المنظمة وضوابط Cloudflare حتى تصل روبوتات البحث المعتمدة إلى النسخة الصحيحة من كل صفحة.",
+      },
+      {
+        title: "هندسة الكيانات والإجابات",
+        copy: "نمنح كل صفحة مهمة غرضاً واضحاً وإجابة رئيسية واحدة وعناوين وصفية وحقائق متسقة عن المؤسسة والخدمة وروابط مفهومة، بحيث تستطيع أنظمة البحث تتبع المعنى من دون تخمين.",
+      },
+      {
+        title: "محتوى قائم على الأدلة",
+        copy: "نعزّز الصفحات ذات الأولوية بخبرة منسوبة إلى أصحابها، وأمثلة مباشرة، ومراجع أولية، وتعريفات، ومقارنات، ومعايير قرار، وادعاءات محددة يستطيع المشتري التحقق منها.",
+      },
+      {
+        title: "سلطة معرفية تتجاوز الموقع",
+        copy: "نحسّن اتساق المعلومات في ملفات الأعمال والأدلة القطاعية وصفحات الشركاء والملفات المهنية والتغطية المكتسبة وغيرها من المصادر المستقلة التي قد تؤكد ما تقوله المؤسسة عن نفسها.",
+      },
+      {
+        title: "قياس الاستشهادات والطلب",
+        copy: "نتابع أداء البحث واستشهادات Bing المدعومة بالذكاء الاصطناعي ومجموعة مختارة من الأسئلة وإحالات الزيارات والطلب المرتبط بالعلامة التجارية والاستفسارات، مع فصل الأدلة عن الافتراضات وعدم اعتبار نتيجة سؤال واحد ترتيباً دائماً.",
+      },
+    ],
+    process: [
+      {
+        title: "حدّد الأسئلة المهمة",
+        copy: "نبني مجموعة مضبوطة من الأسئلة التجارية والمعلوماتية والمقارنات والاستفسارات المحلية التي قد يطرحها مشترون حقيقيون قبل التواصل مع مزود في الإمارات.",
+      },
+      {
+        title: "قِس الإجابة الحالية",
+        copy: "نسجّل ما إذا كانت المؤسسة تظهر، وكيف يجري وصفها، وما الصفحات أو المصادر المستقلة التي يتم الاستشهاد بها، وما إذا كانت النتيجة دقيقة بما يكفي لدعم قرار الشراء.",
+      },
+      {
+        title: "أصلح الإتاحة والمعنى",
+        copy: "نعالج مشكلات الزحف والفهرسة والتكرار والكيانات والبيانات الوصفية والروابط الداخلية والبيانات المنظمة وهدف الصفحة قبل إنتاج مزيد من المحتوى.",
+      },
+      {
+        title: "قوّ الأدلة ذات الأولوية",
+        copy: "نطوّر الصفحات الأقرب إلى القيمة التجارية بإجابات مباشرة ومسؤولية خبراء وتجربة أصلية وأدلة قابلة للتحقق وصيغ مساندة مفيدة.",
+      },
+      {
+        title: "اكسب تأكيداً مستقلاً",
+        copy: "نبني إشارات مشروعة من جهات مستقلة ونحافظ على اتساق معلومات الأعمال في الأماكن التي يبحث فيها المشترون وأنظمة الاسترجاع عن إثبات مستقل.",
+      },
+      {
+        title: "راقب وتعلّم",
+        copy: "نراجع الظهور والاستشهادات وجودة الزيارات والتحويلات والأخطاء وتحركات المنافسين وفق جدول ثابت، ثم نستثمر حيث تدل الأدلة على تغير مفيد.",
+      },
+    ],
+    guidance: [
+      {
+        title: "تعامل مع GEO وAEO بوصفهما امتداداً مسؤولاً لتحسين محركات البحث.",
+        copy: [
+          "يصف تحسين المحركات التوليدية وتحسين محركات الإجابة وتحسين المحتوى للنماذج اللغوية هدفاً ناشئاً: أن تُمثّل المؤسسة بدقة عندما يسترجع نظام ذكاء اصطناعي المعلومات ويجمعها. لا تحل هذه الممارسات محل تحسين البحث التقني أو المحتوى المفيد أو السمعة أو العرض التجاري الواضح. وتؤكد Google أن خصائص البحث التوليدي تعتمد على الأسس نفسها ولا تحتاج إلى ترميز خاص للذكاء الاصطناعي.",
+          "لذلك يبدأ البرنامج العملي بصفحات أساسية قابلة للفهرسة وبنية معلومات مترابطة. ثم يحسّن وضوح إجابات تلك الصفحات عن الأسئلة الحقيقية، ويعرّف بالمؤسسة وخبرائها، ويدعم الادعاءات المهمة، ويربط كل موضوع بأدلة مستقلة. يجب أن تبقى الصفحة مفيدة للمشتري حتى لو اختفت جميع روبوتات الذكاء الاصطناعي غداً.",
+        ],
+        points: [
+          "اكتب صفحة مرجعية واحدة لكل غرض شراء مستقل.",
+          "حافظ على تطابق المحتوى المرئي مع البيانات المنظمة.",
+          "تجنّب الصفحات شبه المتطابقة المصنوعة فقط لتغييرات الكلمات المفتاحية.",
+          "استخدم llms.txt كخريطة قراءة محدّثة لا كوعد بالترتيب.",
+        ],
+      },
+      {
+        title: "اجعل المصدر سهل الاسترجاع وصعب الالتباس.",
+        copy: [
+          "ينبغي أن تكون المعلومات المهمة نصاً مقروءاً في استجابة الخادم، لا أن تقتصر على حركة أو فيديو أو صورة أو تفاعل يتطلب كشف المحتوى. يقلل عنوان H1 واضح، وعناوين أقسام وصفية، وتعريفات موجزة، وجداول عند الحاجة إلى المقارنة، وروابط داخلية ثابتة من الغموض لدى الأشخاص وأنظمة الاسترجاع معاً.",
+          "لا تعني قابلية القراءة الآلية كتابة نص آلي. بل تعني تحديد الموضوع والنطاق والموقع والأدلة والقيود والخطوة التالية بلا حشو. تستطيع البيانات المنظمة الخاصة بالمؤسسة والشخص والخدمة والمقال ومسار التنقل توضيح العلاقات عندما تطابق الصفحة المرئية، لكن لا يوجد مخطط GEO خاص يصنع الترتيب أو الاستشهاد وحده.",
+        ],
+        points: [
+          "اسمح لروبوتات البحث التي تخدم القنوات التي تريد الظهور فيها.",
+          "استخدم العناوين الأساسية وhreflang باتساق بين الإنجليزية والعربية.",
+          "احتفظ بالحقائق المهمة في HTML مع روابط وعناوين وصفية.",
+          "افصل في سياساتك بين روبوتات اكتشاف البحث وروبوتات تدريب النماذج.",
+        ],
+      },
+      {
+        title: "ابنِ السلطة المعرفية بأدلة يستطيع مصدر آخر تأكيدها.",
+        copy: [
+          "صفحة العلامة التجارية ضرورية، لكنها لا تستطيع وحدها إثبات كل ما تدعيه. تحدد الصفحات القوية الخبير المسؤول، وتشرح كيفية الوصول إلى الاستنتاجات، وتشير إلى القوانين أو الإرشادات الرسمية عند الحاجة، وتعرض عملاً مباشراً من دون كشف معلومات العملاء السرية. ويمكن لصفحات الشركاء والأدلة والملفات المهنية والإعلام والأبحاث ومراجع العملاء المستقلة أن تعزّز الكيان نفسه وإشارات الخبرة ذاتها.",
+          "الهدف ليس صناعة إشارات زائفة، بل جعل الخبرة الحقيقية محددة بما يكفي للاستشهاد بها ومتسقة بما يكفي لتأكيدها. ينبغي أن يحمل كل ادعاء مستوى الدليل الملائم لأثره. وتزيد التواريخ والمصادر وأسماء المؤلفين ومسؤولية المراجعة والقيود من موثوقية الإجابة لدى المشترين وأنظمة الاسترجاع.",
+        ],
+        points: [
+          "فضّل المصادر الأولية في اللوائح والسياسات وحقائق السوق.",
+          "سمّ المؤلفين والمراجعين ذوي الخبرة ذات الصلة.",
+          "انشر أمثلة وأساليب وأدوات قرار أصلية متى أمكن.",
+          "صحّح الأوصاف غير الدقيقة في الذكاء الاصطناعي بدلاً من تضخيمها كدليل.",
+        ],
+      },
+      {
+        title: "قِس الاستشهادات من دون معاملتها كترتيب تقليدي.",
+        copy: [
+          "تختلف إجابات الذكاء الاصطناعي باختلاف المنصة والنموذج والموقع الجغرافي وحداثة المعلومات والسياق والصياغة الدقيقة للسؤال. لذلك لا يشكل سؤال يدوي واحد مقياساً موثوقاً للأداء. نحدد مجموعة ثابتة من الأسئلة، ونسجل المحرك والتاريخ، ونميّز بين مجرد ذكر المؤسسة والاستشهاد بمصدر، ثم نقارن النتائج بمرور الوقت إلى جانب نتائج البحث والنتائج التجارية.",
+          "يربط التقرير المفيد أربع طبقات: الأهلية التقنية، والظهور في البحث، والتمثيل في إجابات الذكاء الاصطناعي، والاستجابة التجارية. تستطيع أدوات Bing لمشرفي المواقع الآن إظهار الاستشهادات في تجارب ذكاء اصطناعي مدعومة. وتوفر Search Console والتحليلات أدلة مكملة عن الاكتشاف والزيارات، بينما تحدد الاستفسارات والتحويلات وجودة المحادثات ما إذا كان الظهور مفيداً تجارياً.",
+        ],
+        points: [
+          "تابع الذكر والاستشهاد والصفحات المستشهد بها ودقة الوصف كلّاً على حدة.",
+          "حافظ على مجموعة ثابتة من الاستفسارات والأسئلة لمقارنة الاتجاهات.",
+          "سجّل الزيارات والتحويلات المساندة القادمة من الذكاء الاصطناعي حيث تسمح التحليلات.",
+          "لا تعد بموضع دائم داخل إجابة مولدة ومتغيرة.",
+        ],
+      },
+    ],
+    references: [
+      { label: "Google Search Central: خصائص الذكاء الاصطناعي وموقعكم", href: "https://developers.google.com/search/docs/appearance/ai-features" },
+      { label: "OpenAI: الأسئلة الشائعة للناشرين والمطورين", href: "https://help.openai.com/en/articles/12627856" },
+      { label: "Bing Webmaster Tools: قياس الأداء في إجابات الذكاء الاصطناعي", href: "https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview" },
+      { label: "جامعة برينستون: بحث تحسين المحركات التوليدية", href: "https://collaborate.princeton.edu/en/publications/geo-generative-engine-optimization/" },
+      { label: "Cloudflare: صيغة Markdown للوكلاء", href: "https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/" },
+    ],
+    faqs: [
+      {
+        question: "ما هو تحسين البحث المدعوم بالذكاء الاصطناعي؟",
+        answer: "هو تحسين دقة اكتشاف المؤسسة وخبرتها واسترجاعها وفهمها والاستشهاد بها في البحث التقليدي والإجابات المولدة. ويجمع بين تحسين البحث التقني وبنية المعلومات واتساق الكيانات والمحتوى القائم على الأدلة والسلطة الخارجية وقياس الظهور في محركات الإجابة.",
+      },
+      {
+        question: "ما الفرق بين GEO وAEO وتحسين النماذج اللغوية وتحسين محركات البحث؟",
+        answer: "يحسّن SEO الظهور في أنظمة البحث، ويركّز AEO على المحتوى الذي يجيب مباشرة عن الأسئلة، بينما يركّز GEO وتحسين النماذج اللغوية على التمثيل والاستشهاد في الإجابات التوليدية. تشترك جميعها عملياً في الأسس نفسها، لذلك نديرها ضمن برنامج موحد للظهور في البحث.",
+      },
+      {
+        question: "هل يمكن ضمان استشهاد ChatGPT أو Google AI بموقعنا؟",
+        answer: "لا يستطيع مزود مسؤول ضمان الاستشهاد أو موضع ثابت داخل إجابة مولدة. تختار المنصات المصادر بصورة ديناميكية ولا تنشر معادلة ترتيب يمكن التحكم بها. نستطيع تحسين الأهلية التقنية والوضوح والأدلة والتأكيد المستقل والقياس، ثم الإبلاغ عن التغيرات من دون تقديم الارتباط على أنه ضمان.",
+      },
+      {
+        question: "هل يحتاج الموقع إلى llms.txt للظهور في البحث الذكي؟",
+        answer: "لا. توضح Google أنها لا تستخدم llms.txt في البحث أو خصائصه التوليدية. يبقى الملف خريطة قراءة طوعية مفيدة للأنظمة التي تختار استخدامه، بشرط أن يكون موجزاً ودقيقاً ومحدّثاً. وينبغي أن يكمّل صفحات HTML الأساسية وخريطة الموقع لا أن يكررهما.",
+      },
+      {
+        question: "هل يؤدي حظر GPTBot إلى منع ظهور الموقع في بحث ChatGPT؟",
+        answer: "ليس بالضرورة. يرتبط GPTBot بتدريب النماذج، بينما يُستخدم OAI-SearchBot لاكتشاف المحتوى في بحث ChatGPT. تستطيع المؤسسة اتخاذ قرار مستقل لكل روبوت، وينبغي مراجعة التنفيذ وفق أحدث وثائق الزحف المنشورة لأن أسماء المستخدمين والضوابط قد تتغير.",
+      },
+      {
+        question: "هل ننشئ صفحة منفصلة مخصصة لروبوتات الذكاء الاصطناعي؟",
+        answer: "لا. ينبغي أن تخدم الصفحة الأقوى المشتري وأن تكون متاحة بالكامل للروبوتات المعتمدة. قد تؤدي صفحة مكررة أو محشوة بالكلمات ومخصصة للروبوتات إلى تشويش الغرض وتقسيم السلطة وزيادة مخاطر الصيانة. يجب أن تحسّن البنية القابلة للقراءة آلياً الصفحة البشرية بدلاً من إنشاء نسخة ثانية من الحقيقة.",
+      },
+      {
+        question: "ما مخرجات تدقيق الظهور في البحث الذكي؟",
+        answer: "يشمل التدقيق مراجعة الزحف والفهرسة، واتساق الكيان والرسائل، ومجموعة أسئلة واستفسارات ذات أولوية، وخط أساس للاستشهادات والمنافسين، وتوصيات لكل صفحة، وفحص البيانات المنظمة، وفجوات السلطة الخارجية، ومتطلبات القياس، وخطة تنفيذ مرتبة.",
+      },
+      {
+        question: "كيف نقيس الظهور في البحث المدعوم بالذكاء الاصطناعي؟",
+        answer: "نقيس الأهلية التقنية وأداء البحث التقليدي وذكر المؤسسة في محركات الإجابة والاستشهادات والصفحات المستشهد بها ودقة التمثيل والزيارات والطلب المرتبط بالعلامة التجارية والاستفسارات المؤهلة. ونسجل المنصة والتاريخ والموقع والسؤال لأن الإجابات المولدة قد تختلف بين الجلسات والنماذج.",
+      },
+    ],
+  },
+};
+
+export function getService(slug: string, locale: "en" | "ar" = "en") {
+  if (locale === "ar" && arabicServices[slug]) return arabicServices[slug];
   return services.find((service) => service.slug === slug);
 }

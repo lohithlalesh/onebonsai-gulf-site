@@ -5,7 +5,8 @@
 ## Primary pages
 
 - [Home](https://obgulf.com/): Company positioning and core capabilities
-- [Services](https://obgulf.com/services): AI consulting, integration, agentic AI, custom software, training, and VR simulation
+- [Services](https://obgulf.com/services): AI consulting, integration, agentic AI, custom software, AI search optimization, training, and VR simulation
+- [AI search optimization](https://obgulf.com/services/ai-search-optimization): Technical SEO, entity clarity, evidence-led content, third-party authority, and measurement for visibility across search and AI answers
 - [System integration](https://obgulf.com/services/system-integration): Enterprise application, API, event, data, cloud, and AI integration in the UAE
 - [Cybersecurity](https://obgulf.com/services/cybersecurity): Security architecture, application and cloud security, AI controls, and incident readiness
 - [Application development](https://obgulf.com/services/application-development): Web, mobile, internal, and AI-enabled application delivery in Abu Dhabi and the UAE
