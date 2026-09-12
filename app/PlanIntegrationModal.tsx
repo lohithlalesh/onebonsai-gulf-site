@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLocale } from "./LocaleProvider";
 import { localizedPath } from "./locale";
+import { trackEvent } from "./analytics";
 
 const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const publicAsset = (path: string) => `${assetBase}${path}`;
@@ -104,8 +105,12 @@ type PlanIntegrationContextValue = {
 const PlanIntegrationContext = createContext<PlanIntegrationContextValue | null>(null);
 
 export function PlanIntegrationProvider({ children }: { children: ReactNode }) {
+  const { locale } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
-  const openPlanIntegration = useCallback(() => setIsOpen(true), []);
+  const openPlanIntegration = useCallback(() => {
+    trackEvent("plan_ai_integration_open", { locale });
+    setIsOpen(true);
+  }, [locale]);
   const closePlanIntegration = useCallback(() => setIsOpen(false), []);
   const contextValue = useMemo(() => ({ openPlanIntegration }), [openPlanIntegration]);
 
@@ -204,6 +209,11 @@ export default function PlanIntegrationModal({ isOpen, onClose }: { isOpen: bool
 
     setErrors({});
     setSubmissionState("submitting");
+    trackEvent("enquiry_start", {
+      requirement,
+      locale,
+      contact_method: email && phone ? "email_and_phone" : email ? "email" : "phone",
+    });
 
     try {
       const response = await fetch(publicAsset("/api/enquire"), {
@@ -215,6 +225,7 @@ export default function PlanIntegrationModal({ isOpen, onClose }: { isOpen: bool
       if (!response.ok) throw new Error("Enquiry delivery failed");
 
       form.reset();
+      trackEvent("generate_lead", { requirement, locale });
       setSubmissionState("idle");
       onClose();
       router.push(`${publicAsset(localizedPath("/contact", locale))}?enquiry=sent`);

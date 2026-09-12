@@ -36,18 +36,18 @@ Canonical: https://obgulf.com/.well-known/security.txt
 
 function createCsp(nonce?: string) {
   const scriptPolicy = nonce
-    ? `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https://challenges.cloudflare.com`
-    : "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com";
+    ? `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https://challenges.cloudflare.com https://www.googletagmanager.com`
+    : "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com";
 
   return [
     "default-src 'none'",
     "base-uri 'none'",
-    "connect-src 'self' https://challenges.cloudflare.com",
+    "connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
     "font-src 'self' data:",
     "form-action 'self'",
     "frame-ancestors 'none'",
     "frame-src https://challenges.cloudflare.com",
-    "img-src 'self' data: blob:",
+    "img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com",
     "manifest-src 'self'",
     "media-src 'self'",
     "object-src 'none'",

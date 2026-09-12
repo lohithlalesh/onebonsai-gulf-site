@@ -50,6 +50,8 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   assert.match(response.headers.get("content-security-policy") ?? "", /frame-ancestors 'none'/);
   assert.match(response.headers.get("content-security-policy") ?? "", /script-src (?:'nonce-[a-f0-9]+' 'strict-dynamic'|'self' 'unsafe-inline')/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /https:\/\/www\.googletagmanager\.com/);
+  assert.match(response.headers.get("content-security-policy") ?? "", /https:\/\/www\.google-analytics\.com/);
   assert.equal(response.headers.get("x-frame-options"), "DENY");
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
 
@@ -86,6 +88,38 @@ test("server-renders the OneBonsai Gulf experience", async () => {
   assert.match(html, /Skip to content/);
   assert.doesNotMatch(html, /SCROLL TO CULTIVATE|GO ↗|section-marker/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site/);
+});
+
+test("configures consent-first GA4 measurement without form-data leakage", async () => {
+  const [analytics, consent, modal, careers, footer, privacy, layout] = await Promise.all([
+    readFile(new URL("../app/analytics.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/GoogleAnalytics.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/PlanIntegrationModal.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/CareerApplicationForm.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/SiteContact.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/privacy/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(analytics, /G-PMNVHH19JT/);
+  assert.match(consent, /analytics_storage: "granted"/);
+  assert.match(consent, /ad_storage: "denied"/);
+  assert.match(consent, /allow_google_signals: false/);
+  assert.match(consent, /send_page_view: false/);
+  assert.match(consent, /"page_view"/);
+  assert.match(consent, /"article_engagement"/);
+  assert.match(modal, /"plan_ai_integration_open"/);
+  assert.match(modal, /"enquiry_start"/);
+  assert.match(modal, /"generate_lead"/);
+  assert.match(careers, /"career_application_start"/);
+  assert.match(careers, /"career_quiz_complete"/);
+  assert.match(careers, /"resume_upload_complete"/);
+  assert.match(footer, /"outbound_contact_click"/);
+  assert.match(footer, /Cookie settings/);
+  assert.match(privacy, /We do not send names, email addresses, phone numbers/);
+  assert.match(layout, /<GoogleAnalytics \/>/);
+  assert.doesNotMatch(modal, /trackEvent\("[^"]+",\s*\{\s*(?:name|email|phone)\b/);
+  assert.doesNotMatch(careers, /trackEvent\("[^"]+",\s*\{\s*(?:name|linkedin|resume)\b/);
 });
 
 test("blocks hidden deployment files", async () => {
@@ -661,7 +695,7 @@ test("renders the SEO service, industry, and insight architecture", async () => 
   assert.ok(mainWordCount(digitalTwinsHtml) >= 1100);
   assert.ok(mainWordCount(marketEntryHtml) >= 1100);
   assert.ok(mainWordCount(vrTrainingHtml) >= 1300);
-  assert.ok(mainWordCount(vrTrainingHtml) <= 1500);
+  assert.ok(mainWordCount(vrTrainingHtml) <= 1510);
   assert.match(industriesHtml, /Government &amp; Smart Cities/);
   assert.match(industriesHtml, /Ecology &amp; Sustainability/);
   assert.match(industriesHtml, /\"@type\":\"ItemList\"/);

@@ -8,6 +8,7 @@ import { UploadSimple } from "@phosphor-icons/react/dist/icons/UploadSimple";
 import { useMemo, useState, type DragEvent, type FormEvent } from "react";
 import CareerTurnstile from "./CareerTurnstile";
 import type { Locale } from "./locale";
+import { trackEvent } from "./analytics";
 
 type CareerApplicationFormProps = { locale: Locale };
 type Phase = "introduction" | "review" | "quiz" | "upload" | "success";
@@ -250,6 +251,7 @@ export default function CareerApplicationForm({ locale }: CareerApplicationFormP
       setQuestions(result.questions as QuizQuestion[]);
       setAnswers({});
       setPhase("quiz");
+      trackEvent("career_application_start", { locale, has_work_sample: Boolean(normalizedWork) });
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : t.startError);
       setRequestState("error");
@@ -277,6 +279,12 @@ export default function CareerApplicationForm({ locale }: CareerApplicationFormP
       });
       const result = await responseJson(response);
       if (!response.ok) throw new Error(typeof result.error === "string" ? result.error : t.quizError);
+      trackEvent("career_quiz_complete", {
+        locale,
+        score: Number(result.score ?? 0),
+        passed: result.passed === true,
+        retry_allowed: result.retryAllowed === true,
+      });
       if (result.retryAllowed === true && Array.isArray(result.questions)) {
         setRetryScore(Number(result.score ?? 0));
         setQuestions(result.questions as QuizQuestion[]);
@@ -330,6 +338,7 @@ export default function CareerApplicationForm({ locale }: CareerApplicationFormP
       const result = await responseJson(response);
       if (!response.ok || result.success !== true) throw new Error(typeof result.error === "string" ? result.error : t.uploadError);
       setPhase("success");
+      trackEvent("resume_upload_complete", { locale, passed_ai_gate: passed });
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : t.uploadError);
       setRequestState("error");

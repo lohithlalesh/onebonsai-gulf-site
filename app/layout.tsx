@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { preload } from "react-dom";
 import LocaleProvider from "./LocaleProvider";
+import GoogleAnalytics from "./GoogleAnalytics";
 import { PlanIntegrationProvider } from "./PlanIntegrationModal";
 import { getRequestLocale } from "./i18n";
 import "./globals.css";
@@ -215,6 +216,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         `}</style>
         <LocaleProvider locale={locale}>
           <PlanIntegrationProvider>{children}</PlanIntegrationProvider>
+          <GoogleAnalytics />
         </LocaleProvider>
       </body>
     </html>
