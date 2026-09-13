@@ -64,6 +64,8 @@ export default function ClarityJourney() {
 
   useEffect(() => {
     let frame = 0;
+    const desktopJourney = window.matchMedia("(min-width: 761px)");
+    let isListening = false;
 
     const updateStep = () => {
       frame = 0;
@@ -81,14 +83,38 @@ export default function ClarityJourney() {
       frame = window.requestAnimationFrame(updateStep);
     };
 
-    updateStep();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
+    const startListening = () => {
+      if (isListening) return;
+      isListening = true;
+      updateStep();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+    };
 
-    return () => {
+    const stopListening = () => {
+      if (!isListening) return;
+      isListening = false;
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       if (frame) window.cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    const syncJourneyMode = () => {
+      if (desktopJourney.matches) {
+        startListening();
+      } else {
+        stopListening();
+        setActiveIndex(0);
+      }
+    };
+
+    syncJourneyMode();
+    desktopJourney.addEventListener("change", syncJourneyMode);
+
+    return () => {
+      desktopJourney.removeEventListener("change", syncJourneyMode);
+      stopListening();
     };
   }, []);
 

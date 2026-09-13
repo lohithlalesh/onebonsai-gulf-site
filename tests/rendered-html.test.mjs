@@ -452,7 +452,7 @@ test("keeps high-resolution scroll media, UAE imagery, and private sector-level 
   assert.match(clarity, /Integrate/);
   assert.match(clarity, /Scale/);
   assert.match(clarity, /window\.addEventListener\("scroll"/);
-  assert.doesNotMatch(clarity, /window\.matchMedia\("\(max-width: 760px\)"\)\.matches/);
+  assert.match(clarity, /window\.matchMedia\("\(min-width: 761px\)"\)/);
   assert.match(clarity, /clarity-diagnose-3d-v1\.jpg/);
   assert.match(clarity, /clarity-integrate-3d-v1\.jpg/);
   assert.match(clarity, /clarity-scale-3d-v1\.jpg/);
@@ -468,7 +468,9 @@ test("keeps high-resolution scroll media, UAE imagery, and private sector-level 
   assert.doesNotMatch(siteHeader, /brand-gulf/);
   assert.match(siteHeader, /\["Work", "\/work"\]/);
   assert.match(css, /\.journey \{ height: 500dvh; padding: 0 10px; \}/);
-  assert.match(css, /\.clarity-journey \{ height: 300dvh; overflow: clip; \}/);
+  assert.match(css, /\.clarity-journey \{ height: auto; overflow: visible; \}/);
+  assert.match(css, /\.clarity-sticky \{ display: none; \}/);
+  assert.match(css, /\.clarity-mobile-steps \{[\s\S]*?display: grid;/);
   assert.match(css, /object-position: center top/);
   assert.match(css, /height: 100svh/);
   assert.doesNotMatch(css, /journey\[data-act="[12]"\] \.journey-film (?:video|img)/);

@@ -3508,82 +3508,72 @@ html.scroll-reveal-enabled .mechanical-reveal[data-scroll-reveal="pending"] svg 
   .services-heading,
   .academy { grid-template-columns: 1fr; }
 
-  .clarity-journey { height: 300dvh; overflow: clip; }
-  .clarity-sticky {
-    display: block;
-    height: 100dvh;
-    min-height: 0;
-    padding-top: 72px;
-  }
-  .clarity-orbit {
-    top: 82px;
-    right: 18px;
-    left: 18px;
-    width: auto;
-    height: 46px;
-    aspect-ratio: auto;
-    transform: none;
-  }
-  .clarity-orbit-track {
-    inset: 0;
+  .clarity-journey { height: auto; overflow: visible; }
+  .clarity-sticky { display: none; }
+  .clarity-mobile-steps {
+    padding-block: 88px 104px;
+    padding-inline: 18px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  }
+  .clarity-mobile-steps article {
+    padding-block: 38px 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
     border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    border-radius: 0;
-    transform: none;
-    transition: none;
   }
-  .clarity-orbit-line,
-  .clarity-orbit-ticks,
-  .clarity-orbit-sweep { display: none; }
-  .clarity-orbit-track button,
-  .clarity-orbit-track button:nth-of-type(1),
-  .clarity-orbit-track button:nth-of-type(2),
-  .clarity-orbit-track button:nth-of-type(3) {
-    position: relative;
-    inset: auto;
-    width: auto;
-    min-height: 44px;
-    background: transparent;
+  .clarity-mobile-steps article:last-child {
+    padding-block-end: 0;
+    border-bottom: 0;
   }
-  .clarity-orbit-marker {
-    gap: 7px;
-    font-size: 11px;
-    transform: none;
+  .clarity-mobile-steps article > img {
+    width: min(100%, 430px);
+    height: auto;
+    aspect-ratio: 1;
+    justify-self: center;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at center, #000 43%, rgba(0, 0, 0, 0.96) 63%, transparent 100%);
+    mask-image: radial-gradient(ellipse 50% 50% at center, #000 43%, rgba(0, 0, 0, 0.96) 63%, transparent 100%);
   }
-  .clarity-copy {
-    top: auto;
-    right: 22px;
-    bottom: 72px;
-    left: 22px;
-    width: auto;
+  .clarity-mobile-steps article > div > p:first-child {
+    margin: 0 0 16px;
+    color: var(--ink);
+    font: 400 12px/1 "IBM Plex Mono", monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
-  .clarity-copy h3 {
+  .clarity-mobile-steps h3 {
     max-width: 13ch;
-    margin-bottom: 18px;
-    font-size: clamp(2.35rem, 10.5vw, 3.15rem);
+    margin: 0 0 20px;
+    font-size: clamp(2.5rem, 11.5vw, 3.7rem);
+    font-weight: 510;
+    line-height: 0.94;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
   }
-  .clarity-copy > p:nth-of-type(2) { max-width: 38ch; font-size: 13px; }
-  .clarity-copy ul { margin-top: 20px; gap: 6px; }
-  .clarity-copy li { padding: 7px 9px; font-size: 8px; }
-  .clarity-sculpture {
-    top: 126px;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 38dvh;
-    aspect-ratio: auto;
-    transform: none;
+  .clarity-mobile-steps article > div > p:nth-of-type(2) {
+    max-width: 42ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
   }
-  .clarity-sculpture img { object-position: center 30%; }
-  .clarity-counter {
-    right: 22px;
-    bottom: 24px;
-    left: 22px;
-    width: auto;
+  .clarity-mobile-steps ul {
+    margin: 24px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
   }
-  .clarity-mobile-steps { display: none; }
+  .clarity-mobile-steps li {
+    padding: 9px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.5);
+    font: 400 12px/1.2 "IBM Plex Mono", monospace;
+  }
 
   .about-intro { gap: 30px; margin-bottom: 84px; }
   .about-parent-brand { width: 100%; align-items: flex-start; flex-direction: column; gap: 14px; }
