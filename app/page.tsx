@@ -40,12 +40,12 @@ const arabicSpecialistServices = [
   {
     title: "التدريب والمحاكاة بالواقع الافتراضي",
     copy: "تدرّب على الأعمال عالية المخاطر أو المعقّدة من دون تعطيل العمليات الفعلية.",
-    items: ["تدريب السلامة", "التوائم الرقمية", "البشر الافتراضيون", "تحليلات التعلّم"],
+    items: ["تدريب السلامة", "التوائم الرقمية", "الشخصيات الافتراضية", "تحليلات التعلّم"],
   },
   {
     title: "الأمن السيبراني والذكاء الاصطناعي الآمن",
-    copy: "صمّم الضوابط والبنية والتدريب اللازم للنشر الآمن.",
-    items: ["نشر آمن للذكاء الاصطناعي", "تدريب سيبراني", "حوكمة المخاطر", "ضوابط تشغيلية"],
+    copy: "صمّم الضوابط والبنية والتدريب اللازم للتفعيل الآمن.",
+    items: ["تفعيل آمن للذكاء الاصطناعي", "تدريب سيبراني", "حوكمة المخاطر", "ضوابط تشغيلية"],
   },
   {
     title: "أكاديمية الذكاء الاصطناعي والتبنّي",
@@ -87,7 +87,7 @@ export async function generateMetadata(): Promise<Metadata> {
       openGraph: {
         locale: "ar_AE",
         title: "تكامل الذكاء الاصطناعي والبرمجيات المخصّصة في أبوظبي",
-        description: "استشارات وهندسة وتكامل ذكاء اصطناعي مؤسسي من أبوظبي إلى دولة الإمارات والخليج.",
+        description: "استشارات وهندسة وتكامل ذكاء اصطناعي مؤسسي من أبوظبي إلى دولة الإمارات ودول الخليج.",
       },
     };
   }
@@ -121,11 +121,11 @@ export default async function Home() {
           <div className="system-heading">
             <div className="system-copy">
               <p className="section-kicker">{isArabic ? "قدرات التنفيذ" : "Delivery capabilities"}</p>
-              <h2 id="system-title">{isArabic ? "أضف القدرة التالية التي تحتاجها أعمالك." : "Add the capability your business needs next."}</h2>
+              <h2 id="system-title">{isArabic ? "تعزيز قدرات عملك للمرحلة القادمة." : "Add the capability your business needs next."}</h2>
             </div>
             <div className="system-summary">
-              <p>{isArabic ? "بعد وضوح الاتجاه، نضيف البرمجيات أو التكامل أو البحث أو القدرات التسويقية التي تصنع قيمة قابلة للقياس." : "After the direction is clear, we add the software, integration, search, or marketing capability that creates measurable value."}</p>
-              <Link className="primary-button" href={localizedPath("/services", locale)}>{isArabic ? "استكشف خدمات الذكاء الاصطناعي والبرمجيات" : "Explore AI and software services"}</Link>
+              <p>{isArabic ? "بعد وضوح الاتجاه، نضيف البرمجيات، التكامل، البحث، أو القدرات التسويقية التي تُحدث أثراً ملموساً وقابلاً للقياس." : "After the direction is clear, we add the software, integration, search, or marketing capability that creates measurable value."}</p>
+              <Link className="primary-button" href={localizedPath("/services", locale)}>{isArabic ? "اكتشف خدمات الذكاء الاصطناعي والبرمجيات" : "Explore AI and software services"}</Link>
             </div>
           </div>
           <IntegrationMap />
@@ -135,9 +135,9 @@ export default async function Home() {
           <div className="services-heading">
             <div>
               <p className="section-kicker">{isArabic ? "خدمات متخصصة" : "Specialist services"}</p>
-              <h2 id="services-title">{isArabic ? "درّب فرقك، وأمّن كل عملية نشر." : "Train teams and secure every deployment."}</h2>
+              <h2 id="services-title">{isArabic ? "تدريب الفرق وتأمين كل عملية تفعيل." : "Train teams and secure every deployment."}</h2>
             </div>
-            <p>{isArabic ? "وسّع النظام الأساسي بالمحاكاة الغامرة والأمن السيبراني والتدريب العملي على الذكاء الاصطناعي لكل دور." : "Extend the core system with immersive simulation, cybersecurity, and practical AI training for each role."}</p>
+            <p>{isArabic ? "توسيع النظام الأساسي ليشمل بيئات المحاكاة التفاعلية، الأمن السيبراني، والتدريب العملي على الذكاء الاصطناعي بما يلائم كل دور." : "Extend the core system with immersive simulation, cybersecurity, and practical AI training for each role."}</p>
           </div>
           <div className="service-list">
             {renderedServices.map((service) => (
@@ -164,7 +164,7 @@ export default async function Home() {
           />
           <div className="infrastructure-copy">
             <p>{isArabic ? "الرؤية الحاسوبية للبنية التحتية" : "Computer vision for infrastructure"}</p>
-            <h2 id="infrastructure-title">{isArabic ? "افحص الأصول من دون إيقافها عن العمل." : "Inspect assets without closing them down."}</h2>
+            <h2 id="infrastructure-title">{isArabic ? "فحص المعدات وهي قيد التشغيل." : "Inspect assets without closing them down."}</h2>
             <span>{isArabic ? "التقط. راجع. أصلح." : "Capture. Review. Repair."}</span>
           </div>
         </section>
@@ -178,7 +178,7 @@ export default async function Home() {
             <ul className="academy-programs">
               {renderedPrograms.map((item) => <li key={item}>{item}</li>)}
             </ul>
-            <a className="primary-button" href="#contact">{isArabic ? "أحضر الأكاديمية إلى فريقك" : "Bring the Academy to your team"}</a>
+            <a className="primary-button" href="#contact">{isArabic ? "الأكاديمية في متناول فريقك" : "Bring the Academy to your team"}</a>
           </div>
         </section>
 

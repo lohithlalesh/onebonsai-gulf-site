@@ -82,7 +82,7 @@ const capabilities = { en: [
   {
     title: "الاستشارات",
     signal: "رتّب أولويات العمل",
-    copy: "حدّد حالة الاستخدام الأولى وخطة التنفيذ والمقاييس قبل الالتزام بالبناء.",
+    copy: "تحديد أول حالة تطبيقية مع خطة التنفيذ والمقاييس قبل الالتزام بالبناء.",
     outcome: "مسار محدّد نحو التشغيل",
     href: null,
     image: "/media/capability-consulting-v1.jpg",
@@ -100,7 +100,7 @@ const capabilities = { en: [
   {
     title: "أنظمة التسويق",
     signal: "استفد من إشارات العملاء",
-    copy: "اربط بيانات الحملات والعملاء حتى ترى الفرق بوضوح ما الذي يصنع الطلب.",
+    copy: "اربط بيانات الحملات والعملاء حتى ترى الفرق بوضوح العوامل التي تولّد الطلب.",
     outcome: "تسويق مرتبط بخط المبيعات",
     href: null,
     image: "/media/capability-marketing-systems-v1.jpg",
@@ -141,7 +141,7 @@ export default function IntegrationMap() {
       <aside className="integration-scroll-sticky">
         <div className="integration-scroll-heading">
           <p>{isArabic ? "ابدأ بما لديك بالفعل" : "Start with what is already there"}</p>
-          <h3>{isArabic ? "تبقى بيئتكم الحالية في مكانها." : "Your current setup stays in place."}</h3>
+          <h3>{isArabic ? "الحفاظ على منظومتكم الحالية." : "Your current setup stays in place."}</h3>
           <ul>
             {systemInputs[locale].map((input) => <li key={input}>{input}</li>)}
           </ul>

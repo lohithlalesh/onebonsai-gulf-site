@@ -31,7 +31,7 @@ export default function AboutSection({ locale = "en" }: { locale?: Locale }) {
               : "Founded in Europe in 2014, OneBonsai has spent more than a decade delivering DeepTech for complex environments. In 2026, that experience expanded into Abu Dhabi through OneBonsai Gulf: a local team combining AI consulting, custom software, integration, and specialist expertise to build sovereign capability that can be operated, measured, and scaled with confidence."}
           </p>
           <a href="https://onebonsai.com" target="_blank" rel="noreferrer">
-            {isArabic ? "استكشف ون بونساي" : "Explore OneBonsai"}
+            {isArabic ? "اكتشف ون بونساي" : "Explore OneBonsai"}
             <ArrowUpRight className="directional-icon" size={15} weight="thin" aria-hidden="true" />
           </a>
         </div>

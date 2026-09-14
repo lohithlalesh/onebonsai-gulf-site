@@ -28,7 +28,7 @@ const principles = {
     {
       label: "نستشير",
       title: "استراتيجية الذكاء الاصطناعي والتحول",
-      copy: "نحدّد أين يصنع الذكاء الاصطناعي قيمة حقيقية، ونبني نموذج التشغيل، ونحوّل الطموح إلى خطة تنفيذ قابلة للقياس.",
+      copy: "نحدّد أين يضيف الذكاء الاصطناعي قيمة حقيقية، نبني نموذج التشغيل، ونحوّل الطموح إلى خطة تنفيذ قابلة للقياس.",
       icon: CompassTool,
     },
     {
@@ -40,7 +40,7 @@ const principles = {
     {
       label: "نربط",
       title: "خبراء ذكاء اصطناعي ومتخصصون موثوقون",
-      copy: "نوصل فريقك بالخبرة المناسبة لمشروع محدّد، أو لقدرة حاسمة، أو لنمو طويل الأمد داخل المؤسسة.",
+      copy: "نوفّر لفريقك الداخلي الخبرات المناسبة لمشروع محدّد، لتعزيز قدرة محورية أو لتحقيق نمو مستدام على المدى الطويل.",
       icon: UsersThree,
     },
   ],
@@ -73,7 +73,7 @@ export default function AboutPrinciples({ locale = "en" }: { locale?: Locale }) 
           </article>
         ))}
         <p className="about-principles-closing">
-          {isArabic ? "نستطيع أن نرسم الطريق معكم، أو نبني الحل لكم، أو نساعدكم على تكوين الفريق القادر على امتلاك الرحلة داخلياً." : "We can advise you, build it for you, or help you build the right team to do it yourself."}
+          {isArabic ? "نرشدكم، نبني الحل لكم، أو نساعدكم على تشكيل الفريق المناسب لتنفيذ المشروع بأنفسكم." : "We can advise you, build it for you, or help you build the right team to do it yourself."}
         </p>
       </div>
     </section>

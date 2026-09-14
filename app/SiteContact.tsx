@@ -16,7 +16,7 @@ export default function SiteContact() {
     <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="contact-top">
         <span>{isArabic ? "أبوظبي، الإمارات العربية المتحدة" : "Abu Dhabi, United Arab Emirates"}</span>
-        <span>{isArabic ? "ذكاء اصطناعي مؤسسي لمنطقة الخليج" : "Enterprise AI across the Gulf"}</span>
+        <span>{isArabic ? "ذكاء اصطناعي مؤسسي في دول الخليج" : "Enterprise AI across the Gulf"}</span>
       </div>
       <p className="section-kicker">{isArabic ? "ابدأ بسير عمل حقيقي" : "Start with a real workflow"}</p>
       <h2 id="contact-title">{isArabic ? "انقل اهتمامك بالذكاء الاصطناعي إلى نظام يستخدمه فريقك بثقة." : "Move from AI interest to a system your team can use."}</h2>

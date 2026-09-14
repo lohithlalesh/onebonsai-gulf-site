@@ -42,7 +42,7 @@ export default function CustomerMarquee() {
   return (
     <section className="customer-marquee" aria-labelledby="customer-marquee-title" data-paused={paused}>
       <div className="customer-marquee-heading">
-        <p id="customer-marquee-title">{isArabic ? "موضع ثقة جهات تبني ما هو آتٍ" : "Trusted by organizations building what comes next"}</p>
+        <p id="customer-marquee-title">{isArabic ? "موضع ثقة المؤسسات التي ترسم ملامح المستقبل" : "Trusted by organizations building what comes next"}</p>
         <button
           type="button"
           aria-label={isArabic

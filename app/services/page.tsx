@@ -92,7 +92,7 @@ export default async function ServicesPage() {
                 <h2><Link href={localizedPath(`/services/${service.slug}`, locale)}>{service.title}</Link></h2>
                 <p>{service.description}</p>
               </div>
-              <Link href={localizedPath(`/services/${service.slug}`, locale)} aria-label={isArabic ? `استكشف ${service.name}` : `Explore ${service.name}`}>{isArabic ? "استكشف الخدمة" : "Explore service"} <b className="directional-icon" aria-hidden="true">{isArabic ? "↖" : "↗"}</b></Link>
+              <Link href={localizedPath(`/services/${service.slug}`, locale)} aria-label={isArabic ? `اكتشف ${service.name}` : `Explore ${service.name}`}>{isArabic ? "اكتشف الخدمة" : "Explore service"} <b className="directional-icon" aria-hidden="true">{isArabic ? "↖" : "↗"}</b></Link>
             </article>
           ))}
         </section>

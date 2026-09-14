@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const isArabic = locale === "ar";
   const title = isArabic ? "أعمال الذكاء الاصطناعي والبرمجيات" : "Custom Software Development Abu Dhabi";
   const description = isArabic
-    ? "أمثلة على أعمال OneBonsai Gulf في الذكاء الاصطناعي والبرمجيات والتدريب الغامر، إضافة إلى Simplify Suite وشريك التحقق Blinking.id."
+    ? "أمثلة على أعمال OneBonsai Gulf في الذكاء الاصطناعي والبرمجيات والتدريب بالمحاكاة، إضافة إلى Simplify Suite وشريك التحقق Blinking.id."
     : "Explore custom software development in Abu Dhabi, enterprise AI work, immersive training, Simplify Suite, and our Blinking.id partnership.";
 
   return {
@@ -46,7 +46,7 @@ export default async function WorkPage() {
               <p className="section-kicker">{isArabic ? "أعمال مختارة" : "Selected work"}</p>
               <h1 id="work-title">
                 {isArabic
-                  ? "ذكاء اصطناعي وبرمجيات وتدريب غامر للمهام عالية الأثر."
+                  ? "ذكاء اصطناعي وبرمجيات وتدريب بالمحاكاة للمهام عالية الأثر."
                   : "AI, software, and immersive training built for high-stakes work."}
               </h1>
             </div>
